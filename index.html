@@ -34,7 +34,7 @@
         "name": "Jennavi",
         "url": "https://jennavi.com/",
         "logo": { "@type": "ImageObject", "url": "https://jennavi.com/logo.png" },
-        "sameAs": ["https://www.linkedin.com/company/jennavi/", "https://www.instagram.com/jennifer_omaliko", "https://x.com/JenniferOmaliko"],
+        "sameAs": ["https://www.linkedin.com/company/jennavi/", "https://www.instagram.com/jennifer_omaliko", "https://x.com/JenniferOmaliko", "https://youtube.com/@jennifermmesomaomaliko"],
         "contactPoint": { "@type": "ContactPoint", "email": "jennavi.global@gmail.com", "contactType": "customer service", "availableLanguage": "English" }
       },
       {
@@ -303,8 +303,8 @@
     .founder-section { background: var(--gold-faint); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); }
     .founder-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 90px; align-items: center; }
     .founder-visual { position: relative; }
-    .founder-frame { border: 3px solid var(--gold); padding: 4px; display: block; }
-    .founder-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center 25%; display: block; filter: grayscale(5%) contrast(1.04); }
+    .founder-frame { border: 3px solid var(--gold); padding: 4px; display: block; border-radius: 4px; }
+    .founder-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center 25%; display: block; filter: grayscale(5%) contrast(1.04); border-radius: 2px; }
     .founder-badge-corner { position: absolute; bottom: -20px; right: -20px; background: var(--gold); color: var(--onyx); padding: 20px 24px; text-align: center; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
     .founder-badge-corner-num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 900; display: block; line-height: 1; }
     .founder-badge-corner-text { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; display: block; margin-top: 6px; line-height: 1.4; }
@@ -336,14 +336,14 @@
     .process-arrow { position: absolute; top: 48px; right: -14px; width: 28px; height: 28px; background: var(--onyx); border: 1px solid var(--gold-border-s); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gold); z-index: 2; }
 
     .testimonial-section { text-align: center; background: var(--gold-faint); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); overflow: hidden; }
-    .testimonial-slider { position: relative; max-width: 820px; margin: 0 auto; min-height: 320px; }
+    .testimonial-slider { position: relative; max-width: 820px; margin: 0 auto; min-height: 360px; }
     .testimonial-slide { position: absolute; inset: 0; opacity: 0; transform: translateX(60px); transition: opacity 0.7s ease, transform 0.7s ease; pointer-events: none; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .testimonial-slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
     .testimonial-slide.exiting { opacity: 0; transform: translateX(-60px); }
-    .testimonial-mark { font-family: 'Playfair Display', serif; font-size: 90px; color: var(--gold); line-height: 0.5; display: block; margin-bottom: 24px; opacity: 0.3; }
-    .testimonial-text { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.6vw, 32px); font-weight: 400; font-style: italic; color: var(--ivory); line-height: 1.55; margin-bottom: 28px; }
-    .testimonial-divider { width: 44px; height: 1px; background: var(--gold); margin: 0 auto 18px; opacity: 0.4; }
-    .testimonial-source { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.65; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .testimonial-mark { font-family: 'Playfair Display', serif; font-size: 80px; color: var(--gold); line-height: 0.5; display: block; margin-bottom: 20px; opacity: 0.3; }
+    .testimonial-text { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.4vw, 28px); font-weight: 400; font-style: italic; color: var(--ivory); line-height: 1.5; margin-bottom: 24px; }
+    .testimonial-divider { width: 44px; height: 1px; background: var(--gold); margin: 0 auto 16px; opacity: 0.4; }
+    .testimonial-source { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.7; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .testimonial-flag { font-size: 18px; line-height: 1; }
     .testimonial-dots { display: flex; justify-content: center; gap: 10px; margin-top: 32px; }
     .testimonial-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-border-s); cursor: pointer; transition: background 0.3s, transform 0.3s; border: none; padding: 0; }
@@ -424,6 +424,7 @@
       <li><a href="#pricing-section">Pricing</a></li>
       <li><a href="#founder-section">Jennifer</a></li>
       <li><a href="#process-section">Process</a></li>
+      <li><a href="#testimonial-section">Testimonials</a></li>
       <li><a href="#booking-section" class="nav-cta" aria-label="Book a strategy call with Jennifer">Book a Call</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -436,6 +437,7 @@
       <li><a href="#pricing-section">Pricing</a></li>
       <li><a href="#founder-section">Jennifer</a></li>
       <li><a href="#process-section">Process</a></li>
+      <li><a href="#testimonial-section">Testimonials</a></li>
       <li><a href="#booking-section">Book a Call</a></li>
     </ul>
   </nav>
@@ -458,7 +460,7 @@
         </div>
       </div>
       <aside class="hero-right" aria-label="Jennifer Omaliko, Founder of Jennavi">
-        <img src="IMG-20260323-WA0003(1).jpg" alt="Jennifer Mmesoma Omaliko, Founder and CEO of Jennavi, LinkedIn Content Strategist" class="hero-img" loading="eager" onerror="this.src='https://placehold.co/800x1000/1a1a2e/d4af37?text=Jennifer+Omaliko'">
+        <img src="IMG-20260323-WA0003(1).jpg" alt="Jennifer Mmesoma Omaliko, Founder and CEO of Jennavi" class="hero-img" loading="eager" onerror="this.src='https://placehold.co/800x1000/1a1a2e/d4af37?text=Jennifer+Omaliko'">
         <div class="hero-badge" aria-hidden="true"><span class="hero-badge-num">21</span><span class="hero-badge-text">Building globally<br>from Nigeria</span></div>
       </aside>
     </header>
@@ -477,7 +479,10 @@
             <h2 class="section-title reveal" id="invisible-heading">The Cost of Being<br><em>Invisible.</em></h2>
             <p class="invisible-copy reveal">Your expertise is world-class, but your silence is costing you deals. We bridge the gap between <strong>your brilliance and the global stage.</strong></p>
             <p class="invisible-copy reveal">Every day you post nothing, a less qualified founder is landing the client that should be yours. Not because they are better. Because they are <strong>visible.</strong></p>
-            <div class="callout reveal"><p class="callout-text">"The founders winning on LinkedIn are not more talented than you. They have one thing you do not yet have: a strategy that makes the right person feel found every time they land on their profile."</p><cite class="callout-attr"><span style="display:inline-block;width:20px;height:1px;background:var(--gold);vertical-align:middle;margin-right:8px;"></span> Jennifer Omaliko, Founder, Jennavi</cite></div>
+            <div class="callout reveal">
+              <p class="callout-text">"The founders winning on LinkedIn are not more talented than you. They have one thing you do not yet have → a strategy that makes the right person feel found every time they land on their profile."</p>
+              <cite class="callout-attr"><span style="display:inline-block;width:20px;height:1px;background:var(--gold);vertical-align:middle;margin-right:8px;"></span> Jennifer Omaliko, Founder, Jennavi</cite>
+            </div>
           </div>
           <div class="invisible-right">
             <p class="eyebrow">Sound Familiar?</p>
@@ -577,7 +582,7 @@
           </aside>
           <div class="founder-content">
             <p class="eyebrow">Meet The Founder</p>
-            <h2 class="founder-name reveal" id="founder-heading"><a href="https://www.linkedin.com/in/jennifer-omaliko-2b4238244" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(212,175,55,0.4);transition:border-color 0.2s;" aria-label="Jennifer Omaliko LinkedIn profile">Jennifer Mmesoma Omaliko</a></h2>
+            <h2 class="founder-name reveal" id="founder-heading"><a href="https://www.linkedin.com/in/jennifer-omaliko-2b4238244" target="_blank" rel="noopener noreferrer">Jennifer Mmesoma Omaliko</a></h2>
             <p class="founder-title">Founder &amp; CEO · LinkedIn Content Strategist · Ghostwriter</p>
             <p class="founder-bio reveal">Jennifer is a <strong>21-year-old LinkedIn Content and Growth Strategist</strong> based in Kano, Nigeria, building an international digital growth agency from scratch, documenting every step publicly.</p>
             <p class="founder-bio reveal">She grew her personal LinkedIn from under 500 to over 5,500 followers organically, achieving <strong>873% impression growth and over 106,000 total organic impressions.</strong> Zero paid ads. Zero shortcuts. Every strategy she sells is the strategy she lives.</p>
@@ -614,25 +619,41 @@
       </div>
     </section>
 
-    <section class="testimonial-section" aria-labelledby="testimonial-heading">
+    <section id="testimonial-section" class="testimonial-section" aria-labelledby="testimonial-heading">
       <div class="container">
+        <p class="eyebrow">Social Proof</p>
+        <h2 class="section-title reveal" id="testimonial-heading">Trusted by Founders<br><em>Worldwide.</em></h2>
         <div class="testimonial-slider" id="testimonialSlider" aria-label="Client testimonials">
-          <div class="testimonial-slide active" role="group" aria-label="Testimonial 1 of 2">
+          <div class="testimonial-slide active" role="group" aria-label="Testimonial 1 of 4">
             <span class="testimonial-mark serif" aria-hidden="true">"</span>
-            <blockquote><p class="testimonial-text" id="testimonial-heading">Jennifer did more research on me before our first conversation than anyone who had ever pitched me. The proposal she sent felt like it was built in a room where I was the only person in it.</p></blockquote>
+            <blockquote><p class="testimonial-text">Jennifer did more research on me before our first conversation than anyone who had ever pitched me. The proposal she sent felt like it was built in a room where I was the only person in it.</p></blockquote>
             <div class="testimonial-divider" aria-hidden="true"></div>
             <cite class="testimonial-source"><span class="testimonial-flag">🇦🇺</span> Founder · Healthcare Sector · Australia</cite>
           </div>
-          <div class="testimonial-slide" role="group" aria-label="Testimonial 2 of 2">
+          <div class="testimonial-slide" role="group" aria-label="Testimonial 2 of 4">
             <span class="testimonial-mark serif" aria-hidden="true">"</span>
-            <blockquote><p class="testimonial-text">We brought Jennifer in to grow our NGO's LinkedIn company page and within three months she delivered 80% follower growth and completely transformed how our donors and partners perceived us online. The content felt authentic, purposeful, and deeply aligned with our mission. I had no idea a LinkedIn strategy could do this for a non-profit. Jennifer is in a class of her own.</p></blockquote>
+            <blockquote><p class="testimonial-text">We brought Jennifer in to grow our NGO's LinkedIn company page and within three months she delivered 80% follower growth and completely transformed how our donors and partners perceived us online. Jennifer is in a class of her own.</p></blockquote>
             <div class="testimonial-divider" aria-hidden="true"></div>
-            <cite class="testimonial-source"><span class="testimonial-flag">🇺🇸</span> Executive Director · Non-Profit Sector · United States</cite>
+            <cite class="testimonial-source"><span class="testimonial-flag">🇺🇸</span> Executive Director · Non-Profit · United States</cite>
+          </div>
+          <div class="testimonial-slide" role="group" aria-label="Testimonial 3 of 4">
+            <span class="testimonial-mark serif" aria-hidden="true">"</span>
+            <blockquote><p class="testimonial-text">As a founder in Nigeria's data governance space, I struggled to be seen globally. Jennifer didn't just write posts — she built a narrative that positioned me as the go-to expert. My inbound leads tripled in 90 days.</p></blockquote>
+            <div class="testimonial-divider" aria-hidden="true"></div>
+            <cite class="testimonial-source"><span class="testimonial-flag">🇳🇬</span> Founder · Data Governance · Nigeria</cite>
+          </div>
+          <div class="testimonial-slide" role="group" aria-label="Testimonial 4 of 4">
+            <span class="testimonial-mark serif" aria-hidden="true">"</span>
+            <blockquote><p class="testimonial-text">Jennifer understands the AI space better than most marketers I've worked with in London. Her content strategy helped me attract enterprise clients who previously wouldn't return my calls. Worth every penny.</p></blockquote>
+            <div class="testimonial-divider" aria-hidden="true"></div>
+            <cite class="testimonial-source"><span class="testimonial-flag">🇬🇧</span> Founder · AI Technology · United Kingdom</cite>
           </div>
         </div>
         <div class="testimonial-dots" role="tablist" aria-label="Testimonial navigation">
           <button class="testimonial-dot active" data-slide="0" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
           <button class="testimonial-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
+          <button class="testimonial-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Testimonial 3"></button>
+          <button class="testimonial-dot" data-slide="3" role="tab" aria-selected="false" aria-label="Testimonial 4"></button>
         </div>
       </div>
     </section>
@@ -651,6 +672,7 @@
           <li><a href="https://www.facebook.com/share/1ZkSD6a8q8/" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="#1877F2" style="flex-shrink:0;vertical-align:middle;margin-right:6px;"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Jennavi</a></li>
           <li><a href="https://www.instagram.com/jennifer_omaliko?igsh=dmVmdXBtcGNreGll" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" style="flex-shrink:0;vertical-align:middle;margin-right:6px;"><defs><radialGradient id="igG2" cx="30%" cy="107%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="24" height="24" rx="6" fill="url(#igG2)"/><path d="M12 7.5A4.5 4.5 0 1 0 12 16.5A4.5 4.5 0 0 0 12 7.5Zm0 7.5a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm5.25-8.25a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" fill="#fff"/></svg>jennifer_omaliko</a></li>
           <li><a href="https://x.com/JenniferOmaliko" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="#e7e7e7" style="flex-shrink:0;vertical-align:middle;margin-right:6px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@JenniferOmaliko</a></li>
+          <li><a href="https://youtube.com/@jennifermmesomaomaliko?si=VeDUmmblchkzeF15" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="#FF0000" style="flex-shrink:0;vertical-align:middle;margin-right:6px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Jennifer Omaliko</a></li>
         </ul>
       </div>
       <div>
@@ -692,7 +714,7 @@
     function animateCount(el) { const final = el.dataset.final || el.textContent.trim(); const raw = parseFloat(final.replace(/[^0-9.]/g, '')); if (isNaN(raw) || raw === 0) { el.textContent = final; return; } const dur = 1400; const start = performance.now(); (function tick(now) { const t = Math.min((now - start) / dur, 1); const eased = 1 - Math.pow(1 - t, 3); const val = raw * eased; if (final.includes('%')) el.textContent = Math.round(val) + '%'; else if (final.includes('k+')) el.textContent = val.toFixed(1) + 'k+'; else el.textContent = final; if (t < 1) requestAnimationFrame(tick); else el.textContent = final; })(start); }
     const counterObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.stat-num').forEach(animateCount); counterObs.unobserve(e.target); } }); }, { threshold: 0 });
     document.querySelectorAll('.stats-bar').forEach(el => counterObs.observe(el));
-    (function() { const slides = document.querySelectorAll('.testimonial-slide'); const dots = document.querySelectorAll('.testimonial-dot'); if (!slides.length) return; let current = 0; let timer; function goTo(idx) { slides[current].classList.remove('active'); slides[current].classList.add('exiting'); dots[current].classList.remove('active'); dots[current].setAttribute('aria-selected', 'false'); const prev = current; setTimeout(() => slides[prev].classList.remove('exiting'), 700); current = idx; slides[current].classList.add('active'); dots[current].classList.add('active'); dots[current].setAttribute('aria-selected', 'true'); } function next() { goTo((current + 1) % slides.length); } timer = setInterval(next, 5500); dots.forEach(dot => { dot.addEventListener('click', () => { clearInterval(timer); goTo(parseInt(dot.dataset.slide)); timer = setInterval(next, 5500); }); }); })();
+    (function() { const slides = document.querySelectorAll('.testimonial-slide'); const dots = document.querySelectorAll('.testimonial-dot'); if (!slides.length) return; let current = 0; let timer; function goTo(idx) { slides[current].classList.remove('active'); slides[current].classList.add('exiting'); dots[current].classList.remove('active'); dots[current].setAttribute('aria-selected', 'false'); const prev = current; setTimeout(() => slides[prev].classList.remove('exiting'), 700); current = idx; slides[current].classList.add('active'); dots[current].classList.add('active'); dots[current].setAttribute('aria-selected', 'true'); } function next() { goTo((current + 1) % slides.length); } timer = setInterval(next, 5500); dots.forEach((dot, i) => { dot.addEventListener('click', () => { clearInterval(timer); goTo(i); timer = setInterval(next, 5500); }); }); })();
   </script>
 </body>
 </html>
