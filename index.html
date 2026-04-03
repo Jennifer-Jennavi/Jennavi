@@ -11,7 +11,7 @@
   <meta name="description" content="Jennavi transforms Founders and CEOs into unignorable industry authorities. High-ROI LinkedIn ghostwriting, strategy, and personal branding by Jennifer Omaliko.">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jennavi.com/">
+  <meta property="og:url" content="https://jennifer-jennavi.github.io/Jennavi-/">
   <meta property="og:title" content="Jennifer Omaliko | Jennavi: Elite LinkedIn Ghostwriting for Founders">
   <meta property="og:description" content="Jennavi transforms Founders and CEOs into unignorable industry authorities. 873% average ROI documented. High-ROI LinkedIn ghostwriting by Jennifer Omaliko.">
   <meta property="og:image" content="IMG-20260323-WA0003(1).jpg">
@@ -25,7 +25,7 @@
   <meta name="twitter:description" content="Stop being the best-kept secret in your industry. Jennavi builds founder authority on LinkedIn. 873% ROI documented.">
   <meta name="twitter:image" content="IMG-20260323-WA0003(1).jpg">
 
-  <link rel="canonical" href="https://jennavi.com/">
+  <link rel="canonical" href="https://jennifer-jennavi.github.io/Jennavi-/">
 
   <script type="application/ld+json">
   {
@@ -33,19 +33,19 @@
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://jennavi.com/#organization",
+        "@id": "https://jennifer-jennavi.github.io/Jennavi-/#organization",
         "name": "Jennavi",
-        "url": "https://jennavi.com/",
-        "logo": { "@type": "ImageObject", "url": "https://jennavi.com/logo.png" },
+        "url": "https://jennifer-jennavi.github.io/Jennavi-/",
+        "logo": { "@type": "ImageObject", "url": "https://jennifer-jennavi.github.io/Jennavi-/logo.png" },
         "sameAs": ["https://www.linkedin.com/company/jennavi/", "https://www.instagram.com/jennifer_omaliko", "https://x.com/JenniferOmaliko", "https://youtube.com/@jennifermmesomaomaliko"],
         "contactPoint": { "@type": "ContactPoint", "email": "jennavi.global@gmail.com", "contactType": "customer service", "availableLanguage": "English" }
       },
       {
         "@type": "ProfessionalService",
-        "@id": "https://jennavi.com/#service",
+        "@id": "https://jennifer-jennavi.github.io/Jennavi-/#service",
         "name": "Jennavi – LinkedIn Ghostwriting & Content Strategy",
         "description": "Jennavi transforms Founders and CEOs into unignorable LinkedIn authorities through elite ghostwriting, content strategy, and personal branding. Founded by Jennifer Mmesoma Omaliko.",
-        "url": "https://jennavi.com/",
+        "url": "https://jennifer-jennavi.github.io/Jennavi-/",
         "founder": {
           "@type": "Person",
           "name": "Jennifer Mmesoma Omaliko",
@@ -147,6 +147,7 @@
     .container { max-width: 1200px; margin: 0 auto; width: 100%; }
     section { padding: 110px 48px; position: relative; }
 
+    /* Hero Buttons - Simplified for clickability */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -158,38 +159,19 @@
       text-transform: uppercase;
       padding: 16px 36px;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
+      transition: all 0.25s ease;
       white-space: nowrap;
       border: none;
-      z-index: 10000;
+      position: relative;
+      z-index: 10001;
       pointer-events: auto;
+      border-radius: 2px;
     }
-    .btn:hover { transform: translateY(-2px); }
-    .btn span { position: relative; z-index: 1; }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
     .btn-gold { background: var(--gold); color: var(--onyx); }
-    .btn-gold::before { content: ''; position: absolute; inset: 0; background: var(--gold-light); transform: translateX(-101%); transition: transform 0.38s var(--ease-out); }
-    .btn-gold:hover::before { transform: translateX(0); }
-    .btn-gold:hover { box-shadow: 0 10px 36px rgba(212,175,55,0.32); }
-    .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold-border-s); }
-    .btn-outline:hover { background: var(--gold-faint); border-color: var(--gold); }
+    .btn-gold:hover { background: var(--gold-light); box-shadow: 0 10px 36px rgba(212,175,55,0.32); }
     .btn-wa { background: #25D366; color: #fff; }
-    .btn-wa:hover { box-shadow: 0 10px 32px rgba(37,211,102,0.28); }
-    .link-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border-bottom: 1px solid var(--gold-border-s);
-      padding-bottom: 3px;
-      transition: gap 0.22s, opacity 0.2s;
-    }
-    .link-ghost:hover { gap: 14px; opacity: 0.8; }
+    .btn-wa:hover { background: #20b859; box-shadow: 0 10px 32px rgba(37,211,102,0.28); }
 
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 900;
@@ -231,7 +213,7 @@
     .hero-headline .serif-italic { font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; }
     .hero-sub { font-size: 15.5px; color: var(--ivory-muted); line-height: 1.9; max-width: 500px; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.36s forwards; }
     .hero-sub strong { color: var(--ivory); font-weight: 600; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.5s forwards; position: relative; z-index: 10001; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.5s forwards; position: relative; z-index: 10001; pointer-events: auto; }
     .hero-stats { display: flex; gap: 0; margin-top: 52px; border: 1px solid var(--gold-border); opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.65s forwards; }
     .hero-stat { padding: 20px 28px; border-right: 1px solid var(--gold-border); flex: 1; transition: background 0.3s; }
     .hero-stat:last-child { border-right: none; }
@@ -324,7 +306,7 @@
     .proof-pill { background: rgba(212,175,55,0.1); border: 1px solid var(--gold-border-s); padding: 7px 16px; font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: var(--gold); transition: background 0.22s; }
     .proof-pill:hover { background: rgba(212,175,55,0.18); }
 
-    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--gold-border); }
+    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--gold-border); margin: 60px 0; }
     .stat-item { padding: 52px 40px; text-align: center; border-right: 1px solid var(--gold-border); transition: background 0.3s; }
     .stat-item:last-child { border-right: none; }
     .stat-item:hover { background: var(--gold-faint); }
@@ -481,7 +463,7 @@
       <div class="container">
         <div class="invisible-grid">
           <div class="invisible-left">
-            <!-- REMOVED: <p class="eyebrow">The Authority Hook</p> -->
+            <!-- The Authority Hook eyebrow removed as requested -->
             <h2 class="section-title reveal" id="invisible-heading">The Cost of Being<br><em>Invisible.</em></h2>
             <p class="invisible-copy reveal">Your expertise is world-class, but your silence is costing you deals. We bridge the gap between <strong>your brilliance and the global stage.</strong></p>
             <p class="invisible-copy reveal">Every day you post nothing, a less qualified founder is landing the client that should be yours. Not because they are better. Because they are <strong>visible.</strong></p>
