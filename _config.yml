@@ -1,11 +1,2 @@
-title: Jennavi Insights
-description: Strategic Positioning for Founders
-baseurl: "/Jennavi"
-url: "https://jennifer-jennavi.github.io"
-
-# Markdown settings
-markdown: kramdown
-highlighter: rouge
-
-# Keeps your current homepage safe
-exclude: [node_modules, vendor, .sass-cache, .jekyll-cache, .jekyll-metadata]
+# Empty config – .nojekyll overrides everything
+# This file exists only to avoid GitHub Pages warnings
