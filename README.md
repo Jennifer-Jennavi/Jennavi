@@ -1,5 +1,5 @@
 # Jennavi
-LinkedIn Growth Agency for Founders & CEOs
+*LinkedIn Growth Agency for Founders & CEOs*
 
 **From invisible to inevitable. One founder at a time.**
 
@@ -35,3 +35,11 @@ No build step required. Clone the repo and open `index.html` in your browser.
 ```bash
 git clone https://github.com/jennifer-jennavi/Jennavi.git
 cd Jennavi
+```
+## License
+
+© 2026 Jennavi – Jennifer Mmesoma Omaliko. All rights reserved.
+
+**Ready to stop being the best‑kept secret?**  
+
+👉 [Secure your strategy call](https://calendly.com/omalikojennifermmesoma/30min)
