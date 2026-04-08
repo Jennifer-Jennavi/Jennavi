@@ -3,9 +3,9 @@
 
 **From invisible to inevitable. One founder at a time.**
 
-[![Live Site](https://img.shields.io/badge/Live-Jennavi-gold?style=flat-square)](https://jennifer-jennavi.github.io/Jennavi/)
-[![SEO Score](https://img.shields.io/badge/SEO-Top%201%25-brightgreen?style=flat-square)](https://jennifer-jennavi.github.io/Jennavi/)
-[![Book](https://img.shields.io/badge/CRICKETS-53%20pages-gold?style=flat-square)](https://jennifer-jennavi.github.io/Jennavi/book.html)
+[![Live Site](https://img.shields.io/badge/Live-Jennavi-gold?style=flat-square)](https://jennavi.co/)
+[![SEO Score](https://img.shields.io/badge/SEO-Top%201%25-brightgreen?style=flat-square)](https://jennavi.co/)
+[![Book](https://img.shields.io/badge/CRICKETS-53%20pages-gold?style=flat-square)](https://jennavi.co/book.html)
 
 ## The Platform
 
@@ -14,19 +14,19 @@ Jennavi transforms startup founders, coaches, and CEOs into **unignorable Linked
 
 ## Key Pages
 
-- [Homepage](https://jennifer-jennavi.github.io/Jennavi/) – Main brand hub
-- [CRICKETS – The Playbook](https://jennifer-jennavi.github.io/Jennavi/book.html) – 53‑page digital book ($29.90)
-- [Services & Pricing](https://jennifer-jennavi.github.io/Jennavi/services.html) – $100–$800/month retainers
-- [Why Jennavi](https://jennifer-jennavi.github.io/Jennavi/why-jennavi.html) – Methodology
-- [Founder](https://jennifer-jennavi.github.io/Jennavi/founder.html) – Jennifer Mmesoma Omaliko
-- [Insights](https://jennifer-jennavi.github.io/Jennavi/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html) – SEO blog article
+- [Homepage](https://jennavi.co/) – Main brand hub
+- [CRICKETS – The Playbook](https://jennavi.co/book.html) – 53‑page digital book ($29.90)
+- [Services & Pricing](https://jennavi.co/services.html) – $100–$800/month retainers
+- [Why Jennavi](https://jennavi.co/why-jennavi.html) – Methodology
+- [Founder](https://jennavi.co/founder.html) – Jennifer Mmesoma Omaliko
+- [Insights](https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html) – SEO blog article
 
 ## Tech Stack
 
 - Pure HTML5 / CSS3 / JavaScript
 - Fully responsive, mobile‑optimised
 - No Jekyll – static site for maximum speed & SEO control
-- GitHub Pages hosting
+- GitHub Pages hosting with custom domain `jennavi.co`
 
 ## Local Development
 
