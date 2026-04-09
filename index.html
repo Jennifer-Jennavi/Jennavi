@@ -159,23 +159,43 @@
         "contentUrl": "https://www.youtube.com/watch?v=gle9p9rEMuE",
         "embedUrl": "https://www.youtube.com/embed/gle9p9rEMuE",
         "publisher": {"@id": "https://jennavi.co/#organization"},
-        "duration": "PT5M",
-        "inLanguage": "en",
-        "isAccessibleForFree": true
+        "duration": "PT5M"
       },
       {
-        "@type": "VideoObject",
-        "@id": "https://jennavi.co/#video2",
-        "name": "LinkedIn Growth Strategy for Startup Founders - Jennifer Omaliko UGC",
-        "description": "Jennifer Omaliko demonstrates how startup founders can turn LinkedIn visibility into paying clients using AI-powered content strategy and ghostwriting.",
-        "thumbnailUrl": "https://img.youtube.com/vi/7Tv7ZByWQkE/maxresdefault.jpg",
-        "uploadDate": "2026-03-15",
-        "contentUrl": "https://www.youtube.com/watch?v=7Tv7ZByWQkE",
-        "embedUrl": "https://www.youtube.com/embed/7Tv7ZByWQkE",
-        "publisher": {"@id": "https://jennavi.co/#organization"},
-        "duration": "PT1M",
-        "inLanguage": "en",
-        "isAccessibleForFree": true
+        "@type": "FAQPage",
+        "@id": "https://jennavi.co/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a LinkedIn ghostwriter for founders?",
+            "acceptedAnswer": {"@type": "Answer", "text": "A LinkedIn ghostwriter for founders is a professional who writes and strategises LinkedIn content on behalf of startup founders, CEOs and executives. They capture the founder's authentic voice, develop a content strategy, and publish posts that build authority, attract inbound clients and grow a professional network. Jennavi specialises in this service exclusively for founders."}
+          },
+          {
+            "@type": "Question",
+            "name": "How much does LinkedIn ghostwriting cost for founders?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Jennavi offers LinkedIn ghostwriting retainers starting at $200 per month for 8 posts, up to $800 per month for the full VIP executive package including 20 posts, newsletter writing and weekly strategy calls. A one-time LinkedIn profile audit is available for $100."}
+          },
+          {
+            "@type": "Question",
+            "name": "How quickly will I see results from LinkedIn ghostwriting?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Most Jennavi clients see meaningful impression growth and profile visit increases within the first 30 days. Consistent inbound inquiries typically develop between month 2 and month 4 as LinkedIn's algorithm learns your positioning. Jennifer's own profile achieved 873% impression growth organically using the same methodology applied to all clients."}
+          },
+          {
+            "@type": "Question",
+            "name": "Will the content sound like me?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every Jennavi engagement begins with a comprehensive onboarding process to capture your voice, tone, industry expertise and business goals. Every post is written to sound like you on your best day. Jennifer's ghostwriting methodology is voice first, not template driven."}
+          },
+          {
+            "@type": "Question",
+            "name": "What is CRICKETS by Jennifer Omaliko?",
+            "acceptedAnswer": {"@type": "Answer", "text": "CRICKETS is a 53-page digital playbook by Jennifer Omaliko that diagnoses why your LinkedIn content gets views but generates zero clients. It provides the complete positioning system from profile optimisation to DM conversion for $29.90. Available instantly on Selar."}
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a contract to work with Jennavi?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every Jennavi client signs a service agreement before work begins covering scope, deliverables, revisions, payment terms and confidentiality. The first month is paid upfront before content delivery begins."}
+          }
+        ]
       },
       {
         "@type": "BreadcrumbList",
@@ -203,9 +223,9 @@
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
     body { background:var(--onyx); color:var(--ivory); font-family:'Montserrat',sans-serif; font-weight:300; line-height:1.75; overflow-x:hidden; }
-    body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events:none !important; z-index:9998; user-select:none; }
+    body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events:none; z-index:-1; user-select:none; }
 
-    /* GLOBAL MOBILE CLICK FIX - SUPER STRONG VERSION */
+    /* GLOBAL MOBILE CLICK FIXES */
     a, button, .btn, .card-cta, .cta-tile, .book-btn, .founder-name a,
     .hero-actions a, .nav-links a, .nav-drawer a, .footer-links a,
     .pricing-card .card-cta, .cta-tile-action, .insights-btn,
@@ -216,20 +236,17 @@
       -webkit-tap-highlight-color: rgba(201,168,76,0.2);
       cursor: pointer;
       position: relative;
-      z-index: 9999999 !important;
-    }
-    .hero-left, .hero-right, .container, section, div, main, .hero-actions, .founder-name {
-      pointer-events: auto !important;
       z-index: 999999 !important;
     }
-    body::after, .hero::before, .hero-right::before, .ticker::before, .ticker::after,
-    .book-cover-shadow, .book-section::before, .process-arrow, .callout::before {
-      display: none !important;
+    body::after, .hero-right::before, .ticker::before, .ticker::after,
+    .book-cover-shadow, .book-section::before, .hero::before {
+      pointer-events: none !important;
+      z-index: -1;
     }
-    .hero-actions .btn, .hero-actions a { display:inline-flex !important; position:relative !important; z-index:9999999 !important; }
-    .founder-name a { display:inline-block !important; z-index:9999999 !important; }
-    .carousel-btn, .carousel-dot { z-index: 9999999 !important; pointer-events: auto !important; }
-    .carousel-track { touch-action: pan-y pinch-zoom; }
+    .video-container iframe { pointer-events: auto !important; touch-action: manipulation !important; }
+    .hero-actions .btn, .hero-actions a { display:inline-flex !important; position:relative !important; z-index:999999 !important; pointer-events:auto !important; cursor:pointer !important; }
+    .founder-name a { display:inline-block !important; pointer-events:auto !important; cursor:pointer !important; z-index:999999 !important; position:relative !important; }
+    .book-btn, .pricing-card .card-cta, .cta-tile { cursor:pointer !important; pointer-events:auto !important; position:relative !important; }
 
     img { display:block; max-width:100%; }
     a { color:inherit; text-decoration:none; }
@@ -250,28 +267,29 @@
     .btn-wa { background:#25D366; color:#fff; }
     .btn-wa:hover { background:#20b859; }
 
-    /* NAV */
-    .nav { position:fixed; top:0; left:0; right:0; z-index:10000; padding:18px 48px; display:flex; justify-content:space-between; align-items:center; transition:background 0.4s, padding 0.4s; border-bottom:1px solid transparent; }
-    .nav.scrolled { background:rgba(10,10,10,0.97); backdrop-filter:blur(14px); padding:13px 48px; border-bottom-color:var(--gold-border); }
+    /* NAV – simplified from working founder.html */
+    .nav { position:fixed; top:0; left:0; right:0; z-index:10000; padding:18px 48px; display:flex; justify-content:space-between; align-items:center; background:rgba(10,10,10,0.97); backdrop-filter:blur(14px); border-bottom:1px solid var(--gold-border); }
     .nav-logo img { height:30px; width:auto; display:block; }
     .nav-links { display:flex; gap:24px; list-style:none; align-items:center; }
-    .nav-links a { font-size:10.5px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; opacity:0.6; transition:opacity 0.2s; padding:0 4px; }
-    .nav-links a:hover, .nav-links a.active { opacity:1; color:var(--gold); }
+    .nav-links a { font-size:10.5px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; opacity:0.6; color:var(--ivory); transition:opacity 0.2s, color 0.2s; pointer-events:auto !important; touch-action:manipulation !important; }
+    .nav-links a:hover { opacity:1; color:var(--gold); }
+    .nav-links .nav-active { opacity:1 !important; color:var(--gold) !important; }
     .nav-links .nav-book { border:1px solid var(--gold-border-s); color:var(--gold) !important; opacity:1 !important; padding:7px 14px; }
     .nav-links .nav-cta { background:var(--gold); color:var(--onyx) !important; opacity:1 !important; padding:9px 20px; font-weight:600; }
     .nav-links .nav-cta:hover { background:var(--gold-light) !important; }
-    .nav-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; z-index:10001 !important; position:relative; touch-action:manipulation; -webkit-tap-highlight-color: transparent; min-width:44px; min-height:44px; align-items:center; justify-content:center; }
+    .nav-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; padding:4px; cursor:pointer; }
     .nav-toggle span { display:block; width:24px; height:1px; background:var(--ivory); transition:transform 0.3s, opacity 0.3s; }
     .nav-toggle.open span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity:0; }
     .nav-toggle.open span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
-    .nav-drawer { display:block; position:fixed; top:0; right:0; width:min(300px,82vw); height:100vh; background:rgba(10,10,10,0.99); border-left:1px solid var(--gold-border); z-index:10002; padding:90px 36px 48px; transform:translateX(100%); transition:transform 0.4s var(--ease-out); backdrop-filter:blur(20px); visibility:hidden; pointer-events:none; }
-    .nav-drawer.open { transform:translateX(0); visibility:visible; pointer-events:auto; }
+    .nav-drawer { display:none; position:fixed; top:0; right:0; width:min(300px,82vw); height:100vh; background:rgba(10,10,10,0.99); border-left:1px solid var(--gold-border); z-index:9999; padding:90px 36px 48px; transform:translateX(100%); transition:transform 0.4s var(--ease-out); backdrop-filter:blur(20px); }
+    .nav-drawer.open { transform:translateX(0); }
     .nav-drawer ul { list-style:none; display:flex; flex-direction:column; gap:4px; }
-    .nav-drawer ul li a { font-family:'Playfair Display',serif; font-size:26px; font-weight:400; color:var(--ivory); opacity:0.7; display:block; padding:10px 0; border-bottom:1px solid rgba(201,168,76,0.1); transition:opacity 0.2s, color 0.2s, padding-left 0.22s; pointer-events:auto !important; touch-action:manipulation !important; -webkit-tap-highlight-color:transparent; }
+    .nav-drawer ul li a { font-family:'Playfair Display',serif; font-size:26px; font-weight:400; color:var(--ivory); opacity:0.7; display:block; padding:10px 0; border-bottom:1px solid rgba(201,168,76,0.1); transition:opacity 0.2s, color 0.2s, padding-left 0.22s; pointer-events:auto !important; touch-action:manipulation !important; }
     .nav-drawer ul li a:hover { opacity:1; color:var(--gold); padding-left:10px; }
-    .nav-overlay { display:block; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:10001; opacity:0; transition:opacity 0.3s; pointer-events:none; visibility:hidden; }
-    .nav-overlay.open { opacity:1; visibility:visible; pointer-events:auto; }
+    .nav-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9998; opacity:0; transition:opacity 0.3s; pointer-events:auto; }
+    .nav-overlay.open { opacity:1; }
+    @media (max-width:900px) { .nav { padding:18px 24px; } .nav-links { display:none; } .nav-toggle { display:flex; } .nav-drawer { display:block; } .nav-overlay { display:block; } }
 
     /* HERO */
     .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; padding:0; position:relative; overflow:hidden; }
@@ -471,7 +489,7 @@
     .insights-btn { display:inline-flex; align-items:center; gap:12px; font-family:'DM Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:14px 32px; background:transparent; border:1.5px solid var(--gold); color:var(--gold); cursor:pointer; transition:all 0.25s ease; text-decoration:none; border-radius:2px; min-height:44px; }
     .insights-btn:hover { background:var(--gold); color:var(--onyx); transform:translateY(-2px); gap:16px; }
 
-    /* FOOTER */
+    /* FOOTER (full) */
     footer { border-top:1px solid var(--gold-border); padding:80px 48px 48px; }
     .footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:64px; padding-bottom:56px; border-bottom:1px solid var(--gold-border); }
     .footer-brand-name { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; display:block; margin-bottom:16px; }
@@ -506,20 +524,37 @@
     /* RESPONSIVE */
     @media (max-width:1100px) { .pricing-grid { grid-template-columns:repeat(3,1fr); } .cta-grid { grid-template-columns:repeat(2,1fr); } .nav-links { gap:18px; } }
     @media (max-width:900px) {
-      .nav { padding:18px 24px; } .nav.scrolled { padding:13px 24px; } .nav-links { display:none; } .nav-toggle { display:flex; } .nav-drawer { display:block; } .nav-overlay { display:block; }
+      .nav { padding:18px 24px; }
+      .nav-links { display:none; }
+      .nav-toggle { display:flex; }
+      .nav-drawer { display:block; }
+      .nav-overlay { display:block; }
       section { padding:80px 24px; }
-      .hero { grid-template-columns:1fr; min-height:auto; } .hero-left { padding:120px 24px 60px; } .hero-left::after { display:none; } .hero-right { height:auto; min-height:60vh; } .hero-img { max-height:55vh; width:auto; margin:0 auto; }
+      .hero { grid-template-columns:1fr; min-height:auto; }
+      .hero-left { padding:120px 24px 60px; }
+      .hero-left::after { display:none; }
+      .hero-right { height:auto; min-height:60vh; }
+      .hero-img { max-height:55vh; width:auto; margin:0 auto; }
       .invisible-grid, .services-intro, .founder-grid, .why-grid, .book-grid { grid-template-columns:1fr; gap:48px; }
       .book-cover-wrap { order:-1; }
-      .pricing-grid { grid-template-columns:repeat(2,1fr); } .cta-grid { grid-template-columns:1fr 1fr; } .process-grid { grid-template-columns:1fr 1fr; }
+      .pricing-grid { grid-template-columns:repeat(2,1fr); }
+      .cta-grid { grid-template-columns:1fr 1fr; }
+      .process-grid { grid-template-columns:1fr 1fr; }
       .stats-bar { grid-template-columns:1fr 1fr; }
-      .stat-item:nth-child(2) { border-right:none; } .stat-item:nth-child(3) { border-right:1px solid var(--gold-border); border-top:1px solid var(--gold-border); } .stat-item:nth-child(4) { border-right:none; border-top:1px solid var(--gold-border); }
-      .footer-grid { grid-template-columns:1fr; gap:48px; } .founder-visual { display:none; }
-      .hero-actions a.btn-gold, .hero-actions a.btn-wa, .founder-name a { position:relative !important; z-index:9999999 !important; display:inline-flex !important; }
+      .stat-item:nth-child(2) { border-right:none; }
+      .stat-item:nth-child(3) { border-right:1px solid var(--gold-border); border-top:1px solid var(--gold-border); }
+      .stat-item:nth-child(4) { border-right:none; border-top:1px solid var(--gold-border); }
+      .footer-grid { grid-template-columns:1fr; gap:48px; }
+      .founder-visual { display:none; }
+      .hero-actions a.btn-gold, .hero-actions a.btn-wa, .founder-name a { position:relative !important; z-index:999999 !important; display:inline-flex !important; }
     }
     @media (max-width:640px) {
-      .pricing-grid { grid-template-columns:1fr; } .cta-grid { grid-template-columns:1fr; } .process-grid { grid-template-columns:1fr; }
-      .stats-bar { grid-template-columns:1fr; } .stat-item { border-right:none !important; border-top:1px solid var(--gold-border); } .stat-item:first-child { border-top:none; }
+      .pricing-grid { grid-template-columns:1fr; }
+      .cta-grid { grid-template-columns:1fr; }
+      .process-grid { grid-template-columns:1fr; }
+      .stats-bar { grid-template-columns:1fr; }
+      .stat-item { border-right:none !important; border-top:1px solid var(--gold-border); }
+      .stat-item:first-child { border-top:none; }
       .footer-bottom { flex-direction:column; text-align:center; }
       .book-cta-row { flex-direction:column; align-items:flex-start; }
       .book-title { font-size:clamp(52px,16vw,80px); }
@@ -530,9 +565,9 @@
 
 <body>
   <!-- NAV -->
-  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
-    <a href="https://jennavi.co/" class="nav-logo" aria-label="Jennavi - LinkedIn Ghostwriting for Founders">
-      <img src="/jennavi-logo.svg" alt="Jennavi" width="140" height="30">
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="https://jennavi.co/" class="nav-logo">
+      <img src="/jennavi-logo.svg" alt="Jennavi - LinkedIn Ghostwriting for Founders" width="140" height="30">
     </a>
     <ul class="nav-links" role="list">
       <li><a href="https://jennavi.co/why-jennavi.html">Why Jennavi</a></li>
@@ -897,7 +932,6 @@
               <meta itemprop="uploadDate" content="2026-04-01">
               <meta itemprop="contentUrl" content="https://www.youtube.com/watch?v=gle9p9rEMuE">
               <meta itemprop="embedUrl" content="https://www.youtube.com/embed/gle9p9rEMuE">
-              <meta itemprop="duration" content="PT5M">
               <iframe
                 src="https://www.youtube.com/embed/gle9p9rEMuE?playsinline=1&rel=0"
                 title="The exact AI prompt Jennifer Omaliko uses for Founder LinkedIn content"
@@ -1069,8 +1103,8 @@
       <div>
         <p class="footer-col-title">Direct Contact</p>
         <ul class="footer-links direct-contact" role="list">
-          <li><a href="/cdn-cgi/l/email-protection#f897979994919397929d9696919e9d8a95959d8b979599b89f95999194d69b9795" aria-label="Email Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span><span class="__cf_email__" data-cfemail="d9b6b4b8b5b0b2b6b3bcb7b7b0bfbcabb4b4bcaab6b4b899beb4b8b0b5f7bab6b4">[email&#160;protected]</span></span></a></li>
-          <li><a href="/cdn-cgi/l/email-protection#82e8e7ecece3f4ebace5eeede0e3eec2e5efe3ebeeace1edef" aria-label="Email Jennavi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span><span class="__cf_email__" data-cfemail="5b313e35353a2d32753c3734393a371b3c363a323775383436">[email&#160;protected]</span></span></a></li>
+          <li><a href="mailto:omalikojennifermmesoma@gmail.com" aria-label="Email Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span>omalikojennifermmesoma@gmail.com</span></a></li>
+          <li><a href="mailto:jennavi.global@gmail.com" aria-label="Email Jennavi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span>jennavi.global@gmail.com</span></a></li>
           <li><a href="tel:+2349031237643" aria-label="Call Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+234 903 123 7643</span></a></li>
           <li><a href="https://wa.me/2349031237643?text=Hi%20Jennifer%2C%20I%27d%20love%20to%20learn%20more%20about%20Jennavi!" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span>WhatsApp</span></a></li>
           <li><a href="https://calendly.com/omalikojennifermmesoma/30min" target="_blank" rel="noopener noreferrer" aria-label="Book Strategy Call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Book a Strategy Call</span></a></li>
@@ -1098,7 +1132,6 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     document.body.classList.add('js-ready');
 
@@ -1121,7 +1154,7 @@
     }, { threshold: 0.2 });
     document.querySelectorAll('section[id]').forEach(function(s) { sectionObs.observe(s); });
 
-    // MOBILE NAV - FIXED VERSION
+    // MOBILE NAV (simplified, works like founder.html)
     const toggle = document.getElementById('navToggle');
     const drawer = document.getElementById('navDrawer');
     const overlay = document.getElementById('navOverlay');
@@ -1144,9 +1177,7 @@
       document.body.style.overflow = '';
     }
 
-    // Use only click event (works for both mouse and touch)
     toggle.addEventListener('click', function(e) {
-      e.stopPropagation();
       if (toggle.classList.contains('open')) {
         closeMenu();
       } else {
@@ -1155,13 +1186,9 @@
     });
 
     overlay.addEventListener('click', closeMenu);
-
-    // Close drawer when a link is clicked
     drawer.querySelectorAll('a').forEach(function(a) {
       a.addEventListener('click', closeMenu);
     });
-
-    // Close drawer on Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeMenu();
     });
