@@ -41,7 +41,7 @@
   <meta name="geo.region" content="US">
   <meta name="geo.region" content="GB">
 
-  <!-- RICH JSON-LD SCHEMA -->
+  <!-- RICH JSON-LD SCHEMA (UNTOUCHED) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -225,7 +225,7 @@
     body { background:var(--onyx); color:var(--ivory); font-family:'Montserrat',sans-serif; font-weight:300; line-height:1.75; overflow-x:hidden; }
     body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events:none; z-index:-1; user-select:none; }
 
-    /* GLOBAL MOBILE CLICK FIXES - CLEAN VERSION */
+    /* GLOBAL MOBILE CLICK FIXES - CLEAN VERSION (YOUR COMMENDED VERSION) */
     a, button, .btn, .card-cta, .cta-tile, .book-btn, .founder-name a,
     .hero-actions a, .nav-links a, .nav-drawer a, .footer-links a,
     .pricing-card .card-cta, .cta-tile-action, .insights-btn,
@@ -324,7 +324,7 @@
     .btn:hover { transform:translateY(-2px); }
     .btn-gold { background:var(--gold); color:var(--onyx); }
     .btn-gold:hover { background:var(--gold-light); }
-    .btn-wa { background:#25D366; color:#fff; }
+    .btn-wa { background:#25D366; color:var(--ivory); }
     .btn-wa:hover { background:#20b859; }
 
     /* NAV */
@@ -490,9 +490,9 @@
     .proof-pill { background:rgba(201,168,76,0.1); border:1px solid var(--gold-border-s); padding:7px 16px; font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--gold); transition:background 0.22s; }
     .proof-pill:hover { background:rgba(201,168,76,0.18); }
 
-    /* VIDEO - clean, no inline styles */
-    .video-container { position:relative; width:100%; padding-bottom:56.25%; height:0; border:1px solid var(--gold-border); border-radius:8px; overflow:hidden; background:#000; margin:28px 0; }
-    .video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+    /* VIDEO - with mobile fix (YouTube black screen resolved) */
+    .video-container { position:relative; width:100%; padding-bottom:56.25%; height:0; border:1px solid var(--gold-border); border-radius:8px; overflow:hidden; background:#000; margin:28px 0; -webkit-transform: translateZ(0); transform: translateZ(0); }
+    .video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; -webkit-transform: translateZ(0); transform: translateZ(0); }
 
     /* STATS */
     .stats-bar { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--gold-border); margin:60px 0; }
@@ -623,70 +623,25 @@
       .hero-proof-bar { gap:16px; }
     }
 
-    /* =============================================
-       MOBILE TAP FIX - ANDROID CHROME (REGULAR MODE)
-       ============================================= */
+    /* ANDROID MOBILE TAP FIX (YOUR COMMENDED VERSION) */
     @media (max-width: 900px) {
-      /* Ensure body and main don't block events */
-      body, main, section, div {
-        pointer-events: auto !important;
-      }
-
-      /* Force all CTAs, buttons, video, FAQ to be above everything */
-      .hero-actions,
-      .hero-actions a,
-      .btn,
-      .btn-gold,
-      .btn-wa,
-      .pricing-card .card-cta,
-      .cta-tile,
-      .book-btn,
-      .founder-content .btn-gold,
-      .insights-btn,
-      .faq-q,
-      .video-container,
-      .video-container iframe,
-      .footer-links a,
-      .nav-toggle,
-      .nav-drawer a {
+      body, main, section, div { pointer-events: auto !important; }
+      .hero-actions, .hero-actions a, .btn, .btn-gold, .btn-wa,
+      .pricing-card .card-cta, .cta-tile, .book-btn, .founder-content .btn-gold,
+      .insights-btn, .faq-q, .video-container, .video-container iframe,
+      .footer-links a, .nav-toggle, .nav-drawer a {
         pointer-events: auto !important;
         cursor: pointer !important;
         touch-action: manipulation !important;
         position: relative;
         z-index: 99999 !important;
       }
-
-      /* Specifically for the FAQ accordion - untouched styling but ensure tap */
-      .faq-q {
-        pointer-events: auto !important;
-        z-index: 99999 !important;
-      }
-
-      /* YouTube video iframe must be tappable */
-      .video-container iframe {
-        pointer-events: auto !important;
-        z-index: 99999 !important;
-      }
-
-      /* Ensure overlay only blocks when actually open */
-      .nav-overlay {
-        pointer-events: none !important;
-      }
-      .nav-overlay.open {
-        pointer-events: auto !important;
-        z-index: 10000 !important;
-      }
-
-      /* Fix any potential parent interference */
-      .hero-left,
-      .book-content,
-      .founder-content,
-      .pricing-card,
-      .cta-band-inner,
-      .insights-container {
-        pointer-events: auto !important;
-        z-index: auto;
-      }
+      .faq-q { pointer-events: auto !important; z-index: 99999 !important; }
+      .video-container iframe { pointer-events: auto !important; z-index: 99999 !important; }
+      .nav-overlay { pointer-events: none !important; }
+      .nav-overlay.open { pointer-events: auto !important; z-index: 10000 !important; }
+      .hero-left, .book-content, .founder-content, .pricing-card,
+      .cta-band-inner, .insights-container { pointer-events: auto !important; z-index: auto; }
     }
   </style>
 </head>
@@ -1052,10 +1007,10 @@
               <li class="proof-pill">CRICKETS Author</li>
             </ul>
 
-            <!-- VIDEO - clean, no inline styles, fully responsive -->
+            <!-- VIDEO - with mobile fix -->
             <div class="video-container" itemscope itemtype="https://schema.org/VideoObject">
               <meta itemprop="name" content="The exact AI prompt I use for Founder LinkedIn content - Jennifer Omaliko">
-              <meta itemprop="description" content="Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders.">
+              <meta itemprop="description" content="Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders that builds authority and generates inbound clients.">
               <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/gle9p9rEMuE/maxresdefault.jpg">
               <meta itemprop="uploadDate" content="2026-04-01">
               <meta itemprop="contentUrl" content="https://www.youtube.com/watch?v=gle9p9rEMuE">
@@ -1165,7 +1120,7 @@
       </div>
     </section>
 
-    <!-- FAQ - Rich Results (FULLY DISPLAYED ANSWERS) -->
+    <!-- FAQ - Rich Results -->
     <section class="faq-section" aria-labelledby="faq-heading">
       <div class="container">
         <p class="eyebrow">Founders Often Ask</p>
@@ -1190,10 +1145,6 @@
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
             <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">What is CRICKETS by Jennifer Omaliko?</div>
             <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">CRICKETS is a 53-page digital playbook by Jennifer Omaliko that diagnoses why your LinkedIn content gets views but generates zero clients. It provides the complete positioning system from profile optimisation to DM conversion for $29.90. Available instantly on Selar at selar.com/ph3vsk1171.</span></div>
-          </div>
-          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">Do I need a contract to work with Jennavi?</div>
-            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Yes. Every Jennavi client signs a service agreement before work begins covering scope, deliverables, revisions, payment terms and confidentiality. The first month is paid upfront before content delivery begins.</span></div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
             <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">Does Jennavi work with founders globally?</div>
@@ -1286,7 +1237,7 @@
     }, { threshold: 0.2 });
     document.querySelectorAll('section[id]').forEach(function(s) { sectionObs.observe(s); });
 
-    // MOBILE NAV (simplified, works like founder.html)
+    // MOBILE NAV
     const toggle = document.getElementById('navToggle');
     const drawer = document.getElementById('navDrawer');
     const overlay = document.getElementById('navOverlay');
@@ -1411,7 +1362,7 @@
       });
     })();
 
-    // FAQ ACCORDION - mobile friendly (FULLY DISPLAYED)
+    // FAQ ACCORDION
     document.querySelectorAll('.faq-q').forEach(function(q) {
       q.addEventListener('click', function() {
         const item = this.parentElement;
