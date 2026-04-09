@@ -182,7 +182,7 @@
           },
           {
             "@type": "Question",
-            "name": "Will the content actually sound like me?",
+            "name": "Will the content sound like me?",
             "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every Jennavi engagement begins with a comprehensive onboarding process to capture your voice, tone, industry expertise and business goals. Every post is written to sound like you on your best day. Jennifer's ghostwriting methodology is voice first, not template driven."}
           },
           {
@@ -421,7 +421,7 @@
     .proof-pill { background:rgba(201,168,76,0.1); border:1px solid var(--gold-border-s); padding:7px 16px; font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--gold); transition:background 0.22s; }
     .proof-pill:hover { background:rgba(201,168,76,0.18); }
 
-    /* VIDEO - clean, no inline styles */
+    /* VIDEO - clean */
     .video-container { position:relative; width:100%; padding-bottom:56.25%; height:0; border:1px solid var(--gold-border); border-radius:8px; overflow:hidden; background:#000; margin:28px 0; }
     .video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
 
@@ -444,7 +444,7 @@
     .process-body { font-size:13px; color:var(--ivory-muted); line-height:1.75; }
     .process-arrow { position:absolute; top:48px; right:-14px; width:28px; height:28px; background:var(--onyx); border:1px solid var(--gold-border-s); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--gold); z-index:2; pointer-events:none; }
 
-    /* FAQ - FULLY DISPLAYED ANSWERS */
+    /* FAQ */
     .faq-section { background:var(--onyx-card); border-bottom:1px solid var(--gold-border); }
     .faq-grid { max-width:900px; margin:0 auto; }
     .faq-item { margin-bottom:0; border-bottom:1px solid var(--gold-border); }
@@ -482,7 +482,7 @@
     .insights-btn { display:inline-flex; align-items:center; gap:12px; font-family:'DM Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:14px 32px; background:transparent; border:1.5px solid var(--gold); color:var(--gold); cursor:pointer; transition:all 0.25s ease; text-decoration:none; border-radius:2px; min-height:44px; }
     .insights-btn:hover { background:var(--gold); color:var(--onyx); transform:translateY(-2px); gap:16px; }
 
-    /* FOOTER */
+    /* FOOTER - GOLD COLORS RESTORED */
     footer { border-top:1px solid var(--gold-border); padding:80px 48px 48px; }
     .footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:64px; padding-bottom:56px; border-bottom:1px solid var(--gold-border); }
     .footer-brand-name { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; display:block; margin-bottom:16px; }
@@ -917,10 +917,10 @@
               <li class="proof-pill">CRICKETS Author</li>
             </ul>
 
-            <!-- VIDEO - clean, no inline styles, fully responsive -->
+            <!-- VIDEO - clean -->
             <div class="video-container" itemscope itemtype="https://schema.org/VideoObject">
               <meta itemprop="name" content="The exact AI prompt I use for Founder LinkedIn content - Jennifer Omaliko">
-              <meta itemprop="description" content="Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders.">
+              <meta itemprop="description" content="Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders that builds authority and generates inbound clients.">
               <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/gle9p9rEMuE/maxresdefault.jpg">
               <meta itemprop="uploadDate" content="2026-04-01">
               <meta itemprop="contentUrl" content="https://www.youtube.com/watch?v=gle9p9rEMuE">
@@ -1030,7 +1030,7 @@
       </div>
     </section>
 
-    <!-- FAQ - Rich Results (FULLY DISPLAYED ANSWERS) -->
+    <!-- FAQ - Rich Results (FULLY DISPLAYED) -->
     <section class="faq-section" aria-labelledby="faq-heading">
       <div class="container">
         <p class="eyebrow">Founders Often Ask</p>
@@ -1132,11 +1132,9 @@
   <script>
     document.body.classList.add('js-ready');
 
-    // NAV SCROLL
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
 
-    // ACTIVE NAV LINKS
     const navLinks = document.querySelectorAll('.nav-links a');
     const sectionObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
@@ -1151,46 +1149,14 @@
     }, { threshold: 0.2 });
     document.querySelectorAll('section[id]').forEach(function(s) { sectionObs.observe(s); });
 
-    // MOBILE NAV (simplified, works like founder.html)
-    const toggle = document.getElementById('navToggle');
-    const drawer = document.getElementById('navDrawer');
-    const overlay = document.getElementById('navOverlay');
-
-    function openMenu() {
-      toggle.classList.add('open');
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      toggle.setAttribute('aria-expanded', 'true');
-      overlay.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMenu() {
-      toggle.classList.remove('open');
-      drawer.classList.remove('open');
-      overlay.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    toggle.addEventListener('click', function() {
-      if (toggle.classList.contains('open')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
+    const toggle = document.getElementById('navToggle'), drawer = document.getElementById('navDrawer'), overlay = document.getElementById('navOverlay');
+    function openMenu() { toggle.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('open'); toggle.setAttribute('aria-expanded', 'true'); overlay.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+    function closeMenu() { toggle.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); overlay.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+    toggle.addEventListener('click', function() { toggle.classList.contains('open') ? closeMenu() : openMenu(); });
     overlay.addEventListener('click', closeMenu);
-    drawer.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', closeMenu);
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeMenu();
-    });
+    drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
 
-    // SCROLL REVEAL
     const revealObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
     }, { threshold: 0 });
@@ -1199,7 +1165,6 @@
       else { revealObs.observe(el); }
     });
 
-    // ANIMATED COUNTERS
     document.querySelectorAll('.stat-num').forEach(function(el) { el.dataset.final = el.textContent.trim(); });
     function animateCount(el) {
       const final = el.dataset.final || el.textContent.trim();
@@ -1219,7 +1184,6 @@
     }, { threshold: 0 });
     document.querySelectorAll('.stats-bar').forEach(function(el) { counterObs.observe(el); });
 
-    // TESTIMONIAL SLIDER
     (function() {
       const slides = document.querySelectorAll('.testimonial-slide');
       const dots = document.querySelectorAll('.testimonial-dot');
@@ -1237,7 +1201,6 @@
       dots.forEach(function(dot, i) { dot.addEventListener('click', function() { clearInterval(timer); goTo(i); timer = setInterval(function() { goTo((current + 1) % slides.length); }, 5500); }); });
     })();
 
-    // BOOK CAROUSEL with swipe support
     (function() {
       const track = document.getElementById('carouselTrack');
       const slides = document.querySelectorAll('#bookCarousel .carousel-slide');
@@ -1267,7 +1230,6 @@
       nextBtn.addEventListener('click', function() { goTo(currentIndex + 1); });
       window.addEventListener('resize', updateCarousel);
       updateCarousel();
-      // Touch swipe
       let startX = 0;
       track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
       track.addEventListener('touchend', function(e) {
@@ -1276,7 +1238,6 @@
       });
     })();
 
-    // FAQ ACCORDION - mobile friendly (FULLY DISPLAYED)
     document.querySelectorAll('.faq-q').forEach(function(q) {
       q.addEventListener('click', function() {
         const item = this.parentElement;
