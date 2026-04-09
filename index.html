@@ -623,78 +623,69 @@
       .hero-proof-bar { gap:16px; }
     }
 
-    /* Android Mobile CTA Fix - ALL CTAs Functional */
+    /* =============================================
+       MOBILE TAP FIX - ANDROID CHROME (REGULAR MODE)
+       ============================================= */
     @media (max-width: 900px) {
-      /* Hero CTAs */
-      .hero-actions {
+      /* Ensure body and main don't block events */
+      body, main, section, div {
         pointer-events: auto !important;
       }
-      
+
+      /* Force all CTAs, buttons, video, FAQ to be above everything */
+      .hero-actions,
       .hero-actions a,
-      .hero-actions .btn-gold,
-      .hero-actions .btn-wa {
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        -webkit-tap-highlight-color: transparent !important;
-        z-index: 100 !important;
-      }
-      
-      /* Pricing card CTAs */
-      .pricing-card .card-cta {
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        z-index: 50 !important;
-      }
-      
-      /* CTA band tiles */
-      .cta-tile {
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        z-index: 50 !important;
-      }
-      
-      .cta-tile-action {
-        pointer-events: auto !important;
-      }
-      
-      /* Book section CTA */
-      .book-btn {
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        z-index: 60 !important;
-      }
-      
-      /* Founder section CTA */
-      .founder-content .btn-gold {
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        z-index: 60 !important;
-      }
-      
-      /* Insights button */
-      .insights-btn {
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        z-index: 50 !important;
-      }
-      
-      /* Nav drawer links */
+      .btn,
+      .btn-gold,
+      .btn-wa,
+      .pricing-card .card-cta,
+      .cta-tile,
+      .book-btn,
+      .founder-content .btn-gold,
+      .insights-btn,
+      .faq-q,
+      .video-container,
+      .video-container iframe,
+      .footer-links a,
+      .nav-toggle,
       .nav-drawer a {
         pointer-events: auto !important;
         cursor: pointer !important;
-        z-index: 200 !important;
+        touch-action: manipulation !important;
+        position: relative;
+        z-index: 99999 !important;
       }
-      
-      /* Nav toggle button */
-      .nav-toggle {
+
+      /* Specifically for the FAQ accordion - untouched styling but ensure tap */
+      .faq-q {
         pointer-events: auto !important;
-        z-index: 250 !important;
+        z-index: 99999 !important;
       }
-      
-      /* Footer CTAs */
-      .footer-links a {
+
+      /* YouTube video iframe must be tappable */
+      .video-container iframe {
         pointer-events: auto !important;
-        cursor: pointer !important;
+        z-index: 99999 !important;
+      }
+
+      /* Ensure overlay only blocks when actually open */
+      .nav-overlay {
+        pointer-events: none !important;
+      }
+      .nav-overlay.open {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
+      }
+
+      /* Fix any potential parent interference */
+      .hero-left,
+      .book-content,
+      .founder-content,
+      .pricing-card,
+      .cta-band-inner,
+      .insights-container {
+        pointer-events: auto !important;
+        z-index: auto;
       }
     }
   </style>
