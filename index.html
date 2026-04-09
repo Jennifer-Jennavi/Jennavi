@@ -225,19 +225,88 @@
     body { background:var(--onyx); color:var(--ivory); font-family:'Montserrat',sans-serif; font-weight:300; line-height:1.75; overflow-x:hidden; }
     body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events:none; z-index:-1; user-select:none; }
 
-    /* GLOBAL MOBILE CLICK FIXES */
+    /* GLOBAL MOBILE CLICK FIXES - CLEAN VERSION */
     a, button, .btn, .card-cta, .cta-tile, .book-btn, .founder-name a,
     .hero-actions a, .nav-links a, .nav-drawer a, .footer-links a,
     .pricing-card .card-cta, .cta-tile-action, .insights-btn,
-    .nav-toggle, .testimonial-dot, .carousel-btn, .faq-q,
-    .video-container iframe {
+    .nav-toggle, .testimonial-dot, .carousel-btn, .faq-q {
       pointer-events: auto !important;
       touch-action: manipulation !important;
       -webkit-tap-highlight-color: rgba(201,168,76,0.2);
       cursor: pointer;
-      position: relative;
-      z-index: 999999 !important;
     }
+
+    /* Fix for Android CTA stacking */
+    .hero-actions {
+      position: relative;
+      z-index: 50;
+      pointer-events: auto !important;
+    }
+
+    .hero-actions a,
+    .hero-actions .btn,
+    .btn-gold,
+    .btn-wa {
+      position: relative;
+      z-index: 51;
+      pointer-events: auto !important;
+      display: inline-flex !important;
+    }
+
+    /* Pricing card CTAs */
+    .pricing-card .card-cta {
+      position: relative;
+      z-index: 20;
+      pointer-events: auto !important;
+    }
+
+    /* CTA tiles */
+    .cta-tile {
+      position: relative;
+      z-index: 20;
+      pointer-events: auto !important;
+    }
+
+    .cta-tile-action {
+      pointer-events: auto !important;
+    }
+
+    /* Book button */
+    .book-btn {
+      position: relative;
+      z-index: 30;
+      pointer-events: auto !important;
+    }
+
+    /* Founder section CTA */
+    .founder-content .btn-gold {
+      position: relative;
+      z-index: 30;
+      pointer-events: auto !important;
+    }
+
+    /* Insights button */
+    .insights-btn {
+      position: relative;
+      z-index: 20;
+      pointer-events: auto !important;
+    }
+
+    /* Footer links */
+    .footer-links a {
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Overlay handling - prevents it from blocking CTAs when closed */
+    .nav-overlay {
+      pointer-events: none;
+    }
+    .nav-overlay.open {
+      pointer-events: auto;
+    }
+
     a { color:inherit; text-decoration:none; }
     img { display:block; max-width:100%; }
     .serif { font-family:'Playfair Display',serif; }
@@ -552,6 +621,81 @@
       .book-cta-row { flex-direction:column; align-items:flex-start; }
       .book-title { font-size:clamp(52px,16vw,80px); }
       .hero-proof-bar { gap:16px; }
+    }
+
+    /* Android Mobile CTA Fix - ALL CTAs Functional */
+    @media (max-width: 900px) {
+      /* Hero CTAs */
+      .hero-actions {
+        pointer-events: auto !important;
+      }
+      
+      .hero-actions a,
+      .hero-actions .btn-gold,
+      .hero-actions .btn-wa {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: transparent !important;
+        z-index: 100 !important;
+      }
+      
+      /* Pricing card CTAs */
+      .pricing-card .card-cta {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 50 !important;
+      }
+      
+      /* CTA band tiles */
+      .cta-tile {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 50 !important;
+      }
+      
+      .cta-tile-action {
+        pointer-events: auto !important;
+      }
+      
+      /* Book section CTA */
+      .book-btn {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 60 !important;
+      }
+      
+      /* Founder section CTA */
+      .founder-content .btn-gold {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 60 !important;
+      }
+      
+      /* Insights button */
+      .insights-btn {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 50 !important;
+      }
+      
+      /* Nav drawer links */
+      .nav-drawer a {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 200 !important;
+      }
+      
+      /* Nav toggle button */
+      .nav-toggle {
+        pointer-events: auto !important;
+        z-index: 250 !important;
+      }
+      
+      /* Footer CTAs */
+      .footer-links a {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
     }
   </style>
 </head>
