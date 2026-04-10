@@ -225,7 +225,45 @@
     body { background:var(--onyx); color:var(--ivory); font-family:'Montserrat',sans-serif; font-weight:300; line-height:1.75; overflow-x:hidden; }
     body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events:none; z-index:-1; user-select:none; }
 
-    /* GLOBAL MOBILE CLICK FIXES - CLEAN VERSION (YOUR COMMENDED VERSION) */
+    /* ========== GOLD COLOR FORCE (NO WHITE) ========== */
+    .gold,
+    .section-title em,
+    .hero-headline .gold,
+    .hero-headline .serif-italic,
+    .cta-band-headline em,
+    .book-title,
+    .book-title a,
+    .pricing-price,
+    .stat-num,
+    .founder-title,
+    .insights-headline,
+    .testimonial-mark,
+    .faq-q::after,
+    .eyebrow,
+    .nav-links .nav-book,
+    .nav-links .nav-cta,
+    .btn-gold,
+    .card-cta,
+    .cta-tile-action,
+    .book-btn,
+    .insights-btn,
+    .hero-kicker,
+    .callout-attr,
+    .proof-pill,
+    .footer-col-title,
+    .carousel-btn {
+      color: var(--gold) !important;
+    }
+    .section-title em {
+      font-style: italic;
+    }
+    /* Override any accidental white text */
+    .hero-headline .gold,
+    .hero-headline .serif-italic {
+      color: var(--gold) !important;
+    }
+
+    /* ========== GLOBAL MOBILE CLICK FIXES ========== */
     a, button, .btn, .card-cta, .cta-tile, .book-btn, .founder-name a,
     .hero-actions a, .nav-links a, .nav-drawer a, .footer-links a,
     .pricing-card .card-cta, .cta-tile-action, .insights-btn,
@@ -236,7 +274,6 @@
       cursor: pointer;
     }
 
-    /* Fix for Android CTA stacking */
     .hero-actions {
       position: relative;
       z-index: 50;
@@ -253,14 +290,12 @@
       display: inline-flex !important;
     }
 
-    /* Pricing card CTAs */
     .pricing-card .card-cta {
       position: relative;
       z-index: 20;
       pointer-events: auto !important;
     }
 
-    /* CTA tiles */
     .cta-tile {
       position: relative;
       z-index: 20;
@@ -271,35 +306,30 @@
       pointer-events: auto !important;
     }
 
-    /* Book button */
     .book-btn {
       position: relative;
       z-index: 30;
       pointer-events: auto !important;
     }
 
-    /* Founder section CTA */
     .founder-content .btn-gold {
       position: relative;
       z-index: 30;
       pointer-events: auto !important;
     }
 
-    /* Insights button */
     .insights-btn {
       position: relative;
       z-index: 20;
       pointer-events: auto !important;
     }
 
-    /* Footer links */
     .footer-links a {
       pointer-events: auto !important;
       position: relative;
       z-index: 10;
     }
 
-    /* Overlay handling - prevents it from blocking CTAs when closed */
     .nav-overlay {
       pointer-events: none;
     }
@@ -359,7 +389,7 @@
     .hero-kicker::before { content:''; width:36px; height:1px; background:var(--gold); }
     .hero-headline { font-family:'Playfair Display',serif; font-size:clamp(40px,5.2vw,74px); font-weight:900; line-height:1.02; color:var(--ivory); margin-bottom:28px; letter-spacing:-0.01em; opacity:0; animation:fadeUp 0.9s var(--ease-out) 0.22s forwards; }
     .hero-headline .gold { color:var(--gold); }
-    .hero-headline .serif-italic { font-style:italic; font-weight:400; letter-spacing:0; }
+    .hero-headline .serif-italic { font-style:italic; font-weight:400; letter-spacing:0; color:var(--gold); }
     .hero-sub { font-size:16px; color:var(--ivory-muted); line-height:1.9; max-width:500px; margin-bottom:16px; opacity:0; animation:fadeUp 0.9s var(--ease-out) 0.36s forwards; }
     .hero-sub strong { color:var(--ivory); font-weight:600; }
     .hero-proof-bar { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:40px; opacity:0; animation:fadeUp 0.9s var(--ease-out) 0.44s forwards; }
@@ -441,7 +471,7 @@
     .book-content { position:relative; z-index:2; }
     .book-eyebrow { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; opacity:0.8; }
     .book-title { font-family:'Playfair Display',serif; font-size:clamp(56px,8vw,96px); font-weight:900; color:var(--gold); line-height:0.9; letter-spacing:-0.03em; margin-bottom:16px; text-transform:uppercase; }
-    .book-title a { color:inherit; text-decoration:none; }
+    .book-title a { color:var(--gold); text-decoration:none; }
     .book-subtitle { font-family:'Playfair Display',serif; font-size:17px; font-style:italic; color:var(--ivory-muted); line-height:1.55; margin-bottom:32px; max-width:420px; }
     .book-hook { background:rgba(201,168,76,0.06); border-left:3px solid var(--gold); padding:20px 24px; margin-bottom:32px; font-family:'Playfair Display',serif; font-style:italic; font-size:17px; color:var(--ivory); line-height:1.65; }
     .book-bullets { list-style:none; margin-bottom:40px; }
@@ -490,9 +520,35 @@
     .proof-pill { background:rgba(201,168,76,0.1); border:1px solid var(--gold-border-s); padding:7px 16px; font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--gold); transition:background 0.22s; }
     .proof-pill:hover { background:rgba(201,168,76,0.18); }
 
-    /* VIDEO - with mobile fix (YouTube black screen resolved) */
-    .video-container { position:relative; width:100%; padding-bottom:56.25%; height:0; border:1px solid var(--gold-border); border-radius:8px; overflow:hidden; background:#000; margin:28px 0; -webkit-transform: translateZ(0); transform: translateZ(0); }
-    .video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; -webkit-transform: translateZ(0); transform: translateZ(0); }
+    /* VIDEO - FIXED FOR MOBILE (no black screen) */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+      margin: 28px 0;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      border: 0;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      pointer-events: auto !important;
+    }
 
     /* STATS */
     .stats-bar { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--gold-border); margin:60px 0; }
@@ -586,47 +642,30 @@
     /* RESPONSIVE */
     @media (max-width:1100px) { .pricing-grid { grid-template-columns:repeat(3,1fr); } .cta-grid { grid-template-columns:repeat(2,1fr); } }
     @media (max-width:900px) {
-      .nav { padding:18px 24px; }
-      .nav-links { display:none; }
-      .nav-toggle { display:flex; }
-      .nav-drawer { display:block; }
-      .nav-overlay { display:block; }
+      .nav { padding:18px 24px; } .nav-links { display:none; } .nav-toggle { display:flex; } .nav-drawer { display:block; } .nav-overlay { display:block; }
       section { padding:80px 24px; }
-      .hero { grid-template-columns:1fr; min-height:auto; }
-      .hero-left { padding:120px 24px 60px; }
-      .hero-left::after { display:none; }
-      .hero-right { height:auto; min-height:60vh; }
-      .hero-img { max-height:55vh; width:auto; margin:0 auto; }
+      .hero { grid-template-columns:1fr; min-height:auto; } .hero-left { padding:120px 24px 60px; } .hero-left::after { display:none; } .hero-right { height:auto; min-height:60vh; } .hero-img { max-height:55vh; width:auto; margin:0 auto; }
       .invisible-grid, .services-intro, .founder-grid, .why-grid, .book-grid { grid-template-columns:1fr; gap:48px; }
       .book-cover-wrap { order:-1; }
-      .pricing-grid { grid-template-columns:repeat(2,1fr); }
-      .cta-grid { grid-template-columns:1fr 1fr; }
-      .process-grid { grid-template-columns:1fr 1fr; }
+      .pricing-grid { grid-template-columns:repeat(2,1fr); } .cta-grid { grid-template-columns:1fr 1fr; } .process-grid { grid-template-columns:1fr 1fr; }
       .stats-bar { grid-template-columns:1fr 1fr; }
-      .stat-item:nth-child(2) { border-right:none; }
-      .stat-item:nth-child(3) { border-right:1px solid var(--gold-border); border-top:1px solid var(--gold-border); }
-      .stat-item:nth-child(4) { border-right:none; border-top:1px solid var(--gold-border); }
-      .footer-grid { grid-template-columns:1fr; gap:48px; }
-      .founder-visual { display:none; }
+      .stat-item:nth-child(2) { border-right:none; } .stat-item:nth-child(3) { border-right:1px solid var(--gold-border); border-top:1px solid var(--gold-border); } .stat-item:nth-child(4) { border-right:none; border-top:1px solid var(--gold-border); }
+      .footer-grid { grid-template-columns:1fr; gap:48px; } .founder-visual { display:none; }
       .hero-actions a.btn-gold, .hero-actions a.btn-wa, .founder-name a { position:relative !important; z-index:999999 !important; display:inline-flex !important; }
     }
     @media (max-width:640px) {
-      .pricing-grid { grid-template-columns:1fr; }
-      .cta-grid { grid-template-columns:1fr; }
-      .process-grid { grid-template-columns:1fr; }
-      .stats-bar { grid-template-columns:1fr; }
-      .stat-item { border-right:none !important; border-top:1px solid var(--gold-border); }
-      .stat-item:first-child { border-top:none; }
+      .pricing-grid { grid-template-columns:1fr; } .cta-grid { grid-template-columns:1fr; } .process-grid { grid-template-columns:1fr; }
+      .stats-bar { grid-template-columns:1fr; } .stat-item { border-right:none !important; border-top:1px solid var(--gold-border); } .stat-item:first-child { border-top:none; }
       .footer-bottom { flex-direction:column; text-align:center; }
       .book-cta-row { flex-direction:column; align-items:flex-start; }
       .book-title { font-size:clamp(52px,16vw,80px); }
       .hero-proof-bar { gap:16px; }
     }
 
-    /* ANDROID MOBILE TAP FIX (YOUR COMMENDED VERSION) */
+    /* ANDROID MOBILE TAP FIX (FINAL) */
     @media (max-width: 900px) {
       body, main, section, div { pointer-events: auto !important; }
-      .hero-actions, .hero-actions a, .btn, .btn-gold, .btn-wa,
+      .hero-actions a, .btn, .btn-gold, .btn-wa,
       .pricing-card .card-cta, .cta-tile, .book-btn, .founder-content .btn-gold,
       .insights-btn, .faq-q, .video-container, .video-container iframe,
       .footer-links a, .nav-toggle, .nav-drawer a {
@@ -647,7 +686,7 @@
 </head>
 
 <body>
-  <!-- NAV -->
+  <!-- NAV (unchanged) -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <a href="https://jennavi.co/" class="nav-logo">
       <img src="/jennavi-logo.svg" alt="Jennavi - LinkedIn Ghostwriting for Founders" width="140" height="30">
@@ -678,7 +717,7 @@
   </nav>
 
   <main>
-    <!-- HERO -->
+    <!-- HERO (unchanged) -->
     <header class="hero" itemscope itemtype="https://schema.org/WPHeader">
       <div class="hero-left">
         <p class="hero-kicker">LinkedIn Ghostwriting for Founders · Trusted Globally</p>
@@ -974,7 +1013,7 @@
       </div>
     </div>
 
-    <!-- FOUNDER -->
+    <!-- FOUNDER (with fixed video) -->
     <section id="founder-section" class="founder-section" aria-labelledby="founder-heading" itemscope itemtype="https://schema.org/Person">
       <meta itemprop="name" content="Jennifer Mmesoma Omaliko">
       <meta itemprop="jobTitle" content="LinkedIn Ghostwriter for Founders, CEO of Jennavi">
@@ -1007,7 +1046,7 @@
               <li class="proof-pill">CRICKETS Author</li>
             </ul>
 
-            <!-- VIDEO - with mobile fix -->
+            <!-- VIDEO - FIXED -->
             <div class="video-container" itemscope itemtype="https://schema.org/VideoObject">
               <meta itemprop="name" content="The exact AI prompt I use for Founder LinkedIn content - Jennifer Omaliko">
               <meta itemprop="description" content="Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders that builds authority and generates inbound clients.">
@@ -1165,7 +1204,7 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (unchanged) -->
   <footer role="contentinfo">
     <div class="footer-grid">
       <div>
