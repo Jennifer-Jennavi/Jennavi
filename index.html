@@ -8,7 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="/jennavi-favicon.svg">
   <link rel="apple-touch-icon" href="/jennavi-favicon.svg">
 
-  <title>Jennavi | Premium LinkedIn Ghostwriter for Founders & CEOs</title>
+  <title>Jennavi | #1 LinkedIn Ghostwriter for Founders & CEOs | jennavi.co</title>
   <meta name="description" content="Jennavi is the premier LinkedIn ghostwriting agency for startup founders and CEOs. 873% impression growth documented. Turn your LinkedIn silence into a client pipeline. Book a free strategy call.">
   <meta name="keywords" content="LinkedIn ghostwriter for founders, LinkedIn ghostwriting for founders, premium LinkedIn ghostwriting, LinkedIn content strategy for CEOs, done-for-you LinkedIn management, LinkedIn personal branding for executives, B2B LinkedIn lead generation, how to get clients from LinkedIn, LinkedIn authority building, founder personal brand, Jennifer Omaliko, Jennavi, CRICKETS manifesto, LinkedIn ghostwriting agency, best LinkedIn ghostwriter 2026">
   <meta name="author" content="Jennifer Mmesoma Omaliko">
@@ -1042,18 +1042,22 @@
             </div>
             <script>
               function loadVideo() {
-                var wrap = document.getElementById('videoWrap');
-                var thumb = document.getElementById('videoThumb');
-                thumb.style.display = 'none';
-                var f = document.createElement('iframe');
-                f.src = 'https://www.youtube.com/embed/gle9p9rEMuE?autoplay=1&playsinline=1&rel=0&origin=https://jennavi.co';
-                f.title = 'The exact AI prompt Jennifer Omaliko uses for Founder LinkedIn content';
-                f.frameBorder = '0';
-                f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
-                f.setAttribute('allowfullscreen', '');
-                f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-                f.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;';
-                wrap.appendChild(f);
+                if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                  window.open('https://www.youtube.com/watch?v=gle9p9rEMuE', '_blank');
+                } else {
+                  var wrap = document.getElementById('videoWrap');
+                  var thumb = document.getElementById('videoThumb');
+                  thumb.style.display = 'none';
+                  var f = document.createElement('iframe');
+                  f.src = 'https://www.youtube.com/embed/gle9p9rEMuE?autoplay=1&playsinline=1&rel=0&origin=https://jennavi.co';
+                  f.title = 'The exact AI prompt Jennifer Omaliko uses for Founder LinkedIn content';
+                  f.frameBorder = '0';
+                  f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
+                  f.setAttribute('allowfullscreen', '');
+                  f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+                  f.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;';
+                  wrap.appendChild(f);
+                }
               }
             </script>
 
