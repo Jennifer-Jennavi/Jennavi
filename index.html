@@ -491,11 +491,45 @@
     }
     .video-container iframe {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       border: 0;
+    }
+    .video-thumb {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .video-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .video-thumb .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px; height: 68px;
+      background: rgba(0,0,0,0.72);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--gold);
+      transition: background 0.2s, transform 0.2s;
+      pointer-events: none;
+    }
+    .video-thumb:hover .play-btn,
+    .video-thumb:active .play-btn {
+      background: var(--gold);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    .video-thumb .play-btn svg {
+      width: 28px; height: 28px;
+      fill: #fff;
+      margin-left: 5px;
     }
 
     /* STATS */
@@ -991,7 +1025,7 @@
               <li class="proof-pill">CRICKETS Author</li>
             </ul>
 
-            <!-- VIDEO – CLEAN MOBILE VERSION (EXACT FROM founder.html) -->
+            <!-- VIDEO – CLICK TO PLAY (works on all mobile browsers) -->
             <div class="video-container" itemscope itemtype="https://schema.org/VideoObject">
               <meta itemprop="name" content="The exact AI prompt I use for Founder LinkedIn content - Jennifer Omaliko">
               <meta itemprop="description" content="Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders that builds authority and generates inbound clients.">
@@ -999,15 +1033,28 @@
               <meta itemprop="uploadDate" content="2026-04-01T00:00:00+00:00">
               <meta itemprop="contentUrl" content="https://www.youtube.com/watch?v=gle9p9rEMuE">
               <meta itemprop="embedUrl" content="https://www.youtube.com/embed/gle9p9rEMuE">
-              <iframe
-                src="https://www.youtube.com/embed/gle9p9rEMuE?playsinline=1&rel=0&origin=https://jennavi.co"
-                title="The exact AI prompt Jennifer Omaliko uses for Founder LinkedIn content"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen>
-              </iframe>
+              <div class="video-thumb" id="videoThumb" onclick="loadVideo()" role="button" tabindex="0" aria-label="Play video: The exact AI prompt Jennifer Omaliko uses for Founder LinkedIn content" onkeydown="if(event.key==='Enter'||event.key===' ')loadVideo()">
+                <img src="https://img.youtube.com/vi/gle9p9rEMuE/maxresdefault.jpg" alt="The exact AI prompt Jennifer Omaliko uses for Founder LinkedIn content" loading="lazy">
+                <span class="play-btn" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </span>
+              </div>
             </div>
+            <script>
+              function loadVideo() {
+                var c = document.getElementById('videoThumb').parentElement;
+                var t = document.getElementById('videoThumb');
+                t.style.display = 'none';
+                var f = document.createElement('iframe');
+                f.src = 'https://www.youtube.com/embed/gle9p9rEMuE?autoplay=1&playsinline=1&rel=0&origin=https://jennavi.co';
+                f.title = 'The exact AI prompt Jennifer Omaliko uses for Founder LinkedIn content';
+                f.frameBorder = '0';
+                f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
+                f.setAttribute('allowfullscreen', '');
+                f.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;';
+                c.appendChild(f);
+              }
+            </script>
 
             <a href="https://calendly.com/omalikojennifermmesoma/30min" target="_blank" rel="noopener noreferrer" class="btn btn-gold" aria-label="Work directly with Jennifer Omaliko - book your strategy call">
               <span>Work With Jennifer Directly</span>
