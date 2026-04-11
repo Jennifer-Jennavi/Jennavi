@@ -155,7 +155,7 @@
         "name": "The exact AI prompt I use for Founder LinkedIn content - Jennifer Omaliko",
         "description": "Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders that builds authority and generates inbound clients.",
         "thumbnailUrl": "https://img.youtube.com/vi/gle9p9rEMuE/maxresdefault.jpg",
-        "uploadDate": "2026-04-01",
+        "uploadDate": "2026-04-01T00:00:00+00:00",
         "contentUrl": "https://www.youtube.com/watch?v=gle9p9rEMuE",
         "embedUrl": "https://www.youtube.com/embed/gle9p9rEMuE",
         "publisher": {"@id": "https://jennavi.co/#organization"},
@@ -167,31 +167,37 @@
         "mainEntity": [
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/#faq-1",
             "name": "What is a LinkedIn ghostwriter for founders?",
             "acceptedAnswer": {"@type": "Answer", "text": "A LinkedIn ghostwriter for founders is a professional who writes and strategises LinkedIn content on behalf of startup founders, CEOs and executives. They capture the founder's authentic voice, develop a content strategy, and publish posts that build authority, attract inbound clients and grow a professional network. Jennavi specialises in this service exclusively for founders."}
           },
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/#faq-2",
             "name": "How much does LinkedIn ghostwriting cost for founders?",
             "acceptedAnswer": {"@type": "Answer", "text": "Jennavi offers LinkedIn ghostwriting retainers starting at $200 per month for 8 posts, up to $800 per month for the full VIP executive package including 20 posts, newsletter writing and weekly strategy calls. A one-time LinkedIn profile audit is available for $100."}
           },
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/#faq-3",
             "name": "How quickly will I see results from LinkedIn ghostwriting?",
             "acceptedAnswer": {"@type": "Answer", "text": "Most Jennavi clients see meaningful impression growth and profile visit increases within the first 30 days. Consistent inbound inquiries typically develop between month 2 and month 4 as LinkedIn's algorithm learns your positioning. Jennifer's own profile achieved 873% impression growth organically using the same methodology applied to all clients."}
           },
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/#faq-4",
             "name": "Will the content actually sound like me?",
             "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every Jennavi engagement begins with a comprehensive onboarding process to capture your voice, tone, industry expertise and business goals. Every post is written to sound like you on your best day. Jennifer's ghostwriting methodology is voice first, not template driven."}
           },
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/#faq-5",
             "name": "What is CRICKETS by Jennifer Omaliko?",
             "acceptedAnswer": {"@type": "Answer", "text": "CRICKETS is a 53-page digital playbook by Jennifer Omaliko that diagnoses why your LinkedIn content gets views but generates zero clients. It provides the complete positioning system from profile optimisation to DM conversion for $29.90. Available instantly on Selar."}
           },
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/#faq-6",
             "name": "Do I need a contract to work with Jennavi?",
             "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every Jennavi client signs a service agreement before work begins covering scope, deliverables, revisions, payment terms and confidentiality. The first month is paid upfront before content delivery begins."}
           }
@@ -453,8 +459,15 @@
     .faq-q::after { content:'+'; color:var(--gold); font-size:24px; font-weight:300; flex-shrink:0; transition:transform 0.25s; font-family:'Montserrat',sans-serif; }
     .faq-item.open .faq-q::after { transform:rotate(45deg); }
     .faq-a { font-size:16px; color:var(--ivory-muted); line-height:1.8; max-height:0; overflow:hidden; transition:max-height 0.35s ease, padding 0.35s ease; }
-    .faq-item.open .faq-a { max-height:240px; padding-bottom:28px; }
+    .faq-item.open .faq-a { max-height:500px; padding-bottom:28px; }
     .faq-a strong { color:var(--ivory); font-weight:600; }
+
+    /* SECTION TITLES – bold, gold-accented */
+    .section-title { font-family:'Playfair Display',serif; font-size:clamp(36px,4.5vw,62px); font-weight:900; color:var(--ivory); line-height:1.05; letter-spacing:-0.02em; }
+    .section-title em { font-style:italic; color:var(--gold); font-weight:400; }
+    .eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:14px; }
+    .eyebrow::before { content:''; width:28px; height:1px; background:var(--gold); }
+    .section-body { font-size:17px; color:var(--ivory-muted); line-height:1.9; max-width:560px; margin-top:20px; }
 
     /* TESTIMONIALS */
     .testimonial-section { text-align:center; background:var(--gold-faint); border-top:1px solid var(--gold-border); border-bottom:1px solid var(--gold-border); overflow:hidden; }
@@ -547,7 +560,7 @@
     <ul class="nav-links" role="list">
       <li><a href="https://jennavi.co/why-jennavi.html">Why Jennavi</a></li>
       <li><a href="https://jennavi.co/services.html">Services</a></li>
-      <li><a href="#book-section" class="nav-book">CRICKETS ✦</a></li>
+      <li><a href="https://jennavi.co/book.html" class="nav-book">CRICKETS ✦</a></li>
       <li><a href="https://jennavi.co/founder.html">Jennifer</a></li>
       <li><a href="#testimonial-section">Proof</a></li>
       <li><a href="https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html">Insights</a></li>
@@ -561,7 +574,7 @@
     <ul role="list">
       <li><a href="https://jennavi.co/why-jennavi.html">Why Jennavi</a></li>
       <li><a href="https://jennavi.co/services.html">Services</a></li>
-      <li><a href="#book-section">CRICKETS The Book</a></li>
+      <li><a href="https://jennavi.co/book.html">CRICKETS — Founder Manifesto</a></li>
       <li><a href="https://jennavi.co/founder.html">Jennifer</a></li>
       <li><a href="#testimonial-section">Proof</a></li>
       <li><a href="https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html">Insights</a></li>
@@ -896,14 +909,8 @@
               <li class="proof-pill">CRICKETS Author</li>
             </ul>
 
-            <!-- VIDEO - mobile-tappable, SEO VideoObject -->
-            <div class="video-container" itemscope itemtype="https://schema.org/VideoObject">
-              <meta itemprop="name" content="The exact AI prompt I use for Founder LinkedIn content - Jennifer Omaliko">
-              <meta itemprop="description" content="Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders that builds authority and generates inbound clients.">
-              <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/gle9p9rEMuE/maxresdefault.jpg">
-              <meta itemprop="uploadDate" content="2026-04-01">
-              <meta itemprop="contentUrl" content="https://www.youtube.com/watch?v=gle9p9rEMuE">
-              <meta itemprop="embedUrl" content="https://www.youtube.com/embed/gle9p9rEMuE">
+            <!-- VIDEO - mobile-tappable, indexed via JSON-LD in head -->
+            <div class="video-container">
               <iframe
                 src="https://www.youtube.com/embed/gle9p9rEMuE?playsinline=1&rel=0"
                 title="The exact AI prompt Jennifer Omaliko uses for Founder LinkedIn content"
@@ -1009,35 +1016,35 @@
       </div>
     </section>
 
-    <!-- FAQ - Rich Results -->
+    <!-- FAQ - Rich Results via JSON-LD in head -->
     <section class="faq-section" aria-labelledby="faq-heading">
       <div class="container">
         <p class="eyebrow">Founders Often Ask</p>
         <h2 class="section-title reveal" id="faq-heading">Questions About<br><em>LinkedIn Ghostwriting</em></h2>
-        <div class="faq-grid" itemscope itemtype="https://schema.org/FAQPage">
-          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">What is a LinkedIn ghostwriter for founders?</div>
-            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">A LinkedIn ghostwriter for founders is a professional who writes and strategises LinkedIn content on behalf of startup founders, CEOs and executives. They capture the founder's authentic voice, develop a content strategy, and publish posts that build authority, attract inbound clients and grow a professional network. Jennavi specialises in this service exclusively for founders globally.</span></div>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">What is a LinkedIn ghostwriter for founders?</div>
+            <div class="faq-a">A LinkedIn ghostwriter for founders is a professional who writes and strategises LinkedIn content on behalf of startup founders, CEOs and executives. They capture the founder's authentic voice, develop a content strategy, and publish posts that build authority, attract inbound clients and grow a professional network. Jennavi specialises in this service exclusively for founders globally.</div>
           </div>
-          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">How much does LinkedIn ghostwriting cost for founders?</div>
-            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Jennavi offers LinkedIn ghostwriting retainers starting at $200 per month for 8 posts, up to $800 per month for the full VIP executive package including 20 posts, newsletter writing and weekly strategy calls. A one-time LinkedIn profile audit is available for $100. All prices are in USD.</span></div>
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">How much does LinkedIn ghostwriting cost for founders?</div>
+            <div class="faq-a">Jennavi offers LinkedIn ghostwriting retainers starting at $200 per month for 8 posts, up to $800 per month for the full VIP executive package including 20 posts, newsletter writing and weekly strategy calls. A one-time LinkedIn profile audit is available for $100. All prices are in USD.</div>
           </div>
-          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">How quickly will I see results from LinkedIn ghostwriting?</div>
-            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Most Jennavi clients see meaningful impression growth and profile visit increases within the first 30 days. Consistent inbound inquiries typically develop between month 2 and month 4 as LinkedIn's algorithm learns your positioning. Jennifer's own profile achieved 873% impression growth organically using the same methodology applied to all clients.</span></div>
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">How quickly will I see results from LinkedIn ghostwriting?</div>
+            <div class="faq-a">Most Jennavi clients see meaningful impression growth and profile visit increases within the first 30 days. Consistent inbound inquiries typically develop between month 2 and month 4 as LinkedIn's algorithm learns your positioning. Jennifer's own profile achieved 873% impression growth organically using the same methodology applied to all clients.</div>
           </div>
-          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">Will the content actually sound like me?</div>
-            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Yes. Every Jennavi engagement begins with a comprehensive onboarding process to capture your voice, tone, industry expertise and business goals. Every post is written to sound like you on your best day. Jennifer's ghostwriting methodology is voice first, not template driven.</span></div>
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">Will the content actually sound like me?</div>
+            <div class="faq-a">Yes. Every Jennavi engagement begins with a comprehensive onboarding process to capture your voice, tone, industry expertise and business goals. Every post is written to sound like you on your best day. Jennifer's ghostwriting methodology is voice first, not template driven.</div>
           </div>
-          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">What is CRICKETS by Jennifer Omaliko?</div>
-            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">CRICKETS is a 53-page digital playbook by Jennifer Omaliko that diagnoses why your LinkedIn content gets views but generates zero clients. It provides the complete positioning system from profile optimisation to DM conversion for $29.90. Available instantly on Selar at selar.com/ph3vsk1171.</span></div>
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">What is CRICKETS by Jennifer Omaliko?</div>
+            <div class="faq-a">CRICKETS is a 53-page digital playbook by Jennifer Omaliko that diagnoses why your LinkedIn content gets views but generates zero clients. It provides the complete positioning system from profile optimisation to DM conversion for $29.90. Available instantly on Selar at selar.com/ph3vsk1171.</div>
           </div>
-          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <div class="faq-q" itemprop="name" role="button" tabindex="0" aria-expanded="false">Does Jennavi work with founders globally?</div>
-            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Yes. Jennavi has active clients across the US, UK, Australia, Canada, Pakistan, India and Nigeria. All services are delivered remotely and all pricing is in USD. Jennifer works with startup founders, coaches and executives across all industries and time zones.</span></div>
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">Does Jennavi work with founders globally?</div>
+            <div class="faq-a">Yes. Jennavi has active clients across the US, UK, Australia, Canada, Pakistan, India and Nigeria. All services are delivered remotely and all pricing is in USD. Jennifer works with startup founders, coaches and executives across all industries and time zones.</div>
           </div>
         </div>
       </div>
@@ -1075,8 +1082,8 @@
       <div>
         <p class="footer-col-title">Direct Contact</p>
         <ul class="footer-links direct-contact" role="list">
-          <li><a href="mailto:omalikojennifermmesoma@gmail.com" aria-label="Email Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span>omalikojennifermmesoma@gmail.com</span></a></li>
-          <li><a href="mailto:jennavi.global@gmail.com" aria-label="Email Jennavi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span>jennavi.global@gmail.com</span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#5936343835303236333c3737303f3c2b34343c2a363438193e34383035773a3634" aria-label="Email Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span><span class="__cf_email__" data-cfemail="8fe0e2eee3e6e4e0e5eae1e1e6e9eafde2e2eafce0e2eecfe8e2eee6e3a1ece0e2">[email&#160;protected]</span></span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#f298979c9c93849bdc959e9d90939eb2959f939b9edc919d9f" aria-label="Email Jennavi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span><span class="__cf_email__" data-cfemail="355f505b5b54435c1b52595a575459755258545c591b565a58">[email&#160;protected]</span></span></a></li>
           <li><a href="tel:+2349031237643" aria-label="Call Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+234 903 123 7643</span></a></li>
           <li><a href="https://wa.me/2349031237643?text=Hi%20Jennifer%2C%20I%27d%20love%20to%20learn%20more%20about%20Jennavi!" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span>WhatsApp</span></a></li>
           <li><a href="https://calendly.com/omalikojennifermmesoma/30min" target="_blank" rel="noopener noreferrer" aria-label="Book Strategy Call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Book a Strategy Call</span></a></li>
@@ -1104,7 +1111,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.body.classList.add('js-ready');
 
     // NAV SCROLL
@@ -1254,11 +1261,11 @@
     // FAQ ACCORDION - mobile friendly
     document.querySelectorAll('.faq-q').forEach(function(q) {
       q.addEventListener('click', function() {
-        const item = this.parentElement;
-        const isOpen = item.classList.contains('open');
+        var item = this.parentElement;
+        var isOpen = item.classList.contains('open');
         document.querySelectorAll('.faq-item').forEach(function(i) {
           i.classList.remove('open');
-          const qEl = i.querySelector('.faq-q');
+          var qEl = i.querySelector('.faq-q');
           if (qEl) qEl.setAttribute('aria-expanded', 'false');
         });
         if (!isOpen) {
@@ -1267,10 +1274,7 @@
         }
       });
       q.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          q.click();
-        }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
       });
     });
   </script>
