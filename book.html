@@ -262,6 +262,51 @@
     .book-btn:hover { background:var(--gold-light); transform:translateY(-2px); box-shadow:0 8px 28px rgba(201,168,76,0.3); }
     .book-formats { font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-top:16px; }
 
+    /* CHAPTER PREVIEW CAROUSEL */
+    .book-chapter-carousel { margin:0 0 32px; }
+    .book-chapter-carousel-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); opacity:0.7; margin-bottom:14px; }
+    .bcc-outer { position:relative; overflow:hidden; border-radius:6px; border:1px solid var(--gold-border); background:var(--onyx-card); }
+    .bcc-track { display:flex; transition:transform 0.4s var(--ease-out); will-change:transform; }
+    .bcc-slide { flex:0 0 100%; padding:28px 24px; min-height:220px; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box; }
+
+    /* Cover slide */
+    .slide-cover { display:flex; flex-direction:column; gap:14px; }
+    .cover-manifesto-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); opacity:0.75; }
+    .cover-title { font-family:'Playfair Display',serif; font-size:clamp(40px,8vw,64px); font-weight:900; color:var(--gold); line-height:0.9; letter-spacing:-0.03em; text-transform:uppercase; }
+    .cover-subtitle { font-family:'Playfair Display',serif; font-size:14px; font-style:italic; color:var(--ivory-muted); line-height:1.55; max-width:340px; }
+    .cover-stats { display:flex; gap:20px; flex-wrap:wrap; margin-top:6px; }
+    .cover-stat { display:flex; flex-direction:column; }
+    .cover-stat-num { font-family:'Playfair Display',serif; font-size:22px; font-weight:900; color:var(--gold); line-height:1; }
+    .cover-stat-label { font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+
+    /* Chapter slides */
+    .slide-chapter { display:flex; flex-direction:column; gap:10px; }
+    .chapter-num { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); opacity:0.65; }
+    .chapter-title { font-family:'Playfair Display',serif; font-size:clamp(20px,4vw,26px); font-weight:700; color:var(--ivory); line-height:1.1; }
+    .chapter-pull { font-family:'Playfair Display',serif; font-size:14px; font-style:italic; color:var(--gold); line-height:1.5; border-left:2px solid var(--gold-border-s); padding-left:14px; }
+    .chapter-desc { font-size:13px; color:var(--ivory-muted); line-height:1.7; }
+
+    /* CTA slide */
+    .slide-cta { display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+    .cta-kicker { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); opacity:0.7; }
+    .cta-headline { font-family:'Playfair Display',serif; font-size:clamp(36px,7vw,52px); font-weight:900; color:var(--gold); line-height:0.95; letter-spacing:-0.02em; text-transform:uppercase; }
+    .cta-sub { font-size:13px; color:var(--ivory-muted); line-height:1.65; max-width:340px; }
+    .cta-price-row { display:flex; align-items:baseline; gap:10px; }
+    .cta-price { font-family:'Playfair Display',serif; font-size:28px; font-weight:900; color:var(--gold); line-height:1; }
+    .cta-price-desc { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+    .btn-get-book { display:inline-flex; align-items:center; gap:8px; font-family:'DM Mono',monospace; font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:14px 28px; background:var(--gold); color:var(--onyx); border:none; border-radius:2px; text-decoration:none; touch-action:manipulation; cursor:pointer; transition:background 0.2s, transform 0.2s; }
+    .btn-get-book:hover { background:var(--gold-light); transform:translateY(-2px); }
+
+    /* Controls */
+    .bcc-controls { display:flex; align-items:center; justify-content:space-between; margin-top:12px; padding:0 2px; }
+    .bcc-dots { display:flex; gap:7px; }
+    .bcc-dot { width:7px; height:7px; border-radius:50%; background:var(--gold-border-s); border:none; padding:0; cursor:pointer; touch-action:manipulation; transition:background 0.25s, transform 0.25s; }
+    .bcc-dot.active { background:var(--gold); transform:scale(1.25); }
+    .bcc-counter { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.12em; color:var(--muted); }
+    .bcc-arrows { display:flex; gap:8px; }
+    .bcc-arrow { background:rgba(201,168,76,0.08); border:1px solid var(--gold-border); color:var(--gold); font-size:16px; width:36px; height:36px; border-radius:3px; display:flex; align-items:center; justify-content:center; cursor:pointer; touch-action:manipulation; transition:background 0.2s; }
+    .bcc-arrow:hover { background:rgba(201,168,76,0.18); }
+
     /* TESTIMONIAL SLIDER */
     .testimonial-section { background:var(--onyx-card); border-top:1px solid var(--gold-border); border-bottom:1px solid var(--gold-border); padding:80px 0; text-align:center; overflow:hidden; }
     .testimonial-heading { font-family:'Playfair Display',serif; font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--ivory); margin-bottom:16px; }
@@ -399,6 +444,92 @@
               <li>The DM mistake that makes you sound like a vendor, not a partner</li>
               <li>The complete system from positioning to conversion. No tips, no fluff.</li>
             </ul>
+
+            <div class="book-chapter-carousel">
+              <div class="book-chapter-carousel-label">Inside the Manifesto — 6 of 9 Chapters</div>
+              <div class="bcc-outer" id="bccOuter">
+                <div class="bcc-track" id="bccTrack">
+
+                  <div class="bcc-slide">
+                    <div class="slide-cover">
+                      <div class="cover-manifesto-tag">A Manifesto for Founders Who Are Done Being Ignored</div>
+                      <div class="cover-title">CRICKETS</div>
+                      <div class="cover-subtitle">Why your LinkedIn sounds loud, pays nothing, and the exact identity shift that changes everything.</div>
+                      <div class="cover-stats">
+                        <div class="cover-stat"><span class="cover-stat-num">873%</span><span class="cover-stat-label">Organic growth</span></div>
+                        <div class="cover-stat"><span class="cover-stat-num">106K+</span><span class="cover-stat-label">Impressions</span></div>
+                        <div class="cover-stat"><span class="cover-stat-num">$0</span><span class="cover-stat-label">Ads spent</span></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bcc-slide">
+                    <div class="slide-chapter">
+                      <div class="chapter-num">Chapter 01</div>
+                      <div class="chapter-title">The Two Games</div>
+                      <div class="chapter-pull">"Visibility without conversion is performance art. You are building a stage with no box office."</div>
+                      <div class="chapter-desc">Visibility and conversion are not the same fight. Most founders have been training for the wrong one for months. A fintech founder rebuilt his positioning in one afternoon and received three qualified DMs within two weeks. One converted to a retained engagement valued at $36,000.</div>
+                    </div>
+                  </div>
+
+                  <div class="bcc-slide">
+                    <div class="slide-chapter">
+                      <div class="chapter-num">Chapter 03</div>
+                      <div class="chapter-title">The Corporate Cringe</div>
+                      <div class="chapter-pull">"Your competitors are not beating you because they are better. They are beating you because they are clearer."</div>
+                      <div class="chapter-desc">The professional mask feels like credibility. It is costing you every client you are not currently getting. Clients do not hire people who sound professional. They hire people who sound like they already understand the problem.</div>
+                    </div>
+                  </div>
+
+                  <div class="bcc-slide">
+                    <div class="slide-chapter">
+                      <div class="chapter-num">Chapter 04</div>
+                      <div class="chapter-title">The Bleeding Neck</div>
+                      <div class="chapter-pull">"The content that converts is not better-written. It is more precisely aimed."</div>
+                      <div class="chapter-desc">Vitamins are optional. Painkillers are non-negotiable. Most founders are producing vitamin content. Genuinely useful. Nicely written. Completely forgettable. This chapter shows you how to name the exact pain your client has not confessed to anyone yet.</div>
+                    </div>
+                  </div>
+
+                  <div class="bcc-slide">
+                    <div class="slide-chapter">
+                      <div class="chapter-num">Chapter 06</div>
+                      <div class="chapter-title">The 8-Second War</div>
+                      <div class="chapter-pull">"If the first line does not make someone uncomfortable, curious, or immediately recognized, it is not a hook."</div>
+                      <div class="chapter-desc">You are competing with a CEO's phone buzzing, a coffee going cold, a Slack notification from a client who needs something now. You have eight seconds. This chapter contains the 10 hooks that actually work, with the mechanism explained for each one.</div>
+                    </div>
+                  </div>
+
+                  <div class="bcc-slide">
+                    <div class="slide-cta">
+                      <div class="cta-kicker">The Founder's Manifesto</div>
+                      <div class="cta-headline">CRICKETS</div>
+                      <div class="cta-sub">9 chapters. A full toolkit. The exact system that turns a silent LinkedIn into the client pipeline your business deserves.</div>
+                      <div class="cta-price-row">
+                        <span class="cta-price">$29.90</span>
+                        <span class="cta-price-desc">One-time · Instant access</span>
+                      </div>
+                      <a href="https://selar.com/ph3vsk1171" class="btn-get-book" target="_blank" rel="noopener noreferrer">Get the Manifesto →</a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="bcc-controls">
+                <div class="bcc-dots" id="bccDots">
+                  <button class="bcc-dot active" aria-label="Slide 1"></button>
+                  <button class="bcc-dot" aria-label="Slide 2"></button>
+                  <button class="bcc-dot" aria-label="Slide 3"></button>
+                  <button class="bcc-dot" aria-label="Slide 4"></button>
+                  <button class="bcc-dot" aria-label="Slide 5"></button>
+                  <button class="bcc-dot" aria-label="Slide 6"></button>
+                </div>
+                <div class="bcc-counter" id="bccCounter">1 / 6</div>
+                <div class="bcc-arrows">
+                  <button class="bcc-arrow" id="bccPrev" aria-label="Previous slide">&#8592;</button>
+                  <button class="bcc-arrow" id="bccNext" aria-label="Next slide">&#8594;</button>
+                </div>
+              </div>
+            </div>
 
             <div class="book-cta-row">
               <div>
@@ -601,6 +732,48 @@
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
       });
     });
+
+    // CHAPTER PREVIEW CAROUSEL
+    (function() {
+      var track = document.getElementById('bccTrack');
+      var dots = document.querySelectorAll('#bccDots .bcc-dot');
+      var counter = document.getElementById('bccCounter');
+      var prevBtn = document.getElementById('bccPrev');
+      var nextBtn = document.getElementById('bccNext');
+      if (!track) return;
+      var slides = track.querySelectorAll('.bcc-slide');
+      var total = slides.length;
+      var idx = 0;
+
+      function goTo(n) {
+        idx = ((n % total) + total) % total;
+        var w = track.parentElement.getBoundingClientRect().width;
+        track.style.transform = 'translateX(-' + (idx * w) + 'px)';
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+        if (counter) counter.textContent = (idx + 1) + ' / ' + total;
+      }
+
+      prevBtn.addEventListener('click', function() { goTo(idx - 1); });
+      nextBtn.addEventListener('click', function() { goTo(idx + 1); });
+      dots.forEach(function(d, i) { d.addEventListener('click', function() { goTo(i); }); });
+      window.addEventListener('resize', function() { goTo(idx); });
+
+      // Touch swipe
+      var startX = 0;
+      var swiping = false;
+      track.addEventListener('touchstart', function(e) {
+        if (e.target.closest('a, button')) return;
+        startX = e.touches[0].clientX;
+        swiping = true;
+      }, { passive: true });
+      track.addEventListener('touchend', function(e) {
+        if (!swiping) return;
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) goTo(idx + (diff > 0 ? 1 : -1));
+        swiping = false;
+      });
+      track.addEventListener('touchcancel', function() { swiping = false; });
+    })();
 
     // NAV TOGGLE
     const toggle = document.getElementById('navToggle'), drawer = document.getElementById('navDrawer'), overlay = document.getElementById('navOverlay');
