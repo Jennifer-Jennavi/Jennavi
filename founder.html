@@ -83,7 +83,7 @@
         "name": "The exact AI prompt I use for Founder LinkedIn content",
         "description": "Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders that builds authority and generates inbound clients.",
         "thumbnailUrl": "https://img.youtube.com/vi/gle9p9rEMuE/maxresdefault.jpg",
-        "uploadDate": "2026-04-01",
+        "uploadDate": "2026-04-01T00:00:00+00:00",
         "contentUrl": "https://www.youtube.com/watch?v=gle9p9rEMuE",
         "embedUrl": "https://www.youtube.com/embed/gle9p9rEMuE",
         "author": {"@type": "Person", "name": "Jennifer Mmesoma Omaliko"},
@@ -91,21 +91,34 @@
       },
       {
         "@type": "FAQPage",
+        "@id": "https://jennavi.co/founder.html#faq",
         "mainEntity": [
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/founder.html#faq-1",
             "name": "How did Jennifer Omaliko grow her LinkedIn to 5,500 followers?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Jennifer grew her LinkedIn from under 500 to over 5,500 followers organically using surgical content positioning, consistent publishing, and a strategy focused on making the right audience feel personally found. Zero paid ads were used. The 873% impression growth was achieved through the same methodology she now applies for clients at Jennavi."}
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Jennifer grew her LinkedIn from under 500 to over 5,500 followers organically using surgical content positioning, consistent publishing, and a strategy focused on making the right audience feel personally found. Zero paid ads were used. The 873% impression growth was achieved through the same methodology she now applies for clients at Jennavi."
+            }
           },
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/founder.html#faq-2",
             "name": "What is Jennifer Omaliko's approach to LinkedIn ghostwriting?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Jennifer's approach starts with deep positioning work before writing a single word. Every piece of content is designed to make a founder's ideal client feel found, not just informed. The goal is never engagement for its own sake. It is inbound inquiries, discovery calls and revenue."}
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Jennifer's approach starts with deep positioning work before writing a single word. Every piece of content is designed to make a founder's ideal client feel found, not just informed. The goal is never engagement for its own sake. It is inbound inquiries, discovery calls and revenue."
+            }
           },
           {
             "@type": "Question",
+            "@id": "https://jennavi.co/founder.html#faq-3",
             "name": "Can I work directly with Jennifer Omaliko?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Yes. All Jennavi clients work directly with Jennifer. There is no outsourcing to junior writers. Jennifer personally writes, strategises and manages every client account. Book a free 30-minute strategy call on Calendly to start."}
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. All Jennavi clients work directly with Jennifer. There is no outsourcing to junior writers. Jennifer personally writes, strategises and manages every client account. Book a free 30-minute strategy call on Calendly to start."
+            }
           }
         ]
       }
@@ -187,19 +200,24 @@
     /* BREADCRUMB */
     .breadcrumb { padding:92px 24px 0; max-width:900px; margin:0 auto; }
 
-    /* FOUNDER CONTENT */
-    .founder-grid { display:flex; flex-wrap:wrap; gap:48px; align-items:flex-start; margin-bottom:48px; }
-    .founder-img-wrap { flex:1; min-width:200px; max-width:280px; }
-    .founder-img-wrap img { width:100%; border-radius:8px; border:3px solid var(--gold); box-shadow:0 20px 40px rgba(0,0,0,0.4); }
-    .founder-bio { flex:2; min-width:260px; }
-    .founder-name { font-family:'Playfair Display',serif; font-size:clamp(32px,5vw,52px); font-weight:700; color:var(--gold); margin-bottom:6px; line-height:1.1; }
-    .founder-title-mono { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:28px; opacity:0.8; }
+    /* FOUNDER HERO IMAGE – full width */
+    .founder-hero-wrap { position:relative; width:100vw; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; height:min(90vh,680px); overflow:hidden; }
+    .founder-hero-wrap img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+    .founder-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.0) 35%, rgba(10,10,10,0.65) 80%, rgba(10,10,10,1) 100%); }
+    .founder-hero-badge { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .founder-jo-monogram { width:72px; height:72px; border-radius:50%; border:2px solid var(--gold); background:rgba(10,10,10,0.6); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:28px; font-weight:900; color:var(--gold); backdrop-filter:blur(10px); }
+    .founder-hero-caption { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(250,243,224,0.7); white-space:nowrap; }
+
+    .founder-name { font-family:'Playfair Display',serif; font-size:clamp(44px,7vw,80px); font-weight:900; color:var(--gold); margin-bottom:8px; line-height:0.95; letter-spacing:-0.02em; text-transform:uppercase; }
+    .founder-title-mono { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:32px; opacity:0.8; }
+    .proof-pills { display:flex; flex-wrap:wrap; gap:10px; margin:40px 0; }
+    .proof-pill { background:rgba(201,168,76,0.1); border:1px solid var(--gold-border-s); padding:7px 16px; font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--gold); }
+
+    /* FOUNDER BIO */
+    .founder-bio { max-width:900px; margin:0 auto; padding:56px 24px 0; }
     .founder-bio p { font-size:16px; color:var(--ivory-muted); line-height:1.85; margin-bottom:20px; }
     .founder-bio p:last-of-type { margin-bottom:0; }
     .founder-bio strong { color:var(--ivory); font-weight:600; }
-
-    .proof-pills { display:flex; flex-wrap:wrap; gap:10px; margin:40px 0; }
-    .proof-pill { background:rgba(201,168,76,0.1); border:1px solid var(--gold-border-s); padding:7px 16px; font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--gold); }
 
     /* VIDEO – fully mobile tappable */
     .video-section { margin:48px 0; }
@@ -218,7 +236,7 @@
     .faq-q::after { content:'+'; color:var(--gold); font-size:22px; font-weight:300; flex-shrink:0; transition:transform 0.2s; font-family:'Montserrat',sans-serif; }
     .faq-item.open .faq-q::after { transform:rotate(45deg); }
     .faq-a { font-size:15px; color:var(--ivory-muted); line-height:1.8; max-height:0; overflow:hidden; transition:max-height 0.3s ease, padding 0.3s ease; }
-    .faq-item.open .faq-a { max-height:200px; padding-top:14px; }
+    .faq-item.open .faq-a { max-height:500px; padding-top:14px; }
 
     /* FOOTER (full, same as homepage) */
     footer { border-top:1px solid var(--gold-border); padding:80px 48px 48px; }
@@ -281,21 +299,28 @@
   </div>
 
   <main>
-    <section style="padding-top:48px;">
-      <div class="container">
-        <div class="founder-grid" itemscope itemtype="https://schema.org/Person">
-          <div class="founder-img-wrap">
-            <img src="/IMG-20260323-WA0003(1).jpg" alt="Jennifer Mmesoma Omaliko, Founder and CEO of Jennavi, LinkedIn Ghostwriter for Founders" itemprop="image" loading="eager">
-          </div>
-          <div class="founder-bio">
-            <h1 class="founder-name" itemprop="name">Jennifer Mmesoma Omaliko</h1>
-            <p class="founder-title-mono" itemprop="jobTitle">Founder and CEO · LinkedIn Ghostwriter · Content Strategist</p>
-            <p>Jennifer is a <strong>LinkedIn Content and Growth Strategist</strong> building an international digital growth agency from scratch and documenting every step publicly.</p>
-            <p>She grew her personal LinkedIn from under 500 to over 5,500 followers organically, achieving <strong>873% impression growth and over 106,000 total organic impressions.</strong> Zero paid ads. Zero shortcuts. Every strategy she sells is the strategy she has lived, tested and proven on her own profile.</p>
-            <p>Jennifer is building <span itemprop="worksFor" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">Jennavi</span></span> as a globally competitive remote agency with active clients across the US, UK, Australia and beyond. Her proof is not a claim. It is documented, public and verifiable.</p>
-          </div>
+    <!-- FOUNDER HERO IMAGE – full width -->
+    <div style="padding-top:67px;">
+      <div class="founder-hero-wrap">
+        <img src="/IMG-20260323-WA0003(1).jpg" alt="Jennifer Mmesoma Omaliko, Founder and CEO of Jennavi, LinkedIn Ghostwriter for Founders" loading="eager">
+        <div class="founder-hero-overlay"></div>
+        <div class="founder-hero-badge">
+          <div class="founder-jo-monogram">JO</div>
+          <span class="founder-hero-caption">Jennifer Mmesoma Omaliko · Founder & CEO</span>
         </div>
+      </div>
+    </div>
 
+    <section style="padding-top:0; padding-bottom:80px;">
+      <div class="founder-bio" itemscope itemtype="https://schema.org/Person">
+        <h1 class="founder-name" itemprop="name">Jennifer<br>Mmesoma<br>Omaliko</h1>
+        <p class="founder-title-mono" itemprop="jobTitle">Founder and CEO · LinkedIn Ghostwriter · Content Strategist</p>
+        <p>Jennifer is a <strong>LinkedIn Content and Growth Strategist</strong> building an international digital growth agency from scratch and documenting every step publicly.</p>
+        <p>She grew her personal LinkedIn from under 500 to over 5,500 followers organically, achieving <strong>873% impression growth and over 106,000 total organic impressions.</strong> Zero paid ads. Zero shortcuts. Every strategy she sells is the strategy she has lived, tested and proven on her own profile.</p>
+        <p>Jennifer is building <span itemprop="worksFor" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">Jennavi</span></span> as a globally competitive remote agency with active clients across the US, UK, Australia and beyond. Her proof is not a claim. It is documented, public and verifiable.</p>
+      </div>
+
+      <div class="container">
         <div class="proof-pills" role="list" aria-label="Jennifer Omaliko proof points">
           <span class="proof-pill" role="listitem">873% Impression Growth</span>
           <span class="proof-pill" role="listitem">5,500+ Followers Built</span>
@@ -305,14 +330,8 @@
           <span class="proof-pill" role="listitem">CRICKETS Author</span>
         </div>
 
-        <!-- VIDEO – plays inline on mobile, fully tappable -->
-        <div class="video-section" itemscope itemtype="https://schema.org/VideoObject">
-          <meta itemprop="name" content="The exact AI prompt I use for Founder LinkedIn content">
-          <meta itemprop="description" content="Jennifer Omaliko shares the exact AI prompt framework she uses to create high-converting LinkedIn content for founders.">
-          <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/gle9p9rEMuE/maxresdefault.jpg">
-          <meta itemprop="uploadDate" content="2026-04-01">
-          <meta itemprop="contentUrl" content="https://www.youtube.com/watch?v=gle9p9rEMuE">
-          <meta itemprop="embedUrl" content="https://www.youtube.com/embed/gle9p9rEMuE">
+        <!-- VIDEO – plays inline on mobile, fully tappable, NO microdata (JSON-LD in head) -->
+        <div class="video-section">
           <div class="video-label">Watch Jennifer in action</div>
           <div class="video-container">
             <iframe
@@ -333,24 +352,24 @@
       </div>
     </section>
 
-    <!-- FAQ SECTION (rich results, mobile tappable) -->
-    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+    <!-- FAQ SECTION (JSON-LD in head handles schema) -->
+    <section class="faq-section">
       <div class="container">
         <h2 class="faq-title">Founders <em>Often Ask</em></h2>
 
-        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" role="button" tabindex="0">How did Jennifer Omaliko grow her LinkedIn to 5,500 followers?</div>
-          <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Jennifer grew her LinkedIn from under 500 to over 5,500 followers organically using surgical content positioning, consistent publishing, and a strategy focused on making the right audience feel personally found. Zero paid ads were used. The 873% impression growth was achieved through the same methodology she now applies for clients at Jennavi.</span></div>
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0">How did Jennifer Omaliko grow her LinkedIn to 5,500 followers?</div>
+          <div class="faq-a">Jennifer grew her LinkedIn from under 500 to over 5,500 followers organically using surgical content positioning, consistent publishing, and a strategy focused on making the right audience feel personally found. Zero paid ads were used. The 873% impression growth was achieved through the same methodology she now applies for clients at Jennavi.</div>
         </div>
 
-        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" role="button" tabindex="0">What is Jennifer Omaliko's approach to LinkedIn ghostwriting?</div>
-          <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Jennifer's approach starts with deep positioning work before writing a single word. Every piece of content is designed to make a founder's ideal client feel found, not just informed. The goal is never engagement for its own sake. It is inbound inquiries, discovery calls and revenue.</span></div>
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0">What is Jennifer Omaliko's approach to LinkedIn ghostwriting?</div>
+          <div class="faq-a">Jennifer's approach starts with deep positioning work before writing a single word. Every piece of content is designed to make a founder's ideal client feel found, not just informed. The goal is never engagement for its own sake. It is inbound inquiries, discovery calls and revenue.</div>
         </div>
 
-        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" role="button" tabindex="0">Can I work directly with Jennifer Omaliko?</div>
-          <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Yes. All Jennavi clients work directly with Jennifer. There is no outsourcing to junior writers. Jennifer personally writes, strategises and manages every client account. Book a free 30-minute strategy call on Calendly to start.</span></div>
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0">Can I work directly with Jennifer Omaliko?</div>
+          <div class="faq-a">Yes. All Jennavi clients work directly with Jennifer. There is no outsourcing to junior writers. Jennifer personally writes, strategises and manages every client account. Book a free 30-minute strategy call on Calendly to start.</div>
         </div>
       </div>
     </section>
@@ -375,8 +394,8 @@
       <div>
         <p class="footer-col-title">Direct Contact</p>
         <ul class="footer-links direct-contact" role="list">
-          <li><a href="mailto:omalikojennifermmesoma@gmail.com?subject=Inquiry%20via%20Jennavi" aria-label="Email Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span>omalikojennifermmesoma@gmail.com</span></a></li>
-          <li><a href="mailto:jennavi.global@gmail.com?subject=New%20Client%20Inquiry" aria-label="Email Jennavi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span>jennavi.global@gmail.com</span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#4b24262a27222024212e2525222d2e3926262e3824262a0b2c262a22276528242674383e29212e283f7602253a3e2239326e797b3d222a6e797b012e25252a3d22" aria-label="Email Jennifer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span><span class="__cf_email__" data-cfemail="7d12101c1114161217181313141b180f1010180e12101c3d1a101c1411531e1210">[email&#160;protected]</span></span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#3c565952525d4a55125b50535e5d507c5b515d5550125f5351034f495e56595f480172594b190e0c7f5055595248190e0c75524d49554e45" aria-label="Email Jennavi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><span><span class="__cf_email__" data-cfemail="5339363d3d32253a7d343f3c31323f13343e323a3f7d303c3e">[email&#160;protected]</span></span></a></li>
           <li><a href="tel:+2349031237643" aria-label="Phone"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+234 903 123 7643</span></a></li>
           <li><a href="https://wa.me/2349031237643?text=Hi%20Jennifer%2C%20I%27d%20love%20to%20learn%20more%20about%20Jennavi!" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span>WhatsApp</span></a></li>
           <li><a href="https://calendly.com/omalikojennifermmesoma/30min" target="_blank" rel="noopener noreferrer" aria-label="Calendly"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Book a Strategy Call</span></a></li>
@@ -404,7 +423,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // FAQ ACCORDION – works on mobile tap
     document.querySelectorAll('.faq-q').forEach(function(q) {
       q.addEventListener('click', function(e) {
@@ -420,11 +439,4 @@
     // NAV TOGGLE
     const toggle = document.getElementById('navToggle'), drawer = document.getElementById('navDrawer'), overlay = document.getElementById('navOverlay');
     const openMenu = function() { toggle.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('open'); toggle.setAttribute('aria-expanded','true'); overlay.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; };
-    const closeMenu = function() { toggle.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; };
-    toggle.addEventListener('click', function() { toggle.classList.contains('open') ? closeMenu() : openMenu(); });
-    overlay.addEventListener('click', closeMenu);
-    drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
-  </script>
-</body>
-</html>
+    const closeMenu = function() { toggle.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('open'); toggle.setAttribute('aria-expanded','fa
