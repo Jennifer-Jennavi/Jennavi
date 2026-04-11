@@ -205,7 +205,7 @@
     .book-section { margin:72px auto; max-width:800px; padding:0 24px; }
     .book-section-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:24px; display:flex; align-items:center; gap:12px; }
     .book-section-label::after { content:''; flex:1; height:1px; background:var(--gold-border); }
-    .book-carousel { position:relative; overflow:clip; border:1px solid var(--gold-border-s); }
+    .book-carousel { position:relative; overflow:hidden; border:1px solid var(--gold-border-s); }
     .book-carousel-track { display:flex; transition:transform 0.45s cubic-bezier(0.4,0,0.2,1); }
     .book-slide { min-width:100%; display:flex; align-items:stretch; }
 
@@ -227,7 +227,7 @@
     .chapter-pull { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(14px,2vw,17px); color:var(--gold); line-height:1.6; border-left:3px solid var(--gold-border-s); padding-left:20px; margin-bottom:24px; }
     .chapter-desc { font-size:14px; line-height:1.8; color:var(--ivory-muted); }
 
-    .slide-cta { width:100%; min-height:400px; background:linear-gradient(135deg, #0f0e0a 0%, #0a0a0a 100%); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:52px 48px; position:relative; overflow:visible; }
+    .slide-cta { width:100%; min-height:400px; background:linear-gradient(135deg, #0f0e0a 0%, #0a0a0a 100%); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:52px 48px; position:relative; overflow:hidden; }
     .slide-cta::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:400px; height:400px; background:radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%); pointer-events:none; }
     .slide-cta::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
     .cta-kicker { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
@@ -237,7 +237,7 @@
     .cta-price { font-family:'DM Mono',monospace; font-size:28px; font-weight:500; color:var(--gold); }
     .cta-price-desc { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
     .slide-cover, .slide-chapter, .slide-cta { position:relative; z-index:auto; }
-    .btn-get-book { display:inline-flex; align-items:center; justify-content:center; background:var(--gold); color:var(--onyx); font-family:'DM Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:14px 32px; min-height:48px; text-decoration:none; transition:background 0.2s, transform 0.2s; pointer-events:auto !important; touch-action:manipulation !important; }
+    .btn-get-book { display:inline-flex; align-items:center; justify-content:center; background:var(--gold); color:var(--onyx); font-family:'DM Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:14px 32px; min-height:48px; text-decoration:none; transition:background 0.2s, transform 0.2s; pointer-events:auto !important; touch-action:manipulation !important; position:relative; z-index:999999 !important; }
     .btn-get-book:hover { background:var(--gold-light); transform:translateY(-2px); }
 
     .carousel-controls { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; background:rgba(201,168,76,0.03); border-top:1px solid var(--gold-border); }
@@ -476,7 +476,7 @@
                 <span class="cta-price">$29.90</span>
                 <span class="cta-price-desc">One-time · Instant access</span>
               </div>
-              <a href="/book.html" class="btn-get-book" style="pointer-events:auto !important; touch-action:manipulation !important;">Get the Manifesto →</a>
+              <a href="/book.html" class="btn-get-book" style="pointer-events:auto !important; touch-action:manipulation !important; position:relative; z-index:999999 !important; display:inline-flex;">Get the Manifesto →</a>
             </div>
           </div>
 
