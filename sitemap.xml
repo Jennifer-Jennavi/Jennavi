@@ -4,44 +4,90 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+  <!-- CRITICAL PAGES - Priority 1.0 -->
   <url>
     <loc>https://jennavi.co/</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://jennavi.co/book.html</loc>
-    <lastmod>2026-04-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
     <loc>https://jennavi.co/services.html</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://jennavi.co/why-jennavi.html</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- HIGH PRIORITY - Priority 0.9 -->
+  <url>
+    <loc>https://jennavi.co/founder.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://jennavi.co/founder.html</loc>
-    <lastmod>2026-04-12</lastmod>
+    <loc>https://jennavi.co/book.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- MEDIUM PRIORITY - Priority 0.8 -->
+  <url>
+    <loc>https://jennavi.co/insights/index.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- STANDARD PRIORITY - Priority 0.7 -->
+  <url>
+    <loc>https://jennavi.co/insights/how-much-does-linkedin-ghostwriting-cost.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-ghostwriter-vs-diy.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/how-to-choose-a-linkedin-ghostwriting-agency.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-personal-branding-for-startup-founders.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/why-your-linkedin-headline-isnt-getting-you-clients.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
