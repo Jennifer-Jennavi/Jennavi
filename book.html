@@ -309,7 +309,24 @@
           "availability": "https://schema.org/InStock",
           "url": "https://selar.com/ph3vsk1171",
           "priceValidUntil": "2027-12-31",
-          "seller": {"@id": "https://jennavi.co/#organization"}
+          "seller": {"@id": "https://jennavi.co/#organization"},
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {"@type": "MonetaryAmount", "value": "0", "currency": "USD"},
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {"@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "MIN"},
+              "transitTime": {"@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "MIN"}
+            }
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 0,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/FreeReturn"
+          }
         }
       },
       {
