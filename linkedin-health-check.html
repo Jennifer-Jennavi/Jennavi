@@ -243,7 +243,7 @@
     /* HERO */
     .quiz-hero{padding:64px 48px 72px;text-align:center;border-bottom:1px solid var(--gold-border);background:linear-gradient(180deg,rgba(201,168,76,0.06) 0%,transparent 100%);}
     .quiz-hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px;}
-    .quiz-hero-eyebrow::before,.quiz-hero-eyebrow::after{content:'';display:block;width:40px;height:1px;background:var(--gold);}
+    .quiz-hero-eyebrow::before{content:'◆';color:var(--gold);font-size:8px;line-height:1;}.quiz-hero-eyebrow::after{content:'◆';color:var(--gold);font-size:8px;line-height:1;}
     .quiz-hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,6vw,82px);font-weight:900;line-height:1.0;letter-spacing:-0.02em;margin-bottom:24px;}
     .quiz-hero h1 em{font-style:italic;color:var(--gold);font-weight:400;}
     .quiz-hero-sub{font-size:17px;color:var(--ivory-muted);line-height:1.9;max-width:620px;margin:0 auto 40px;}
@@ -298,7 +298,7 @@
     .opt-letter{width:28px;height:28px;border:1px solid var(--gold-border-s);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);flex-shrink:0;margin-top:2px;transition:background 0.2s,color 0.2s;}
     .opt-text{font-size:15px;color:var(--ivory-muted);line-height:1.65;transition:color 0.2s;}
     .option.selected .opt-text{color:var(--ivory);}
-    .opt-pts{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);flex-shrink:0;margin-left:auto;padding-left:12px;white-space:nowrap;margin-top:4px;}
+    .opt-pts{display:none;}.opt-pts-hidden{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);flex-shrink:0;margin-left:auto;padding-left:12px;white-space:nowrap;margin-top:4px;}
 
     /* NAV BUTTONS */
     .q-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;}
@@ -466,7 +466,6 @@
       <li><a href="https://jennavi.co/founder.html" style="font-size:16px;">Jennifer</a></li>
       <li><a href="https://jennavi.co/insights/" style="font-size:16px;">Insights</a></li>
       <li style="padding:12px 0 4px;"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);opacity:0.5;">Free Tools</span></li>
-      <li><a href="https://jennavi.co/linkedin-health-check.html" style="font-size:15px;color:var(--gold);">LinkedIn Health Check</a></li>
       <li><a href="https://jennavi.co/linkedin-roi-calculator.html" style="font-size:15px;color:var(--gold);">ROI Calculator</a></li>
       <li><a href="https://jennavi.co/linkedin-content-audit.html" style="font-size:15px;color:var(--gold);">Content Audit</a></li>
       <li style="padding:12px 0 4px;"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);opacity:0.5;">Get Started</span></li>
@@ -538,7 +537,7 @@
       <!-- METHODOLOGY NOTE -->
       <div class="method-note">
         <span class="method-icon" aria-hidden="true">&#9679;</span>
-        <p class="method-text"><strong>Built on the 20-Point Brutal Profile Audit from <a href="https://jennavi.co/book.html" target="_blank" rel="noopener noreferrer">The CRICKETS Manifesto</a>.</strong> Each question maps to a specific profile or content element Jennifer Omaliko audits personally for every Jennavi client. Score below 14 means your profile is actively costing you clients. Be honest. Nobody is watching.</p>
+        <p class="method-text"><strong>Built on the 20-Point Brutal Profile Audit from <a href="https://jennavi.co/book.html" target="_blank" rel="noopener noreferrer">The CRICKETS Manifesto</a>.</strong> Each question maps to a specific profile or content element Jennifer Omaliko audits personally for every Jennavi client. Score below 40 means your profile is actively costing you clients. Be honest. Nobody is watching.</p>
       </div>
 
       <!-- QUIZ QUESTIONS SECTION -->
@@ -678,7 +677,7 @@
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
             <div class="faq-q" role="button" tabindex="0" aria-expanded="false" itemprop="name">How does the scoring work?</div>
-            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">Each of the 20 questions is worth up to 5 points, giving a maximum of 100. Scores of 0 to 20 mean a complete rebuild is needed. Scores of 21 to 40 mean significant repositioning gaps. Scores of 41 to 60 mean posting but not converting. Scores of 61 to 80 mean visible but not converting at scale. Scores of 81 to 100 mean authority-level presence ready for VIP management.</span></div>
+            <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><span itemprop="text">The quiz scores your LinkedIn across 20 questions with a maximum of 100 points. Scores of 0 to 20 mean a complete rebuild is needed. Scores of 21 to 40 mean significant repositioning gaps. Scores of 41 to 60 mean posting but not converting. Scores of 61 to 80 mean visible but not converting at scale. Scores of 81 to 100 mean authority-level presence ready for VIP management.</span></div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
             <div class="faq-q" role="button" tabindex="0" aria-expanded="false" itemprop="name">Who created this quiz?</div>
@@ -763,7 +762,7 @@
 
     /* ── DATA ─────────────────────────────────────────────────────────────── */
     var CATEGORIES = ['Banner','Headline','About Section','Featured Section','Content','Positioning'];
-    var CAT_MAX = [9, 9, 12, 9, 12, 9];
+    var CAT_MAX = [15, 15, 20, 15, 20, 15];
 
     var QUESTIONS = [
       // BANNER
@@ -1210,10 +1209,10 @@
       started = false;
       resultSection.classList.remove('show');
       quizSection.style.display = '';
-      qContainer.innerHTML = '';
+      questionContainer.innerHTML = '';
       buildProgressCats();
       renderQuestion(0);
-      quizSection.scrollIntoView({behavior:'smooth', block:'start'});
+      window.scrollTo({top: 0, behavior: 'smooth'});
     });
 
     /* HERO TESTIMONIAL SLIDER */
@@ -1234,13 +1233,19 @@
       });
     })();
 
-    /* EMAILJS */
+    /* EMAILJS CONFIG */
     var EJS_PUBLIC_KEY  = 'XIy6yIQorZRwYz0xf';
     var EJS_SERVICE_ID  = 'service_10a5m5e';
     var EJS_TEMPLATE_ID = 'template_d9nbbv9';
-    window.addEventListener('load', function(){
-      if(typeof emailjs !== 'undefined') emailjs.init({publicKey: EJS_PUBLIC_KEY});
-    });
+
+    function initEmailJS(){
+      if(typeof emailjs !== 'undefined'){
+        try{ emailjs.init({publicKey: EJS_PUBLIC_KEY}); }catch(e){ console.warn('EJS init:',e); }
+      }
+    }
+    initEmailJS();
+    document.addEventListener('DOMContentLoaded', initEmailJS);
+    window.addEventListener('load', initEmailJS);
 
     /* EMAIL HTML BUILDER */
     function buildEmailHtml(name,score,range,rTitle,rBody,ctaText,ctaUrl){
@@ -1249,14 +1254,26 @@
     }
 
     function sendEmail(name,email,score,range,rTitle,rBody,ctaText,ctaUrl){
-      if(!EJS_PUBLIC_KEY||!EJS_SERVICE_ID||!EJS_TEMPLATE_ID) return;
-      if(typeof emailjs==='undefined') return;
-      emailjs.send(EJS_SERVICE_ID,EJS_TEMPLATE_ID,{
-        to_name:name, to_email:email, quiz_score:score+' out of 100', score_range:range,
-        result_title:rTitle, result_body:rBody, cta_text:ctaText, cta_url:ctaUrl,
-        html_content:buildEmailHtml(name,score,range,rTitle,rBody,ctaText,ctaUrl),
-        from_name:'Jennifer Omaliko, Jennavi', reply_to:'jennifer@jennavi.co'
-      },EJS_PUBLIC_KEY).catch(function(e){ console.warn('EmailJS:',e); });
+      if(!email){ console.warn('EJS: no email'); return; }
+      if(typeof emailjs==='undefined'){ console.warn('EJS: SDK not loaded'); return; }
+      try{ emailjs.init({publicKey: EJS_PUBLIC_KEY}); }catch(e){}
+      var params = {
+        to_name:      name || 'Founder',
+        to_email:     email,
+        quiz_score:   String(score) + ' out of 100',
+        score_range:  range,
+        result_title: rTitle,
+        result_body:  rBody,
+        cta_text:     ctaText,
+        cta_url:      ctaUrl,
+        html_content: buildEmailHtml(name,score,range,rTitle,rBody,ctaText,ctaUrl),
+        from_name:    'Jennifer Omaliko, Jennavi',
+        reply_to:     'jennifer@jennavi.co'
+      };
+      console.log('EJS: sending to', email);
+      emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, params, EJS_PUBLIC_KEY)
+        .then(function(r){ console.log('EJS sent:', r.status, r.text); })
+        .catch(function(e){ console.error('EJS error:', JSON.stringify(e)); });
     }
 
     /* LEAD FORM */
