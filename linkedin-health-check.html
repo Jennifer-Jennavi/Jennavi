@@ -1245,4 +1245,81 @@
     /* EMAIL HTML BUILDER */
     function buildEmailHtml(name,score,range,rTitle,rBody,ctaText,ctaUrl){
       var sc=parseInt(score), col=sc<=20?'#C62828':sc<=40?'#E65100':sc<=60?'#A07830':sc<=80?'#C9A84C':'#2E7D32';
-      return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.sb{background:#0a0a0a;border:1px solid rgba(201,168,76,0.3);padding:24px;text-align:center;margin-bottom:22px;}.sl{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,168,76,0.7);display:block;margin-bottom:8px;}.sn{font-size:56px;font-weight:700;color:#C9A84C;line-height:1;display:block;}.sd{font-family:Courier New,monospace;font-size:10px;color:rgba(250,243,224,0.4);display:block;margin-top:4px;letter-spacing:0.1em;}.sr{display:inline-block;margin-top:12px;padding:4px 14px;font-family:Courier New,monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;border:1px solid '+col+';color:'+col+';}.rt{font-size:18px;font-weight:700;color:#FAF3E0;margin-bottom:10px;}.dg{font-size:13px;color:rgba(250,243,224,0.65);line-height:1.85;margin-bottom:24px;padding:18px 20px;background:#0a0a0a;border-left:3px solid #C9A84C;}.ct{text-align:center;padding:24px 0;}.cb{display:inline-block;padding:14px 34px;background:#C9A84C;color:#0a0a0a;font-family:Courier New,monospace;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;}.sl2{display:block;text-align:center;margin-top:10px;font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;}.sl2 a{color:#C9A84C;text-decoration:none;}.nt{font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;font-style:italic;margin-bottom:16px;border-top:1px solid rgba(201,168,76,0.15);padding-top:20px;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07
+      return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.sb{background:#0a0a0a;border:1px solid rgba(201,168,76,0.3);padding:24px;text-align:center;margin-bottom:22px;}.sl{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,168,76,0.7);display:block;margin-bottom:8px;}.sn{font-size:56px;font-weight:700;color:#C9A84C;line-height:1;display:block;}.sd{font-family:Courier New,monospace;font-size:10px;color:rgba(250,243,224,0.4);display:block;margin-top:4px;letter-spacing:0.1em;}.sr{display:inline-block;margin-top:12px;padding:4px 14px;font-family:Courier New,monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;border:1px solid '+col+';color:'+col+';}.rt{font-size:18px;font-weight:700;color:#FAF3E0;margin-bottom:10px;}.dg{font-size:13px;color:rgba(250,243,224,0.65);line-height:1.85;margin-bottom:24px;padding:18px 20px;background:#0a0a0a;border-left:3px solid #C9A84C;}.ct{text-align:center;padding:24px 0;}.cb{display:inline-block;padding:14px 34px;background:#C9A84C;color:#0a0a0a;font-family:Courier New,monospace;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;}.sl2{display:block;text-align:center;margin-top:10px;font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;}.sl2 a{color:#C9A84C;text-decoration:none;}.nt{font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;font-style:italic;margin-bottom:16px;border-top:1px solid rgba(201,168,76,0.15);padding-top:20px;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span><span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi '+(name||'there')+',<br><br>You just completed the Jennavi LinkedIn Health Check. Here is your full personalised result.</p><div class="sb"><span class="sl">YOUR LINKEDIN HEALTH SCORE</span><span class="sn">'+score+'</span><span class="sd">out of 100 points</span><div><span class="sr">'+range+'</span></div></div><p class="rt">'+rTitle+'</p><div class="dg">'+rBody+'</div><div class="ct"><a href="'+ctaUrl+'" class="cb">'+ctaText+'</a><div class="sl2"><a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Or see all five Jennavi service tiers</a></div></div><p class="nt">I review every submission personally. If your score surprised you, reply to this email or WhatsApp me at +234 902 468 0769. I will tell you exactly what your number means for your business.</p><span class="sn2">Jennifer Omaliko</span><span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a> &middot; <a href="https://calendly.com/jennavi/30min">Book a strategy call</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+    }
+
+    function sendEmail(name,email,score,range,rTitle,rBody,ctaText,ctaUrl){
+      if(!EJS_PUBLIC_KEY||!EJS_SERVICE_ID||!EJS_TEMPLATE_ID) return;
+      if(typeof emailjs==='undefined') return;
+      emailjs.send(EJS_SERVICE_ID,EJS_TEMPLATE_ID,{
+        to_name:name, to_email:email, quiz_score:score+' out of 100', score_range:range,
+        result_title:rTitle, result_body:rBody, cta_text:ctaText, cta_url:ctaUrl,
+        html_content:buildEmailHtml(name,score,range,rTitle,rBody,ctaText,ctaUrl),
+        from_name:'Jennifer Omaliko, Jennavi', reply_to:'jennifer@jennavi.co'
+      },EJS_PUBLIC_KEY).catch(function(e){ console.warn('EmailJS:',e); });
+    }
+
+    /* LEAD FORM */
+    var leadForm = document.getElementById('leadForm');
+    var lcThanks = document.getElementById('lcThanks');
+    var lcSkip   = document.getElementById('lcSkip');
+    if(leadForm){
+      leadForm.addEventListener('submit',function(e){
+        e.preventDefault();
+        var nameVal  = (document.getElementById('lc-name')||{}).value||'';
+        var emailVal = (document.getElementById('lc-email')||{}).value||'';
+        var scoreVal = (document.getElementById('lcScore')||{}).value||'';
+        var rangeVal = (document.getElementById('lcRange')||{}).value||'';
+        var rTitle   = (document.getElementById('resultTitle')||{}).textContent||'';
+        var rBody    = (document.getElementById('resultTagline')||{}).textContent||'';
+        var data = new FormData(leadForm);
+        fetch('https://formspree.io/f/mqejgwab',{method:'POST',body:data,headers:{'Accept':'application/json'}})
+          .then(function(r){
+            if(r.ok){
+              leadForm.style.display='none';
+              if(lcSkip) lcSkip.style.display='none';
+              if(lcThanks) lcThanks.style.display='block';
+              var waMsg='Hi Jennifer, I just completed the Jennavi LinkedIn Health Check. My name is '+(nameVal||'a founder')+'. My score is '+(scoreVal||'?')+' out of 100. Result: '+(rangeVal||'?')+'. I would love to discuss this with you.';
+              var waBtn=document.getElementById('lcWaBtn');
+              if(waBtn) waBtn.href='https://wa.me/2349024680769?text='+encodeURIComponent(waMsg);
+              sendEmail(nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,'Book Your Free Discovery Call','https://calendly.com/jennavi/30min');
+              if(typeof gtag!=='undefined') gtag('event','lead_captured',{event_category:'LinkedIn Health Check',value:parseInt(scoreVal)||0});
+            } else { alert('Something went wrong. Please email jennifer@jennavi.co directly.'); }
+          }).catch(function(){ alert('Something went wrong. Please email jennifer@jennavi.co directly.'); });
+      });
+    }
+    if(lcSkip){ lcSkip.addEventListener('click',function(){ var lc=document.getElementById('leadCapture'); if(lc) lc.style.display='none'; }); }
+
+    /* SHARE BUTTONS */
+    var SHARE_URL='https://jennavi.co/linkedin-health-check.html';
+    document.addEventListener('click',function(e){
+      var id=e.target.id||(e.target.parentElement?e.target.parentElement.id:'');
+      if(id==='shareLinkedIn'){
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(SHARE_URL),'_blank');
+        if(typeof gtag!=='undefined') gtag('event','share_linkedin',{event_category:'LinkedIn Health Check'});
+        return;
+      }
+      if(id==='shareWhatsApp'){
+        window.open('https://wa.me/?text='+encodeURIComponent('I just took this free LinkedIn Health Check and it told me exactly what is broken. Takes 4 minutes. Try it: '+SHARE_URL),'_blank');
+        if(typeof gtag!=='undefined') gtag('event','share_whatsapp',{event_category:'LinkedIn Health Check'});
+        return;
+      }
+      if(id==='copyLink'){
+        var btn=document.getElementById('copyLink');
+        var fallback=function(){ var ta=document.createElement('textarea'); ta.value=SHARE_URL; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); if(btn){ btn.textContent='Copied'; } setTimeout(function(){ if(btn) btn.textContent='Copy Link'; },2200); };
+        if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(SHARE_URL).then(function(){ if(btn){ btn.textContent='Copied'; btn.style.color='#2E7D32'; } setTimeout(function(){ if(btn){ btn.textContent='Copy Link'; btn.style.color=''; } },2200); }).catch(fallback); } else { fallback(); }
+        if(typeof gtag!=='undefined') gtag('event','copy_link',{event_category:'LinkedIn Health Check'});
+        return;
+      }
+    });
+
+    /* UTIL */
+    function escHtml(str){
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+  })();
+  </script>
+
+</body>
+</html>
