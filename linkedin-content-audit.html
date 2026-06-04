@@ -237,7 +237,7 @@
     /* HERO */
     .audit-hero{padding:64px 48px 72px;text-align:center;border-bottom:1px solid var(--gold-border);background:linear-gradient(180deg,rgba(201,168,76,0.06) 0%,transparent 100%);}
     .audit-hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:22px;}
-    .audit-hero-eyebrow::before,.audit-hero-eyebrow::after{content:'';}
+    .audit-hero-eyebrow::before,.audit-hero-eyebrow::after{content:'◆';color:var(--gold);font-size:8px;}
     .audit-hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,72px);font-weight:900;line-height:1.0;letter-spacing:-0.02em;margin-bottom:20px;}
     .audit-hero h1 em{font-style:italic;color:var(--gold);font-weight:400;}
     .audit-hero-sub{font-size:16px;color:var(--ivory-muted);line-height:1.9;max-width:600px;margin:0 auto 20px;}
@@ -459,7 +459,7 @@
 
   <main>
     <section class="audit-hero" aria-labelledby="audit-hero-heading">
-      <div class="audit-hero-eyebrow" aria-hidden="true">&#9670; Free Tool &nbsp;&nbsp; &#9670; CRICKETS Framework &nbsp;&nbsp; &#9670; Instant Results</div>
+      <div class="audit-hero-eyebrow" aria-hidden="true">Free Tool &middot; CRICKETS Framework &middot; Instant Results</div>
       <h1 id="audit-hero-heading">
         Why Is Your LinkedIn<br>
         Content <em>Not Converting</em><br>
@@ -472,7 +472,7 @@
         <span class="audit-proof-item">CRICKETS Framework</span>
         <span class="audit-proof-item">Built by Jennifer Omaliko</span>
         <span class="audit-proof-item">873% Growth Documented</span>
-        <span class="audit-proof-item">Serving Founders Globally</span>
+        <span class="audit-proof-item">US &middot; UK &middot; AU &middot; CA &middot; NG &middot; IN &middot; UAE &middot; Global</span>
       </div>
     </section>
 
@@ -554,13 +554,9 @@
                 <input type="text" id="gate-name" name="full_name" placeholder="Your full name" required>
               </div>
               <div class="gate-field">
-                <label for="gate-email">Email Address</label>
-                <input type="email" id="gate-email" name="email" placeholder="your@email.com" required>
+                <label for="gate-phone">WhatsApp Number</label>
+                <input type="tel" id="gate-phone" name="whatsapp_phone" placeholder="+1 234 567 8900">
               </div>
-            </div>
-            <div class="gate-field" style="max-width:480px;margin:0 auto;">
-              <label for="gate-phone">WhatsApp Number</label>
-              <input type="tel" id="gate-phone" name="whatsapp_phone" placeholder="+1 234 567 8900 (include country code)">
             </div>
             <input type="hidden" name="overall_score" id="gateScore" value="">
             <input type="hidden" name="source" value="LinkedIn Content Audit Tool">
