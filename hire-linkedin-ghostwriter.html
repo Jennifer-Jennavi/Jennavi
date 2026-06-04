@@ -540,6 +540,7 @@
       <li><a href="https://jennavi.co/why-jennavi.html">Why Jennavi</a></li>
       <li><a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="nav-active">Services</a></li>
       <li><a href="https://jennavi.co/founder.html">Jennifer</a></li>
+      <li><a href="https://jennavi.co/linkedin-tools.html" class="nav-tool">Free LinkedIn Tools</a></li>
       <li><a href="https://jennavi.co/insights/index.html">Insights</a></li>
       <li><a href="https://jennavi.co/linkedin-health-check.html" class="nav-tool">Health Check</a></li>
       <li><a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="nav-cta">Book a Call</a></li>
@@ -557,7 +558,8 @@
       <li><a href="https://jennavi.co/book.html" style="font-size:16px;">CRICKETS &#10022;</a></li>
       <li><a href="https://jennavi.co/founder.html" style="font-size:16px;">Jennifer</a></li>
       <li><a href="https://jennavi.co/insights/index.html" style="font-size:16px;">Insights</a></li>
-      <span class="nav-drawer-section">Free Tools</span>
+      <span class="nav-drawer-section">Free LinkedIn Tools</span>
+      <li><a href="https://jennavi.co/linkedin-tools.html" style="font-size:15px;color:var(--gold);font-weight:600;">The CRICKETS Toolkit &#8594;</a></li>
       <li><a href="https://jennavi.co/linkedin-health-check.html" style="font-size:15px;color:var(--gold);">LinkedIn Health Check</a></li>
       <li><a href="https://jennavi.co/linkedin-roi-calculator.html" style="font-size:15px;color:var(--gold);">ROI Calculator</a></li>
       <li><a href="https://jennavi.co/linkedin-content-audit.html" style="font-size:15px;color:var(--gold);">Content Audit</a></li>
@@ -780,11 +782,11 @@
             <h2 class="reveal" id="why-hire-heading">The LinkedIn Ghostwriter<br>Who <em>Proves It First.</em></h2>
             <p class="why-hire-lead reveal">Most ghostwriters teach LinkedIn strategy. Jennifer <strong>built it from scratch and documented every result publicly.</strong> The methodology she sells is the methodology she has lived, tested and proven on her own profile. Zero paid ads. Zero shortcuts.</p>
             <p class="why-hire-lead reveal">She works directly with every client. No outsourcing to junior writers. No templates. No recycled content. Just Jennifer, your voice, and a strategy built around one outcome: <strong>revenue from LinkedIn.</strong></p>
-            <div class="stat-stack stagger">
-              <div class="stat-box"><span class="stat-box-num">873%</span><span class="stat-box-label">Impression Growth</span></div>
-              <div class="stat-box"><span class="stat-box-num">5.5k+</span><span class="stat-box-label">Followers Built</span></div>
-              <div class="stat-box"><span class="stat-box-num">106k+</span><span class="stat-box-label">Organic Impressions</span></div>
-              <div class="stat-box"><span class="stat-box-num">$0</span><span class="stat-box-label">Paid Advertising</span></div>
+            <div class="stat-stack stagger" id="whyStats">
+              <div class="stat-box"><span class="stat-box-num" data-target="873" data-suffix="%" id="ws1">0%</span><span class="stat-box-label">Impression Growth</span></div>
+              <div class="stat-box"><span class="stat-box-num" id="ws2">5.5k+</span><span class="stat-box-label">Followers Built</span></div>
+              <div class="stat-box"><span class="stat-box-num" data-target="106" data-suffix="k+" id="ws3">0k+</span><span class="stat-box-label">Organic Impressions</span></div>
+              <div class="stat-box"><span class="stat-box-num" data-target="0" data-prefix="$" data-suffix="" id="ws4">$0</span><span class="stat-box-label">Paid Advertising</span></div>
             </div>
           </div>
           <div>
@@ -1197,7 +1199,7 @@
     drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
 
-    // COUNTING ANIMATION - Why Hire Stats
+    // COUNTING ANIMATION FOR WHY HIRE STATS
     (function(){
       var stack = document.getElementById('whyStats');
       if(!stack) return;
@@ -1206,16 +1208,14 @@
         var target = parseInt(el.getAttribute('data-target'));
         var suffix = el.getAttribute('data-suffix') || '';
         var prefix = el.getAttribute('data-prefix') || '';
-        if(isNaN(target)){ return; }
-        if(target === 0){ el.textContent = prefix + '0' + suffix; return; }
+        if(isNaN(target) || target === 0){ el.textContent = prefix + '0' + suffix; return; }
         var dur = 1800, start = performance.now();
         function tick(now){
           var t = Math.min((now - start)/dur, 1);
           var eased = 1 - Math.pow(1 - t, 3);
-          var val = Math.round(eased * target);
-          el.textContent = prefix + val.toLocaleString() + suffix;
+          el.textContent = prefix + Math.round(eased * target) + suffix;
           if(t < 1) requestAnimationFrame(tick);
-          else el.textContent = prefix + target.toLocaleString() + suffix;
+          else el.textContent = prefix + target + suffix;
         }
         requestAnimationFrame(tick);
       }
@@ -1228,7 +1228,7 @@
           });
           obs.disconnect();
         }
-      },{threshold: 0.4});
+      }, {threshold: 0.4});
       obs.observe(stack);
     })();
 
