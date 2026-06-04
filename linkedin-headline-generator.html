@@ -471,7 +471,7 @@
         <div class="input-group">
           <label class="input-label" for="userRole">What do you do?</label>
           <p class="input-hint">Your service, expertise, or what you actually deliver. Not your title. Example: LinkedIn ghostwriter, revenue operations consultant, SaaS growth advisor, executive coach for founders.</p>
-          <input type="text" id="userRole" class="gen-input" placeholder="LinkedIn ghostwriter for startup founders" maxlength="120">
+          <input type="text" id="userRole" class="gen-input" placeholder="LinkedIn ghostwriter" maxlength="120">
         </div>
 
         <div class="input-group">
@@ -706,6 +706,57 @@
       return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    // Convert role noun to gerund/service form for use in sentences
+    function toServiceForm(role){
+      var r = role.toLowerCase().trim();
+      // Remove common suffixes to get base
+      // ghostwriter -> ghostwriting
+      if(/ghostwriter/i.test(r)) return role.replace(/ghostwriter/gi, 'ghostwriting');
+      // copywriter -> copywriting
+      if(/copywriter/i.test(r)) return role.replace(/copywriter/gi, 'copywriting');
+      // writer -> writing
+      if(/writer/i.test(r)) return role.replace(/writer/gi, 'writing');
+      // coach -> coaching
+      if(/coach/i.test(r)) return role.replace(/coach/gi, 'coaching');
+      // designer -> design
+      if(/designer/i.test(r)) return role.replace(/designer/gi, 'design');
+      // developer -> development
+      if(/developer/i.test(r)) return role.replace(/developer/gi, 'development');
+      // recruiter -> recruiting
+      if(/recruiter/i.test(r)) return role.replace(/recruiter/gi, 'recruiting');
+      // marketer -> marketing
+      if(/marketer/i.test(r)) return role.replace(/marketer/gi, 'marketing');
+      // advisor -> advisory
+      if(/advisor/i.test(r)) return role.replace(/advisor/gi, 'advisory');
+      // consultant -> consulting
+      if(/consultant/i.test(r)) return role.replace(/consultant/gi, 'consulting');
+      // strategist -> strategy
+      if(/strategist/i.test(r)) return role.replace(/strategist/gi, 'strategy');
+      // trainer -> training
+      if(/trainer/i.test(r)) return role.replace(/trainer/gi, 'training');
+      // manager -> management
+      if(/manager/i.test(r)) return role.replace(/manager/gi, 'management');
+      // analyst -> analysis
+      if(/analyst/i.test(r)) return role.replace(/analyst/gi, 'analysis');
+      // builder -> building
+      if(/builder/i.test(r)) return role.replace(/builder/gi, 'building');
+      // speaker -> speaking
+      if(/speaker/i.test(r)) return role.replace(/speaker/gi, 'speaking');
+      // editor -> editing
+      if(/editor/i.test(r)) return role.replace(/editor/gi, 'editing');
+      // manager -> management
+      if(/\bmanager\b/i.test(r)) return role.replace(/\bmanager\b/gi, 'management');
+      // strategist -> strategy
+      if(/\bstrategist\b/i.test(r)) return role.replace(/\bstrategist\b/gi, 'strategy');
+      // specialist -> specialisation
+      if(/\bspecialist\b/i.test(r)) return role.replace(/\bspecialist\b/gi, 'specialisation');
+      // director -> direction  (keep as director - sounds fine)
+      // already ends in -ing, -ment, -tion, -ry, -gy - use as is
+      if(/ing$|ment$|tion$|ry$|gy$|ics$|ce$/.test(r)) return role;
+      // default: return as typed
+      return role;
+    }
+
     function generateHeadlines(role, client, result){
       role   = clean(role);
       client = clean(client);
@@ -721,13 +772,13 @@
       var headlines = [
         {
           formula: 'Result-First Formula',
-          text: res + '. That is what I help ' + c + ' achieve through ' + r.toLowerCase() + '.',
-          why: 'Opens with your proof, then names your client, then names your method. The reader sees the outcome before they see the service. Impossible to ignore.'
+          text: res + '. That is what ' + c + ' get when they work with me.',
+          why: 'Opens with your documented proof and ends with a direct invitation. The reader sees the outcome first. No jargon. No title. Just the result and who gets it.'
         },
         {
           formula: 'Client-Specific Formula',
-          text: 'I help ' + c + ' ' + getVerb(role) + ' without ' + getPain(role) + '. ' + resShort + '.',
-          why: 'Speaks directly to the client in the first word. Names what they get and what they avoid. The proof lands harder because the client already feels seen.'
+          text: 'I help ' + c + ' ' + getVerb(role) + '. No more ' + getPain(role) + '. ' + resShort + '.',
+          why: 'Speaks directly to the client in the first word. Names what they gain and what they leave behind. The proof lands harder because the client already feels seen.'
         },
         {
           formula: 'Authority and Proof Formula',
@@ -751,30 +802,111 @@
 
     function getVerb(role){
       var r = role.toLowerCase();
-      if(/ghostwrit|content|writ/i.test(r)) return 'build authority and generate inbound clients';
-      if(/coach|mentor/i.test(r)) return 'unlock growth and get out of their own way';
-      if(/consult|advis|strateg/i.test(r)) return 'scale revenue and fix what is holding them back';
-      if(/design|brand/i.test(r)) return 'look like the premium brand they actually are';
-      if(/recruit|talent|hire/i.test(r)) return 'build the team that actually drives results';
-      if(/sales|revenue|growth/i.test(r)) return 'close more deals and build a predictable pipeline';
-      if(/tech|develop|engineer/i.test(r)) return 'build faster and ship without the chaos';
-      if(/finance|cfo|account/i.test(r)) return 'get control of their numbers and stop leaving money behind';
-      if(/market|seo|ads|paid/i.test(r)) return 'attract the right clients and stop wasting budget';
-      if(/operat|process|system/i.test(r)) return 'build systems that scale without burning out the team';
+      // Writing and content
+      if(/ghostwrit|content writ/i.test(r)) return 'build authority and generate inbound clients';
+      if(/copywrite|copywriting/i.test(r)) return 'turn words into revenue and browsers into buyers';
+      if(/technical writ|documentation/i.test(r)) return 'turn complex products into clear compelling content';
+      if(/journalist|reporter|editor/i.test(r)) return 'tell stories that move people and build credibility';
+      if(/speechwrit|speech writ/i.test(r)) return 'command rooms and make every word land with power';
+      // Coaching and development
+      if(/life coach|life-coach/i.test(r)) return 'design a life they are proud to wake up to';
+      if(/executive coach|leadership coach/i.test(r)) return 'lead with clarity and stop leaving performance on the table';
+      if(/career coach/i.test(r)) return 'land the role they deserve and negotiate the salary that matches it';
+      if(/business coach/i.test(r)) return 'build a business that works without burning them out';
+      if(/health coach|wellness coach|nutrition/i.test(r)) return 'reclaim their energy and stop surviving their own schedule';
+      if(/fitness|personal train/i.test(r)) return 'build the body and discipline that carries into every boardroom';
+      if(/mindset|mental performance/i.test(r)) return 'remove the ceiling they placed on themselves';
+      if(/coach|mentor/i.test(r)) return 'unlock the next level and get out of their own way';
+      // Consulting and strategy
+      if(/management consult/i.test(r)) return 'fix what is broken and build what scales';
+      if(/strategy consult/i.test(r)) return 'make the decisions that matter with clarity and speed';
+      if(/brand strateg/i.test(r)) return 'build a brand that commands premium pricing without explanation';
+      if(/pr |public relation/i.test(r)) return 'control the narrative and build the reputation that opens doors';
+      if(/consult|advis|strateg/i.test(r)) return 'scale revenue and fix what is actually holding them back';
+      // Design and creative
+      if(/ux|user experience|product design/i.test(r)) return 'build products people love and keep coming back to';
+      if(/web design|website design/i.test(r)) return 'turn their website from a cost into a client-generating machine';
+      if(/graphic design|visual design/i.test(r)) return 'communicate value visually before they read a single word';
+      if(/video|film|cinemat/i.test(r)) return 'capture attention in the first three seconds and hold it';
+      if(/photo/i.test(r)) return 'show up in every room looking like the expert they already are';
+      if(/design|brand|creative/i.test(r)) return 'look like the premium brand they actually are';
+      // Recruiting and HR
+      if(/recruit|talent|hire|headhunt/i.test(r)) return 'build the team that drives results without the six-month hiring nightmare';
+      if(/hr |human resource|people ops/i.test(r)) return 'build a culture where people stay, perform and grow';
+      // Sales and revenue
+      if(/sales train|sales coach/i.test(r)) return 'close deals faster and stop leaving revenue on the table';
+      if(/sales|revenue|growth hac/i.test(r)) return 'build a predictable pipeline and close more of the right deals';
+      if(/business develop|bd |partnerships/i.test(r)) return 'open doors that turn into long-term revenue relationships';
+      // Technology
+      if(/ai |artificial intel|machine learn/i.test(r)) return 'use AI to move faster, work smarter and outpace the competition';
+      if(/cybersecur|infosec|security/i.test(r)) return 'protect what they built without slowing down the business';
+      if(/data scien|data analyt|data engineer/i.test(r)) return 'turn raw data into decisions that actually move the business';
+      if(/software|develop|engineer|program|coder/i.test(r)) return 'build faster, ship cleaner and stop living in tech debt';
+      if(/product manag|product owner/i.test(r)) return 'ship products customers love and stop building the wrong things';
+      if(/devops|cloud|infrastructure/i.test(r)) return 'scale infrastructure without the 3am outages and fire drills';
+      if(/tech|cto|it /i.test(r)) return 'build faster and ship without the chaos';
+      // Finance and legal
+      if(/tax|taxation/i.test(r)) return 'keep more of what they earn and stop overpaying';
+      if(/invest|wealth|asset manag/i.test(r)) return 'build wealth that outlasts the business they are building';
+      if(/cfo|chief financial/i.test(r)) return 'get full financial visibility and stop making decisions in the dark';
+      if(/accountan|bookkeep/i.test(r)) return 'know their numbers and never be surprised by their own finances';
+      if(/financ|bank|insuran/i.test(r)) return 'get control of their numbers and stop leaving money behind';
+      if(/lawyer|attorney|legal|solicitor/i.test(r)) return 'protect what they built and stop being exposed without knowing it';
+      // Marketing
+      if(/email market/i.test(r)) return 'turn their email list into their most profitable sales channel';
+      if(/social media/i.test(r)) return 'build a presence that attracts clients without the endless content grind';
+      if(/influencer|creator/i.test(r)) return 'turn their audience into a business that pays them consistently';
+      if(/seo|search engine/i.test(r)) return 'rank for the searches their clients are already making';
+      if(/paid ads|ppc|media buy/i.test(r)) return 'turn ad spend into predictable, profitable client acquisition';
+      if(/market|growth|demand gen/i.test(r)) return 'attract the right clients and stop wasting budget on the wrong ones';
+      // Operations and leadership
+      if(/coo|chief operat/i.test(r)) return 'build the machine behind the business that runs without the founder';
+      if(/project manag/i.test(r)) return 'deliver on time, on budget and without the last-minute chaos';
+      if(/change manag/i.test(r)) return 'lead transformation without losing the people who make it work';
+      if(/operat|process|system|automat/i.test(r)) return 'build systems that scale without burning out the team';
+      // Healthcare and wellness
+      if(/doctor|physician|medical/i.test(r)) return 'get the clarity and care they deserve without waiting months';
+      if(/therapist|psycholog|counsell/i.test(r)) return 'process what is holding them back and build what comes next';
+      if(/dentist|dental/i.test(r)) return 'smile with confidence and stop avoiding the chair';
+      if(/physio|chiropract|osteopath/i.test(r)) return 'move without pain and get back to performing at their best';
+      if(/health|medic|clinic|care/i.test(r)) return 'take control of their health and stop managing symptoms';
+      // Education and training
+      if(/teach|tutor|educat|instruct/i.test(r)) return 'master the skills that open the next door in their career';
+      if(/speak|present|facilitat/i.test(r)) return 'command every room they walk into and make it look effortless';
+      if(/train|learning|development/i.test(r)) return 'build the capability that compounds across the whole organisation';
+      // Real estate and property
+      if(/real estate|property|realtor|mortgage/i.test(r)) return 'find, fund and close the right property without the stress';
+      // Supply chain and logistics
+      if(/supply chain|logistic|procurement/i.test(r)) return 'cut costs, reduce delays and build a supply chain that actually works';
+      // Non-profit and social impact
+      if(/nonprofit|non-profit|ngo|charity|social impact/i.test(r)) return 'maximise their impact and build the funding base that sustains it';
+      // Default
       return 'get from where they are to where they need to be';
     }
 
     function getPain(role){
       var r = role.toLowerCase();
-      if(/ghostwrit|content|writ/i.test(r)) return 'spending hours staring at a blank screen';
+      if(/ghostwrit|content writ/i.test(r)) return 'spending hours staring at a blank screen';
+      if(/copywrite/i.test(r)) return 'writing that costs time and generates nothing';
       if(/coach|mentor/i.test(r)) return 'staying stuck in the same patterns';
-      if(/consult|advis/i.test(r)) return 'guessing what to fix next';
-      if(/design|brand/i.test(r)) return 'looking like every other brand in their space';
-      if(/recruit|talent/i.test(r)) return 'bad hires and wasted time';
-      if(/sales|revenue/i.test(r)) return 'inconsistent revenue and unpredictable pipelines';
-      if(/tech|develop/i.test(r)) return 'shipping slow and burning out the team';
-      if(/finance|cfo/i.test(r)) return 'flying blind on their numbers';
-      if(/market|seo/i.test(r)) return 'paying for visibility that does not convert';
+      if(/consult|advis|strateg/i.test(r)) return 'guessing what to fix next';
+      if(/ux|product design|web design/i.test(r)) return 'building things users ignore';
+      if(/design|brand|creative/i.test(r)) return 'looking like every other brand in their space';
+      if(/recruit|talent|hire/i.test(r)) return 'bad hires and six-month search cycles';
+      if(/hr |human resource|people/i.test(r)) return 'high turnover and low performance';
+      if(/sales|revenue|growth/i.test(r)) return 'inconsistent revenue and unpredictable pipelines';
+      if(/ai |data|machine learn/i.test(r)) return 'drowning in data but starving for decisions';
+      if(/cybersecur|security/i.test(r)) return 'being one breach away from losing everything they built';
+      if(/software|develop|engineer|tech/i.test(r)) return 'shipping slow and burning out the team';
+      if(/finance|cfo|account|tax/i.test(r)) return 'flying blind on their numbers';
+      if(/legal|lawyer|attorney/i.test(r)) return 'being exposed to risks they did not even know existed';
+      if(/market|seo|ads|social/i.test(r)) return 'paying for visibility that does not convert';
+      if(/email|newsletter/i.test(r)) return 'sending emails nobody opens or acts on';
+      if(/operat|process|system/i.test(r)) return 'working in the business instead of on it';
+      if(/health|fitness|wellness|nutrition/i.test(r)) return 'running on empty and calling it hustle';
+      if(/real estate|property/i.test(r)) return 'overpaying or underselling on the wrong deals';
+      if(/speak|present/i.test(r)) return 'losing rooms they should be owning';
+      if(/teach|tutor|train/i.test(r)) return 'learning slowly when faster is possible';
       return 'spinning their wheels on the wrong priorities';
     }
 
@@ -782,10 +914,19 @@
       var r = role.toLowerCase();
       if(/ghostwrit|content|writ/i.test(r)) return 'LinkedIn';
       if(/coach|mentor/i.test(r)) return 'positioning';
-      if(/consult|advis/i.test(r)) return 'strategy';
-      if(/design|brand/i.test(r)) return 'brand';
-      if(/sales|revenue/i.test(r)) return 'pipeline';
-      if(/market/i.test(r)) return 'marketing';
+      if(/consult|advis|strateg/i.test(r)) return 'strategy';
+      if(/design|brand|creative/i.test(r)) return 'brand';
+      if(/sales|revenue|growth/i.test(r)) return 'pipeline';
+      if(/market|seo|ads/i.test(r)) return 'marketing';
+      if(/finance|cfo|account|tax/i.test(r)) return 'financial strategy';
+      if(/tech|develop|engineer|software/i.test(r)) return 'tech stack';
+      if(/recruit|talent|hr/i.test(r)) return 'hiring process';
+      if(/operat|process|system/i.test(r)) return 'operations';
+      if(/legal|lawyer/i.test(r)) return 'legal structure';
+      if(/health|wellness|fitness/i.test(r)) return 'health strategy';
+      if(/data|ai |machine/i.test(r)) return 'data strategy';
+      if(/real estate|property/i.test(r)) return 'property strategy';
+      if(/speak|present/i.test(r)) return 'stage presence';
       return 'LinkedIn';
     }
 
