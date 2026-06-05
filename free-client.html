@@ -346,6 +346,8 @@
     .free-tool-name{font-size:13.5px;color:var(--ivory-muted);transition:color 0.2s;}
     .free-tool-item:hover .free-tool-name{color:var(--gold);}
     .free-tool-arrow{color:var(--gold);font-size:12px;opacity:0.6;}
+    .tool-title{color:var(--gold);font-weight:500;}
+    .tool-desc{color:var(--ivory-muted);}
     @media(max-width:600px){.free-also-grid{grid-template-columns:1fr;}}
 
     /* FORM */
@@ -586,11 +588,11 @@
           </a>
         </div>
         <div class="free-tools-list">
-          <a href="https://jennavi.co/linkedin-health-check.html" class="free-tool-item"><span class="free-tool-name">LinkedIn Positioning Health Check &mdash; Score your profile in 2 minutes</span><span class="free-tool-arrow">&#8594;</span></a>
-          <a href="https://jennavi.co/linkedin-headline-generator.html" class="free-tool-item"><span class="free-tool-name">LinkedIn Headline Generator &mdash; Write a headline that converts</span><span class="free-tool-arrow">&#8594;</span></a>
-          <a href="https://jennavi.co/linkedin-content-audit.html" class="free-tool-item"><span class="free-tool-name">LinkedIn Content Audit &mdash; Find what is working and what is not</span><span class="free-tool-arrow">&#8594;</span></a>
-          <a href="https://jennavi.co/linkedin-roi-calculator.html" class="free-tool-item"><span class="free-tool-name">LinkedIn ROI Calculator &mdash; See the value of a working LinkedIn</span><span class="free-tool-arrow">&#8594;</span></a>
-          <a href="https://jennavi.co/linkedin-hook-generator.html" class="free-tool-item"><span class="free-tool-name">LinkedIn Hook Generator &mdash; Stop the scroll from the first line</span><span class="free-tool-arrow">&#8594;</span></a>
+          <a href="https://jennavi.co/linkedin-health-check.html" class="free-tool-item"><span class="free-tool-name"><span class="tool-title">LinkedIn Positioning Health Check</span> &#8594; <span class="tool-desc">Score your profile in 2 minutes</span></span><span class="free-tool-arrow">&#8594;</span></a>
+          <a href="https://jennavi.co/linkedin-headline-generator.html" class="free-tool-item"><span class="free-tool-name"><span class="tool-title">LinkedIn Headline Generator</span> &#8594; <span class="tool-desc">Write a headline that converts</span></span><span class="free-tool-arrow">&#8594;</span></a>
+          <a href="https://jennavi.co/linkedin-content-audit.html" class="free-tool-item"><span class="free-tool-name"><span class="tool-title">LinkedIn Content Audit</span> &#8594; <span class="tool-desc">Find what is working and what is not</span></span><span class="free-tool-arrow">&#8594;</span></a>
+          <a href="https://jennavi.co/linkedin-roi-calculator.html" class="free-tool-item"><span class="free-tool-name"><span class="tool-title">LinkedIn ROI Calculator</span> &#8594; <span class="tool-desc">See the value of a working LinkedIn</span></span><span class="free-tool-arrow">&#8594;</span></a>
+          <a href="https://jennavi.co/linkedin-hook-generator.html" class="free-tool-item"><span class="free-tool-name"><span class="tool-title">LinkedIn Hook Generator</span> &#8594; <span class="tool-desc">Stop the scroll from the first line</span></span><span class="free-tool-arrow">&#8594;</span></a>
         </div>
       </div>
     </div>
@@ -855,7 +857,7 @@
     function animateCount(el){
       var target=parseInt(el.getAttribute('data-target'),10);
       var suffix=el.getAttribute('data-suffix')||'';
-      var duration=1400;var start=null;
+      var duration=1600;var start=null;
       function step(ts){
         if(!start) start=ts;
         var progress=Math.min((ts-start)/duration,1);
@@ -867,13 +869,11 @@
       }
       requestAnimationFrame(step);
     }
-    var animated=new Set();
-    var countObserver=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){var el=entry.target;if(!animated.has(el)){animated.add(el);animateCount(el);}}
-      });
-    },{threshold:0.3});
-    document.querySelectorAll('.count-num').forEach(function(el){countObserver.observe(el);});
+    window.addEventListener('load',function(){
+      setTimeout(function(){
+        document.querySelectorAll('.count-num').forEach(function(el){animateCount(el);});
+      },400);
+    });
 
     var form=document.getElementById('freeClientForm'),thanks=document.getElementById('formThanks');
     if(form){
