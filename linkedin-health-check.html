@@ -253,7 +253,7 @@
     .nav{position:fixed;top:0;left:0;right:0;z-index:10000;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,padding 0.4s;border-bottom:1px solid transparent;}
     .nav.scrolled{background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);padding:13px 48px;border-bottom-color:var(--gold-border);}
     .nav-logo img{height:30px;width:auto;display:block;}
-    .nav-links{display:flex;gap:24px;list-style:none;align-items:center;}
+    .nav-links{display:flex;gap:18px;list-style:none;align-items:center;}
     .nav-links a{font-size:10.5px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;opacity:0.6;color:var(--ivory);transition:opacity 0.2s,color 0.2s;cursor:pointer;}
     .nav-links a:hover{opacity:1;color:var(--gold);}
     .nav-links .nav-active{opacity:1!important;color:var(--gold)!important;}
@@ -271,6 +271,7 @@
     .nav-drawer ul li a:hover{opacity:1;color:var(--gold);padding-left:10px;}
     .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9998;opacity:0;transition:opacity 0.3s;pointer-events:none;}
     .nav-overlay.open{opacity:1;pointer-events:auto;}
+    @media(max-width:1060px){.nav-links .nav-tool{display:none;}}
     @media(max-width:900px){.nav{padding:18px 24px;}.nav-links{display:none;}.nav-toggle{display:flex;}.nav-drawer{display:block;}.nav-overlay{display:block;}}
 
     /* HERO */
@@ -1107,216 +1108,297 @@
           });
           this.classList.add('selected');
           this.setAttribute('aria-checked','true');
-          nextBtn.disabled = false;
-          nextBtn.style.opacity = '1';
+          var nxt = document.getElementById('nextBtn');
+          if(nxt) nxt.disabled = false;
         });
       });
 
-      // keyboard
-      questionContainer.querySelectorAll('.option').forEach(function(btn){
-        btn.addEventListener('keydown', function(e){
-          if(e.key === 'Enter' || e.key === ' '){
-            e.preventDefault();
-            this.click();
-          }
+      // prev
+      var prevBtn = document.getElementById('prevBtn');
+      if(prevBtn){
+        prevBtn.addEventListener('click', function(){
+          if(current > 0){ current--; renderQuestion(current); }
         });
-      });
+      }
+
+      // next
+      var nextBtn = document.getElementById('nextBtn');
+      if(nextBtn){
+        nextBtn.addEventListener('click', function(){
+          if(answers[qIdx] === null) return;
+          if(isLast){ showResults(); }
+          else { current++; renderQuestion(current); }
+        });
+      }
     }
 
-    function showResult(){
-      var totalScore = 0;
-      for(var i = 0; i < answers.length; i++){
-        if(answers[i] !== undefined){
-          var q = questions[i];
-          totalScore += q.options[answers[i]].score;
+    /* ── COMPUTE SCORES ───────────────────────────────────────────────────── */
+    function computeScores(){
+      var total = 0;
+      var byCat = [0,0,0,0,0,0];
+      QUESTIONS.forEach(function(q,i){
+        var a = answers[i];
+        if(a !== null){
+          var pts = q.pts[a];
+          total += pts;
+          byCat[q.cat] += pts;
         }
-      }
-
-      var result;
-      if(totalScore <= 20) result = results[0];
-      else if(totalScore <= 40) result = results[1];
-      else if(totalScore <= 60) result = results[2];
-      else if(totalScore <= 80) result = results[3];
-      else result = results[4];
-
-      quizContainer.style.display = 'none';
-      resultContainer.style.display = 'block';
-
-      var dc = '';
-      dc += '<div class="diag-band ' + result.colorClass + '" style="display:none;" aria-hidden="true">' + result.bandText + '</div>';
-      dc += '<h2 class="result-title">' + result.title + '</h2>';
-      dc += '<div class="result-score-display"><span class="result-score-num">' + totalScore + '</span><span class="result-score-label">out of 100</span></div>';
-      dc += '<div class="result-body">' + result.body + '</div>';
-      dc += '<div class="result-cta-wrap">';
-      dc += '<a href="' + result.ctaUrl + '" class="result-cta-btn" target="_blank" rel="noopener noreferrer">' + result.ctaText + '</a>';
-      dc += '<a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="result-cta-secondary">Or see all five Jennavi service tiers &rarr;</a>';
-      dc += '</div>';
-      resultContainer.innerHTML = dc;
-
-      // populate form
-      var lcName = document.getElementById('lcName');
-      var lcEmail = document.getElementById('lcEmail');
-      var lcScore = document.getElementById('lcScore');
-      var lcTitle = document.getElementById('lcTitle');
-      var lcRange = document.getElementById('lcRange');
-      var lcBody = document.getElementById('lcBody');
-      var lcCta = document.getElementById('lcCta');
-
-      if(lcScore) lcScore.value = totalScore;
-      if(lcTitle) lcTitle.value = result.title;
-      if(lcRange) lcRange.value = result.bandText + ' - ' + result.title;
-      if(lcBody) lcBody.value = result.body.replace(/<[^>]+>/g, '');
-      if(lcCta) lcCta.value = result.ctaText + ' - ' + result.ctaUrl;
-
-      // progress to 100%
-      var progFill = document.getElementById('progressFill');
-      var progText = document.getElementById('progressText');
-      if(progFill) progFill.style.width = '100%';
-      if(progText) progText.textContent = questions.length + ' / ' + questions.length;
-
-      // scroll to result
-      resultContainer.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+      return { total: total, byCat: byCat };
     }
 
-    // NEXT button
-    nextBtn.addEventListener('click', function(){
-      if(answers[qIdx] === undefined) return;
-      if(qIdx < questions.length - 1){
-        qIdx++;
-        renderQuestion(qIdx);
-      } else {
-        showResult();
+    /* ── GET RESULT ───────────────────────────────────────────────────────── */
+    function getResult(total){
+      for(var i=0;i<RESULTS.length;i++){
+        if(total >= RESULTS[i].min && total <= RESULTS[i].max) return RESULTS[i];
       }
+      return RESULTS[RESULTS.length-1];
+    }
+
+    /* ── SHOW RESULTS ─────────────────────────────────────────────────────── */
+    function showResults(){
+      var scores = computeScores();
+      var result = getResult(scores.total);
+
+      // hide quiz, show results
+      quizSection.style.display = 'none';
+      resultSection.classList.add('show');
+
+      // score ring
+      document.getElementById('scoreNum').textContent = scores.total;
+      document.getElementById('resultTitle').textContent = result.title;
+      document.getElementById('resultTagline').textContent = result.tagline;
+
+      // animate score
+      var scoreEl = document.getElementById('scoreNum');
+      var target = scores.total;
+      var start = 0;
+      var dur = 1200;
+      var startTime = performance.now();
+      function tick(now){
+        var t = Math.min((now - startTime) / dur, 1);
+        var eased = 1 - Math.pow(1-t, 3);
+        scoreEl.textContent = Math.round(eased * target);
+        if(t < 1) requestAnimationFrame(tick);
+        else scoreEl.textContent = target;
+      }
+      requestAnimationFrame(tick);
+
+      // breakdown bars
+      var bbHTML = '';
+      CATEGORIES.forEach(function(cat, i){
+        var pct = CAT_MAX[i] > 0 ? (scores.byCat[i] / CAT_MAX[i]) * 100 : 0;
+        bbHTML += '<div class="breakdown-row">';
+        bbHTML += '<span class="breakdown-label">' + escHtml(cat) + '</span>';
+        bbHTML += '<div class="breakdown-track"><div class="breakdown-bar" data-pct="' + pct + '"></div></div>';
+        bbHTML += '<span class="breakdown-score">' + scores.byCat[i] + '/' + CAT_MAX[i] + '</span>';
+        bbHTML += '</div>';
+      });
+      document.getElementById('breakdownBars').innerHTML = bbHTML;
+      setTimeout(function(){
+        document.querySelectorAll('.breakdown-bar').forEach(function(bar){
+          bar.style.width = bar.getAttribute('data-pct') + '%';
+        });
+      }, 200);
+
+      // diagnosis card
+      var dc = '<div class="diagnosis-card ' + result.colorClass + '">';
+      dc += '<div class="diag-band ' + result.colorClass + '" style="display:none;" aria-hidden="true">' + result.bandText + '</div>';
+      dc += '<h3 class="diag-heading serif">' + escHtml(result.title) + '</h3>';
+      dc += '<p class="diag-body">' + escHtml(result.body) + '</p>';
+      dc += '<p class="diag-service">Recommended for you</p>';
+      dc += '<p class="diag-service-name serif">' + escHtml(result.serviceName) + '</p>';
+      dc += '<p class="diag-desc">' + escHtml(result.serviceDesc) + '</p>';
+      dc += '<div class="cta-row">';
+      dc += '<a href="' + result.cta1Url + '" target="_blank" rel="noopener noreferrer" class="cta-primary">' + escHtml(result.cta1Text) + ' &#8594;</a>';
+      dc += '<a href="' + result.cta2Url + '" target="_blank" rel="noopener noreferrer" class="cta-secondary">' + escHtml(result.cta2Text) + '</a>';
+      dc += '</div>';
+      dc += '</div>';
+      document.getElementById('diagnosisCard').innerHTML = dc;
+
+      // secondary links
+      var rlHTML = '';
+      result.links.forEach(function(link){
+        rlHTML += '<a href="' + link.url + '" target="_blank" rel="noopener noreferrer" class="result-link-tile">';
+        rlHTML += '<span class="rlt-label">' + escHtml(link.label) + '</span>';
+        rlHTML += '<span class="rlt-title serif">' + escHtml(link.title) + '</span>';
+        rlHTML += '<span class="rlt-desc">' + escHtml(link.desc) + '</span>';
+        rlHTML += '<span class="rlt-arrow">' + escHtml(link.arrow) + ' &#8594;</span>';
+        rlHTML += '</a>';
+      });
+      document.getElementById('resultLinks').innerHTML = rlHTML;
+
+      // scroll to results
+      resultSection.scrollIntoView({behavior:'smooth', block:'start'});
+
+      // Populate hidden fields
+      var lcScore = document.getElementById('lcScore');
+      var lcRange = document.getElementById('lcRange');
+      if(lcScore) lcScore.value = scores.total;
+      if(lcRange) lcRange.value = result.bandText + ' - ' + result.title;
+
+      // GA event
+      if(typeof gtag !== 'undefined'){
+        gtag('event','quiz_complete',{event_category:'LinkedIn Health Check',event_label:result.title,value:scores.total});
+      }
+
+      initFaq();
+    }
+
+    /* ── START QUIZ ───────────────────────────────────────────────────────── */
+    function startQuiz(){
+      if(started) return;
+      started = true;
+      buildProgressCats();
+      renderQuestion(0);
+      quizSection.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    if(heroStartBtn) heroStartBtn.addEventListener('click', startQuiz);
+
+    /* ── RETAKE ───────────────────────────────────────────────────────────── */
+    retakeBtn.addEventListener('click', function(){
+      answers = new Array(20).fill(null);
+      current = 0;
+      started = false;
+      resultSection.classList.remove('show');
+      quizSection.style.display = '';
+      questionContainer.innerHTML = '';
+      buildProgressCats();
+      renderQuestion(0);
+      // Scroll precisely to question 1, accounting for fixed nav
+      setTimeout(function(){
+        var target = document.getElementById('questionContainer');
+        if(!target) target = document.getElementById('quizArea');
+        if(target){
+          var offset = target.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({top: offset, behavior: 'smooth'});
+        }
+      }, 120);
     });
 
-    // PREV button
-    prevBtn.addEventListener('click', function(){
-      if(qIdx > 0){
-        qIdx--;
-        renderQuestion(qIdx);
+    /* ── HERO TESTIMONIAL SLIDER ──────────────────────────────────────────── */
+    (function(){
+      var slides = document.querySelectorAll('.hpq-slide');
+      var dots   = document.querySelectorAll('.hpq-dot');
+      if(!slides.length) return;
+      var cur = 0, timer;
+      function goTo(idx){
+        slides[cur].classList.remove('active'); slides[cur].classList.add('exiting');
+        dots[cur].classList.remove('active'); dots[cur].setAttribute('aria-selected','false');
+        var prev=cur; setTimeout(function(){ slides[prev].classList.remove('exiting'); },700);
+        cur=idx; slides[cur].classList.add('active'); dots[cur].classList.add('active'); dots[cur].setAttribute('aria-selected','true');
       }
-    });
+      timer = setInterval(function(){ goTo((cur+1)%slides.length); },5500);
+      dots.forEach(function(dot,i){
+        dot.addEventListener('click',function(){ clearInterval(timer); goTo(i); timer=setInterval(function(){ goTo((cur+1)%slides.length); },5500); });
+      });
+    })();
 
-    // keyboard nav
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'ArrowRight' && answers[qIdx] !== undefined){
-        nextBtn.click();
+    /* ── EMAILJS CONFIG ───────────────────────────────────────────────────── */
+    var EJS_PUBLIC_KEY  = 'XIy6yIQorZRwYz0xf';
+    var EJS_SERVICE_ID  = 'service_10a5m5e';
+    var EJS_TEMPLATE_ID = 'template_d9nbbv9';
+    // Init EmailJS immediately
+    function initEmailJS(){
+      if(typeof emailjs !== 'undefined'){
+        try{ emailjs.init({publicKey: EJS_PUBLIC_KEY}); }catch(e){ console.warn('EJS init:',e); }
       }
-      if(e.key === 'ArrowLeft' && qIdx > 0){
-        prevBtn.click();
-      }
-    });
+    }
+    initEmailJS();
+    document.addEventListener('DOMContentLoaded', initEmailJS);
+    window.addEventListener('load', initEmailJS);
 
-    renderQuestion(0);
+    /* ── EMAIL HTML BUILDER ───────────────────────────────────────────────── */
+    function buildEmailHtml(name,score,range,rTitle,rBody,ctaText,ctaUrl){
+      var sc=parseInt(score), col=sc<=20?'#C62828':sc<=40?'#E65100':sc<=60?'#A07830':sc<=80?'#C9A84C':'#2E7D32';
+      return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.sb{background:#0a0a0a;border:1px solid rgba(201,168,76,0.3);padding:24px;text-align:center;margin-bottom:22px;}.sl{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,168,76,0.7);display:block;margin-bottom:8px;}.sn{font-size:56px;font-weight:700;color:#C9A84C;line-height:1;display:block;}.sd{font-family:Courier New,monospace;font-size:10px;color:rgba(250,243,224,0.4);display:block;margin-top:4px;letter-spacing:0.1em;}.sr{display:none;}.rt{font-size:18px;font-weight:700;color:#FAF3E0;margin-bottom:10px;}.dg{font-size:13px;color:rgba(250,243,224,0.65);line-height:1.85;margin-bottom:24px;padding:18px 20px;background:#0a0a0a;border-left:3px solid #C9A84C;}.ct{text-align:center;padding:24px 0;}.cb{display:inline-block;padding:14px 34px;background:#C9A84C;color:#0a0a0a;font-family:Courier New,monospace;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;}.sl2{display:block;text-align:center;margin-top:10px;font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;}.sl2 a{color:#C9A84C;text-decoration:none;}.nt{font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;font-style:italic;margin-bottom:16px;border-top:1px solid rgba(201,168,76,0.15);padding-top:20px;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span><span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi '+(name||'there')+',<br><br>You just completed the Jennavi LinkedIn Health Check. Here is your full personalised result.</p><div class="sb"><span class="sl">YOUR LINKEDIN HEALTH SCORE</span><span class="sn">'+score+'</span><span class="sd">out of 100 points</span><div><span class="sr">'+range+'</span></div></div><p class="rt">'+rTitle+'</p><div class="dg">'+rBody+'</div><div class="ct"><a href="'+ctaUrl+'" class="cb">'+ctaText+'</a><div class="sl2"><a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Or see all five Jennavi service tiers</a></div></div><p class="nt">I review every submission personally. If your score surprised you, reply to this email or WhatsApp me at +234 902 468 0769. I will tell you exactly what your number means for your business.</p><span class="sn2">Jennifer Omaliko</span><span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a> &middot; <a href="https://calendly.com/jennavi/30min">Book a strategy call</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+    }
 
-  })(); // end quiz IIFE
+    function sendEmail(name,email,score,range,rTitle,rBody,ctaText,ctaUrl){
+      if(!email){ console.warn('EJS: no email'); return; }
+      if(typeof emailjs==='undefined'){ console.warn('EJS: SDK not loaded'); return; }
+      try{ emailjs.init({publicKey: EJS_PUBLIC_KEY}); }catch(e){}
+      var params = {
+        to_name:      name || 'Founder',
+        to_email:     email,
+        quiz_score:   String(score) + ' out of 100',
+        score_range:  range,
+        result_title: rTitle,
+        result_body:  rBody,
+        cta_text:     ctaText,
+        cta_url:      ctaUrl,
+        html_content: buildEmailHtml(name,score,range,rTitle,rBody,ctaText,ctaUrl),
+        from_name:    'Jennifer Omaliko, Jennavi',
+        reply_to:     'jennifer@jennavi.co'
+      };
+      console.log('EJS: sending to', email);
+      emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, params, EJS_PUBLIC_KEY)
+        .then(function(r){ console.log('EJS sent:', r.status, r.text); })
+        .catch(function(e){ console.error('EJS error:', JSON.stringify(e)); });
+    }
 
-  // FORM SUBMISSION
-  (function(){
-    var form = document.getElementById('lcShareForm');
-    var nameInput = document.getElementById('lcName');
-    var emailInput = document.getElementById('lcEmail');
-    var shareBtn = document.getElementById('lcShareBtn');
-    var shareSection = document.getElementById('shareSection');
-    var shareThanks = document.getElementById('shareThanks');
+    /* LEAD FORM */
+    var leadForm = document.getElementById('leadForm');
+    var lcThanks = document.getElementById('lcThanks');
+    var lcSkip   = document.getElementById('lcSkip');
+    if(leadForm){
+      leadForm.addEventListener('submit',function(e){
+        e.preventDefault();
+        var nameVal  = (document.getElementById('lc-name')||{}).value||'';
+        var emailVal = (document.getElementById('lc-email')||{}).value||'';
+        var scoreVal = (document.getElementById('lcScore')||{}).value||'';
+        var rangeVal = (document.getElementById('lcRange')||{}).value||'';
+        var rTitle   = (document.getElementById('resultTitle')||{}).textContent||'';
+        var rBody    = (document.getElementById('resultTagline')||{}).textContent||'';
+        var data = new FormData(leadForm);
+        fetch('https://formspree.io/f/mqejgwab',{method:'POST',body:data,headers:{'Accept':'application/json'}})
+          .then(function(r){
+            if(r.ok){
+              leadForm.style.display='none';
+              if(lcSkip) lcSkip.style.display='none';
+              if(lcThanks) lcThanks.style.display='block';
+              var waMsg='Hi Jennifer, I just completed the Jennavi LinkedIn Health Check. My name is '+(nameVal||'a founder')+'. My score is '+(scoreVal||'?')+' out of 100. Result: '+(rangeVal||'?')+'. I would love to discuss this with you.';
+              var waBtn=document.getElementById('lcWaBtn');
+              if(waBtn) waBtn.href='https://wa.me/2349024680769?text='+encodeURIComponent(waMsg);
+              sendEmail(nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,'Book Your Free Discovery Call','https://calendly.com/jennavi/30min');
+              if(typeof gtag!=='undefined') gtag('event','lead_captured',{event_category:'LinkedIn Health Check',value:parseInt(scoreVal)||0});
+            } else { alert('Something went wrong. Please email jennifer@jennavi.co directly.'); }
+          }).catch(function(){ alert('Something went wrong. Please email jennifer@jennavi.co directly.'); });
+      });
+    }
+    if(lcSkip){ lcSkip.addEventListener('click',function(){ var lc=document.getElementById('leadCapture'); if(lc) lc.style.display='none'; }); }
 
-    if(!form || !shareBtn) return;
-
-    shareBtn.addEventListener('click', function(){
-      var name = (nameInput && nameInput.value.trim()) || '';
-      var email = (emailInput && emailInput.value.trim()) || '';
-      if(!email || email.indexOf('@') < 0){
-        emailInput.focus();
-        emailInput.style.borderColor = 'var(--red)';
-        setTimeout(function(){ emailInput.style.borderColor = ''; }, 2000);
+    /* SHARE BUTTONS */
+    var SHARE_URL='https://jennavi.co/linkedin-health-check.html';
+    document.addEventListener('click',function(e){
+      var id=e.target.id||(e.target.parentElement?e.target.parentElement.id:'');
+      if(id==='shareLinkedIn'){
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(SHARE_URL),'_blank');
+        if(typeof gtag!=='undefined') gtag('event','share_linkedin',{event_category:'LinkedIn Health Check'});
         return;
       }
-
-      var score = (document.getElementById('lcScore')||{}).value || '';
-      var title = (document.getElementById('lcTitle')||{}).value || '';
-      var range = (document.getElementById('lcRange')||{}).value || '';
-      var body = (document.getElementById('lcBody')||{}).value || '';
-      var cta = (document.getElementById('lcCta')||{}).value || '';
-
-      var col = '#C9A84C';
-      var scoreNum = parseInt(score);
-      if(scoreNum <= 20) col = '#c62828';
-      else if(scoreNum <= 40) col = '#e65100';
-      else if(scoreNum <= 60) col = '#C9A84C';
-      else if(scoreNum <= 80) col = '#C9A84C';
-      else col = '#2e7d32';
-
-      var rTitle = title;
-      var rBody = body;
-      var ctaParts = cta.split(' - ');
-      var ctaText = ctaParts[0] || 'Book a Free Strategy Call';
-      var ctaUrl = ctaParts[1] || 'https://calendly.com/jennavi/30min';
-
-      var rangeVal = (document.getElementById('lcRange')||{}).value||'';
-
-      var emailHtml = buildEmailHtml(name, score, rangeVal, rTitle, rBody, ctaText, ctaUrl, col);
-
-      var formData = new FormData();
-      formData.append('full_name', name);
-      formData.append('email', email);
-      formData.append('score', score);
-      formData.append('score_range', range);
-      formData.append('result_title', title);
-      formData.append('result_body', body);
-      formData.append('result_cta', cta);
-      formData.append('email_html', emailHtml);
-      formData.append('form_source', 'linkedin-health-check');
-      formData.append('_replyto', email);
-
-      shareBtn.textContent = 'Sending...';
-      shareBtn.disabled = true;
-
-      fetch('https://formspree.io/f/mqejgwab', {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      }).then(function(r){
-        if(r.ok){
-          if(shareSection) shareSection.style.display = 'none';
-          if(shareThanks) shareThanks.style.display = 'block';
-        } else {
-          shareBtn.textContent = 'Share My Result with Jennifer';
-          shareBtn.disabled = false;
-          alert('Something went wrong. Please email jennifer@jennavi.co directly.');
-        }
-      }).catch(function(){
-        shareBtn.textContent = 'Share My Result with Jennifer';
-        shareBtn.disabled = false;
-        alert('Something went wrong. Please email jennifer@jennavi.co directly.');
-      });
+      if(id==='shareWhatsApp'){
+        window.open('https://wa.me/?text='+encodeURIComponent('I just took this free LinkedIn Health Check and it told me exactly what is broken. Takes 4 minutes. Try it: '+SHARE_URL),'_blank');
+        if(typeof gtag!=='undefined') gtag('event','share_whatsapp',{event_category:'LinkedIn Health Check'});
+        return;
+      }
+      if(id==='copyLink'){
+        var btn=document.getElementById('copyLink');
+        var fallback=function(){ var ta=document.createElement('textarea'); ta.value=SHARE_URL; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); if(btn){ btn.textContent='Copied'; } setTimeout(function(){ if(btn) btn.textContent='Copy Link'; },2200); };
+        if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(SHARE_URL).then(function(){ if(btn){ btn.textContent='Copied'; btn.style.color='#2E7D32'; } setTimeout(function(){ if(btn){ btn.textContent='Copy Link'; btn.style.color=''; } },2200); }).catch(fallback); } else { fallback(); }
+        if(typeof gtag!=='undefined') gtag('event','copy_link',{event_category:'LinkedIn Health Check'});
+        return;
+      }
     });
+
+    /* UTIL */
+    function escHtml(str){
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
   })();
+  </script>
 
-  function buildEmailHtml(name, score, range, rTitle, rBody, ctaText, ctaUrl, col){
-    return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.sb{background:#0a0a0a;border:1px solid rgba(201,168,76,0.3);padding:24px;text-align:center;margin-bottom:22px;}.sl{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,168,76,0.7);display:block;margin-bottom:8px;}.sn{font-size:56px;font-weight:700;color:#C9A84C;line-height:1;display:block;}.sd{font-family:Courier New,monospace;font-size:10px;color:rgba(250,243,224,0.4);display:block;margin-top:4px;letter-spacing:0.1em;}.sr{display:none;}.rt{font-size:18px;font-weight:700;color:#FAF3E0;margin-bottom:10px;}.dg{font-size:13px;color:rgba(250,243,224,0.65);line-height:1.85;margin-bottom:24px;padding:18px 20px;background:#0a0a0a;border-left:3px solid #C9A84C;}.ct{text-align:center;padding:24px 0;}.cb{display:inline-block;padding:14px 34px;background:#C9A84C;color:#0a0a0a;font-family:Courier New,monospace;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;}.sl2{display:block;text-align:center;margin-top:10px;font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;}.sl2 a{color:#C9A84C;text-decoration:none;}.nt{font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;font-style:italic;margin-bottom:16px;border-top:1px solid rgba(201,168,76,0.15);padding-top:20px;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span><span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi '+(name||'there')+',<br><br>You just completed the Jennavi LinkedIn Health Check. Here is your full personalised result.</p><div class="sb"><span class="sl">YOUR LINKEDIN HEALTH SCORE</span><span class="sn">'+score+'</span><span class="sd">out of 100 points</span><div><span class="sr">'+range+'</span></div></div><p class="rt">'+rTitle+'</p><div class="dg">'+rBody+'</div><div class="ct"><a href="'+ctaUrl+'" class="cb">'+ctaText+'</a><div class="sl2"><a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Or see all five Jennavi service tiers</a></div></div><p class="nt">I review every submission personally. If your score surprised you, reply to this email or WhatsApp me at +234 902 468 0769. I will tell you exactly what your number means for your business.</p><span class="sn2">Jennifer Omaliko</span><span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a> &middot; <a href="https://calendly.com/jennavi/30min">Book a strategy call</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
-  }
-
-  // NAV
-  var toggle = document.getElementById('navToggle');
-  var drawer = document.getElementById('navDrawer');
-  var overlay = document.getElementById('navOverlay');
-  function openMenu(){ toggle.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('open'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
-  function closeMenu(){ toggle.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
-  toggle.addEventListener('click', function(){ toggle.classList.contains('open') ? closeMenu() : openMenu(); });
-  overlay.addEventListener('click', closeMenu);
-  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
-
-  // FAQ
-  document.querySelectorAll('.faq-q').forEach(function(q){
-    q.addEventListener('click', function(){
-      var item = this.parentElement;
-      var isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); var qEl = i.querySelector('.faq-q'); if(qEl) qEl.setAttribute('aria-expanded','false'); });
-      if(!isOpen){ item.classList.add('open'); this.setAttribute('aria-expanded','true'); }
-    });
-  });
-
-</script>
 </body>
 </html>
