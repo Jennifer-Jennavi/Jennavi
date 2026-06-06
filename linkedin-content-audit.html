@@ -1336,17 +1336,17 @@ function pickVariant(arr, key) {
  function scoreLength(text){
    var len = text.replace(/\s+/g,' ').trim().length;
    if(len < 150){
-     return {modifier:-15, note:'Your post is too short ('+len+' characters). LinkedIn posts under 150 characters rarely have enough substance to build trust or drive action.'};
+     return {modifier:-15, note:'Your post is too short ('+len+' characters). LinkedIn posts under 150 characters rarely have enough substance to build trust or drive action. Score deducted: -15.'};
    } else if(len <= 800){
      return {modifier:0, note:null};
    } else if(len <= 1300){
      return {modifier:0, note:null};
    } else if(len <= 2200){
-     return {modifier:-5, note:'Your post is quite long ('+len+' characters). LinkedIn readers scroll fast. Consider tightening it to under 1300 characters for better retention.'};
+     return {modifier:-5, note:'Your post is quite long ('+len+' characters). LinkedIn readers scroll fast. Consider tightening it to under 1300 characters for better retention. Score deducted: -5.'};
    } else if(len <= 3000){
-     return {modifier:-12, note:'Your post is very long ('+len+' characters). LinkedIn standard posts perform best under 1300 characters. Beyond 3000 characters is newsletter territory.'};
+     return {modifier:-12, note:'Your post is very long ('+len+' characters). LinkedIn standard posts perform best under 1300 characters. Beyond 3000 characters is newsletter territory. Score deducted: -12.'};
    } else {
-     return {modifier:-20, note:'Your post exceeds 3000 characters ('+len+'). At this length it reads as an article, not a post. LinkedIn shows a See More cutoff that most readers never click past.'};
+     return {modifier:-20, note:'Your post exceeds 3000 characters ('+len+'). At this length it reads as an article, not a post. LinkedIn shows a See More cutoff that most readers never click past. Score deducted: -20.'};
    }
  }
 
@@ -1365,9 +1365,9 @@ function scoreFormatting(text){
   var paraBreaks = lines.filter(function(l){ return l.trim().length === 0; }).length;
 
   if(paraBreaks === 0 && wordCount > 60){
-    return {modifier:-10, note:'Your post has no paragraph breaks. LinkedIn readers scan before they read. Break your post into short paragraphs of 1 to 3 lines with white space between them. Wall-of-text posts lose readers before they reach your CTA.'};
+    return {modifier:-10, note:'Your post has no paragraph breaks. LinkedIn readers scan before they read. Break your post into short paragraphs of 1 to 3 lines with white space between them. Wall-of-text posts lose readers before they reach your CTA. Score deducted: -10.'};
   } else if(paraBreaks < 2 && wordCount > 100){
-    return {modifier:-4, note:'Your post could use more white space. LinkedIn readers scan fast. More line breaks between your main points would improve readability.'};
+    return {modifier:-4, note:'Your post could use more white space. LinkedIn readers scan fast. More line breaks between your main points would improve readability. Score deducted: -4.'};
   }
   return {modifier:0, note:null};
 }
@@ -1520,6 +1520,20 @@ function getGrade(score){
       '<div class="post-fix">',
         '<span class="post-fix-label">&#9632; Priority Fix</span>',
         '<p class="post-fix-text">'+getPriorityFix(s)+'</p>',
+        (function(){
+          var deductions = [];
+          if(s.length && s.length.modifier < 0) deductions.push('Length: '+s.length.modifier+' points. '+s.length.note);
+          if(s.formatting && s.formatting.modifier < 0) deductions.push('Formatting: '+s.formatting.modifier+' points. '+s.formatting.note);
+          if(deductions.length === 0) return '';
+          var raw = s.hook.score + s.pain.score + s.proof.score + s.cta.score;
+          var html = '<div style="font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.1em;color:#E65100;margin-top:14px;padding:10px 14px;border:1px solid rgba(230,81,0,0.3);background:rgba(230,81,0,0.06);line-height:2;">';
+          html += '&#9650; Score breakdown<br>';
+          html += 'Dimension total: '+raw+'/100<br>';
+          deductions.forEach(function(d){ html += d+'<br>'; });
+          html += '<strong style="color:#C62828;">Final score: '+s.total+'/100</strong>';
+          html += '</div>';
+          return html;
+        })(),
       '</div>'
     ].join('');
     grid.appendChild(card);
@@ -1821,23 +1835,23 @@ function getGrade(score){
         var lengthModifier = 0, lengthNote = '';
         if(len < 150){
           lengthModifier = -15;
-          lengthNote = 'Too short (' + len + ' characters). LinkedIn About sections under 150 characters do not give visitors enough to make a decision. Aim for at least 300 characters. Score adjusted: -15.';
+          lengthNote = 'Too short (' + len + ' characters). LinkedIn About sections under 150 characters do not give visitors enough to make a decision. Aim for at least 300 characters. Score deducted: -15.';
         } else if(len > 2400){
           lengthModifier = -10;
-          lengthNote = 'Very long (' + len + '/2600 characters). You are at the LinkedIn limit. Visitors rarely read this far. Front-load your strongest content in the first 300 characters. Score adjusted: -10.';
+          lengthNote = 'Very long (' + len + '/2600 characters). You are at the LinkedIn limit. Visitors rarely read this far. Front-load your strongest content in the first 300 characters. Score deducted: -10.';
         } else if(len > 2000){
           lengthModifier = -5;
-          lengthNote = 'Long (' + len + ' characters). Consider tightening. Make sure your most important content appears in the first 300 visible characters. Score adjusted: -5.';
+          lengthNote = 'Long (' + len + ' characters). Consider tightening. Make sure your most important content appears in the first 300 visible characters. Score deducted: -5.';
         }
 
         /* ── FORMATTING MODIFIER ── */
         var formatModifier = 0, formatNote = '';
         if(len > 1500 && paraBreaks === 0){
           formatModifier = -8;
-          formatNote = 'No paragraph breaks detected (' + len + ' characters, no spacing). At this length your About section is a wall of text. Add paragraph breaks between your key sections: client statement, outcome, proof, CTA. Score adjusted: -8.';
+          formatNote = 'No paragraph breaks detected (' + len + ' characters, no spacing). At this length your About section is a wall of text. Add paragraph breaks between your key sections: client statement, outcome, proof, CTA. Score deducted: -8.';
         } else if(len > 800 && paraBreaks < 2){
           formatModifier = -3;
-          formatNote = 'Limited spacing. Your About section could use more paragraph breaks to improve readability. Score adjusted: -3.';
+          formatNote = 'Limited spacing. Your About section could use more paragraph breaks to improve readability. Score deducted: -3.';
         }
 
         /* ── 1. CLIENT CLARITY 0-25 ── */
