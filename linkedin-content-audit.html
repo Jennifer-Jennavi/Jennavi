@@ -1148,7 +1148,24 @@ function pickVariant(arr, key) {
  return {score:3, feedback:'No call to action. Your post ends without directing the reader anywhere. Every post needs one specific next step, even an educational post.'};
  }
 
- function getGrade(score){
+ function scoreLength(text){
+   var len = text.replace(/\s+/g,' ').trim().length;
+   if(len < 150){
+     return {modifier:-15, note:'Your post is too short ('+len+' characters). LinkedIn posts under 150 characters rarely have enough substance to build trust or drive action.'};
+   } else if(len <= 800){
+     return {modifier:0, note:null};
+   } else if(len <= 1300){
+     return {modifier:0, note:null};
+   } else if(len <= 2200){
+     return {modifier:-5, note:'Your post is quite long ('+len+' characters). LinkedIn readers scroll fast. Consider tightening it to under 1300 characters for better retention.'};
+   } else if(len <= 3000){
+     return {modifier:-12, note:'Your post is very long ('+len+' characters). LinkedIn standard posts perform best under 1300 characters. Beyond 3000 characters is newsletter territory.'};
+   } else {
+     return {modifier:-20, note:'Your post exceeds 3000 characters ('+len+'). At this length it reads as an article, not a post. LinkedIn shows a See More cutoff that most readers never click past.'};
+   }
+ }
+
+function getGrade(score){
  if(score >= 81) return {label:'High Converting',cls:'strong'};
  if(score >= 61) return {label:'Good But Incomplete',cls:'good'};
  if(score >= 41) return {label:'Average',cls:'avg'};
@@ -1233,11 +1250,14 @@ function pickVariant(arr, key) {
 
   // Score all posts
   var postScores = posts.map(function(post){
-    var hook  = scoreHook(post);
-    var pain  = scorePain(post);
-    var proof = scoreProof(post);
-    var cta   = scoreCTA(post);
-    return {post:post, total:hook.score+pain.score+proof.score+cta.score, hook:hook, pain:pain, proof:proof, cta:cta};
+    var hook   = scoreHook(post);
+    var pain   = scorePain(post);
+    var proof  = scoreProof(post);
+    var cta    = scoreCTA(post);
+    var length = scoreLength(post);
+    var raw    = hook.score + pain.score + proof.score + cta.score;
+    var total  = Math.max(0, Math.min(100, raw + length.modifier));
+    return {post:post, total:total, raw:raw, hook:hook, pain:pain, proof:proof, cta:cta, length:length};
   });
 
   var overallAvg = Math.round(postScores.reduce(function(sum,s){ return sum+s.total; },0) / postScores.length);
@@ -1251,6 +1271,22 @@ function pickVariant(arr, key) {
   document.getElementById('overallBadge').textContent   = grade.label;
   document.getElementById('overallBadge').className     = 'overall-grade-badge badge-' + grade.cls;
   document.getElementById('overallVerdict').textContent = verdict;
+
+  // Length note — show if any post has a length warning
+  var lengthNotes = postScores.filter(function(s){ return s.length && s.length.note; });
+  var lengthNoteEl = document.getElementById('lengthNote');
+  if(!lengthNoteEl){
+    lengthNoteEl = document.createElement('p');
+    lengthNoteEl.id = 'lengthNote';
+    lengthNoteEl.style.cssText = "font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#E65100;line-height:1.7;margin-top:14px;padding:10px 14px;border:1px solid rgba(230,81,0,0.3);background:rgba(230,81,0,0.06);";
+    document.getElementById('overallGradeBlock').appendChild(lengthNoteEl);
+  }
+  if(lengthNotes.length > 0){
+    lengthNoteEl.textContent = lengthNotes[0].length.note;
+    lengthNoteEl.style.display = 'block';
+  } else {
+    lengthNoteEl.style.display = 'none';
+  }
   document.getElementById('gateScore').value            = overallAvg;
 
   // Build post result cards
@@ -1330,14 +1366,16 @@ function pickVariant(arr, key) {
  }
 
  function getPriorityFix(s){
-   var ordered = [
+   /* Sort by score ascending — show ALL dimensions below 15, capped at 3 */
+   var all = [
      {score:s.cta.score,   label:'Conversion Intent', feedback:s.cta.feedback},
      {score:s.hook.score,  label:'Hook Quality',       feedback:s.hook.feedback},
      {score:s.pain.score,  label:'Pain Specificity',   feedback:s.pain.feedback},
      {score:s.proof.score, label:'Proof Presence',     feedback:s.proof.feedback}
    ];
-   var fixes = ordered.filter(function(d){ return d.score < 15; }).slice(0, 2);
-   if(fixes.length === 0) fixes = [ordered.sort(function(a,b){ return a.score-b.score; })[0]];
+   all.sort(function(a,b){ return a.score - b.score; });
+   var fixes = all.filter(function(d){ return d.score < 15; }).slice(0, 3);
+   if(fixes.length === 0) fixes = [all[0]];
    return fixes.map(function(f){ return '<strong>'+f.label+':</strong> '+f.feedback; }).join('<br><br>');
  }
 
