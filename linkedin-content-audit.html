@@ -1440,6 +1440,22 @@ function getGrade(score){
   document.getElementById('overallBadge').className     = 'overall-grade-badge badge-' + grade.cls;
   document.getElementById('overallVerdict').textContent = verdict;
 
+  // Score deduction transparency , show all modifiers applied
+  var deductionContainer = document.getElementById('scoreDeductions');
+  if(!deductionContainer){
+    deductionContainer = document.createElement('div');
+    deductionContainer.id = 'scoreDeductions';
+    document.getElementById('overallGradeBlock').appendChild(deductionContainer);
+  }
+  var deductionNotes = [];
+  postScores.forEach(function(s, idx){
+    if(s.length && s.length.modifier < 0) deductionNotes.push('Post '+(idx+1)+' length: '+s.length.note);
+    if(s.formatting && s.formatting.modifier < 0) deductionNotes.push('Post '+(idx+1)+' formatting: '+s.formatting.note);
+  });
+  if(deductionNotes.length > 0){
+    deductionContainer.innerHTML = deductionNotes.map(function(n){ return '<p style="font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.1em;color:#E65100;margin-top:8px;padding:8px 12px;border:1px solid rgba(230,81,0,0.3);background:rgba(230,81,0,0.06);">&#9650; '+n+'</p>'; }).join('');
+  } else { deductionContainer.innerHTML = ''; }
+
   // Length note   show if any post has a length warning
   var lengthNotes = postScores.filter(function(s){ return s.length && s.length.note; });
   var lengthNoteEl = document.getElementById('lengthNote');
@@ -1690,9 +1706,9 @@ function getGrade(score){
         /* Q7: Does it open with the client world, not yours? */
         var clientScore = 0, clientFeedback = '';
         var opensWithI = /^(i am|i'm|i have|i was|i started|i founded|welcome|my name|hi,|hello,)/i.test(text.trim());
-        var firstLineClientFocus = /(you|your|if you|founders?|ceos?|executives?|startups?|saas|fintech|b2b|agency owners?|consultants?|coaches?)/i.test(first300);
-        var hasSpecificClient = [/(saas|fintech|b2b|b2c|healthtech|hr tech|legal tech|startup founder|series [abc]|solopreneur|agency owner)/i, /for (founders|ceos|executives|startups|agencies)/i, /my (clients|founders|customers)/i].some(function(p){ return p.test(text); });
-        var hasGenericHelp = /i help (people|businesses|companies|organizations|everyone)/i.test(text);
+        var firstLineClientFocus = /(you|your|if you|founders?|ceos?|executives?|startups?|saas|fintech|b2b|agency owners?|consultants?|coaches?)/i.test(first300);
+        var hasSpecificClient = [/(saas|fintech|b2b|b2c|healthtech|hr tech|legal tech|startup founder|series [abc]|solopreneur|agency owner)/i, /for (founders|ceos|executives|startups|agencies)/i, /my (clients|founders|customers)/i].some(function(p){ return p.test(text); });
+        var hasGenericHelp = /i help (people|businesses|companies|organizations|everyone)/i.test(text);
 
         if(firstLineClientFocus && hasSpecificClient && !hasGenericHelp){ clientScore=25; clientFeedback='Strong. Your About section opens with the client world and names a specific type of person. This is exactly what the first 300 visible characters should do.'; }
         else if(opensWithI && hasSpecificClient){ clientScore=10; clientFeedback='You name a specific client but open with "I". The first 300 characters visitors see are about you, not them. Move the client to the very first sentence.'; }
@@ -1705,8 +1721,8 @@ function getGrade(score){
         /* Q8: At least 2 specific verifiable proof points with real numbers */
         var outcomeScore = 0, outcomeFeedback = '';
         var numberMatches = text.match(/\d+[%x]?|\$[\d,]+/g) || [];
-        var hasResult = /(grew|growth|increased|generated|delivered|achieved|from \d+ to|by \d+%|\d+x|inbound|conversion|clients won|deals closed|revenue|followers|impressions)/i.test(text);
-        var hasVague = /(help|support|assist|guide|enable|empower|transform)/i.test(text);
+        var hasResult = /(grew|growth|increased|generated|delivered|achieved|from \d+ to|by \d+%|\d+x|inbound|conversion|clients won|deals closed|revenue|followers|impressions)/i.test(text);
+        var hasVague = /(help|support|assist|guide|enable|empower|transform)/i.test(text);
         var twoProofPoints = numberMatches.length >= 2 && hasResult;
 
         if(twoProofPoints){ outcomeScore=25; outcomeFeedback='Excellent. You have at least two specific numbers tied to results, which is exactly what Q8 of the LinkedIn Health Check asks for. This is the strongest outcome signal.'; }
@@ -1718,9 +1734,9 @@ function getGrade(score){
         /* 3. Proof Presence 0-25, guided by Q8 and Q9 (deliberate structure) */
         var proofScore = 0, proofFeedback = '';
         var hasStrongProof = /(\$[\d,]+|\d+%|\d+x|\d+ (clients|founders|companies|deals|followers|impressions|figures|months))/i.test(text);
-        var hasMediumProof = /(clients|documented|proven|track record|worked with|partnered|generated)/i.test(text);
-        var hasNameDrop = /(featured|published|speaker|award|recognised|top \d+|forbes|linkedin top)/i.test(text);
-        var hasStructure = /(if you|you are|most founders|the problem|the result|the method|here is how|book a|calendly|dm me)/i.test(text);
+        var hasMediumProof = /(clients|documented|proven|track record|worked with|partnered|generated)/i.test(text);
+        var hasNameDrop = /(featured|published|speaker|award|recognised|top \d+|forbes|linkedin top)/i.test(text);
+        var hasStructure = /(if you|you are|most founders|the problem|the result|the method|here is how|book a|calendly|dm me)/i.test(text);
 
         if(hasStrongProof && hasStructure){ proofScore=25; proofFeedback='Strong proof with deliberate structure. Your About section has specific numbers and follows a logical path toward action. This is Q9 of the Health Check achieved.'; }
         else if(hasStrongProof){ proofScore=18; proofFeedback='Strong proof present. Adding deliberate structure (pain, consequence, proof, CTA) around your numbers would make this convert significantly better.'; }
@@ -1732,8 +1748,8 @@ function getGrade(score){
         /* Q10: Final line names one specific action with booking link or direct CTA */
         var ctaScore = 0, ctaFeedback = '';
         var hasBookingLink = /calendly|book a (free |call|slot|consultation)|schedule a/i.test(text);
-        var hasDirectCTA = /(dm me|message me|reach out|apply|send me a|email me at|whatsapp)/i.test(text);
-        var hasMediumCTA = /(connect|feel free|contact me|get in touch|follow me)/i.test(text);
+        var hasDirectCTA = /(dm me|message me|reach out|apply|send me a|email me at|whatsapp)/i.test(text);
+        var hasMediumCTA = /(connect|feel free|contact me|get in touch|follow me)/i.test(text);
         var lastLines = text.replace(/\r/g,'').split('\n').filter(function(l){ return l.trim().length > 0; }).slice(-2).join(' ').toLowerCase();      var ctaInLastLines = (hasBookingLink || hasDirectCTA) && (lastLines.indexOf('book') > -1 || lastLines.indexOf('dm') > -1 || lastLines.indexOf('calendly') > -1 || lastLines.indexOf('message') > -1 || lastLines.indexOf('email') > -1);
 
         if(hasBookingLink && ctaInLastLines){ ctaScore=25; ctaFeedback='Perfect. You have a specific booking link in the closing lines, which is exactly what Q10 of the LinkedIn Health Check requires.'; }
@@ -1768,57 +1784,159 @@ function getGrade(score){
           proof:{score:proofScore,feedback:proofFeedback},
           cta:{score:ctaScore,feedback:ctaFeedback},
           priorityFix:priorityFix, lengthNote:lengthNote};
-      }      function scoreAbout(text){
+      }            function scoreAbout(text){
         var lower = text.toLowerCase();
+        var len   = text.trim().length;
+        var first300 = text.trim().substring(0,300).toLowerCase();
+        var lines = text.replace(/\r/g,'').split('\n');
+        var nonEmpty = lines.filter(function(l){ return l.trim().length > 0; });
+        var paraBreaks = lines.filter(function(l){ return l.trim().length === 0; }).length;
 
-        /* Client Clarity 0-25 */
+        /* ── LENGTH MODIFIER ── */
+        var lengthModifier = 0, lengthNote = '';
+        if(len < 150){
+          lengthModifier = -15;
+          lengthNote = 'Too short (' + len + ' characters). LinkedIn About sections under 150 characters do not give visitors enough to make a decision. Aim for at least 300 characters. Score adjusted: -15.';
+        } else if(len > 2400){
+          lengthModifier = -10;
+          lengthNote = 'Very long (' + len + '/2600 characters). You are at the LinkedIn limit. Visitors rarely read this far. Front-load your strongest content in the first 300 characters. Score adjusted: -10.';
+        } else if(len > 2000){
+          lengthModifier = -5;
+          lengthNote = 'Long (' + len + ' characters). Consider tightening. Make sure your most important content appears in the first 300 visible characters. Score adjusted: -5.';
+        }
+
+        /* ── FORMATTING MODIFIER ── */
+        var formatModifier = 0, formatNote = '';
+        if(len > 1500 && paraBreaks === 0){
+          formatModifier = -8;
+          formatNote = 'No paragraph breaks detected (' + len + ' characters, no spacing). At this length your About section is a wall of text. Add paragraph breaks between your key sections: client statement, outcome, proof, CTA. Score adjusted: -8.';
+        } else if(len > 800 && paraBreaks < 2){
+          formatModifier = -3;
+          formatNote = 'Limited spacing. Your About section could use more paragraph breaks to improve readability. Score adjusted: -3.';
+        }
+
+        /* ── 1. CLIENT CLARITY 0-25 ── */
+        /* Guided by Q7: opens with client world in first 300 chars */
         var clientScore = 0, clientFeedback = '';
-        var hasSpecificClient = [/(saas|fintech|b2b|b2c|hr|legal|health|tech|startup|founder|ceo|executive|agency|coach|consultant|series [abc])/i,/for (founders|ceos|executives|startups|companies|teams|agencies)/i,/my (clients|founders|customers)/i,/who (are|want|need|struggle|run|lead|build|scale)/i].some(function(p){ return p.test(text); });
-        var hasGenericHelp = /i help (people|businesses|companies|organizations|everyone)/i.test(text);
-        var hasJobTitle = /(i am a|i am an)/i.test(text);
 
-        if(hasSpecificClient && !hasGenericHelp){ clientScore=25; clientFeedback='Strong client clarity. You name a specific type of person you work with which makes the right visitor feel immediately addressed.'; }
-        else if(hasSpecificClient){ clientScore=16; clientFeedback='You reference a niche but also use generic language. Remove broad phrases like "I help businesses" and replace with your specific client type.'; }
-        else if(hasJobTitle){ clientScore=8; clientFeedback='Your About section describes what you are, not who you serve. Rewrite the opening to address your ideal client directly rather than listing your role.'; }
-        else { clientScore=10; clientFeedback='Your About section does not clearly name who you work with. Add one sentence naming your specific client type in the first paragraph.'; }
+        var opensWithI = /^(i am|i'm|i have|i was|i started|i founded|welcome|my name|hi,|hello)/i.test(text.trim());
+        var first300HasClient = /(you |your |if you|founders?|ceos?|executives?|startups?|saas|fintech|b2b|agency owners?|consultants?|coaches?|series [abc]|solopreneur)/i.test(first300);
 
-        /* Outcome Specificity 0-25 */
+        /* Use indexOf instead of \b to avoid backspace corruption */
+        var clientTerms = ['saas founder','b2b founder','fintech founder','hr founder','startup founder','agency owner','solopreneur','series a','series b','pre-seed','seed stage','ceo','ceos','executive','executives','founders','startup founders','consultant','coach'];
+        var genericTerms = ['i help people','i help businesses','i help companies','i help everyone','i help organizations'];
+        var hasSpecificClient = clientTerms.some(function(t){ return lower.indexOf(t) > -1; });
+        var hasGenericHelp    = genericTerms.some(function(t){ return lower.indexOf(t) > -1; });
+
+        if(first300HasClient && hasSpecificClient && !hasGenericHelp){
+          clientScore=25; clientFeedback='Strong. Your About section opens with the client world and names a specific type of person. This is exactly what the first 300 visible characters should do.';
+        } else if(opensWithI && hasSpecificClient){
+          clientScore=12; clientFeedback='You name a specific client but your About section opens with "I". The first 300 characters visitors see are about you, not them. Move your client statement to the very first line.';
+        } else if(opensWithI){
+          clientScore=5; clientFeedback='Your About section opens with "I am" or "I have". The visible preview on LinkedIn is about you, not your client. Rewrite the opening to address your client first.';
+        } else if(hasSpecificClient && !hasGenericHelp){
+          clientScore=18; clientFeedback='You name a specific client type. Ensure the first 300 characters open with them, not with your background or credentials.';
+        } else if(hasGenericHelp){
+          clientScore=8; clientFeedback='You use generic language like "I help people" or "I help businesses". Replace with the specific type of person you serve.';
+        } else if(first300HasClient){
+          clientScore=15; clientFeedback='Your opening mentions a relevant audience. Adding a more specific client label like "Series A SaaS founders" or "B2B agency owners" would strengthen this.';
+        } else {
+          clientScore=5; clientFeedback='Your About section does not clearly name who you work with in the first 300 visible characters. A visitor should know within two lines whether this profile is for them.';
+        }
+
+        /* ── 2. OUTCOME SPECIFICITY 0-25 ── */
+        /* Guided by Q8: at least 2 specific verifiable proof points with numbers */
         var outcomeScore = 0, outcomeFeedback = '';
-        var hasNumber = /\d+/.test(text);
-        var hasResult = /(grew|growth|increased|generated|delivered|achieved|from \d+ to|by \d+%|\d+x|inbound|conversion|clients|deals|revenue|followers|impressions)/i.test(text);
-        var hasVague = /(help|support|assist|guide|enable|empower|transform)/i.test(text);
 
-        if(hasNumber && hasResult){ outcomeScore=25; outcomeFeedback='Excellent outcome specificity. You name a measurable result which gives visitors a concrete reason to reach out.'; }
-        else if(hasResult){ outcomeScore=16; outcomeFeedback='You reference results but without specific numbers. Adding one number turns a claim into proof.'; }
-        else if(hasVague){ outcomeScore=8; outcomeFeedback='Your About section mentions helping but does not name a specific outcome. Replace vague language with the exact result your clients achieve.'; }
-        else { outcomeScore=5; outcomeFeedback='Your About section does not name any outcome. Visitors need to know what changes for them if they work with you. Add one specific result.'; }
+        var numberMatches = (text.match(/\d[\d,]*(%|x|\+)?/g) || []).filter(function(n){ return parseInt(n) > 0; });
+        var resultTerms   = ['grew','growth','increased','generated','delivered','achieved','inbound','conversion','clients','deals','revenue','followers','impressions','pipeline','booked','closed','raised'];
+        var vagueTerms    = ['help','support','assist','guide','enable','empower'];
+        var hasResult  = resultTerms.some(function(t){ return lower.indexOf(t) > -1; });
+        var hasVague   = vagueTerms.some(function(t){ return lower.indexOf(t) > -1; });
+        var twoNumbers = numberMatches.length >= 2;
 
-        /* Proof Presence 0-25 */
+        if(twoNumbers && hasResult){
+          outcomeScore=25; outcomeFeedback='Excellent. You have at least two specific numbers tied to results. This is exactly what Q8 of the LinkedIn Health Check asks for.';
+        } else if(numberMatches.length >= 1 && hasResult){
+          outcomeScore=18; outcomeFeedback='You have one specific number tied to a result. Adding a second proof point would maximise this dimension. Q8 asks for at least two.';
+        } else if(numberMatches.length >= 1){
+          outcomeScore=12; outcomeFeedback='You include numbers but they are not clearly tied to client outcomes. Connect your numbers to results: "grew X by Y%" not just "X years experience".';
+        } else if(hasResult){
+          outcomeScore=10; outcomeFeedback='You reference results but without specific numbers. One number changes this from a claim to evidence.';
+        } else if(hasVague){
+          outcomeScore=6; outcomeFeedback='Your About section mentions helping but names no specific outcome. Replace vague language with the exact result your clients achieve.';
+        } else {
+          outcomeScore=3; outcomeFeedback='No specific outcomes or numbers. Q8 of the LinkedIn Health Check asks for at least 2 verifiable proof points with real numbers.';
+        }
+
+        /* ── 3. PROOF PRESENCE 0-25 ── */
+        /* Guided by Q8 and Q9 */
         var proofScore = 0, proofFeedback = '';
-        var hasStrongProof = /(\$[\d,]+|\d+%|\d+x|\d+ (clients|founders|companies|deals|followers|impressions|figures|months))/i.test(text);
-        var hasMediumProof = /(clients|documented|proven|track record|worked with|partnered)/i.test(text);
-        var hasNameDrop = /(featured|published|speaker|award|recognised|top \d+|forbes|linkedin top)/i.test(text);
 
-        if(hasStrongProof){ proofScore=25; proofFeedback='Strong proof. Specific numbers build instant credibility.'; }
-        else if(hasNameDrop){ proofScore=20; proofFeedback='Good credibility signal. Combining this with a specific number would make it stronger.'; }
-        else if(hasMediumProof){ proofScore=13; proofFeedback='You reference experience or clients but without specific numbers. One number makes the difference between a claim and evidence.'; }
-        else { proofScore=4; proofFeedback='Your About section has no proof. No numbers, no results, no documented outcomes. Every About section needs at least one specific credibility anchor.'; }
+        var strongProofPatterns = [/\d+%/,/\d+x/,/\$[\d,]+/,/\d+,?\d+ (clients|founders|companies|followers|impressions)/i,/from \d+ to \d+/i,/\d+ (inbound|deals|conversations|bookings)/i];
+        var hasStrongProof = strongProofPatterns.some(function(p){ return p.test(text); });
+        var mediumTerms    = ['clients','documented','proven','track record','worked with','partnered','generated'];
+        var hasMediumProof = mediumTerms.some(function(t){ return lower.indexOf(t) > -1; });
+        var dropTerms      = ['featured','published','speaker','award','recognised','top ','forbes','linkedin top'];
+        var hasNameDrop    = dropTerms.some(function(t){ return lower.indexOf(t) > -1; });
+        var hasStructure   = ['if you','you are','most founders','the problem','the result','book a','calendly','dm me','message me'].some(function(t){ return lower.indexOf(t) > -1; });
 
-        /* Call to Action 0-25 */
+        if(hasStrongProof && hasStructure){
+          proofScore=25; proofFeedback='Strong proof with deliberate structure. Specific numbers and a logical path toward action , this is Q9 of the Health Check achieved.';
+        } else if(hasStrongProof){
+          proofScore=20; proofFeedback='Strong proof present. Adding deliberate structure around your numbers (pain, proof, CTA) would make it convert better.';
+        } else if(hasNameDrop && hasMediumProof){
+          proofScore=16; proofFeedback='Good credibility signals. Adding one specific number (percentage, count, timeframe) would make this much stronger.';
+        } else if(hasNameDrop){
+          proofScore=13; proofFeedback='Credibility signal present. Combine with a specific number for maximum proof impact.';
+        } else if(hasMediumProof){
+          proofScore=10; proofFeedback='You reference experience or clients without specific numbers. One number makes the difference between a claim and evidence.';
+        } else {
+          proofScore=3; proofFeedback='No proof in your About section. Q8 of the LinkedIn Health Check requires at least 2 specific verifiable proof points with real numbers.';
+        }
+
+        /* ── 4. CALL TO ACTION 0-25 ── */
+        /* Guided by Q10: final line has specific CTA with booking link */
         var ctaScore = 0, ctaFeedback = '';
-        var hasStrongCTA = /(book|schedule|dm me|message me|reach out|apply|calendly|book a call|book a free|send me a)/i.test(text);
-        var hasMediumCTA = /(connect|feel free|contact me|get in touch|follow me|find me)/i.test(text);
 
-        if(hasStrongCTA){ ctaScore=25; ctaFeedback='Clear call to action. You tell visitors exactly what to do next.'; }
-        else if(hasMediumCTA){ ctaScore=13; ctaFeedback='You invite connection but do not specify the action. Replace "feel free to connect" with one specific step like "Book a free call at calendly.com/..."'; }
-        else { ctaScore=3; ctaFeedback='Your About section ends without a next step. Every About section needs one specific CTA. Without it visitors leave with no instructions.'; }
+        var bookingTerms  = ['calendly','book a free','book a call','book your free','schedule a call','schedule a free','book a 30','book a strategy'];
+        var directTerms   = ['dm me','message me','reach out','send me a','email me','whatsapp me','apply now','apply here'];
+        var mediumCTATerms= ['connect with me','feel free to connect','get in touch','contact me','let\'s connect','find me on'];
+        var hasBookingLink= bookingTerms.some(function(t){ return lower.indexOf(t) > -1; });
+        var hasDirectCTA  = directTerms.some(function(t){ return lower.indexOf(t) > -1; });
+        var hasMediumCTA  = mediumCTATerms.some(function(t){ return lower.indexOf(t) > -1; });
 
-        var total = Math.min(100, clientScore + outcomeScore + proofScore + ctaScore);
+        /* Check if CTA appears in the last 20% of the text */
+        var lastSection   = lower.substring(Math.floor(lower.length * 0.75));
+        var ctaInLastPart = bookingTerms.concat(directTerms).some(function(t){ return lastSection.indexOf(t) > -1; });
+
+        if(hasBookingLink && ctaInLastPart){
+          ctaScore=25; ctaFeedback='Perfect. You have a specific booking link in the closing section. This is exactly what Q10 of the LinkedIn Health Check requires.';
+        } else if(hasBookingLink){
+          ctaScore=20; ctaFeedback='You have a booking link. Move it to the very last lines so it is the final thing a visitor sees before deciding to act.';
+        } else if(hasDirectCTA && ctaInLastPart){
+          ctaScore=18; ctaFeedback='Clear direct CTA in the right position. Adding a specific booking link with a URL would convert more visitors than a general invitation.';
+        } else if(hasDirectCTA){
+          ctaScore=13; ctaFeedback='You have a direct CTA but it is not in the closing section. Move it to the last lines so the final message is a clear action.';
+        } else if(hasMediumCTA){
+          ctaScore=8; ctaFeedback='You invite connection but without a specific action. Replace "feel free to connect" with a booking link or a direct instruction. Q10 requires one specific next step with a link.';
+        } else {
+          ctaScore=0; ctaFeedback='No call to action anywhere in your About section. Q10 of the LinkedIn Health Check makes this the final and essential element. Add one specific action with a link at the end.';
+        }
+
+        var raw   = clientScore + outcomeScore + proofScore + ctaScore;
+        var total = Math.max(0, Math.min(100, raw + lengthModifier + formatModifier));
+
+        /* Collect all active deductions */
+        var deductions = [];
+        if(lengthModifier !== 0) deductions.push(lengthNote);
+        if(formatModifier !== 0) deductions.push(formatNote);
+
         var verdict = '', verdictClass = '';
-        if(total>=81){ verdict='Your About section is structured to convert. Visitors who read this know who you serve, what you deliver, and what to do next.'; verdictClass='green'; }
-        else if(total>=61){ verdict='Your About section has good bones but is missing key conversion elements. One or two targeted fixes will significantly increase the response rate.'; verdictClass='gold-v'; }
-        else if(total>=41){ verdict='Your About section describes you but does not sell you. The gap is almost always outcome specificity and a missing CTA.'; verdictClass='amber'; }
-        else { verdict='Your About section needs significant structural work. It is talking about you rather than speaking directly to your ideal client.'; verdictClass='red'; }
+        if(total >= 81){ verdict='Your About section is structured to convert.'; verdictClass='green'; }
+        else if(total >= 61){ verdict='Good structure with missing conversion elements.'; verdictClass='gold-v'; }
+        else if(total >= 41){ verdict='Describes you but does not sell you.'; verdictClass='amber'; }
+        else { verdict='Needs significant structural work.'; verdictClass='red'; }
 
         var dims = [
           {score:clientScore,  label:'Client Clarity',     feedback:clientFeedback},
@@ -1831,8 +1949,17 @@ function getGrade(score){
         if(fixes.length === 0) fixes = [dims[0]];
         var priorityFix = fixes.map(function(f){ return '<strong>'+f.label+':</strong> '+f.feedback; }).join('<br><br>');
 
-        return {total:total, verdict:verdict, verdictClass:verdictClass, client:{score:clientScore,feedback:clientFeedback}, outcome:{score:outcomeScore,feedback:outcomeFeedback}, proof:{score:proofScore,feedback:proofFeedback}, cta:{score:ctaScore,feedback:ctaFeedback}, priorityFix:priorityFix};
+        return {
+          total:total, verdict:verdict, verdictClass:verdictClass,
+          client:{score:clientScore, feedback:clientFeedback},
+          outcome:{score:outcomeScore, feedback:outcomeFeedback},
+          proof:{score:proofScore, feedback:proofFeedback},
+          cta:{score:ctaScore, feedback:ctaFeedback},
+          priorityFix:priorityFix,
+          deductions:deductions
+        };
       }
+
 
       function buildAboutHTML(r){
         return [
@@ -1840,6 +1967,7 @@ function getGrade(score){
             '<span class="about-audit-score-num">'+r.total+'</span>',
             '<span class="about-audit-score-lbl">out of 100</span>',
             '<p class="about-audit-verdict '+r.verdictClass+'">'+r.verdict+'</p>',
+            (r.deductions&&r.deductions.length>0?r.deductions.map(function(d){return '<p style="font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.1em;color:#E65100;margin-top:8px;padding:8px 12px;border:1px solid rgba(230,81,0,0.3);background:rgba(230,81,0,0.06);">&#9650; '+d+'</p>';}).join(''):''),
           '</div>',
           '<div class="about-audit-dims">',
             buildAboutDim('Client Clarity',     r.client),
