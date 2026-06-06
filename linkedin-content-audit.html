@@ -1200,140 +1200,145 @@ function pickVariant(arr, key) {
 
  /* AUDIT */
  document.getElementById('auditBtn').addEventListener('click', function(){
- var posts = [];
- for(var i=1; i<=postCount; i++){
- var ta = document.getElementById('post'+i);
- var postText = ta ? ta.value.trim() : ''; if(postText.length >= 25) posts.push(postText);
- }
-       var auditValMsg = document.getElementById('auditValMsg');
-      // Check for short posts first
-      var shortPost = false;
-      for(var ci=1; ci<=postCount; ci++){
-        var cta = document.getElementById('post'+ci);
-        var ctaVal = cta ? cta.value.trim() : '';
-        if(ctaVal.length > 0 && ctaVal.length < 25){
-          shortPost = true;
-          if(cta) cta.style.borderColor = '#C62828';
-        } else if(cta){ cta.style.borderColor = ''; }
-      }
-      if(shortPost){
-        if(auditValMsg){ auditValMsg.textContent = 'Your post is too short to audit. Please paste at least 25 characters.'; auditValMsg.style.display = 'block'; }
-        return;
-      }
-      if(posts.length === 0){
-        var ta = document.getElementById('post1');
-        if(ta) ta.style.borderColor = '#C62828';
-        if(auditValMsg){ auditValMsg.textContent = 'Please paste at least one LinkedIn post to audit it.'; auditValMsg.style.display = 'block'; }
-        return;
-      }
-      if(auditValMsg) auditValMsg.style.display = 'none';
- var ta1 = document.getElementById('post1');
- if(ta1) ta1.style.borderColor = '';
+  var posts = [];
+  for(var i=1; i<=postCount; i++){
+    var ta = document.getElementById('post'+i);
+    var postText = ta ? ta.value.trim() : '';
+    if(postText.length >= 25) posts.push(postText);
+  }
 
- // Score all posts
- var postScores = posts.map(function(post){
- var hook = scoreHook(post);
- var pain = scorePain(post);
- var proof = scoreProof(post);
- var cta = scoreCTA(post);
- var total = hook.score + pain.score + proof.score + cta.score;
- return {post:post, total:total, hook:hook, pain:pain, proof:proof, cta:cta};
- });
+  var auditValMsg = document.getElementById('auditValMsg');
 
- var overallAvg = Math.round(postScores.reduce(function(sum,s){ return sum+s.total; },0) / postScores.length);
- var grade = getGrade(overallAvg);
- var verdict = getVerdict(overallAvg);
+  // Short post check
+  var shortPost = false;
+  for(var ci=1; ci<=postCount; ci++){
+    var taCheck = document.getElementById('post'+ci);
+    var taVal = taCheck ? taCheck.value.trim() : '';
+    if(taVal.length > 0 && taVal.length < 25){
+      shortPost = true;
+      if(taCheck) taCheck.style.borderColor = '#C62828';
+    } else if(taCheck){ taCheck.style.borderColor = ''; }
+  }
+  if(shortPost){
+    if(auditValMsg){ auditValMsg.textContent = 'Your post is too short to audit. Please paste at least 25 characters.'; auditValMsg.style.display = 'block'; }
+    return;
+  }
+  if(posts.length === 0){
+    var ta1 = document.getElementById('post1');
+    if(ta1) ta1.style.borderColor = '#C62828';
+    if(auditValMsg){ auditValMsg.textContent = 'Please paste at least one LinkedIn post to audit it.'; auditValMsg.style.display = 'block'; }
+    return;
+  }
+  if(auditValMsg) auditValMsg.style.display = 'none';
 
- // Update overall grade
- var overallScoreEl = document.getElementById('overallScore');
- overallScoreEl.className = 'overall-score ' + getColorClass(overallAvg);
- overallScoreEl.textContent = '0';
- document.getElementById('overallBadge').textContent = grade.label;
- document.getElementById('overallBadge').className = 'overall-grade-badge badge-' + grade.cls;
- document.getElementById('overallVerdict').textContent = verdict;
+  // Score all posts
+  var postScores = posts.map(function(post){
+    var hook  = scoreHook(post);
+    var pain  = scorePain(post);
+    var proof = scoreProof(post);
+    var cta   = scoreCTA(post);
+    return {post:post, total:hook.score+pain.score+proof.score+cta.score, hook:hook, pain:pain, proof:proof, cta:cta};
+  });
 
- // Build post result cards
- var grid = document.getElementById('postResultsGrid');
- grid.innerHTML = '';
- postScores.forEach(function(s, idx){
- var postGrade = getGrade(s.total);
- var card = document.createElement('div');
- card.className = 'post-result-card card-' + postGrade.cls;
- card.innerHTML = [
- '<div class="post-result-title">',
- '<span>Post '+(idx+1)+' &nbsp;&middot;&nbsp; <span class="post-result-score-badge '+getColorClass(s.total)+'" data-score="'+s.total+'">0</span>/100</span>',
- '<span style="font-family:\'DM Mono\',monospace;font-size:9px;letter-spacing:0.14em;color:var(--muted);">'+postGrade.label+'</span>',
- '</div>',
- '<p class="post-preview">"'+truncatePost(s.post)+'"</p>',
- '<div class="dimension-scores">',
- buildDimItem('Hook Quality', s.hook.score, 25, s.hook.feedback),
- buildDimItem('Pain Specificity', s.pain.score, 25, s.pain.feedback),
- buildDimItem('Proof Presence', s.proof.score, 25, s.proof.feedback),
- buildDimItem('Conversion Intent', s.cta.score, 25, s.cta.feedback),
- '</div>',
- '<div class="post-fix">',
- '<span class="post-fix-label">&#9632; Priority Fix</span>',
- '<p class="post-fix-text">'+getPriorityFix(s)+'</p>',
- '</div>'
- ].join('');
- grid.appendChild(card);
- });
+  var overallAvg = Math.round(postScores.reduce(function(sum,s){ return sum+s.total; },0) / postScores.length);
+  var grade   = getGrade(overallAvg);
+  var verdict = getVerdict(overallAvg);
 
- // Populate gate score
- document.getElementById('gateScore').value = overallAvg;
+  // Fill in the pre-existing HTML elements
+  var overallScoreEl = document.getElementById('overallScore');
+  overallScoreEl.className = 'overall-score ' + getColorClass(overallAvg);
+  overallScoreEl.textContent = '0';
+  document.getElementById('overallBadge').textContent   = grade.label;
+  document.getElementById('overallBadge').className     = 'overall-grade-badge badge-' + grade.cls;
+  document.getElementById('overallVerdict').textContent = verdict;
+  document.getElementById('gateScore').value            = overallAvg;
 
- // Show results
- // Loading state
- var auditBtn = document.getElementById('auditBtn');
- var auditResultsEl = document.getElementById('auditResults');
- if(auditBtn){ auditBtn.disabled=true; auditBtn._orig=auditBtn.textContent; auditBtn.textContent='Reviewing your post...'; }
- auditResultsEl.innerHTML='<div class="jn-loading" aria-live="polite"><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-text">Reviewing your post...</span></div>';
- auditResultsEl.classList.add('show');
- auditResultsEl.scrollIntoView({behavior:'smooth',block:'start'});
- setTimeout(function(){
- if(auditBtn){ auditBtn.disabled=false; if(auditBtn._orig) auditBtn.textContent=auditBtn._orig; }
- auditResultsEl.innerHTML='';
- document.getElementById('auditResults').classList.add('show');
- document.getElementById('auditResults').scrollIntoView({behavior:'smooth', block:'start'});
- }, generateDelay()); // end loading setTimeout
+  // Build post result cards
+  var grid = document.getElementById('postResultsGrid');
+  grid.innerHTML = '';
+  postScores.forEach(function(s, idx){
+    var postGrade = getGrade(s.total);
+    var card = document.createElement('div');
+    card.className = 'post-result-card card-' + postGrade.cls;
+    card.innerHTML = [
+      '<div class="post-result-title">',
+        '<span>Post '+(idx+1)+' &nbsp;&middot;&nbsp; <span class="post-result-score-badge '+getColorClass(s.total)+'" data-score="'+s.total+'">0</span>/100</span>',
+        '<span style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.14em;color:var(--muted);">'+postGrade.label+'</span>',
+      '</div>',
+      '<p class="post-preview">"'+truncatePost(s.post)+'"</p>',
+      '<div class="dimension-scores">',
+        buildDimItem('Hook Quality',       s.hook.score,  25, s.hook.feedback),
+        buildDimItem('Pain Specificity',   s.pain.score,  25, s.pain.feedback),
+        buildDimItem('Proof Presence',     s.proof.score, 25, s.proof.feedback),
+        buildDimItem('Conversion Intent',  s.cta.score,   25, s.cta.feedback),
+      '</div>',
+      '<div class="post-fix">',
+        '<span class="post-fix-label">&#9632; Priority Fix</span>',
+        '<p class="post-fix-text">'+getPriorityFix(s)+'</p>',
+      '</div>'
+    ].join('');
+    grid.appendChild(card);
+  });
 
- // Animate numbers
- setTimeout(function(){
- animateNum(overallScoreEl, overallAvg, 1200);
- document.querySelectorAll('[data-score]').forEach(function(el){
- animateNum(el, parseInt(el.getAttribute('data-score')), 1000);
- });
- setTimeout(function(){
- document.querySelectorAll('.dim-score-bar').forEach(function(bar){
- bar.style.width = bar.getAttribute('data-pct') + '%';
- });
- }, 200);
- }, 300);
+  // Show loading then reveal results
+  var auditBtnEl      = document.getElementById('auditBtn');
+  var auditResultsEl  = document.getElementById('auditResults');
+  if(auditBtnEl){ auditBtnEl.disabled = true; auditBtnEl._orig = auditBtnEl.textContent; auditBtnEl.textContent = 'Reviewing your post...'; }
 
- // GA
- if(typeof gtag !== 'undefined'){
- gtag('event','content_audited',{event_category:'LinkedIn Content Audit',event_label:'Overall '+overallAvg,value:overallAvg});
- }
- });
+  auditResultsEl.classList.remove('show');
+  var loadDiv = document.createElement('div');
+  loadDiv.id = 'auditLoader';
+  loadDiv.className = 'jn-loading';
+  loadDiv.setAttribute('aria-live','polite');
+  loadDiv.innerHTML = '<span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-text">Reviewing your post...</span>';
+  auditResultsEl.parentNode.insertBefore(loadDiv, auditResultsEl);
+  loadDiv.scrollIntoView({behavior:'smooth', block:'start'});
+
+  setTimeout(function(){
+    if(auditBtnEl){ auditBtnEl.disabled = false; if(auditBtnEl._orig) auditBtnEl.textContent = auditBtnEl._orig; }
+    var loader = document.getElementById('auditLoader');
+    if(loader) loader.parentNode.removeChild(loader);
+
+    // Reveal results
+    auditResultsEl.classList.add('show');
+    auditResultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+
+    // Animate numbers
+    animateNum(overallScoreEl, overallAvg, 1200);
+    document.querySelectorAll('[data-score]').forEach(function(el){
+      animateNum(el, parseInt(el.getAttribute('data-score')), 1000);
+    });
+    setTimeout(function(){
+      document.querySelectorAll('.dim-score-bar').forEach(function(bar){
+        bar.style.width = bar.getAttribute('data-pct') + '%';
+      });
+    }, 200);
+
+    if(typeof gtag !== 'undefined'){
+      gtag('event','content_audited',{event_category:'LinkedIn Content Audit',event_label:'Overall '+overallAvg,value:overallAvg});
+    }
+  }, generateDelay());
+
+});
+
 
  function buildDimItem(name, score, max, feedback){
- var pct = Math.round((score/max)*100);
- var barCls = getBarClass(score);
- var feedbackHtml = feedback ? '<p class="dim-feedback">'+feedback+'</p>' : '';
- return '<div class="dim-score-item"><div class="dim-score-header"><span class="dim-score-name">'+name+'</span><span class="dim-score-value '+getColorClass(score)+'">'+score+'/'+max+'</span></div><div class="dim-score-bar-wrap"><div class="dim-score-bar '+barCls+'" data-pct="'+pct+'" style="width:0%"></div></div>'+feedbackHtml+'</div>';
+   var pct = Math.round((score/max)*100);
+   var barCls = getBarClass(score);
+   var feedbackHtml = feedback ? '<p class="dim-feedback">'+feedback+'</p>' : '';
+   return '<div class="dim-score-item"><div class="dim-score-header"><span class="dim-score-name">'+name+'</span><span class="dim-score-value '+getColorClass(score)+'">'+score+'/'+max+'</span></div><div class="dim-score-bar-wrap"><div class="dim-score-bar '+barCls+'" data-pct="'+pct+'" style="width:0%"></div></div>'+feedbackHtml+'</div>';
  }
 
  function getPriorityFix(s){
- /* Conversion Intent first (most directly tied to inbound), then Hook, Pain, Proof */
- var ordered = [
- {score:s.cta.score, label:'Conversion Intent', feedback:s.cta.feedback},
- {score:s.hook.score, label:'Hook Quality', feedback:s.hook.feedback},
- {score:s.pain.score, label:'Pain Specificity', feedback:s.pain.feedback},
- {score:s.proof.score,label:'Proof Presence', feedback:s.proof.feedback}
- ];
- var fixes = ordered.filter(function(d){ return d.score < 15; }).slice(0, 2);
- if(fixes.length === 0) fixes = [ordered.sort(function(a,b){ return a.score-b.score; })[0]];
- return fixes.map(function(f){ return '<strong>'+f.label+':</strong> '+f.feedback; }).join('<br><br>');
+   var ordered = [
+     {score:s.cta.score,   label:'Conversion Intent', feedback:s.cta.feedback},
+     {score:s.hook.score,  label:'Hook Quality',       feedback:s.hook.feedback},
+     {score:s.pain.score,  label:'Pain Specificity',   feedback:s.pain.feedback},
+     {score:s.proof.score, label:'Proof Presence',     feedback:s.proof.feedback}
+   ];
+   var fixes = ordered.filter(function(d){ return d.score < 15; }).slice(0, 2);
+   if(fixes.length === 0) fixes = [ordered.sort(function(a,b){ return a.score-b.score; })[0]];
+   return fixes.map(function(f){ return '<strong>'+f.label+':</strong> '+f.feedback; }).join('<br><br>');
  }
 
  /* GATE FORM */
