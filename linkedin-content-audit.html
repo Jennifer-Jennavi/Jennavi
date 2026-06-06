@@ -1071,8 +1071,48 @@ function pickVariant(arr, key) {
 
  /* SCORING ENGINE */
  var HOOK_PATTERNS = {
- strong: [/^\d+\s/,/^if you/i,/^most \w+/i,/^nobody/i,/^stop/i,/^the truth/i,/^i made/i,/^i lost/i,/^i earned/i,/^we went/i,/^in \d+/i,/^after \d+/i,/^you're (posting|writing|losing|leaving)/i,/^your linkedin/i,/^unpopular opinion/i,/^hot take/i,/^controversial/i,/^here's what/i,/^this is why/i,/^the reason/i],
- medium: [/^[A-Z].*\?$/m,/^have you/i,/^did you know/i,/^why (do|does|are|is)/i,/^how (do|does|to|many|much)/i,/^what (if|happens|most)/i,/^let me/i,/^yesterday/i,/^last (week|month|year)/i,/^two years/i,/^three (years|months)/i],
+ strong: [
+   /* Numbers and data */
+   /^\d+\s/,/^in \d+/i,/^after \d+/i,
+   /* Direct address */
+   /^if you/i,/^you're (posting|writing|losing|leaving|stuck|struggling)/i,/^your linkedin/i,
+   /* Pattern-interrupt openers */
+   /^most \w+/i,/^nobody/i,/^stop/i,/^the truth/i,/^unpopular opinion/i,/^hot take/i,/^controversial/i,
+   /* Story proof */
+   /^i made/i,/^i lost/i,/^i earned/i,/^we went/i,/^here's what/i,/^this is why/i,/^the reason/i,
+   /* Generator: Recognition hooks */
+   /^every \w+ (founder|ceo|leader|executive)/i,
+   /^there is a specific kind/i,
+   /^there's a specific kind/i,
+   /* Generator: Discomfort hooks */
+   /^the uncomfortable truth/i,
+   /^nobody wants to say/i,
+   /^the real cost/i,
+   /^every week you/i,
+   /* Generator: Curiosity hooks */
+   /^there is one thing/i,
+   /^there's one thing/i,
+   /^i spent (three|two|six|\d+) months/i,
+   /^the reason .+ has nothing/i,
+   /^i (spoke|talked|worked) with \d+/i,
+   /^i have watched/i,
+   /* Generator: Surprise hooks */
+   /^the \w+ founders who/i,
+   /^the \w+ (founder|ceo|leader|person|team|agency|company) who/i,
+   /^the founders who/i,
+   /^the (saas|b2b|fintech|hr|tech|startup|\w+) founders/i,
+   /^everything you (have|'ve) been told/i,
+   /^working harder is not/i,
+   /* Discomfort — positioning reframes */
+   /^\w+ is not a (strategy|content|visibility|positioning|volume) problem/i,
+   /not the same fix/i
+ ],
+ medium: [
+   /^[A-Z].*\?$/m,/^have you/i,/^did you know/i,
+   /^why (do|does|are|is)/i,/^how (do|does|to|many|much)/i,/^what (if|happens|most)/i,
+   /^let me/i,/^yesterday/i,/^last (week|month|year)/i,/^two years/i,/^three (years|months)/i,
+   /^something happens/i,/^there is a reason/i,/^there's a reason/i
+ ],
  weak: [/^I am/i,/^I'm a/i,/^welcome to/i,/^excited to/i,/^happy to/i,/^proud to/i,/^today I/i,/^sharing (my|this)/i]
  };
 
@@ -1097,13 +1137,15 @@ function pickVariant(arr, key) {
  function scoreHook(text){
  var firstLine = text.split('\n')[0].trim();
  if(!firstLine) return {score:0, feedback:'Your post has no opening line. The hook is the most important line in any LinkedIn post.'};
- /* I-opener detection */
+ /* Check strong patterns FIRST before generic I-opener check */
+ for(var si=0;si<HOOK_PATTERNS.strong.length;si++){
+ if(HOOK_PATTERNS.strong[si].test(firstLine)) return {score:25, feedback:'Strong hook. Your opening line creates an immediate emotional or intellectual response.'};
+ }
+ /* I-opener detection — only fires if no strong pattern matched */
  if(/^I\b/i.test(firstLine)){
  return {score:8, feedback:'Your post opens with "I" which centres the writer, not the reader. LinkedIn readers scroll past posts that start with the writer. Rewrite your opening line to start with a number, a statement, or your client situation.'};
  }
- for(var i=0;i<HOOK_PATTERNS.strong.length;i++){
- if(HOOK_PATTERNS.strong[i].test(firstLine)) return {score:25, feedback:'Strong hook. Your opening line creates an immediate emotional or intellectual response.'};
- }
+
  for(var i=0;i<HOOK_PATTERNS.medium.length;i++){
  if(HOOK_PATTERNS.medium[i].test(firstLine)) return {score:15, feedback:'Decent hook but it could be sharper. Try opening with a specific number, a contrarian statement, or a named pain.'};
  }
