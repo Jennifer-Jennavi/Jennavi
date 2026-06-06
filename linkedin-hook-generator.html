@@ -235,6 +235,46 @@
             "@type": "Answer",
             "text": "Jennifer Mmesoma Omaliko, founder and CEO of Jennavi, built this tool based on the CRICKETS framework she created. Jennifer grew her own LinkedIn from 500 to 5,500 followers with 873% impression growth and zero paid ads. She ghostwrites for founders globally across the US, UK, Australia, Canada, Nigeria, India, Pakistan, UAE and South Africa."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Which hook type should I use most often?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rotate across all four types but use Recognition most frequently if you are early in building your audience. Recognition hooks make readers feel immediately understood which builds trust faster than any other type. Once your audience trusts you, Discomfort and Curiosity hooks drive higher engagement. Surprise hooks work best when you have earned enough credibility for your contrarian take to land with authority."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes a LinkedIn hook actually work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A hook works when it creates an immediate emotional response before the reader has made a conscious decision to keep reading. That response is either recognition (this is about me), discomfort (I have been avoiding this), curiosity (I need to know the answer), or surprise (I did not expect that). A hook that triggers none of those four responses gets scrolled past regardless of how good the rest of the post is."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does opening with I hurt my hook score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LinkedIn readers are moving fast. When a post opens with I, the implicit message is that this post is about the writer, not the reader. That is the fastest way to lose the scroll. The most effective hooks open with the reader's situation, a number, a statement about their industry, or a challenge to something they believe. The writer can enter the post after the hook has done its job."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long should a LinkedIn hook be?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Under 200 characters. LinkedIn shows the first one to two lines before the See More button. Everything after that is hidden. Your hook needs to create enough tension or curiosity in those first two lines to make the reader click. A hook that runs longer than 200 characters is usually trying to do too much. The best hooks are one sentence that lands hard and stops there."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Scroll-Stop Power and how is it scored?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Scroll-Stop Power measures how immediately your hook creates an emotional or intellectual interruption. A hook that opens with a number, a contradiction, a painful truth, or a specific recognition earns high Scroll-Stop Power because it creates a break in the reader's pattern. A hook that opens with a general statement or a question like Have you ever wondered earns low Scroll-Stop Power because it asks for effort before delivering anything."
+          }
         }
       ]
     },
@@ -1535,6 +1575,12 @@ function pickVariant(arr, key) {
         auditResults.scrollIntoView({behavior:'smooth', block:'start'});
         auditBtn.disabled = true;
         auditBtn.textContent = 'Reading your hook...';
+        /* Clear audit input */
+        setTimeout(function(){
+          auditInput.value = '';
+          var cnt = document.getElementById('hookCharCount');
+          if(cnt) cnt.textContent = '0 / 700 characters';
+        }, 500);
 
         setTimeout(function(){
           var result = scoreHook(hook);
@@ -1552,11 +1598,6 @@ function pickVariant(arr, key) {
       /* ── SCORING ── */
       function scoreHook(h){
         var lower = h.toLowerCase().trim();
-
-        /* Strong pattern check FIRST before I-opener */
-        for(var sp=0;sp<HOOK_PATTERNS.strong.length;sp++){
-          if(HOOK_PATTERNS.strong[sp].test(h.trim())){ scrollScore=25; scrollFeedback='Strong scroll-stop power. Your opening line creates an immediate emotional or intellectual response.'; break; }
-        }
 
         /* Minimum substance check: under 15 chars or 3 words = 0 across all dims */
         var hWords = h.trim().split(/\s+/).filter(function(w){ return w.length > 0; }).length;
