@@ -237,6 +237,46 @@
             "@type": "Answer",
             "text": "Book a free 30-minute discovery call with Jennifer at calendly.com/jennavi/30min. She reviews your LinkedIn before the call and arrives with specific observations about your content. You can also take the free LinkedIn Health Check at jennavi.co/linkedin-health-check.html to get a full diagnosis of your entire LinkedIn profile, not just your content."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my About section matter more than my posts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your About section is the only part of your LinkedIn profile a visitor reads with the intention of deciding whether to reach out. Posts are consumed and forgotten. Your About section is where the conversion decision is made. A weak About section means every impressive post you write sends people to a page that fails to close."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Client Clarity in an About section audit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Client Clarity measures whether your About section names a specific type of person you work with in the first 300 visible characters. The more precisely you name your client, the more likely the right person feels your About section was written for them. I help founders is vague. I help Series A SaaS founders generate three to five inbound conversations per month from LinkedIn is specific enough to stop the right person mid-scroll."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Outcome Specificity in an About section?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Outcome Specificity measures whether your About section names a specific result your clients achieve, not just what you do. The difference between I help founders with LinkedIn and I help founders generate inbound from LinkedIn within 90 days is the difference between a profile that gets scrolled past and one that gets a message. Specific outcomes create urgency. Vague descriptions create nothing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should my About section have a call to action?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every About section should end with one specific next step. Not a list of ways to reach you. One action. Book a call, send a DM, visit a link. Profiles that end without a CTA leave the visitor with no instructions and they leave. The About section is not a biography. It is a conversion page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Jennifer personally rewrite my About section?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Jennifer rewrites About sections as part of every Jennavi retainer. Book a free 30-minute discovery call at calendly.com/jennavi/30min. She reviews your LinkedIn before the call and arrives with specific observations about what your About section is costing you."
+          }
         }
       ]
     },
@@ -1456,21 +1496,6 @@ function getGrade(score){
     deductionContainer.innerHTML = deductionNotes.map(function(n){ return '<p style="font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.1em;color:#E65100;margin-top:8px;padding:8px 12px;border:1px solid rgba(230,81,0,0.3);background:rgba(230,81,0,0.06);">&#9650; '+n+'</p>'; }).join('');
   } else { deductionContainer.innerHTML = ''; }
 
-  // Length note   show if any post has a length warning
-  var lengthNotes = postScores.filter(function(s){ return s.length && s.length.note; });
-  var lengthNoteEl = document.getElementById('lengthNote');
-  if(!lengthNoteEl){
-    lengthNoteEl = document.createElement('p');
-    lengthNoteEl.id = 'lengthNote';
-    lengthNoteEl.style.cssText = "font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#E65100;line-height:1.7;margin-top:14px;padding:10px 14px;border:1px solid rgba(230,81,0,0.3);background:rgba(230,81,0,0.06);";
-    document.getElementById('overallGradeBlock').appendChild(lengthNoteEl);
-  }
-  if(lengthNotes.length > 0){
-    lengthNoteEl.textContent = lengthNotes[0].length.note;
-    lengthNoteEl.style.display = 'block';
-  } else {
-    lengthNoteEl.style.display = 'none';
-  }
   document.getElementById('gateScore').value            = overallAvg;
 
   // Build post result cards
