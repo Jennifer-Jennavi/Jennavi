@@ -237,6 +237,46 @@
             "@type": "Answer",
             "text": "Copy the headline that resonates most and update your LinkedIn profile immediately. Then take the free LinkedIn Health Check at jennavi.co/linkedin-health-check.html to score your full profile and see how your banner, About section, Featured section, content, and positioning all work together. If you want Jennifer to personally review which headline is strongest for your market, share your details in the tool and she will be in touch directly."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How long should my LinkedIn headline be?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LinkedIn allows up to 220 characters for your headline. The sweet spot is between 60 and 160 characters. Long enough to include your niche, your client and a specific outcome, short enough to read in under 5 seconds. Anything over 220 characters is cut off and invisible to visitors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a good LinkedIn headline score look like?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A score of 85 and above means your headline is strongly positioned and ready to convert profile visitors. A score of 66 to 84 means good positioning with one or two missing elements. A score of 46 to 65 means weak positioning that describes you without attracting your ideal client. Below 46 means your headline needs a full rewrite."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my job title hurt my headline score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Job titles like Founder, CEO or Entrepreneur tell a visitor what you are but not who you serve or what you deliver. Every LinkedIn profile has a job title. None of them differentiate you. A headline that leads with your title is a missed opportunity to tell your ideal client exactly why they should reach out to you specifically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Generic Title Penalty dimension?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Generic Title Penalty dimension checks whether your headline uses language that any founder could copy without lying. Phrases like passionate about, results-driven, thought leader or building the future appear on thousands of profiles and signal nothing specific about you. These phrases actively reduce your score because they replace specific positioning with empty language."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the Ideal Client Signal score different from Niche Clarity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Niche Clarity measures whether your headline names a specific industry or space you operate in. Ideal Client Signal measures whether your headline makes a specific type of person feel directly spoken to. You can name an industry without addressing a client. The strongest headlines do both: they name the space and speak directly to the person inside it."
+          }
         }
       ]
     },
@@ -850,6 +890,7 @@
  <label class="audit-input-label" for="auditInput">Your Current LinkedIn Headline</label>
  <textarea class="audit-textarea" id="auditInput" placeholder="e.g. Founder at TechCo | Helping businesses grow | Passionate about innovation" maxlength="220" aria-label="Your current LinkedIn headline"></textarea>
  </div>
+ <p id="headlineCharCount" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--muted);margin-top:6px;text-align:right;">0 / 220 characters</p>
  <button class="audit-btn" id="auditBtn" type="button">Audit My Headline &#8594;</button>
  <p class="audit-validation-msg" id="auditValidationMsg">Please paste your current LinkedIn headline to audit it.</p>
  <div class="audit-results" id="auditResults" aria-live="polite">
@@ -1633,8 +1674,18 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
 
  // Clear validation on input
  auditInput.addEventListener('input', function(){
+        /* Hard enforce 220 on paste */
+        if(this.value.length > 220){ this.value = this.value.substring(0, 220); }
         var cnt = document.getElementById('headlineCharCount');
-        if(cnt){ cnt.textContent = this.value.length + ' / 220 characters'; cnt.style.color = this.value.length > 200 ? '#E65100' : this.value.length >= 220 ? '#C62828' : 'var(--muted)'; }
+        var len = this.value.length;
+        if(cnt){
+          cnt.textContent = len + ' / 220 characters';
+          cnt.style.color = len > 200 ? '#E65100' : len >= 220 ? '#C62828' : 'var(--muted)';
+        }
+        if(len >= 220){
+          var msg = document.getElementById('auditValidationMsg');
+          if(msg){ msg.textContent = 'LinkedIn headline maximum is 220 characters. You are at the limit.'; msg.style.display = 'block'; }
+        }
  this.style.borderColor = '';
  if(auditValMsg) auditValMsg.style.display = 'none';
  });
