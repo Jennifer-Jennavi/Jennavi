@@ -318,7 +318,7 @@
     @media(max-width:900px){.nav{padding:18px 24px;}.nav-links{display:none;}.nav-toggle{display:flex;}.nav-drawer{display:block;}.nav-overlay{display:block;}}
 
     /* BREADCRUMB */
-    .breadcrumb{margin-top:56px;padding:10px 48px;border-bottom:1px solid var(--gold-border);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--muted);}
+    .breadcrumb{margin-top:64px;padding:10px 48px;border-bottom:1px solid var(--gold-border);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--muted);}
     .breadcrumb a{color:var(--gold);}
     .breadcrumb a:hover{opacity:0.7;}
     @media(max-width:600px){.breadcrumb{margin-top:54px;padding:9px 24px;}}
@@ -912,8 +912,9 @@
       <p class="hook-audit-sub">Paste your current LinkedIn post opening line below. Get a score out of 100, four dimension breakdowns, and one priority fix. No signup. Instant result.</p>
       <div class="hook-audit-input-wrap">
         <label class="hook-audit-label" for="hookAuditInput">Your Current LinkedIn Hook</label>
-        <textarea class="hook-audit-textarea" id="hookAuditInput" placeholder="Paste the first 1-2 lines of your LinkedIn post here..." aria-label="Your current LinkedIn hook"></textarea>
+        <textarea class="hook-audit-textarea" id="hookAuditInput" placeholder="Paste the first 1-2 lines of your LinkedIn post here..." maxlength="700" aria-label="Your current LinkedIn hook"></textarea>
       </div>
+      <p id="hookCharCount" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--muted);margin-top:6px;text-align:right;">0 / 700 characters</p>
       <button class="hook-audit-btn" id="hookAuditBtn" type="button">Audit My Hook &#8594;</button>
       <p class="hook-audit-val-msg" id="hookAuditValMsg">Please paste your current hook to audit it.</p>
       <div class="hook-audit-results" id="hookAuditResults" aria-live="polite"></div>
@@ -1144,7 +1145,7 @@ function pickVariant(arr, key) {
 
 
 
-/* /* END JENNAVI SHARED UTILITIES v1.0 */
+/* END JENNAVI SHARED UTILITIES v1.0 */
 
   /* ── HOOK GENERATOR LOGIC ──────────────────────────────── */
 
@@ -1270,8 +1271,8 @@ function pickVariant(arr, key) {
         var rawText = v.template(industry, pain);
         var text = cleanOutput(normalizeInput(rawText));
 
-        /* Quality filter */
-        var underLimit = text.length <= 200;
+        /* Quality filter — cap at 500 chars, ideal under 250 */
+        var underLimit = text.length <= 500;
         var hasNiche   = text.toLowerCase().indexOf(industry.toLowerCase().substring(0,5)) > -1;
 
         /* Silent fallback */
@@ -1506,6 +1507,8 @@ function pickVariant(arr, key) {
       if(!auditBtn || !auditInput) return;
 
       auditInput.addEventListener('input', function(){
+        var cnt = document.getElementById('hookCharCount');
+        if(cnt){ cnt.textContent = this.value.length + ' / 700 characters'; cnt.style.color = this.value.length > 600 ? '#E65100' : 'var(--muted)'; }
         this.style.borderColor = '';
         if(auditValMsg) auditValMsg.style.display = 'none';
       });
@@ -1543,6 +1546,20 @@ function pickVariant(arr, key) {
       function scoreHook(h){
         var lower = h.toLowerCase().trim();
 
+        /* Minimum substance check — under 15 chars or 3 words = 0 across all dims */
+        var hWords = h.trim().split(/\s+/).filter(function(w){ return w.length > 0; }).length;
+        if(h.trim().length < 15 || hWords < 3){
+          return {
+            total:0, verdict:'Too Short', verdictClass:'red',
+            scroll:{score:0, feedback:'Your hook is too short to evaluate. A hook needs at least 15 characters and 3 words to create any response in a reader.'},
+            relevance:{score:0, feedback:'No reader can feel addressed by a single word or phrase.'},
+            curiosity:{score:0, feedback:'No curiosity gap can exist in under 3 words.'},
+            length:{score:0, feedback:'A hook needs at least 15 characters and 3 words minimum.'},
+            priorityFix:'What you have entered is not a hook. A hook is the first 1-2 lines of a LinkedIn post. Paste those lines here.',
+            hookTypeRec:'Recognition'
+          };
+        }
+
         /* Scroll-Stop Power 0-25 */
         var scrollScore = 0, scrollFeedback = '';
         var opensWithI = /^i/i.test(h.trim());
@@ -1556,7 +1573,7 @@ function pickVariant(arr, key) {
         else if(hasNumber && hasPain){ scrollScore=25; scrollFeedback='Strong opening. A number combined with a pain point creates specificity and recognition simultaneously, which stops the scroll before the reader makes a conscious choice.'; }
         else if(hasNumber || hasContra){ scrollScore=20; scrollFeedback='Good scroll-stop. Adding a specific pain point or audience reference alongside this would push it to maximum impact.'; }
         else if(hasPain){ scrollScore=15; scrollFeedback='Naming a pain point creates recognition. Adding a number or a direct contradiction would significantly increase scroll-stop power.'; }
-        else { scrollScore=8; scrollFeedback='Your hook does not create an immediate pattern interrupt. Add a specific number, a pain point, or a direct contradiction to give readers a reason to stop scrolling.'; }
+        else { scrollScore=3; scrollFeedback='Your hook does not create an immediate pattern interrupt. Add a specific number, a pain point, or a direct contradiction to give readers a reason to stop scrolling.'; }
 
         /* Reader Relevance 0-25 */
         var relScore = 0, relFeedback = '';
@@ -1580,7 +1597,7 @@ function pickVariant(arr, key) {
         else if(hasGap){ curiosityScore=18; curiosityFeedback='Good curiosity gap. Adding a specific number or timeframe would make the information void feel more credible and urgent.'; }
         else if(hasSpecific){ curiosityScore=15; curiosityFeedback='Specific numbers create credibility. Adding an information gap (something the reader does not yet know) would dramatically increase the pull to read on.'; }
         else if(hasVague){ curiosityScore=5; curiosityFeedback='Vague language like "interesting" or "some things" creates no curiosity gap. Replace with specific numbers or a direct statement about what the reader does not yet know.'; }
-        else { curiosityScore=10; curiosityFeedback='Your hook does not create a strong information gap. Give the reader something they need to know that they cannot get without reading further.'; }
+        else { curiosityScore=4; curiosityFeedback='Your hook does not create a strong information gap. Give the reader something they need to know that they cannot get without reading further.'; }
 
         /* Length and Clarity 0-25 */
         var lenScore = 0, lenFeedback = '';
