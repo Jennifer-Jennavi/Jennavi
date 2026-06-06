@@ -1471,6 +1471,21 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
  var genBtn = document.getElementById('generateBtn');
  cards.innerHTML = '<div class="jn-loading" aria-live="polite"><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-text">Finding your angle...</span></div>';
  genResults.classList.add('show');
+ /* Clear input fields after loading starts */
+ setTimeout(function(){
+   var r=document.getElementById('userRole'); var cl=document.getElementById('targetClient'); var rs=document.getElementById('bestResult');
+   if(r) r.value=''; if(cl) cl.value=''; if(rs) rs.value='';
+ }, 500);
+          /* Disclaimer */
+          var disc = document.getElementById('genDisclaimer');
+          if(!disc){
+            disc = document.createElement('p');
+            disc.id = 'genDisclaimer';
+            disc.style.cssText = "font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--muted);margin-top:16px;line-height:1.7;text-align:center;";
+            disc.textContent = 'Outputs are based on your input. Review for grammar and formatting before publishing. Strong inputs produce strong outputs.';
+            genResults.parentNode.insertBefore(disc, genResults.nextSibling);
+          }
+          disc.style.display = 'block';
  genResults.scrollIntoView({behavior:'smooth', block:'start'});
  if(genBtn){ genBtn.disabled = true; genBtn._orig = genBtn.textContent; genBtn.textContent = 'Finding your angle...'; }
 
@@ -1628,11 +1643,19 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
  var headline = auditInput.value.trim();
  if(!headline){
  auditInput.style.borderColor = '#C62828';
- if(auditValMsg) auditValMsg.style.display = 'block';
+ if(auditValMsg){ auditValMsg.textContent = 'Please paste your current LinkedIn headline.'; auditValMsg.style.display = 'block'; }
+ return;
+ }
+ if(headline.length > 220){
+ auditInput.style.borderColor = '#C62828';
+ if(auditValMsg){ auditValMsg.textContent = 'Your headline is '+headline.length+' characters. LinkedIn maximum is 220. Shorten it before auditing.'; auditValMsg.style.display = 'block'; }
  return;
  }
  auditInput.style.borderColor = '';
  if(auditValMsg) auditValMsg.style.display = 'none';
+
+ // Clear input after short delay so user sees loading first
+ setTimeout(function(){ auditInput.value = ''; var cnt=document.getElementById('headlineCharCount'); if(cnt) cnt.textContent='0 / 220 characters'; }, 500);
 
  // Loading state
  auditResults.innerHTML = '<div class="jn-loading" aria-live="polite"><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-text">Reading your headline...</span></div>';
@@ -1661,7 +1684,7 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
       var lower = h.toLowerCase().trim();
       var len = h.trim().length;
 
-      /* ── LENGTH CHECK — LinkedIn hard limit 220 chars ── */
+      /* ── LENGTH CHECK: LinkedIn hard limit 220 chars ── */
       if(len === 0) return {total:0, verdict:'No input', verdictClass:'red',
         niche:{score:0,feedback:'No headline entered.'},
         outcome:{score:0,feedback:'No headline entered.'},
@@ -1690,7 +1713,7 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
           niche:{score:0,feedback:'A headline needs at least a few words to communicate anything.'},
           outcome:{score:0,feedback:'No outcome is communicated in this input.'},
           client:{score:0,feedback:'No client is addressed.'},
-          penalty:{score:5,feedback:'Short input — no generic language detected but no positioning either.'},
+          penalty:{score:5,feedback:'Short input. No generic language detected but no positioning either.'},
           priorityFix:'Your headline is too short to evaluate. A LinkedIn headline should be at least 3 words and communicate who you serve and what you deliver.',
           formulaRec:'Result-First Formula', formulaId:'result-first',
           lengthNote:''};
@@ -1700,9 +1723,9 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
       /* Guided by Q4: names a specific result for a specific client */
       /* Guided by Q5: stranger understands in 5 seconds */
       var nicheScore = 0, nicheFeedback = '';
-      var industryTerms = ['saas','fintech','healthtech','hr tech','hr','legal tech','legal','finance','consulting','coach','agency','startup','b2b','b2c','healthcare','marketing','sales','data','ai','recruitment','real estate','insurance','accounting','engineering','design','product','edtech','proptech','insurtech'];
-      var specificClientTerms = ['series a','series b','pre-seed','seed stage','solopreneur','founder','ceo','cto','cmo','cfo','executive','director','startup founder','saas founder','b2b founder','agency owner','consultant'];
-      /* Words that sound specific but are generic — should NOT trigger full score */
+      var industryTerms = ['saas','fintech','healthtech','hr tech','hrtech','hr','legal tech','legaltech','finance','consulting','coach','agency','startup','b2b','b2c','healthcare','marketing','sales','data','ai','recruitment','real estate','insurance','accounting','engineering','design','product','edtech','proptech','insurtech','operations','logistics','supply chain','climate tech','cleantech','biotech','medtech','deep tech'];
+      var specificClientTerms = ['series a','series b','series c','pre-seed','seed stage','solopreneur','founder','founders','ceo','ceos','cto','cmo','cfo','vp','executive','director','startup founder','saas founder','b2b founder','fintech founder','hr founder','agency owner','consultant','early stage','growth stage','venture-backed','bootstrapped founder','first-time founder'];
+      /* Words that sound specific but are generic. Should NOT trigger full score */
       var falsePositives = ['people','businesses','companies','teams','organizations','everyone','professionals','leaders'];
 
       var hasIndustry = industryTerms.some(function(t){ return lower.indexOf(t) > -1; });
@@ -1730,7 +1753,7 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
       var hasTransform = transformWords.some(function(t){ return lower.indexOf(t) > -1; });
       var hasVague = vagueWords.some(function(t){ return lower.indexOf(t) > -1; });
 
-      if(hasNumber && (hasPercent || hasDollar || hasTransform)){ outcomeScore=25; outcomeFeedback='Excellent. Your headline includes a specific measurable result — the strongest credibility signal a headline can have.'; }
+      if(hasNumber && (hasPercent || hasDollar || hasTransform)){ outcomeScore=25; outcomeFeedback='Excellent. Your headline includes a specific measurable result. This is the strongest credibility signal a headline can have.'; }
       else if(hasNumber){ outcomeScore=18; outcomeFeedback='You include a number which is strong. Connecting it directly to a transformation or result (grow, generate, close) would make it more powerful.'; }
       else if(hasTransform && !hasVague){ outcomeScore=15; outcomeFeedback='Your headline uses transformation language. Adding one specific number would significantly increase its credibility.'; }
       else if(hasVague){ outcomeScore=5; outcomeFeedback='Your headline uses vague helper language. Replace "help" or "support" with a specific transformation and a number.'; }
@@ -1739,9 +1762,9 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
       /* ── IDEAL CLIENT SIGNAL 0/5/15/25 ── */
       /* Guided by Q6: uniquely yours, specific enough that others cannot copy it */
       var clientScore = 0, clientFeedback = '';
-      var specificClients = ['series a','series b','pre-seed','seed stage','venture-backed','enterprise','fortune 500','startup founder','saas founder','b2b founder','fintech founder','healthcare founder','agency owner','solopreneur','7-figure','8-figure'];
+      var specificClients = ['series a','series b','series c','pre-seed','seed stage','venture-backed','enterprise','fortune 500','startup founder','saas founder','b2b founder','b2c founder','fintech founder','healthcare founder','hr founder','agency owner','solopreneur','7-figure','8-figure','first-time founder','bootstrapped','growth-stage'];
       var generalAudience = ['founders','executives','leaders','professionals','businesses','companies'];
-      /* Note: "people" and "teams" removed — they are not client signals */
+      /* Note: "people" and "teams" removed. They are not client signals */
 
       var hasSpecific = specificClients.some(function(t){ return lower.indexOf(t) > -1; });
       var hasGenAud = generalAudience.some(function(t){
@@ -1752,11 +1775,11 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
 
       if(hasSpecific){ clientScore=25; clientFeedback='Your headline names a specific client type. The right person will feel immediately spoken to.'; }
       else if(hasGenAud && hasYouAddress){ clientScore=18; clientFeedback='You address a general audience but speak to them directly. Narrowing the client type further would significantly increase pull.'; }
-      else if(hasGenAud){ clientScore=12; clientFeedback='Your headline references a general group. Narrowing to a specific client type — Series A founders, SaaS CEOs — would make the right person lean in.'; }
+      else if(hasGenAud){ clientScore=12; clientFeedback='Your headline references a general group. Narrowing to a specific client type like Series A founders or SaaS CEOs would make the right person lean in.'; }
       else if(hasYouAddress){ clientScore=8; clientFeedback='You use "you" or "your" which is good. Adding a specific client type would tell the right visitor this is for them specifically.'; }
       else { clientScore=0; clientFeedback='Your headline does not address a specific client. There is nothing here that makes any particular person feel spoken to.'; }
 
-      /* ── GENERIC TITLE PENALTY — baseline 5, earned up to 25 ── */
+      /* ── GENERIC TITLE PENALTY: baseline 5, earned up to 25 ── */
       /* Guided by Q6: could any other founder copy this without lying? */
       var penaltyScore = 5, penaltyFeedback = '', deductions = [];
       var majorPenalties = ['passionate about','results-driven','thought leader','helping businesses grow','building the future','innovator','visionary','guru','ninja','rockstar','game changer','disruptor','serial entrepreneur'];
@@ -1778,7 +1801,7 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
       if(deductions.length > 0){ penaltyFeedback = 'Generic language found: ' + deductions.join(', ') + '. Every one of these phrases appears on thousands of profiles and signals nothing specific about you.'; }
       else if(positiveSignals.length >= 3){ penaltyFeedback = 'No generic language. Your headline uses specific, earned positioning language.'; }
       else if(positiveSignals.length > 0){ penaltyFeedback = 'No generic language detected. Adding more specific signals (' + ['a number','a named client','an industry'].filter(function(s){ return positiveSignals.indexOf(s) === -1; }).slice(0,2).join(', ') + ') would push this score higher.'; }
-      else { penaltyFeedback = 'No generic language but also no specific positioning signals. Your headline is neutral — neither penalised nor rewarded. Add specificity to earn full points here.'; }
+      else { penaltyFeedback = 'No generic language but also no specific positioning signals. Your headline is neutral , neither penalised nor rewarded. Add specificity to earn full points here.'; }
 
       var total = nicheScore + outcomeScore + clientScore + penaltyScore;
 
@@ -1789,7 +1812,7 @@ function generateHeadlines(roleRaw, clientRaw, resultRaw) {
       else if(total >= 46){ verdict='Weak Positioning'; verdictClass='amber'; }
       else { verdict='Needs Full Repositioning'; verdictClass='red'; }
 
-      /* ── PRIORITY FIX — lowest two ── */
+      /* ── PRIORITY FIX: lowest two ── */
       var dims = [
         {name:'Niche Clarity', score:nicheScore, feedback:nicheFeedback},
         {name:'Outcome Specificity', score:outcomeScore, feedback:outcomeFeedback},
