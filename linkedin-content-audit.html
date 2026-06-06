@@ -723,9 +723,9 @@
  <div class="post-input-group" data-post="1">
  <div class="post-number">
  <span>Post 1</span>
- <span class="post-char-count" id="count1">0 characters</span>
+ <span class="post-char-count" id="count1">0 / 5000 characters</span>
  </div>
- <textarea class="post-textarea" id="post1" placeholder="Paste your LinkedIn post text here. The first line is your hook. Make it count." rows="6"></textarea>
+ <textarea class="post-textarea" id="post1" placeholder="Paste your LinkedIn post text here. The first line is your hook. Make it count." rows="6" maxlength="5000"></textarea>
  </div>
  </div>
 
@@ -883,8 +883,9 @@
       <p class="about-audit-sub">Your About section is the most read part of your LinkedIn profile after your headline. Paste it below and get a score out of 100 across four dimensions. No signup. Instant result.</p>
       <div class="about-audit-input-wrap">
         <label class="about-audit-label" for="aboutAuditInput">Your LinkedIn About Section</label>
-        <textarea class="about-audit-textarea" id="aboutAuditInput" placeholder="Paste your full LinkedIn About section here..." aria-label="Your LinkedIn About section"></textarea>
+        <textarea class="about-audit-textarea" id="aboutAuditInput" placeholder="Paste your full LinkedIn About section here..." maxlength="2600" aria-label="Your LinkedIn About section"></textarea>
       </div>
+      <p id="aboutCharCount" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--muted);margin-top:6px;text-align:right;">0 / 2600 characters</p>
       <button class="about-audit-btn" id="aboutAuditBtn" type="button">Audit My About Section &#8594;</button>
       <p class="about-audit-val-msg" id="aboutAuditValMsg">Please paste your About section to audit it.</p>
       <div class="about-audit-results" id="aboutAuditResults" aria-live="polite"></div>
@@ -1142,7 +1143,16 @@ function pickVariant(arr, key) {
  /* CHAR COUNT */
  function attachCharCount(textarea, countEl){
  textarea.addEventListener('input', function(){
- countEl.textContent = this.value.length + ' characters';
+ var len = this.value.length;
+ var max = parseInt(this.getAttribute('maxlength')) || 5000;
+ countEl.textContent = len + ' / ' + max + ' characters';
+ countEl.style.color = len > 3000 ? '#E65100' : 'var(--muted)';
+ /* Show warning at 3000 */
+ var warnEl = document.getElementById('postLengthWarn');
+ if(!warnEl){ warnEl = document.createElement('p'); warnEl.id='postLengthWarn'; warnEl.style.cssText="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#E65100;margin-top:6px;display:none;"; this.parentNode.appendChild(warnEl); }
+ if(len > 3000 && len <= 5000){ warnEl.textContent='Your post is '+len+' characters. LinkedIn standard posts perform best under 3000 characters. Beyond this reads as an article.'; warnEl.style.display='block'; }
+ else if(len > 5000){ warnEl.textContent='Maximum 5000 characters.'; warnEl.style.display='block'; }
+ else { warnEl.style.display='none'; }
  this.classList.toggle('has-content', this.value.trim().length > 0);
  });
  }
@@ -1246,7 +1256,7 @@ function pickVariant(arr, key) {
  if(HOOK_PATTERNS.weak[i].test(firstLine)) return {score:5, feedback:'Weak hook. Starting with "I am" or "I\'m excited" makes the post about you, not the reader. Rewrite the first line to name your reader\'s world.'};
  }
  if(firstLine.length < 40) return {score:10, feedback:'Your opening line is too short and generic. Give the reader a reason to keep reading in the very first sentence.'};
- return {score:12, feedback:'Average hook. It does not immediately stop the scroll. Try a specific number, a strong opinion, or a named frustration your reader feels.'};
+ return {score:6, feedback:'Your opening line does not create recognition, discomfort, curiosity or surprise. It reads as a neutral statement. Rewrite it to immediately trigger one of those four responses.'};
  }
 
  function scorePain(text){
@@ -1260,7 +1270,7 @@ function pickVariant(arr, key) {
  for(var i=0;i<PAIN_PATTERNS.weak.length;i++){
  if(PAIN_PATTERNS.weak[i].test(text)) return {score:6, feedback:'Your post discusses improvement or growth but does not name a specific pain. Founders respond to posts that name their exact frustration.'};
  }
- return {score:8, feedback:'This post does not clearly address a specific client pain. Ask yourself: what is the one thing your ideal client is frustrated about right now? Say that.'};
+ return {score:4, feedback:'This post does not name any client pain or frustration. Without a pain point your post is information, not persuasion. Ask yourself: what is the exact frustration my ideal client is carrying right now?'};
  }
 
  function scoreProof(text){
@@ -1593,6 +1603,12 @@ function getGrade(score){
       if(!btn || !input) return;
 
       input.addEventListener('input', function(){
+        var cnt = document.getElementById('aboutCharCount');
+        if(cnt){
+          var len = this.value.length;
+          cnt.textContent = len + ' / 2600 characters';
+          cnt.style.color = len > 2400 ? '#E65100' : len >= 2600 ? '#C62828' : 'var(--muted)';
+        }
         this.style.borderColor = '';
         if(valMsg) valMsg.style.display = 'none';
       });
@@ -1626,6 +1642,99 @@ function getGrade(score){
       });
 
       function scoreAbout(text){
+        var lower = text.toLowerCase();
+        var len = text.trim().length;
+        var first300 = text.trim().substring(0, 300).toLowerCase();
+
+        /* Length modifier — LinkedIn max is 2600 chars */
+        var lengthModifier = 0, lengthNote = '';
+        if(len < 150){ lengthModifier = -15; lengthNote = 'Your About section is very short ('+len+' chars). Visitors expect enough substance to make a decision. Aim for at least 300 characters.'; }
+        else if(len > 2400){ lengthModifier = -10; lengthNote = 'You are approaching LinkedIn maximum ('+len+'/2600). At this length you risk losing readers before your CTA.'; }
+        else if(len > 2000){ lengthModifier = -5; lengthNote = 'Your About section is long ('+len+' chars). Consider tightening. Front-load the strongest content in the first 300 characters.'; }
+
+        /* 1. Client Clarity 0-25 — guided by Q7 */
+        /* Q7: Does it open with the client world, not yours? */
+        var clientScore = 0, clientFeedback = '';
+        var opensWithI = /^(i am|i'm|i have|i was|i started|i founded|welcome|my name|hi,|hello,)/i.test(text.trim());
+        var firstLineClientFocus = /(you|your|if you|founders?|ceos?|executives?|startups?|saas|fintech|b2b|agency owners?|consultants?|coaches?)/i.test(first300);
+        var hasSpecificClient = [/(saas|fintech|b2b|b2c|healthtech|hr tech|legal tech|startup founder|series [abc]|solopreneur|agency owner)/i, /for (founders|ceos|executives|startups|agencies)/i, /my (clients|founders|customers)/i].some(function(p){ return p.test(text); });
+        var hasGenericHelp = /i help (people|businesses|companies|organizations|everyone)/i.test(text);
+
+        if(firstLineClientFocus && hasSpecificClient && !hasGenericHelp){ clientScore=25; clientFeedback='Strong. Your About section opens with the client world and names a specific type of person. This is exactly what the first 300 visible characters should do.'; }
+        else if(opensWithI && hasSpecificClient){ clientScore=10; clientFeedback='You name a specific client but open with "I" — the first 300 characters visitors see are about you, not them. Move the client to the very first sentence.'; }
+        else if(opensWithI){ clientScore=5; clientFeedback='Your About section opens with "I am" or "I have" — the visible preview on LinkedIn is about you, not your client. Rewrite the opening to address your client first.'; }
+        else if(hasSpecificClient && !hasGenericHelp){ clientScore=18; clientFeedback='You name a specific client type. Check that the first 300 characters open with them, not with your background.'; }
+        else if(hasGenericHelp){ clientScore=8; clientFeedback='You use generic language like "I help people" or "I help businesses". Replace with the specific type of person you serve.'; }
+        else { clientScore=5; clientFeedback='Your About section does not clearly name who you work with. A visitor should know in the first two lines whether this profile is for them.'; }
+
+        /* 2. Outcome Specificity 0-25 — guided by Q8 */
+        /* Q8: At least 2 specific verifiable proof points with real numbers */
+        var outcomeScore = 0, outcomeFeedback = '';
+        var numberMatches = text.match(/\d+[%x]?|\$[\d,]+/g) || [];
+        var hasResult = /(grew|growth|increased|generated|delivered|achieved|from \d+ to|by \d+%|\d+x|inbound|conversion|clients won|deals closed|revenue|followers|impressions)/i.test(text);
+        var hasVague = /(help|support|assist|guide|enable|empower|transform)/i.test(text);
+        var twoProofPoints = numberMatches.length >= 2 && hasResult;
+
+        if(twoProofPoints){ outcomeScore=25; outcomeFeedback='Excellent. You have at least two specific numbers tied to results — exactly what Q8 of the LinkedIn Health Check asks for. This is the strongest outcome signal.'; }
+        else if(numberMatches.length >= 1 && hasResult){ outcomeScore=18; outcomeFeedback='You have one specific number tied to a result. Adding a second proof point (Q8 asks for at least two) would maximise this dimension.'; }
+        else if(numberMatches.length >= 1){ outcomeScore=12; outcomeFeedback='You include a number but it is not clearly tied to a client result. Connect your numbers to outcomes: "grew X by Y%" not just "X years experience".'; }
+        else if(hasVague){ outcomeScore=5; outcomeFeedback='Your About section mentions helping or transforming but contains no numbers. Replace vague language with specific measurable results.'; }
+        else { outcomeScore=3; outcomeFeedback='No specific outcomes or numbers in your About section. LinkedIn Health Check Q8 asks for at least 2 verifiable proof points. Add them.'; }
+
+        /* 3. Proof Presence 0-25 — guided by Q8 and Q9 (deliberate structure) */
+        var proofScore = 0, proofFeedback = '';
+        var hasStrongProof = /(\$[\d,]+|\d+%|\d+x|\d+ (clients|founders|companies|deals|followers|impressions|figures|months))/i.test(text);
+        var hasMediumProof = /(clients|documented|proven|track record|worked with|partnered|generated)/i.test(text);
+        var hasNameDrop = /(featured|published|speaker|award|recognised|top \d+|forbes|linkedin top)/i.test(text);
+        var hasStructure = /(if you|you are|most founders|the problem|the result|the method|here is how|book a|calendly|dm me)/i.test(text);
+
+        if(hasStrongProof && hasStructure){ proofScore=25; proofFeedback='Strong proof with deliberate structure. Your About section has specific numbers and follows a logical path toward action — this is Q9 of the Health Check achieved.'; }
+        else if(hasStrongProof){ proofScore=18; proofFeedback='Strong proof present. Adding deliberate structure (pain, consequence, proof, CTA) around your numbers would make this convert significantly better.'; }
+        else if(hasNameDrop){ proofScore=15; proofFeedback='Credibility signal present. Combine this with a specific number for maximum proof impact.'; }
+        else if(hasMediumProof){ proofScore=10; proofFeedback='You reference experience or clients without specific numbers. One number changes this from a claim to evidence.'; }
+        else { proofScore=3; proofFeedback='Your About section has no proof at all. LinkedIn Health Check Q8 requires at least 2 specific verifiable proof points with real numbers.'; }
+
+        /* 4. Call to Action 0-25 — guided by Q10 */
+        /* Q10: Final line names one specific action with booking link or direct CTA */
+        var ctaScore = 0, ctaFeedback = '';
+        var hasBookingLink = /calendly|book a (free |call|slot|consultation)|schedule a/i.test(text);
+        var hasDirectCTA = /(dm me|message me|reach out|apply|send me a|email me at|whatsapp)/i.test(text);
+        var hasMediumCTA = /(connect|feel free|contact me|get in touch|follow me)/i.test(text);
+        var lastLines = text.replace(/\r/g,'').split('\n').filter(function(l){ return l.trim().length > 0; }).slice(-2).join(' ').toLowerCase();      var ctaInLastLines = (hasBookingLink || hasDirectCTA) && (lastLines.indexOf('book') > -1 || lastLines.indexOf('dm') > -1 || lastLines.indexOf('calendly') > -1 || lastLines.indexOf('message') > -1 || lastLines.indexOf('email') > -1);
+
+        if(hasBookingLink && ctaInLastLines){ ctaScore=25; ctaFeedback='Perfect. You have a specific booking link in the closing lines — exactly what Q10 of the LinkedIn Health Check requires.'; }
+        else if(hasBookingLink){ ctaScore=20; ctaFeedback='You have a booking link somewhere in your About section. Move it to the final line so it is the last thing a visitor sees.'; }
+        else if(hasDirectCTA){ ctaScore=15; ctaFeedback='You have a direct CTA. Adding a specific booking link (Calendly or similar) with a URL would convert significantly more visitors.'; }
+        else if(hasMediumCTA){ ctaScore=8; ctaFeedback='You invite connection but do not specify the action. Q10 requires one specific action with a link or direct instruction. Replace vague invitations with a booking link.'; }
+        else { ctaScore=0; ctaFeedback='Your About section has no call to action. Q10 of the LinkedIn Health Check makes this the final and essential element. Every About section must end with one specific next step.'; }
+
+        var raw = clientScore + outcomeScore + proofScore + ctaScore;
+        var total = Math.max(0, Math.min(100, raw + lengthModifier));
+
+        var verdict = '', verdictClass = '';
+        if(total>=81){ verdict='Your About section is structured to convert.'; verdictClass='green'; }
+        else if(total>=61){ verdict='Good structure with missing conversion elements.'; verdictClass='gold-v'; }
+        else if(total>=41){ verdict='Describes you but does not sell you.'; verdictClass='amber'; }
+        else { verdict='Needs significant structural work.'; verdictClass='red'; }
+
+        var dims = [
+          {score:clientScore,  label:'Client Clarity',     feedback:clientFeedback},
+          {score:outcomeScore, label:'Outcome Specificity', feedback:outcomeFeedback},
+          {score:proofScore,   label:'Proof Presence',      feedback:proofFeedback},
+          {score:ctaScore,     label:'Call to Action',      feedback:ctaFeedback}
+        ];
+        dims.sort(function(a,b){ return a.score - b.score; });
+        var fixes = dims.filter(function(d){ return d.score < 15; }).slice(0,3);
+        if(fixes.length === 0) fixes = [dims[0]];
+        var priorityFix = fixes.map(function(f){ return '<strong>'+f.label+':</strong> '+f.feedback; }).join('<br><br>');
+
+        return {total:total, verdict:verdict, verdictClass:verdictClass,
+          client:{score:clientScore,feedback:clientFeedback},
+          outcome:{score:outcomeScore,feedback:outcomeFeedback},
+          proof:{score:proofScore,feedback:proofFeedback},
+          cta:{score:ctaScore,feedback:ctaFeedback},
+          priorityFix:priorityFix, lengthNote:lengthNote};
+      }      function scoreAbout(text){
         var lower = text.toLowerCase();
 
         /* Client Clarity 0-25 */
