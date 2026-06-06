@@ -293,16 +293,6 @@
  img{display:block;max-width:100%;}
  .serif{font-family:'Playfair Display',serif;}
 
- /* AUDIT VALIDATION CLEAR */
- (function(){
- var ta = document.getElementById('post1');
- if(ta) ta.addEventListener('input', function(){
- this.style.borderColor = '';
- var msg = document.getElementById('auditValMsg');
- if(msg) msg.style.display = 'none';
- });
- })();
-
  /* NAV */
  .nav{position:fixed;top:0;left:0;right:0;z-index:10000;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,padding 0.4s;border-bottom:1px solid transparent;}
  .nav.scrolled{background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);padding:13px 48px;border-bottom-color:var(--gold-border);}
