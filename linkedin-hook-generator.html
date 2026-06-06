@@ -1271,7 +1271,7 @@ function pickVariant(arr, key) {
         var rawText = v.template(industry, pain);
         var text = cleanOutput(normalizeInput(rawText));
 
-        /* Quality filter — cap at 500 chars, ideal under 250 */
+        /* Quality filter: cap at 500 chars, ideal under 250 */
         var underLimit = text.length <= 500;
         var hasNiche   = text.toLowerCase().indexOf(industry.toLowerCase().substring(0,5)) > -1;
 
@@ -1349,8 +1349,15 @@ function pickVariant(arr, key) {
       var genBtn = document.getElementById('generateBtn');
       cards.innerHTML = '<div class="jn-loading" aria-live="polite"><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-text">Reading your audience...</span></div>';
       genResults.classList.add('show');
+      var hdisc = document.getElementById('hookDisclaimer');
+      if(!hdisc){ hdisc=document.createElement('p'); hdisc.id='hookDisclaimer'; hdisc.style.cssText="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--muted);margin-top:16px;line-height:1.7;text-align:center;"; hdisc.textContent='Outputs are based on your input. Review for grammar and formatting before publishing. Strong inputs produce strong outputs.'; genResults.parentNode.insertBefore(hdisc, genResults.nextSibling); } hdisc.style.display='block';
       genResults.scrollIntoView({behavior:'smooth', block:'start'});
       if(genBtn){ genBtn.disabled = true; genBtn._orig = genBtn.textContent; genBtn.textContent = 'Reading your audience...'; }
+      /* Clear inputs after loading starts */
+      setTimeout(function(){
+        var ind=document.getElementById('userIndustry'); var pan=document.getElementById('clientPain');
+        if(ind) ind.value=''; if(pan) pan.value='';
+      }, 500);
 
       setTimeout(function(){
         var hooks = generateHooks(industry.toLowerCase(), pain.toLowerCase(), selectedType);
@@ -1546,7 +1553,12 @@ function pickVariant(arr, key) {
       function scoreHook(h){
         var lower = h.toLowerCase().trim();
 
-        /* Minimum substance check — under 15 chars or 3 words = 0 across all dims */
+        /* Strong pattern check FIRST before I-opener */
+        for(var sp=0;sp<HOOK_PATTERNS.strong.length;sp++){
+          if(HOOK_PATTERNS.strong[sp].test(h.trim())){ scrollScore=25; scrollFeedback='Strong scroll-stop power. Your opening line creates an immediate emotional or intellectual response.'; break; }
+        }
+
+        /* Minimum substance check: under 15 chars or 3 words = 0 across all dims */
         var hWords = h.trim().split(/\s+/).filter(function(w){ return w.length > 0; }).length;
         if(h.trim().length < 15 || hWords < 3){
           return {
