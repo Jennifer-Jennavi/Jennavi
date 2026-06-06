@@ -1490,40 +1490,57 @@ function pickVariant(arr, key) {
 
  // Fix This First callout
  (function(){
- var lowestCat = 0;
- var lowestPct = 999;
- scores.byCat.forEach(function(score, i){
- var pct = CAT_MAX[i] > 0 ? score / CAT_MAX[i] : 0;
- if(pct < lowestPct){ lowestPct = pct; lowestCat = i; }
- });
- var catName = CATEGORIES[lowestCat];
- var catScore = scores.byCat[lowestCat];
- var catMax = CAT_MAX[lowestCat];
+   var CAT_THRESHOLDS = [9, 9, 12, 9, 12, 9]; /* 60% of max for each category */
+   var actionMap = {
+     'Banner':          { text: 'Your banner should show your name, your niche, and one proof point. No stock photos. No blank space.', link: null, linkText: null },
+     'Headline':        { text: 'Your headline is the first thing every visitor reads.', link: 'https://jennavi.co/linkedin-headline-generator.html', linkText: 'Generate a stronger headline free.' },
+     'About Section':   { text: 'Your About section is your silent sales page. It opens on your client world, not your biography.', link: 'https://jennavi.co/linkedin-content-audit.html', linkText: 'Audit your About section free.' },
+     'Featured Section':{ text: 'Pin your booking link first. Every item must advance a buying decision. Review and update it now.', link: null, linkText: null },
+     'Content':         { text: 'Your content is visible but not converting. Check your hooks, proof and conversion intent.', link: 'https://jennavi.co/linkedin-content-audit.html', linkText: 'Audit your last post free.' },
+     'Positioning':     { text: 'Positioning problems always start with the headline. If a stranger cannot understand your value in 5 seconds, your positioning needs work.', link: 'https://jennavi.co/linkedin-headline-generator.html', linkText: 'Generate a stronger headline free.' }
+   };
 
- var actionMap = {
- 'Banner': { text: 'Your banner should show your name, your niche, and one proof point. No stock photos. No blank space.', link: null, linkText: null },
- 'Headline': { text: 'Your headline is the first thing every visitor reads.', link: 'https://jennavi.co/linkedin-headline-generator.html', linkText: 'Generate a stronger headline free.' },
- 'About Section': { text: 'Your About section is your silent sales page.', link: 'https://jennavi.co/linkedin-content-audit.html', linkText: 'Audit your About section content free.' },
- 'Featured Section':{ text: 'Pin your best performing post, your book, or your booking link. Three items maximum.', link: null, linkText: null },
- 'Content': { text: 'Your content is visible but not converting.', link: 'https://jennavi.co/linkedin-content-audit.html', linkText: 'Audit your last post free.' },
- 'Positioning': { text: 'Positioning problems always start with the headline.', link: 'https://jennavi.co/linkedin-headline-generator.html', linkText: 'Generate a stronger headline free.' }
- };
+   /* Build list of poor categories sorted lowest first */
+   var catData = CATEGORIES.map(function(name, i){
+     return { name: name, score: scores.byCat[i], max: CAT_MAX[i], pct: CAT_MAX[i] > 0 ? scores.byCat[i]/CAT_MAX[i] : 0, threshold: CAT_THRESHOLDS[i] };
+   });
+   catData.sort(function(a,b){ return a.pct - b.pct; });
 
- var action = actionMap[catName] || { text: 'This is your most urgent fix.', link: null, linkText: null };
- var fixEl = document.getElementById('fixThisFirst');
- if(fixEl){
- var html = '<span class="ftf-label">Fix This First</span>';
- html += '<p class="ftf-category">' + escHtml(catName) + ' &mdash; ' + catScore + '/' + catMax + '</p>';
- html += '<p class="ftf-text">' + escHtml(action.text) + '</p>';
- if(action.link){
- html += '<a href="' + action.link + '" class="ftf-link">' + escHtml(action.linkText) + ' &rarr;</a>';
- }
- fixEl.innerHTML = html;
- fixEl.style.display = 'block';
- }
+   var poorCats = catData.filter(function(d){ return d.score < d.threshold; });
+   var fixEl = document.getElementById('fixThisFirst');
+   if(!fixEl) return;
+
+   var html = '<span class="ftf-label">Fix This First</span>';
+
+   if(poorCats.length === 0){
+     /* All good , show the single lowest as the area to sharpen */
+     var lowest = catData[0];
+     var action = actionMap[lowest.name] || { text: 'Continue refining this area.', link: null };
+     html += '<p class="ftf-category">' + escHtml(lowest.name) + ' ' + lowest.score + '/' + lowest.max + '</p>';
+     html += '<p class="ftf-text">Your profile is performing well. ' + escHtml(action.text) + '</p>';
+     if(action.link) html += '<a href="' + action.link + '" class="ftf-link">' + escHtml(action.linkText) + ' &rarr;</a>';
+
+   } else if(poorCats.length === catData.length){
+     /* All categories poor , combined message */
+     html += '<p class="ftf-category" style="color:var(--score-crit);">All Categories Need Attention</p>';
+     html += '<p class="ftf-text">Every section of your LinkedIn profile needs work. Start with your Banner, then your Headline, then your About Section. Work through each category in order. Do not post more content until the profile foundation is fixed.</p>';
+
+   } else {
+     /* Some poor, some good , list all poor ones */
+     poorCats.forEach(function(cat, idx){
+       var action = actionMap[cat.name] || { text: 'This area needs attention.', link: null };
+       html += '<p class="ftf-category">' + (idx+1) + '. ' + escHtml(cat.name) + ' ' + cat.score + '/' + cat.max + '</p>';
+       html += '<p class="ftf-text">' + escHtml(action.text) + '</p>';
+       if(action.link) html += '<a href="' + action.link + '" class="ftf-link">' + escHtml(action.linkText) + ' &rarr;</a>';
+       if(idx < poorCats.length - 1) html += '<hr style="border:none;border-top:1px solid var(--gold-border);margin:12px 0;">';
+     });
+   }
+
+   fixEl.innerHTML = html;
+   fixEl.style.display = 'block';
  })();
 
- // Weighting explanation
+// Weighting explanation
  var weightEl = document.getElementById('weightingNote');
  if(weightEl) weightEl.style.display = 'block';
 
