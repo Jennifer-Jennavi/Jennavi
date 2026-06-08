@@ -840,9 +840,9 @@
         <div class="post-input-group" data-post="1">
           <div class="post-number-row">
             <span class="post-number-label">Post 1</span>
-            <span class="post-char-count" id="count1">0 / 5000 characters</span>
+            <span class="post-char-count" id="count1">0 / 10000 characters</span>
           </div>
-          <textarea class="post-textarea" id="post1" placeholder="Paste your LinkedIn post text here. Include the full post from hook to CTA." rows="7" maxlength="5000" aria-label="LinkedIn post 1"></textarea>
+          <textarea class="post-textarea" id="post1" placeholder="Paste your LinkedIn post text here. Include the full post from hook to CTA." rows="7" maxlength="10000" aria-label="LinkedIn post 1"></textarea>
         </div>
       </div>
 
@@ -1118,8 +1118,10 @@ function updateGateHeading(score){
     document.getElementById('modeContentBtn').classList.toggle('active', mode==='content');
     document.getElementById('modeContentBtn').setAttribute('aria-selected', mode==='content');
     document.getElementById('howToContent').innerHTML = howToContents[mode];
-    // Hide shared section on mode switch
+    /* Hide shared section and reset gate heading on mode switch */
     document.getElementById('sharedPostAudit').style.display = 'none';
+    var gh=document.getElementById('gateHeading');
+    if(gh)gh.innerHTML='Your scores show exactly what to fix.<br>Jennifer will tell you how.';
     document.getElementById('hookAuditResults').classList.remove('show');
     document.getElementById('hookAuditResults').innerHTML = '';
     document.getElementById('contentAuditResults').classList.remove('show');
@@ -1149,6 +1151,13 @@ function updateGateHeading(score){
      HOOK AUDIT ENGINE
      Four dimensions from the CRICKETS manifesto:
      Recognition, Discomfort, Curiosity, Surprise (0-25 each)
+
+     NOTE on overlapping patterns: Some hooks (e.g. "DMs are completely
+     silent") legitimately score on both Recognition and Discomfort
+     simultaneously. This is correct behaviour: a hook that makes the
+     reader feel seen AND names a cost they are experiencing is stronger
+     than one that does only one. The dominant bonus accounts for this
+     by rewarding genuine multi-dimension strength while capping at 100.
   ══════════════════════════════════════════════════════ */
 
   function scoreRecognition(h){
@@ -1576,9 +1585,11 @@ function updateGateHeading(score){
   function attachCharCount(textarea,countEl){
     textarea.addEventListener('input',function(){
       var len=this.value.length;
-      var max=parseInt(this.getAttribute('maxlength'))||5000;
+      var max=parseInt(this.getAttribute('maxlength'))||10000;
       countEl.textContent=len+' / '+max+' characters';
-      countEl.style.color=len>3000?'var(--amber)':'var(--muted)';
+      countEl.style.color=len>7000?'var(--amber)':'var(--muted)';
+      /* If user manually edits, clear the carousel flag */
+      _isCarouselPost=false;
       this.classList.toggle('has-content',this.value.trim().length>0);
     });
   }
@@ -1590,7 +1601,7 @@ function updateGateHeading(score){
     var group=document.createElement('div');
     group.className='post-input-group';
     group.setAttribute('data-post',postCount);
-    group.innerHTML='<div class="post-number-row"><span class="post-number-label">Post '+postCount+'</span><span class="post-char-count" id="count'+postCount+'">0 / 5000 characters</span></div><textarea class="post-textarea" id="post'+postCount+'" placeholder="Paste post '+postCount+' here..." rows="7" maxlength="5000" aria-label="LinkedIn post '+postCount+'"></textarea>';
+    group.innerHTML='<div class="post-number-row"><span class="post-number-label">Post '+postCount+'</span><span class="post-char-count" id="count'+postCount+'">0 / 10000 characters</span></div><textarea class="post-textarea" id="post'+postCount+'" placeholder="Paste post '+postCount+' here..." rows="7" maxlength="10000" aria-label="LinkedIn post '+postCount+'"></textarea>';
     document.getElementById('postInputs').appendChild(group);
     attachCharCount(document.getElementById('post'+postCount),document.getElementById('count'+postCount));
     if(postCount>=MAX_POSTS)this.style.display='none';
@@ -1598,6 +1609,9 @@ function updateGateHeading(score){
   });
 
   /* ── PDF UPLOAD ── */
+  /* Carousel flag: tracks whether current post1 content came from PDF extraction */
+  var _isCarouselPost = false;
+
   document.getElementById('pdfUpload').addEventListener('change',function(e){
     var file=e.target.files[0];
     if(!file)return;
@@ -1616,10 +1630,16 @@ function updateGateHeading(score){
           fullText=fullText.replace(/ +/g,' ').trim();
           if(!fullText||fullText.length<10){errorEl.textContent='We could not read this PDF. This usually means the PDF contains images rather than text. Please paste your slide copy manually.';errorEl.style.display='block';return;}
           var ta=document.getElementById('post1');
-          ta.value=fullText.substring(0,5000);
+          /* Use full 10000 character limit for carousel PDFs */
+          ta.value=fullText.substring(0,10000);
           ta.classList.add('has-content');
-          document.getElementById('count1').textContent=ta.value.length+' / 5000 characters';
+          document.getElementById('count1').textContent=ta.value.length+' / 10000 characters';
+          /* Set carousel flag so length and formatting penalties are suspended */
+          _isCarouselPost=true;
+          statusEl.textContent='PDF text extracted: '+ta.value.length+' characters from '+pdf.numPages+' page'+(pdf.numPages>1?'s':'')+'. Review and edit below before auditing. Length and formatting penalties are suspended for carousel posts.';
           statusEl.style.display='block';
+          /* Scroll to textarea */
+          ta.scrollIntoView({behavior:'smooth',block:'nearest'});
         });
       }).catch(function(){errorEl.textContent='We could not read this PDF. This usually means the PDF contains images rather than text. Please paste your slide copy manually.';errorEl.style.display='block';});
     };
@@ -1721,6 +1741,8 @@ function updateGateHeading(score){
   /* ── CONTENT AUDIT BUTTON ── */
   document.getElementById('contentAuditBtn').addEventListener('click',function(){
     var posts=[];
+    /* Capture carousel flag before collecting posts */
+    var isCarousel=_isCarouselPost;
     for(var i=1;i<=postCount;i++){var ta=document.getElementById('post'+i);var pt=ta?ta.value.trim():'';if(pt.length>=25)posts.push(pt);}
     var valMsg=document.getElementById('contentValMsg');
     if(posts.length===0){var ta1=document.getElementById('post1');if(ta1)ta1.style.borderColor='#C62828';valMsg.textContent='Please paste at least one LinkedIn post to audit it.';valMsg.style.display='block';return;}
@@ -1732,7 +1754,7 @@ function updateGateHeading(score){
     resultsEl.innerHTML='<div class="jn-loading"><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-text">Reviewing your content...</span></div>';
     resultsEl.classList.add('show');
     resultsEl.scrollIntoView({behavior:'smooth',block:'start'});
-    setTimeout(function(){for(var ci=1;ci<=postCount;ci++){var cta=document.getElementById('post'+ci);var cnt=document.getElementById('count'+ci);if(cta){cta.value='';cta.classList.remove('has-content');cta.style.borderColor='';}if(cnt)cnt.textContent='0 / 5000 characters';}},600);
+    setTimeout(function(){for(var ci=1;ci<=postCount;ci++){var cta=document.getElementById('post'+ci);var cnt=document.getElementById('count'+ci);if(cta){cta.value='';cta.classList.remove('has-content');cta.style.borderColor='';}if(cnt)cnt.textContent='0 / 10000 characters';}},600);
 
     setTimeout(function(){
       btn.disabled=false;btn.textContent=btn._orig;
@@ -1741,11 +1763,18 @@ function updateGateHeading(score){
         var pain=scorePainSpec(post);
         var proof=scoreProofPresence(post);
         var cta=scoreConversionIntent(post);
-        var length=scoreLengthContent(post);
-        var formatting=scoreFormattingContent(post);
+        /* Carousel posts: bypass length and formatting penalties entirely */
+        var length,formatting;
+        if(isCarousel){
+          length={modifier:0,note:null};
+          formatting={modifier:0,note:null};
+        } else {
+          length=scoreLengthContent(post);
+          formatting=scoreFormattingContent(post);
+        }
         var raw=hook.score+pain.score+proof.score+cta.score;
         var total=Math.max(0,Math.min(100,raw+length.modifier+formatting.modifier));
-        return {post:post,total:total,raw:raw,hook:hook,pain:pain,proof:proof,cta:cta,length:length,formatting:formatting};
+        return {post:post,total:total,raw:raw,hook:hook,pain:pain,proof:proof,cta:cta,length:length,formatting:formatting,isCarousel:isCarousel};
       });
       var overallAvg=Math.round(postScores.reduce(function(sum,s){return sum+s.total;},0)/postScores.length);
       var grade=getGradeContent(overallAvg);
@@ -1785,7 +1814,7 @@ function updateGateHeading(score){
         html.push('</div>');
         // Performance context
         html.push('<div class="performance-context" id="perfCtx'+idx+'">');
-        html.push('<button class="performance-context-trigger" type="button" data-idx="'+idx+'"><span class="performance-context-label">Add Your Post Performance Data (Optional)</span><span class="performance-context-chevron" aria-hidden="true">&#9660;</span></button>');
+        html.push('<button class="performance-context-trigger" type="button" data-idx="'+idx+'" aria-expanded="false" aria-controls="perfInterp'+idx+'"><span class="performance-context-label">Add Your Post Performance Data (Optional)</span><span class="performance-context-chevron" aria-hidden="true">&#9660;</span></button>');
         html.push('<div class="performance-context-body"><div class="performance-context-inner">');
         html.push('<div class="perf-field"><span class="perf-field-label">Approximate Impressions</span><input type="number" class="perf-input" id="perfImpr'+idx+'" placeholder="e.g. 1200" min="0"></div>');
         html.push('<div class="perf-field"><span class="perf-field-label">Did this post receive comments?</span><div class="perf-toggles"><button class="perf-toggle-btn" data-field="comments" data-val="yes" data-idx="'+idx+'" type="button">Yes</button><button class="perf-toggle-btn" data-field="comments" data-val="no" data-idx="'+idx+'" type="button">No</button></div></div>');
@@ -1796,8 +1825,12 @@ function updateGateHeading(score){
         html.push('</div>');
       });
       html.push('</div>');
-      // Carousel note
-      html.push('<div class="carousel-note">Note: This tool audits text posts. Carousel and document posts currently achieve 6.60% average engagement versus 2% for text posts on LinkedIn in 2026. If you are only posting text, consider adding one carousel per week.</div>');
+      // Carousel note: context-aware based on whether PDF was uploaded
+      if(isCarousel){
+        html.push('<div class="carousel-note">&#9670; Carousel mode active. Length and formatting penalties suspended. This score reflects your slide copy quality only: hook strength, pain specificity, proof presence, and conversion intent across all slides. Carousel posts average 6.60% engagement versus under 2% for text posts on LinkedIn in 2026.</div>');
+      } else {
+        html.push('<div class="carousel-note">&#9670; This tool audits text posts. Carousel and document posts currently achieve 6.60% average engagement versus under 2% for text posts on LinkedIn in 2026. If you are only posting text, consider adding one carousel per week to your content mix.</div>');
+      }
 
       /* Fix 17: Improved performance interpretation */
       function getPerformanceInterpretation(score,comments,leads){
@@ -1823,9 +1856,16 @@ function updateGateHeading(score){
 
       // Performance context toggles
       resultsEl.addEventListener('click',function(e){
-        // Accordion
+        // Accordion - Fix A: toggle aria-expanded for accessibility
         var trigger=e.target.closest('.performance-context-trigger');
-        if(trigger){var idx=trigger.getAttribute('data-idx');var ctx=document.getElementById('perfCtx'+idx);ctx.classList.toggle('open');return;}
+        if(trigger){
+          var idx=trigger.getAttribute('data-idx');
+          var ctx=document.getElementById('perfCtx'+idx);
+          var isOpen=ctx.classList.contains('open');
+          ctx.classList.toggle('open');
+          trigger.setAttribute('aria-expanded',!isOpen);
+          return;
+        }
         // Toggle buttons - Fix 16
         var tb=e.target.closest('.perf-toggle-btn');
         if(tb){var field=tb.getAttribute('data-field');var idx2=tb.getAttribute('data-idx');tb.closest('.perf-toggles').querySelectorAll('.perf-toggle-btn').forEach(function(b){b.classList.remove('selected');});tb.classList.add('selected');return;}
@@ -1886,7 +1926,13 @@ function updateGateHeading(score){
     document.getElementById('sharedPostAudit').style.display='none';
     document.getElementById('hookTextarea').value='';
     document.getElementById('hookCharCount').textContent='0 characters';
-    for(var i=1;i<=postCount;i++){var ta=document.getElementById('post'+i);var cnt=document.getElementById('count'+i);if(ta){ta.value='';ta.classList.remove('has-content');}if(cnt)cnt.textContent='0 / 5000 characters';}
+    /* Clear carousel flag and PDF status on reaudit */
+    _isCarouselPost=false;
+    var pdfStatusEl=document.getElementById('pdfStatus');
+    if(pdfStatusEl)pdfStatusEl.style.display='none';
+    var pdfInput=document.getElementById('pdfUpload');
+    if(pdfInput)pdfInput.value='';
+    for(var i=1;i<=postCount;i++){var ta=document.getElementById('post'+i);var cnt=document.getElementById('count'+i);if(ta){ta.value='';ta.classList.remove('has-content');}if(cnt)cnt.textContent='0 / 10000 characters';}
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
