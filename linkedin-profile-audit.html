@@ -200,10 +200,10 @@
           },
           {
             "@type": "Question",
-            "name": "What does the Full Profile Audit score?",
+            "name": "What does the Profile Audit score?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The Full Profile Audit at https://jennavi.co/linkedin-profile-audit.html scores your LinkedIn profile out of 100 across four dimensions, each worth 25 points. Headline: whether it names a specific client, states a specific outcome, and contains proof. About Section: client clarity, outcome specificity, proof presence, and call to action. Experience: whether it contains specific numbers tied to outcomes rather than a task list. Skills and Profile Signals: whether your top skills align with your positioning and whether your profile has completeness signals like a featured section, custom URL, and location."
+              "text": "The Profile Audit at https://jennavi.co/linkedin-profile-audit.html scores your LinkedIn profile out of 100 across three dimensions. About Section (40 points): client clarity, outcome specificity, proof presence, and call to action. Experience (35 points): whether your roles show specific numbers tied to outcomes rather than task descriptions. Skills and Profile Signals (25 points): whether your top skills align with your positioning and whether your profile has completeness signals like a custom URL, location, and education. The headline is not scored in the Profile Audit because LinkedIn's PDF export format makes accurate headline extraction unreliable. Use the Headline Audit tab to score your headline separately by pasting it directly."
             }
           },
           {
@@ -710,8 +710,8 @@
     <div class="mode-buttons" role="tablist" aria-label="Audit mode selection">
       <button class="mode-btn active" id="modeFullBtn" data-mode="full" role="tab" aria-selected="true" aria-controls="fullProfilePanel" type="button">
         <span class="mode-btn-icon" aria-hidden="true">&#128196;</span>
-        <span class="mode-btn-title">Full Profile Audit</span>
-        <span class="mode-btn-desc">Upload your LinkedIn PDF. Score out of 100 across 4 dimensions.</span>
+        <span class="mode-btn-title">Profile Audit</span>
+        <span class="mode-btn-desc">Upload your LinkedIn PDF. Score out of 100 across 3 dimensions.</span>
         <span class="mode-btn-badge">PDF Upload</span>
       </button>
       <button class="mode-btn" id="modeHeadlineBtn" data-mode="headline" role="tab" aria-selected="false" aria-controls="headlinePanel" type="button">
@@ -787,9 +787,9 @@
       <div class="section-label">Paste Your LinkedIn About Section</div>
       <div class="input-wrap">
         <label class="input-label" for="aboutInput">Your LinkedIn About Section</label>
-        <textarea class="field-textarea" id="aboutInput" placeholder="Go to your LinkedIn profile and click See More under your About section to expand the full text. Copy everything and paste it here." maxlength="10000" rows="8" aria-label="Your LinkedIn About section"></textarea>
+        <textarea class="field-textarea" id="aboutInput" placeholder="Go to your LinkedIn profile and click See More under your About section to expand the full text. Copy everything and paste it here." maxlength="5000" rows="8" aria-label="Your LinkedIn About section"></textarea>
         <div class="char-row">
-          <span class="char-count" id="aboutCharCount">0 / 10000 characters</span>
+          <span class="char-count" id="aboutCharCount">0 / 5000 characters</span>
         </div>
       </div>
       <button class="audit-btn" id="aboutAuditBtn" type="button">Audit My About Section &#8594;</button>
@@ -1131,12 +1131,17 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
   }
 
   function buildPriorityFix(dims){
-    var sorted=dims.slice().sort(function(a,b){return a.score-b.score;});
-    var fixes=sorted.filter(function(d){return d.score<15;}).slice(0,3);
+    var sorted=dims.slice().sort(function(a,b){
+      var aPct=(a.score/a.max)*100;
+      var bPct=(b.score/b.max)*100;
+      return aPct-bPct;
+    });
+    var fixes=sorted.filter(function(d){
+      return (d.score/d.max)*100 < 55;
+    }).slice(0,3);
     if(fixes.length===0)fixes=[sorted[0]];
     var html=['<div class="priority-fix"><span class="priority-fix-label">Priority Fix</span><p class="priority-fix-text">'];
     var fixTexts=fixes.map(function(f){
-      /* If About Section is a priority fix, drill into its weakest sub-dimension */
       if(f.name==='About Section'&&f.aboutDetail){
         var ab=f.aboutDetail;
         var subDims=[
@@ -1214,7 +1219,7 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
             errorEl.style.display='block';return;
           }
           window._parsedPdfText=fullText;
-          statusEl.textContent='PDF read successfully. '+pdf.numPages+' page'+(pdf.numPages>1?'s':'')+' detected. '+fullText.length+' characters extracted. Ready to audit.';
+          statusEl.textContent='Your profile has been read successfully. Click the button below to audit it.';
           statusEl.style.display='block';
           auditBtn.style.display='block';
           auditBtn.scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -1235,102 +1240,66 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
   function scoreFullProfile(text){
     var lower=text.toLowerCase();
 
-    /* Parse sections */
-    var headlineText=extractHeadline(text);
     var aboutText=extractAbout(text);
     var experienceText=extractExperience(text);
     var skillsText=extractSkills(text);
 
-    /* ── DIMENSION 1: HEADLINE (25pts) ──
-       Grading:
-       25 - names specific client + specific outcome + proof anchor (number/%)
-       20 - names client + outcome, no proof anchor
-       15 - names specific client, vague outcome
-       10 - names outcome only, no client
-        5 - job title only or no client and no outcome
-        3 - one-word or less than 15 chars (clearly wrong extraction)
-    */
-    var hlScore=0,hlFeedback='',hlFix='';
-    /* Always score whatever was extracted - do not bail to standalone mode.
-       The user never sees what was extracted, so we score it and let the
-       dimensions speak for themselves. If extraction produced nothing,
-       the keyword checks simply return false and the score reflects that. */
-    var hasClient=/(saas|fintech|b2b|b2c|founder|ceo|executive|startup|agency|consultant|coach|series|solopreneur|operator|ghostwriter|ghostwriting|copywriter|marketer|advisor|strategist)/i.test(headlineText);
-    var hasOutcome=/(growth|inbound|revenue|clients|leads|impressions|followers|pipeline|conversion|results|achieved|generated|grew|built|closed|scale|convert|attract|turn)/i.test(headlineText);
-    var hasProof=/\d+[%x]|\$[\d,]+|\d[\d,]{2,}/.test(headlineText);
-    var isJobTitleOnly=/^(ceo|founder|co-founder|founder &|ceo &|director|manager|head of|vp|president|chief|entrepreneur)/i.test(headlineText.trim())&&headlineText.length<70&&!hasOutcome;
-    if(hasClient&&hasOutcome&&hasProof){hlScore=25;hlFeedback='Excellent headline. You name a specific client, state a specific outcome, and include a proof anchor. This is the full three-element formula.';hlFix='';}
-    else if(hasClient&&hasOutcome){hlScore=20;hlFeedback='Strong headline with client and outcome present. Adding a specific proof anchor such as a percentage or client count would complete the formula and push this to a perfect score.';hlFix='Add one specific number: percentage growth, client count, or revenue figure.';}
-    else if(isJobTitleOnly){hlScore=5;hlFeedback='Your headline appears to be a job title only. A job title names what you are called, not what changes for your client. Every profile visitor asks the same silent question: what do I gain if I work with this person?';hlFix='Rewrite using: I help [specific client] achieve [specific outcome] | [proof anchor]';}
-    else if(hasClient&&!hasOutcome){hlScore=15;hlFeedback='You name a type of client but the specific outcome they achieve is missing. A visitor cannot understand what changes for them if they work with you.';hlFix='Add the specific result your client achieves. Not "I help founders grow" but "I help founders generate 3 to 5 inbound calls per month."';}
-    else if(hasOutcome&&!hasClient){hlScore=10;hlFeedback='You reference an outcome but without naming who it is for. The right client cannot self-select. Make the client the subject of the headline.';hlFix='Name your specific client type first, then the outcome they achieve.';}
-    else{hlScore=5;hlFeedback='Your headline does not clearly name a specific client or a specific outcome. A visitor cannot understand who this profile is for or why it matters to them.';hlFix='Start with your client: "I help [specific client type] achieve [specific outcome]."';}
-
-    /* ── DIMENSION 2: ABOUT SECTION (25pts) ──
-       Scored by scoreAboutSection() which returns total 0-100.
-       We scale that to 0-25 for the dimension card.
-       The full About detail is shown in the checklist expansion.
-    */
+    /* ══════════════════════════════════════════════
+       DIMENSION 1: ABOUT SECTION (40 points)
+       Headline removed — LinkedIn two-column PDF
+       makes headline extraction unreliable.
+       About is the strongest reliable signal.
+       Raw scoreAboutSection() 0-100 scaled to 0-40.
+    ══════════════════════════════════════════════ */
     var aboutResult=scoreAboutSection(aboutText);
-    var aboutDimScore=Math.round(aboutResult.total/4); /* scale 100 -> 25 */
+    var aboutDimScore=Math.round(aboutResult.total*0.4);
 
-    /* ── DIMENSION 3: EXPERIENCE (25pts) ──
-       Grading:
-       25 - 3+ specific numbers tied to outcome language across multiple roles
-       20 - 2 specific numbers + outcome language
-       15 - 1 specific number + outcome language
-       10 - numbers present but not tied to outcomes (years, dates count excluded)
-        8 - outcome language present but no numbers
-        5 - task language only (responsible for, managed, assisted)
-        3 - no experience section found
-    */
+    /* ══════════════════════════════════════════════
+       DIMENSION 2: EXPERIENCE (35 points)
+       Scores whether roles show specific numbers
+       tied to outcome language vs task lists.
+    ══════════════════════════════════════════════ */
     var expScore=0,expFeedback='',expFix='';
     if(!experienceText||experienceText.length<50){
-      expScore=3;expFeedback='We could not locate an Experience section in your PDF. This may mean the PDF export was incomplete.';expFix='Check your PDF export includes at least your last two roles.';
+      expScore=5;
+      expFeedback='We could not locate an Experience section in your PDF. This may mean the PDF export was incomplete.';
+      expFix='Check your PDF export includes at least your last two roles.';
     } else {
-      /* Filter out date numbers (2020, 2021 etc) and duration numbers (7 months, 2 years) */
       var rawNums=(experienceText.match(/\d[\d,]*(%|x|\+)?/g)||[]);
       var meaningfulNums=rawNums.filter(function(n){
         var v=parseInt(n.replace(/,/g,''));
-        /* Exclude 4-digit years, single digits without context */
         return v>0&&!(v>=1990&&v<=2030)&&n.length>=2;
       });
       var hasOutcomeLanguage=/(grew|growth|increased|generated|delivered|achieved|closed|won|built|launched|scaled|raised|drove|produced|boosted|improved|reduced|saved|secured|converted|acquired)/i.test(experienceText);
       var hasTaskLanguage=/(responsible for|managed|assisted|supported|helped|worked on|contributed|involved in|tasked with)/i.test(experienceText);
       var numCount=meaningfulNums.length;
 
-      if(numCount>=3&&hasOutcomeLanguage){expScore=25;expFeedback='Strong experience section. You have specific numbers tied to outcomes across your roles. This reads as a track record, not a job description.';}
-      else if(numCount>=2&&hasOutcomeLanguage){expScore=20;expFeedback='Good experience section with numbers and outcome language. Ensure at least two separate roles each show a quantified result rather than numbers concentrated in one role.';}
-      else if(numCount>=1&&hasOutcomeLanguage){expScore=15;expFeedback='You have at least one quantified result. Adding a second specific number tied to an outcome in a different role would significantly strengthen this dimension.';}
-      else if(numCount>=2&&!hasOutcomeLanguage){expScore=10;expFeedback='You have numbers but they are not clearly tied to outcomes. Numbers like years of experience or headcount do not count. Connect each number to a result: grew X by Y%, not just X years.';}
-      else if(hasOutcomeLanguage&&numCount===0){expScore=8;expFeedback='You use outcome language but without specific numbers. Every outcome claim needs a number to become evidence. "Grew engagement" is a claim. "Grew engagement by 150%" is evidence.';}
-      else if(hasTaskLanguage){expScore=5;expFeedback='"Responsible for" and "managed" describe duties, not results. Every role should show at least one specific outcome with a number. What actually happened because of your work?';}
-      else{expScore=8;expFeedback='Your experience section needs specific quantified outcomes. At minimum, each role should show one number tied to a result you produced.';}
-
-      expFix=expScore<20?'For each role ask: what specific number changed because of my work? Replace task descriptions with outcome statements.':'';
+      if(numCount>=3&&hasOutcomeLanguage){
+        expScore=35;expFeedback='Strong experience section. You have specific numbers tied to outcomes across your roles. This reads as a track record, not a job description.';
+      } else if(numCount>=2&&hasOutcomeLanguage){
+        expScore=28;expFeedback='Good experience section with numbers and outcome language. Ensure at least two separate roles each show a quantified result rather than numbers concentrated in one role.';
+      } else if(numCount>=1&&hasOutcomeLanguage){
+        expScore=21;expFeedback='You have at least one quantified result. Adding a second specific number tied to an outcome in a different role would significantly strengthen this.';
+      } else if(numCount>=2&&!hasOutcomeLanguage){
+        expScore=14;expFeedback='You have numbers but they are not clearly tied to outcomes. Connect each number to a result: grew X by Y%, not just X years of experience.';
+      } else if(hasOutcomeLanguage&&numCount===0){
+        expScore=10;expFeedback='You use outcome language but without specific numbers. Every outcome claim needs a number to become evidence. "Grew engagement" is a claim. "Grew engagement by 150%" is evidence.';
+      } else if(hasTaskLanguage){
+        expScore=7;expFeedback='"Responsible for" and "managed" describe duties, not results. Every role should show at least one specific outcome with a number. What actually happened because of your work?';
+      } else {
+        expScore=10;expFeedback='Your experience section needs specific quantified outcomes. At minimum each role should show one number tied to a result you produced.';
+      }
+      expFix=expScore<28?'For each role ask: what specific number changed because of my work? Replace task descriptions with outcome statements.':'';
     }
 
-    /* ── DIMENSION 4: SKILLS + PROFILE SIGNALS (25pts) ──
-       Grading breakdown:
-       Skills relevance (0-15):
-         15 - 3+ positioning-relevant skills in top 5
-         10 - 2 positioning-relevant skills
-          6 - 1 positioning-relevant skill
-          2 - all generic (Office, Communication etc)
-
-       Completeness signals (0-10, 2pts each):
-         Custom URL detected
-         Location set (generalised pattern)
-         Education section present
-         Featured section present (tightened pattern)
-         Profile appears complete (PDF has substantive content >1000 chars)
-
-       Photo removed from checklist - not detectable from PDF text.
-    */
+    /* ══════════════════════════════════════════════
+       DIMENSION 3: SKILLS AND PROFILE SIGNALS (25 points)
+       Skills relevance (0-15) + completeness signals (0-10)
+       hasFeatured removed — not reliably captured in PDF.
+    ══════════════════════════════════════════════ */
     var skillsScore=0,skillsFeedback='',skillsFix='';
     var positioningTerms=['ghostwriting','ghostwriter','linkedin','content strategy','content marketing','growth strategy','lead generation','sales','revenue','b2b','saas','fundraising','product strategy','brand strategy','marketing strategy','copywriting','copywriter','positioning','demand generation','inbound marketing','conversion','pipeline','social media strategy','digital marketing','seo','thought leadership','personal branding','email marketing','community building'];
     var genericTerms=['microsoft office','teamwork','communication','time management','leadership','problem solving','microsoft excel','powerpoint','microsoft word','organisational skills','interpersonal skills','customer service','data entry','attention to detail'];
-    /* Skills section may be anywhere in the PDF - search full text for skills area */
     var skillsSearchText=skillsText.toLowerCase()+' '+lower.substring(0,800);
     var posCount=positioningTerms.filter(function(t){return skillsSearchText.indexOf(t)>-1;}).length;
     var genCount=genericTerms.filter(function(t){return skillsSearchText.indexOf(t)>-1;}).length;
@@ -1341,9 +1310,7 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
     else if(genCount>0){skillsPts=2;skillsFeedback='Your visible skills appear generic. Terms like Communication and Microsoft Office signal nothing to a potential client. Update your top three LinkedIn skills to reflect your specific expertise.';}
     else{skillsPts=4;skillsFeedback='We could not clearly detect your skills section. If your top LinkedIn skills are positioning-relevant, the tool may not have found them in this PDF export.';}
 
-    /* Completeness signals - location, custom URL, education, substantial profile */
     var hasCustomUrl=/linkedin\.com\/in\/[a-z][a-z0-9\-]{2,}(?!\d{8})/i.test(text);
-    /* Generalised location: look for common location patterns in first 600 chars of PDF */
     var pdfTop=text.substring(0,600);
     var hasLocation=/(,\s*[A-Z][a-z]+\s*(state|city|county)?|nigeria|ghana|kenya|south africa|united states|united kingdom|australia|canada|india|pakistan|uae|dubai|london|new york|lagos|kano|nairobi|accra|toronto|sydney|melbourne|singapore|berlin|paris|amsterdam)/i.test(pdfTop);
     var hasEducation=/(education|university|college|bachelor|master|degree|diploma|nursing|engineering|science|arts|business school)/i.test(text);
@@ -1351,6 +1318,24 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
 
     var completenessPoints=(hasCustomUrl?3:0)+(hasLocation?2:0)+(hasEducation?2:0)+(profileIsSubstantial?3:0);
     skillsScore=Math.min(25,skillsPts+completenessPoints);
+    skillsFix=(posCount<2)?'Update your top LinkedIn skills to include specific positioning terms: ghostwriting, LinkedIn strategy, lead generation, B2B content, or whatever best describes your expertise.':'';
+
+    /* LENGTH MODIFIER */
+    var lengthModifier=0,lengthNote='';
+    if(text.length<400){
+      lengthModifier=-10;
+      lengthNote='Your LinkedIn PDF appears very short ('+text.length+' characters). This may mean the PDF export was incomplete. Score deducted: -10.';
+    }
+
+    var rawTotal=aboutDimScore+expScore+skillsScore;
+    var total=Math.max(0,Math.min(100,rawTotal+lengthModifier));
+
+    var grade,gradeCls,verdict;
+    if(total>=81){grade='Authority Profile';gradeCls='strong';verdict='Your profile is structured to convert. The next question is whether your content strategy is matching the standard your profile sets.';}
+    else if(total>=61){grade='Credible but Incomplete';gradeCls='good';verdict='Your profile signals expertise but is missing specific elements that would convert a curious visitor into an inbound lead.';}
+    else if(total>=41){grade='Visible but Not Converting';gradeCls='avg';verdict='Your profile describes you but does not sell you. Visitors understand what you do but have no reason to reach out today.';}
+    else if(total>=21){grade='Needs Significant Work';gradeCls='weak';verdict='There are structural gaps across your profile. Fixing the About section and Experience first will produce the fastest return.';}
+    else{grade='Invisible Profile';gradeCls='crit';verdict='Your profile is actively repelling the right clients. Complete the rebuild before optimising content volume.';}
 
     var checklistItems=[
       {label:'Positioning-relevant skills detected',pass:posCount>=1,note:posCount>=1?posCount+' found':null},
@@ -1358,37 +1343,17 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
       {label:'Location set',pass:hasLocation},
       {label:'Education section present',pass:hasEducation}
     ];
-    skillsFix=(posCount<2)?'Update your top LinkedIn skills to include specific positioning terms: ghostwriting, LinkedIn strategy, lead generation, B2B content, or whatever best describes your expertise.':'';
-
-    /* LENGTH MODIFIER - only for clearly incomplete PDFs */
-    var lengthModifier=0,lengthNote='';
-    if(text.length<400){lengthModifier=-10;lengthNote='Your LinkedIn PDF appears very short ('+text.length+' characters). This may mean the PDF export was incomplete or did not capture all sections. Score deducted: -10.';}
-
-    /* ── SCORING NOTE ON ABOUT DIMENSION ──
-       aboutDimScore is scaled from the full About audit (0-25).
-       We show the full about breakdown separately in the checklist expansion.
-    */
-    var rawTotal=hlScore+aboutDimScore+expScore+skillsScore;
-    var total=Math.max(0,Math.min(100,rawTotal+lengthModifier));
-
-    /* ── GRADES ──
-       Authority Profile    81-100
-       Credible but Incomplete  61-80
-       Visible but Not Converting 41-60
-       Needs Significant Work   21-40
-       Invisible Profile    0-20
-    */
-    var grade,gradeCls,verdict;
-    if(total>=81){grade='Authority Profile';gradeCls='strong';verdict='Your profile is structured to convert. The next question is whether your content strategy is matching the standard your profile sets.';}
-    else if(total>=61){grade='Credible but Incomplete';gradeCls='good';verdict='Your profile signals expertise but is missing specific elements that would convert a curious visitor into an inbound lead.';}
-    else if(total>=41){grade='Visible but Not Converting';gradeCls='avg';verdict='Your profile describes you but does not sell you. Visitors understand what you do but have no reason to reach out today.';}
-    else if(total>=21){grade='Needs Significant Work';gradeCls='weak';verdict='There are structural gaps across your profile. Fixing the headline and About section first will produce the fastest return.';}
-    else{grade='Invisible Profile';gradeCls='crit';verdict='Your profile is actively repelling the right clients. Complete the rebuild before optimising content volume.';}
 
     var dims=[
-      {name:'Headline',score:hlScore,max:25,feedback:hlFeedback,fix:hlFix},
-      {name:'About Section',score:aboutDimScore,max:25,feedback:'Full breakdown below. Raw about section score: '+aboutResult.total+'/100 scaled to this dimension.',fix:'',aboutDetail:aboutResult},
-      {name:'Experience',score:expScore,max:25,feedback:expFeedback,fix:expFix},
+      {
+        name:'About Section',
+        score:aboutDimScore,
+        max:40,
+        feedback:'Your About section scored '+aboutResult.total+'/100 (scaled to '+aboutDimScore+'/40 for this audit). '+aboutResult.verdict,
+        fix:'',
+        aboutDetail:aboutResult
+      },
+      {name:'Experience',score:expScore,max:35,feedback:expFeedback,fix:expFix},
       {name:'Skills and Profile Signals',score:skillsScore,max:25,feedback:skillsFeedback+(skillsFix?' '+skillsFix:''),fix:''}
     ];
 
@@ -1549,17 +1514,21 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
       var deductions=r.lengthNote?[r.lengthNote]:[];
       html.push(buildScoreBox(r.total,r.grade,r.gradeCls,r.verdict,'Full',deductions));
 
-      /* Dimension cards with correct max values */
+      /* ── HEADLINE CALLOUT BOX ── */
+      html.push('<div style="padding:16px 20px;background:rgba(201,168,76,0.06);border:1px solid var(--gold-border-s);margin-bottom:24px;border-radius:2px;">');
+      html.push('<span style="font-family:\'DM Mono\',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;">Headline Not Scored Here</span>');
+      html.push('<p style="font-size:13px;color:var(--ivory-muted);line-height:1.7;margin-bottom:12px;">LinkedIn\'s PDF export merges columns when extracted, making accurate headline scoring unreliable in this mode. For a precise headline score, use the <strong style="color:var(--ivory);">Headline Audit</strong> tab. It takes 30 seconds.</p>');
+      html.push('<button type="button" onclick="document.getElementById(\'modeHeadlineBtn\').click();window.scrollTo({top:document.getElementById(\'modeSwitcherWrap\').offsetTop-80,behavior:\'smooth\'});" style="font-family:\'DM Mono\',monospace;font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:10px 20px;background:var(--gold);color:var(--onyx);border:none;cursor:pointer;border-radius:2px;min-height:38px;">Score My Headline in 30 Seconds &#8594;</button>');
+      html.push('</div>');
+
+      /* ── DIMENSION CARDS ── */
       html.push('<div class="dim-cards">');
       r.dims.forEach(function(d){
-        /* About dimension gets expanded sub-score breakdown */
         if(d.name==='About Section'&&d.aboutDetail){
           var ab=d.aboutDetail;
           var abDeductions=ab.deductions&&ab.deductions.length>0?ab.deductions:[];
-          html.push(buildDimCard(d.name,d.score,25,
-            'Your About section scored '+ab.total+'/100 (scaled to '+d.score+'/25 for this dimension). '+ab.verdict,
-            ''));
-          /* Sub-breakdown */
+          html.push(buildDimCard(d.name,d.score,40,
+            'Your About section scored '+ab.total+'/100 (scaled to '+d.score+'/40 for this audit). '+ab.verdict,''));
           html.push('<div style="margin-top:-10px;margin-bottom:14px;padding:14px 16px;background:var(--onyx);border:1px solid var(--gold-border);border-top:none;">');
           html.push('<span style="font-family:\'DM Mono\',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);opacity:0.7;display:block;margin-bottom:10px;">About Section Breakdown</span>');
           [
@@ -1572,7 +1541,7 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
             html.push('<div style="margin-bottom:12px;">');
             html.push('<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">');
             html.push('<span style="font-family:\'DM Mono\',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">'+sub.label+'</span>');
-            html.push('<span style="font-family:\'DM Mono\',monospace;font-size:11px;font-weight:600;'+( sub.score>=20?'color:var(--score-strong)':sub.score>=15?'color:var(--score-good)':sub.score>=10?'color:var(--score-avg)':'color:var(--score-weak)')+'">' +sub.score+'/25</span>');
+            html.push('<span style="font-family:\'DM Mono\',monospace;font-size:11px;font-weight:600;'+(sub.score>=20?'color:var(--score-strong)':sub.score>=15?'color:var(--score-good)':sub.score>=10?'color:var(--score-avg)':'color:var(--score-weak)')+'">' +sub.score+'/25</span>');
             html.push('</div>');
             html.push('<div style="height:2px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;margin-bottom:5px;"><div class="dim-bar '+getBarClass(sub.score,25)+'" data-pct="'+subPct+'" style="width:0%;height:100%;border-radius:2px;transition:width 1s;"></div></div>');
             html.push('<p style="font-size:11.5px;color:var(--ivory-muted);line-height:1.65;">'+sub.fb+'</p>');
@@ -1583,12 +1552,12 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
           }
           html.push('</div>');
         } else {
-          html.push(buildDimCard(d.name,d.score,25,d.feedback,d.fix));
+          html.push(buildDimCard(d.name,d.score,d.max,d.feedback,d.fix));
         }
       });
       html.push('</div>');
 
-      /* Completeness checklist */
+      /* ── COMPLETENESS CHECKLIST ── */
       html.push('<div class="checklist-block"><span class="checklist-label">Profile Completeness Signals</span><div class="checklist-items">');
       r.checklistItems.forEach(function(item){
         var noteStr=item.note?' <span style="font-family:\'DM Mono\',monospace;font-size:9px;color:var(--muted);">('+item.note+')</span>':'';
@@ -1596,9 +1565,20 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
       });
       html.push('</div></div>');
 
+      /* ── PRIORITY FIX ── */
       html.push(buildPriorityFix(r.dims));
-      var fullCtaText=r.total>=81?'Book a Discovery Call With Jennifer &#8594;':r.total>=61?'Get Jennifer to Strengthen Your Profile &#8594;':'Get Jennifer to Personally Audit and Rewrite Your Profile &#8594;';
-      html.push('<div style="text-align:center;margin-bottom:24px;"><a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="btn-gold">'+fullCtaText+'</a></div>');
+
+      /* ── PRIMARY CTA — score-aware ── */
+      var fullCtaText=r.total>=81?'Book a Discovery Call With Jennifer &#8594;':r.total>=61?'Get Jennifer to Strengthen Your Profile &#8594;':'Get Jennifer to Personally Rewrite Your Profile &#8594;';
+      html.push('<div style="text-align:center;margin-bottom:32px;"><a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="btn-gold">'+fullCtaText+'</a></div>');
+
+      /* ── NEXT STEPS — go deeper on headline or about section ── */
+      html.push('<div style="border-top:1px solid var(--gold-border);padding-top:24px;margin-bottom:16px;">');
+      html.push('<span style="font-family:\'DM Mono\',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);opacity:0.7;display:block;margin-bottom:14px;">Go Deeper on Specific Sections</span>');
+      html.push('<div style="display:flex;flex-wrap:wrap;gap:10px;">');
+      html.push('<button type="button" onclick="document.getElementById(\'modeHeadlineBtn\').click();window.scrollTo({top:document.getElementById(\'modeSwitcherWrap\').offsetTop-80,behavior:\'smooth\'});" style="font-family:\'DM Mono\',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:12px 18px;background:transparent;border:1.5px solid var(--gold-border-s);color:var(--gold);cursor:pointer;border-radius:2px;min-height:42px;transition:background 0.2s;" onmouseover="this.style.background=\'rgba(201,168,76,0.1)\'" onmouseout="this.style.background=\'transparent\'">Score My Headline in 30 Seconds &#8594;</button>');
+      html.push('<button type="button" onclick="document.getElementById(\'modeAboutBtn\').click();window.scrollTo({top:document.getElementById(\'modeSwitcherWrap\').offsetTop-80,behavior:\'smooth\'});" style="font-family:\'DM Mono\',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:12px 18px;background:transparent;border:1.5px solid var(--gold-border-s);color:var(--gold);cursor:pointer;border-radius:2px;min-height:42px;transition:background 0.2s;" onmouseover="this.style.background=\'rgba(201,168,76,0.1)\'" onmouseout="this.style.background=\'transparent\'">Audit My About Section &#8594;</button>');
+      html.push('</div></div>');
       resultsEl.innerHTML=html.join('');
       resultsEl.classList.add('show');
       var sn=resultsEl.querySelector('[id^="scoreNum"]');
@@ -1741,7 +1721,7 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
   document.getElementById('aboutInput').addEventListener('input',function(){
     var len=this.value.length;
     var cc=document.getElementById('aboutCharCount');
-    cc.textContent=len+' / 10000 characters';
+    cc.textContent=len+' / 5000 characters';
     cc.className='char-count'+(len>8000?' warn':'');
   });
 
@@ -1879,7 +1859,7 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
     resultsEl.innerHTML='<div class="jn-loading"><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-dot"></span><span class="jn-loading-text">Reading your About section...</span></div>';
     resultsEl.classList.add('show');
     resultsEl.scrollIntoView({behavior:'smooth',block:'start'});
-    setTimeout(function(){document.getElementById('aboutInput').value='';document.getElementById('aboutCharCount').textContent='0 / 10000 characters';},500);
+    setTimeout(function(){document.getElementById('aboutInput').value='';document.getElementById('aboutCharCount').textContent='0 / 5000 characters';},500);
     setTimeout(function(){
       btn.disabled=false;btn.textContent=btn._orig||'Audit My About Section \u2192';
       var r=scoreAboutSection(text,true); /* isPastedManually=true: formatting deduction applies */
