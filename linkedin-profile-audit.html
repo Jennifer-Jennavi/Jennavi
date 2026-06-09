@@ -302,7 +302,8 @@
     .serif{font-family:'Playfair Display',serif;}
 
     /* NAV */
-    .nav{position:fixed;top:0;left:0;right:0;z-index:10000;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(15,15,15,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--gold-border);}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:10000;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,padding 0.4s;border-bottom:1px solid transparent;}
+    .nav.scrolled{background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);padding:13px 48px;border-bottom-color:var(--gold-border);}
     .nav-logo img{height:30px;width:auto;display:block;}
     .nav-links{display:flex;gap:18px;list-style:none;align-items:center;}
     .nav-links a{font-size:9.5px;font-weight:500;letter-spacing:0.11em;text-transform:uppercase;opacity:0.6;color:var(--ivory);transition:opacity 0.2s,color 0.2s;}
@@ -1003,6 +1004,8 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
   }
 
   /* ── NAV ── */
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
   var toggle=document.getElementById('navToggle'),drawer=document.getElementById('navDrawer'),overlay=document.getElementById('navOverlay');
   function openMenu(){toggle.classList.add('open');drawer.classList.add('open');overlay.classList.add('open');toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
   function closeMenu(){toggle.classList.remove('open');drawer.classList.remove('open');overlay.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.body.style.overflow='';}
@@ -1183,7 +1186,27 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
         var textPromises=[];
         for(var i=1;i<=pdf.numPages;i++){textPromises.push(pdf.getPage(i).then(function(page){return page.getTextContent();}));}
         Promise.all(textPromises).then(function(pages){
-          var fullText=pages.map(function(p){return p.items.map(function(item){return item.str;}).join(' ');}).join('\n\n');
+          var fullText=pages.map(function(p){
+            /* Join items within a page preserving line structure.
+               Items with a non-trivial vertical gap get a newline inserted,
+               so the extractHeadline function can find name / headline slots correctly. */
+            var items=p.items;
+            var lines=[];
+            var lastY=null;
+            var currentLine='';
+            items.forEach(function(item){
+              var y=item.transform?Math.round(item.transform[5]):null;
+              if(lastY!==null&&y!==null&&Math.abs(y-lastY)>4){
+                if(currentLine.trim())lines.push(currentLine.trim());
+                currentLine=item.str;
+              } else {
+                currentLine+=(currentLine&&item.str?' ':'')+item.str;
+              }
+              lastY=y;
+            });
+            if(currentLine.trim())lines.push(currentLine.trim());
+            return lines.join('\n');
+          }).join('\n\n');
           fullText=fullText.replace(/ +/g,' ').trim();
           processingEl.style.display='none';
           if(!fullText||fullText.length<30){
@@ -1228,24 +1251,20 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
         3 - one-word or less than 15 chars (clearly wrong extraction)
     */
     var hlScore=0,hlFeedback='',hlFix='';
-    /* Guard: if extracted text looks like a phone/email/url, flag extraction failure */
-    var hlIsGarbage=/^(\+?\d[\d\s\-()]{5,}|\S+@\S+|\S+\.(com|co|io|net|org|html)\S*)/i.test(headlineText.trim())||headlineText.trim().length<15;
-    if(hlIsGarbage){
-      hlScore=0;
-      hlFeedback='We could not reliably extract your headline from this PDF. The extracted text was: "'+headlineText.substring(0,80)+'". Your actual headline is shown above for reference. This dimension has been scored 0 to avoid misleading results. Use the standalone Headline Audit mode to score your headline accurately.';
-      hlFix='Use the Headline Audit tab and paste your headline directly for an accurate score.';
-    } else {
-      var hasClient=/(saas|fintech|b2b|b2c|founder|ceo|executive|startup|agency|consultant|coach|series|solopreneur|operator|ghostwriter|ghostwriting|copywriter|marketer|advisor|strategist)/i.test(headlineText);
-      var hasOutcome=/(growth|inbound|revenue|clients|leads|impressions|followers|pipeline|conversion|results|achieved|generated|grew|built|closed|scale|convert|attract|turn)/i.test(headlineText);
-      var hasProof=/\d+[%x]|\$[\d,]+|\d[\d,]{2,}/.test(headlineText);
-      var isJobTitleOnly=/^(ceo|founder|co-founder|founder &|ceo &|director|manager|head of|vp|president|chief|entrepreneur)/i.test(headlineText.trim())&&headlineText.length<70&&!hasOutcome;
-      if(hasClient&&hasOutcome&&hasProof){hlScore=25;hlFeedback='Excellent headline. You name a specific client, state a specific outcome, and include a proof anchor. This is the full three-element formula.';hlFix='';}
-      else if(hasClient&&hasOutcome){hlScore=20;hlFeedback='Strong headline with client and outcome present. Adding a specific proof anchor such as a percentage or client count would complete the formula and push this to a perfect score.';hlFix='Add one specific number: percentage growth, client count, or revenue figure.';}
-      else if(isJobTitleOnly){hlScore=5;hlFeedback='Your headline appears to be a job title only. A job title names what you are called, not what changes for your client. Every profile visitor asks the same silent question: what do I gain if I work with this person?';hlFix='Rewrite using: I help [specific client] achieve [specific outcome] | [proof anchor]';}
-      else if(hasClient&&!hasOutcome){hlScore=15;hlFeedback='You name a type of client but the specific outcome they achieve is missing. A visitor cannot understand what changes for them if they work with you.';hlFix='Add the specific result your client achieves. Not "I help founders grow" but "I help founders generate 3 to 5 inbound calls per month."';}
-      else if(hasOutcome&&!hasClient){hlScore=10;hlFeedback='You reference an outcome but without naming who it is for. The right client cannot self-select. Make the client the subject of the headline.';hlFix='Name your specific client type first, then the outcome they achieve.';}
-      else{hlScore=5;hlFeedback='Your headline does not clearly name a specific client or a specific outcome. A visitor cannot understand who this profile is for or why it matters to them.';hlFix='Start with your client: "I help [specific client type] achieve [specific outcome]."';}
-    }
+    /* Always score whatever was extracted - do not bail to standalone mode.
+       The user never sees what was extracted, so we score it and let the
+       dimensions speak for themselves. If extraction produced nothing,
+       the keyword checks simply return false and the score reflects that. */
+    var hasClient=/(saas|fintech|b2b|b2c|founder|ceo|executive|startup|agency|consultant|coach|series|solopreneur|operator|ghostwriter|ghostwriting|copywriter|marketer|advisor|strategist)/i.test(headlineText);
+    var hasOutcome=/(growth|inbound|revenue|clients|leads|impressions|followers|pipeline|conversion|results|achieved|generated|grew|built|closed|scale|convert|attract|turn)/i.test(headlineText);
+    var hasProof=/\d+[%x]|\$[\d,]+|\d[\d,]{2,}/.test(headlineText);
+    var isJobTitleOnly=/^(ceo|founder|co-founder|founder &|ceo &|director|manager|head of|vp|president|chief|entrepreneur)/i.test(headlineText.trim())&&headlineText.length<70&&!hasOutcome;
+    if(hasClient&&hasOutcome&&hasProof){hlScore=25;hlFeedback='Excellent headline. You name a specific client, state a specific outcome, and include a proof anchor. This is the full three-element formula.';hlFix='';}
+    else if(hasClient&&hasOutcome){hlScore=20;hlFeedback='Strong headline with client and outcome present. Adding a specific proof anchor such as a percentage or client count would complete the formula and push this to a perfect score.';hlFix='Add one specific number: percentage growth, client count, or revenue figure.';}
+    else if(isJobTitleOnly){hlScore=5;hlFeedback='Your headline appears to be a job title only. A job title names what you are called, not what changes for your client. Every profile visitor asks the same silent question: what do I gain if I work with this person?';hlFix='Rewrite using: I help [specific client] achieve [specific outcome] | [proof anchor]';}
+    else if(hasClient&&!hasOutcome){hlScore=15;hlFeedback='You name a type of client but the specific outcome they achieve is missing. A visitor cannot understand what changes for them if they work with you.';hlFix='Add the specific result your client achieves. Not "I help founders grow" but "I help founders generate 3 to 5 inbound calls per month."';}
+    else if(hasOutcome&&!hasClient){hlScore=10;hlFeedback='You reference an outcome but without naming who it is for. The right client cannot self-select. Make the client the subject of the headline.';hlFix='Name your specific client type first, then the outcome they achieve.';}
+    else{hlScore=5;hlFeedback='Your headline does not clearly name a specific client or a specific outcome. A visitor cannot understand who this profile is for or why it matters to them.';hlFix='Start with your client: "I help [specific client type] achieve [specific outcome]."';}
 
     /* ── DIMENSION 2: ABOUT SECTION (25pts) ──
        Scored by scoreAboutSection() which returns total 0-100.
@@ -1367,13 +1386,13 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
     else{grade='Invisible Profile';gradeCls='crit';verdict='Your profile is actively repelling the right clients. Complete the rebuild before optimising content volume.';}
 
     var dims=[
-      {name:'Headline',score:hlScore,max:25,feedback:hlFeedback,fix:hlFix,extracted:hlIsGarbage?null:headlineText},
+      {name:'Headline',score:hlScore,max:25,feedback:hlFeedback,fix:hlFix},
       {name:'About Section',score:aboutDimScore,max:25,feedback:'Full breakdown below. Raw about section score: '+aboutResult.total+'/100 scaled to this dimension.',fix:'',aboutDetail:aboutResult},
       {name:'Experience',score:expScore,max:25,feedback:expFeedback,fix:expFix},
       {name:'Skills and Profile Signals',score:skillsScore,max:25,feedback:skillsFeedback+(skillsFix?' '+skillsFix:''),fix:''}
     ];
 
-    return {total:total,rawTotal:rawTotal,grade:grade,gradeCls:gradeCls,verdict:verdict,dims:dims,checklistItems:checklistItems,lengthNote:lengthNote,headlineExtracted:hlIsGarbage?headlineText:null};
+    return {total:total,rawTotal:rawTotal,grade:grade,gradeCls:gradeCls,verdict:verdict,dims:dims,checklistItems:checklistItems,lengthNote:lengthNote};
   }
 
   /* ── EXTRACT HEADLINE ──
@@ -1715,7 +1734,7 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
 
   /* ══════════════════════════════════════════════════════
      ABOUT SECTION AUDIT ENGINE
-     Carried from existing linkedin-content-audit.html
+     Ported from legacy tool
      (second scoreAbout function, complete version)
   ══════════════════════════════════════════════════════ */
 
