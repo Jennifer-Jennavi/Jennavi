@@ -1,55 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 110" role="img" aria-label="Jennavi - LinkedIn Ghostwriting for Founders">
   <defs>
-    <!-- Premium 3-stop metallic gold gradient -->
     <linearGradient id="jnGold" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#E8CC70"/>
       <stop offset="42%" stop-color="#C9A84C"/>
       <stop offset="78%" stop-color="#B8962A"/>
       <stop offset="100%" stop-color="#C9A84C"/>
     </linearGradient>
-    <!-- Subtle radial glow behind the J -->
     <radialGradient id="jGlow" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.12"/>
       <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  
-  <!-- Background -->
-  <rect width="520" height="110" fill="#0a0a0a"/>
-  
+
+  <!-- Background removed - transparent, blends with any nav colour -->
+
   <!-- Subtle glow halo behind J -->
   <ellipse cx="46" cy="55" rx="38" ry="38" fill="url(#jGlow)"/>
-  
-  <!-- WORDMARK: JENNAVI in Playfair Display style serif -->
-  <!-- Using path-based custom letterforms for a more distinctive look -->
-  <text 
-    x="18" 
-    y="78" 
-    font-family="'Garamond', 'Cormorant Garamond', 'EB Garamond', Georgia, serif" 
-    font-weight="700" 
-    font-size="72" 
-    letter-spacing="6" 
+
+  <!-- WORDMARK -->
+  <text
+    x="18"
+    y="78"
+    font-family="'Garamond', 'Cormorant Garamond', 'EB Garamond', Georgia, serif"
+    font-weight="700"
+    font-size="72"
+    letter-spacing="6"
     fill="url(#jnGold)"
     dominant-baseline="auto">JENNAVI</text>
-  
-  <!-- Thin gold horizontal baseline accent line -->
+
+  <!-- Gold baseline accent -->
   <line x1="18" y1="88" x2="502" y2="88" stroke="url(#jnGold)" stroke-width="1" stroke-opacity="0.45"/>
-  
-  <!-- Tagline beneath -->
-  <text 
-    x="20" 
-    y="104" 
-    font-family="'DM Mono', 'Courier New', monospace" 
-    font-size="10" 
+
+  <!-- Tagline -->
+  <text
+    x="20"
+    y="104"
+    font-family="'DM Mono', 'Courier New', monospace"
+    font-size="10"
     font-weight="400"
     letter-spacing="3.5"
     fill="#C9A84C"
     fill-opacity="0.55">LINKEDIN GHOSTWRITING FOR FOUNDERS</text>
-  
-  <!-- Decorative element: small gold diamond accent at end of tagline -->
+
+  <!-- Diamond accent -->
   <rect x="493" y="97" width="5" height="5" transform="rotate(45 495.5 99.5)" fill="#C9A84C" fill-opacity="0.5"/>
-  
-  <!-- The distinctive accent: a diagonal gold slash after the J, suggesting forward motion and authority -->
-  <!-- This is the visual signature that separates Jennavi -->
+
+  <!-- Diagonal slash accent -->
   <line x1="8" y1="82" x2="22" y2="20" stroke="#C9A84C" stroke-width="1.5" stroke-opacity="0.3"/>
 </svg>
