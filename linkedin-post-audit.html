@@ -551,8 +551,11 @@
     .perf-toggle-btn.selected { background:rgba(201,168,76,0.08); border-color:var(--gold); color:var(--gold); }
     .perf-submit-btn { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; padding:11px 20px; background:none; border:1px solid var(--gold-border-s); color:var(--gold); cursor:pointer; transition:all 0.2s; border-radius:2px; }
     .perf-submit-btn:hover { background:var(--gold); color:var(--onyx); }
-    .perf-interpretation { padding:14px 18px; border-top:1px solid var(--gold-border); font-size:13px; color:var(--ivory-muted); line-height:1.75; display:none; }
-    .perf-interpretation.show { display:block; }
+    .perf-interpretation { display:none; margin-top:14px; padding:16px 20px; background:rgba(201,168,76,0.06); border-left:3px solid var(--gold); border-right:1px solid var(--gold-border); border-top:1px solid var(--gold-border); border-bottom:1px solid var(--gold-border); }
+    .perf-interpretation.show { display:block; animation:fadeInterpIn 0.4s ease forwards; }
+    @keyframes fadeInterpIn { from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);} }
+    .perf-interpretation-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:8px; }
+    .perf-interpretation-text { font-size:13.5px; color:var(--ivory); line-height:1.8; }
 
     /* GATE */
     .unlock-gate { background:var(--onyx-card); border:1px solid var(--gold-border-s); padding:40px; margin-bottom:40px; position:relative; overflow:hidden; text-align:center; }
@@ -1068,7 +1071,17 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
 /* ── Fix 14: Dynamic gate heading ── */
 function updateGateHeading(score){
   var gateHeadingEl=document.getElementById('gateHeading');
-  if(gateHeadingEl){gateHeadingEl.innerHTML='You scored <span style="color:var(--gold);">'+score+' out of 100.</span><br>Jennifer has seen this score before.<br>She knows exactly what is blocking you.';}
+  if(gateHeadingEl){
+    var msg;
+    if(score>=81){
+      msg='You scored <span style="color:var(--gold);">'+score+' out of 100.</span><br>This is strong. Jennifer can show you<br>how to make it convert even harder.';
+    } else if(score>=61){
+      msg='You scored <span style="color:var(--gold);">'+score+' out of 100.</span><br>Jennifer has seen this gap before.<br>She knows exactly what to fix first.';
+    } else {
+      msg='You scored <span style="color:var(--gold);">'+score+' out of 100.</span><br>Jennifer has seen this score before.<br>She knows exactly what is blocking you.';
+    }
+    gateHeadingEl.innerHTML=msg;
+  }
   var gateScoreEl=document.getElementById('gateScore');
   if(gateScoreEl)gateScoreEl.value=score;
 }
@@ -1120,6 +1133,7 @@ function updateGateHeading(score){
     document.getElementById('howToContent').innerHTML = howToContents[mode];
     /* Hide shared section and reset gate heading on mode switch */
     document.getElementById('sharedPostAudit').style.display = 'none';
+    /* Reset gate heading on mode switch */
     var gh=document.getElementById('gateHeading');
     if(gh)gh.innerHTML='Your scores show exactly what to fix.<br>Jennifer will tell you how.';
     document.getElementById('hookAuditResults').classList.remove('show');
@@ -1848,10 +1862,10 @@ function updateGateHeading(score){
       resultsEl.innerHTML=html.join('');
       resultsEl.classList.add('show');
 
-      // Animate numbers
+      // Animate numbers - exclude perf-submit-btn which also carries data-score
       var csNum=document.getElementById('contentScoreNum');
       if(csNum)animateNum(csNum,overallAvg,1200);
-      resultsEl.querySelectorAll('[data-score]').forEach(function(el){animateNum(el,parseInt(el.getAttribute('data-score')),1000);});
+      resultsEl.querySelectorAll('.post-result-score-badge[data-score]').forEach(function(el){animateNum(el,parseInt(el.getAttribute('data-score')),1000);});
       setTimeout(function(){resultsEl.querySelectorAll('.dim-score-bar').forEach(function(bar){bar.style.width=bar.getAttribute('data-pct')+'%';});},200);
 
       // Performance context toggles
@@ -1880,7 +1894,25 @@ function updateGateHeading(score){
           var leadsVal=leadsBtn?leadsBtn.getAttribute('data-val'):null;
           var interp=getPerformanceInterpretation(score3,commentsVal,leadsVal);
           var interpEl=document.getElementById('perfInterp'+idx3);
-          if(interpEl){interpEl.textContent=interp;interpEl.classList.add('show');}
+          if(interpEl){
+            interpEl.innerHTML='<span class="perf-interpretation-label">&#9632; Performance Interpretation</span><p class="perf-interpretation-text">'+interp+'</p>';
+            interpEl.classList.add('show');
+            interpEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+            /* Auto-reset after 6 seconds so user can try different inputs */
+            setTimeout(function(){
+              /* Clear interpretation */
+              interpEl.classList.remove('show');
+              interpEl.innerHTML='';
+              /* Reset impressions input */
+              var imprInput=document.getElementById('perfImpr'+idx3);
+              if(imprInput)imprInput.value='';
+              /* Deselect all toggle buttons in this card */
+              var ctx=document.getElementById('perfCtx'+idx3);
+              if(ctx){
+                ctx.querySelectorAll('.perf-toggle-btn').forEach(function(b){b.classList.remove('selected');});
+              }
+            },6000);
+          }
         }
       });
 
