@@ -1079,7 +1079,17 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
   /* ── GATE HELPERS ── */
   function updateGateHeading(score){
     var el=document.getElementById('gateHeading');
-    if(el)el.innerHTML='You scored <span style="color:var(--gold);">'+score+' out of 100.</span><br>Jennifer has seen this score before.<br>She knows exactly what is blocking you.';
+    if(el){
+      var msg;
+      if(score>=81){
+        msg='You scored <span style="color:var(--gold);">'+score+' out of 100.</span><br>This is strong. Jennifer can show you<br>how to make it convert even harder.';
+      } else if(score>=61){
+        msg='You scored <span style="color:var(--gold);">'+score+' out of 100.</span><br>Jennifer has seen this gap before.<br>She knows exactly what to fix first.';
+      } else {
+        msg='You scored <span style="color:var(--gold);">'+score+' out of 100.</span><br>Jennifer has seen this score before.<br>She knows exactly what is blocking you.';
+      }
+      el.innerHTML=msg;
+    }
     var gs=document.getElementById('gateScore');if(gs)gs.value=score;
   }
   function showShared(score,mode){
@@ -1125,7 +1135,23 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
     var fixes=sorted.filter(function(d){return d.score<15;}).slice(0,3);
     if(fixes.length===0)fixes=[sorted[0]];
     var html=['<div class="priority-fix"><span class="priority-fix-label">Priority Fix</span><p class="priority-fix-text">'];
-    html.push(fixes.map(function(f){return '<strong>'+f.name+':</strong> '+f.feedback;}).join('<br><br>'));
+    var fixTexts=fixes.map(function(f){
+      /* If About Section is a priority fix, drill into its weakest sub-dimension */
+      if(f.name==='About Section'&&f.aboutDetail){
+        var ab=f.aboutDetail;
+        var subDims=[
+          {name:'Client Clarity',score:ab.client.score,feedback:ab.client.feedback},
+          {name:'Outcome Specificity',score:ab.outcome.score,feedback:ab.outcome.feedback},
+          {name:'Proof Presence',score:ab.proof.score,feedback:ab.proof.feedback},
+          {name:'Call to Action',score:ab.cta.score,feedback:ab.cta.feedback}
+        ];
+        subDims.sort(function(a,b){return a.score-b.score;});
+        var weakestSub=subDims[0];
+        return '<strong>About Section \u2192 '+weakestSub.name+' ('+weakestSub.score+'/25):</strong> '+weakestSub.feedback;
+      }
+      return '<strong>'+f.name+':</strong> '+f.feedback;
+    });
+    html.push(fixTexts.join('<br><br>'));
     html.push('</p></div>');
     return html.join('');
   }
@@ -1378,12 +1404,19 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
     }
 
     /* Find the person's name: Title Case, 2-4 words, no digits, no parens,
-       does NOT contain professional/working/proficiency keywords */
+       handles particles (van, de, al, el, bin, binti), initials (J.), hyphens */
     var nameIdx=-1;
     for(var i=0;i<Math.min(lines.length,30);i++){
       var l=lines[i];
-      if(l.length>=5&&l.length<=55
-        &&/^[A-Z][a-z]+(\s[A-Z][a-z]+){1,3}$/.test(l)
+      if(l.length>=5&&l.length<=65
+        /* Standard Title Case name: "Jennifer Omaliko" */
+        &&(
+          /^[A-Z][a-z]+([\s\-][A-Z][a-z]+){1,3}$/.test(l)
+          /* Name with particle: "Jennifer van der Berg" */
+          ||/^[A-Z][a-z]+(\s(van|de|der|den|von|du|di|da|al|el|bin|binti|ndi|eze|chi)\s[A-Z][a-z]+)+$/i.test(l)
+          /* Name with initial: "Jennifer M. Omaliko" */
+          ||/^[A-Z][a-z]+(\s[A-Z]\.?\s[A-Z][a-z]+)$/.test(l)
+        )
         &&!/\d/.test(l)
         &&!/\(/.test(l)
         &&!/(professional|working|proficiency|certified|registered|licensed)/i.test(l)
@@ -1550,7 +1583,8 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
       html.push('</div></div>');
 
       html.push(buildPriorityFix(r.dims));
-      html.push('<div style="text-align:center;margin-bottom:24px;"><a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="btn-gold">Get Jennifer to Personally Audit and Rewrite Your Profile &#8594;</a></div>');
+      var fullCtaText=r.total>=81?'Book a Discovery Call With Jennifer &#8594;':r.total>=61?'Get Jennifer to Strengthen Your Profile &#8594;':'Get Jennifer to Personally Audit and Rewrite Your Profile &#8594;';
+      html.push('<div style="text-align:center;margin-bottom:24px;"><a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="btn-gold">'+fullCtaText+'</a></div>');
       resultsEl.innerHTML=html.join('');
       resultsEl.classList.add('show');
       var sn=resultsEl.querySelector('[id^="scoreNum"]');
@@ -1672,6 +1706,8 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
       if(r.template){
         html.push('<div class="headline-template"><span class="headline-template-label">Rewrite Template</span><p class="headline-template-text">'+r.template+'</p></div>');
       }
+      var hlCtaText=r.total>=81?'Book a Discovery Call With Jennifer &#8594;':r.total>=61?'Get Jennifer to Strengthen Your Headline &#8594;':'Get Jennifer to Rewrite Your Headline &#8594;';
+      html.push('<div style="text-align:center;margin-bottom:24px;"><a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="btn-gold">'+hlCtaText+'</a></div>');
       resultsEl.innerHTML=html.join('');
       resultsEl.classList.add('show');
       var sn=resultsEl.querySelector('[id^="scoreNum"]');
@@ -1857,7 +1893,8 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
       dims2.forEach(function(d){html.push(buildDimCard(d.name,d.score,25,d.feedback,d.fix));});
       html.push('</div>');
       html.push(buildPriorityFix(dims2));
-      html.push('<div style="text-align:center;margin-bottom:24px;"><a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="btn-gold">Get Jennifer to Rewrite This &#8594;</a></div>');
+      var aboutCtaText=r.total>=81?'Book a Discovery Call With Jennifer &#8594;':r.total>=61?'Get Jennifer to Strengthen Your About Section &#8594;':'Get Jennifer to Rewrite This &#8594;';
+      html.push('<div style="text-align:center;margin-bottom:24px;"><a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="btn-gold">'+aboutCtaText+'</a></div>');
       resultsEl.innerHTML=html.join('');
       resultsEl.classList.add('show');
       var sn=resultsEl.querySelector('[id^="scoreNum"]');
