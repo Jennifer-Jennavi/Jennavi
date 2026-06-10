@@ -1778,6 +1778,9 @@ function updateGateHeading(score){
     } else {
       for(var i=1;i<=postCount;i++){var ta=document.getElementById('post'+i);var pt=ta?ta.value.trim():'';if(pt.length>=25)posts.push(pt);}
     }
+    /* Clear internal carousel text after capturing — forces fresh upload for next audit */
+    window._carouselText='';
+    _isCarouselPost=false;
     var valMsg=document.getElementById('contentValMsg');
     if(posts.length===0){var ta1=document.getElementById('post1');if(ta1)ta1.style.borderColor='#C62828';valMsg.textContent='Please paste at least one LinkedIn post to audit it.';valMsg.style.display='block';return;}
     valMsg.style.display='none';
