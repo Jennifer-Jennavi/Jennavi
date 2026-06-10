@@ -899,8 +899,8 @@
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" role="button" tabindex="0" aria-expanded="false" itemprop="name">What does the Full Profile Audit score?</div>
-          <div class="faq-a" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">The Full Profile Audit scores four dimensions each worth 25 points. Headline: client naming, outcome clarity, and proof anchor. About Section: client clarity, outcome specificity, proof presence, and call to action. Experience: whether roles show specific numbers and outcome language versus task descriptions. Skills and Profile Signals: whether your top skills align with your positioning and whether completeness signals are present including a featured section, custom URL, and location.</span></div>
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false" itemprop="name">What does the Profile Audit score?</div>
+          <div class="faq-a" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">The Profile Audit scores your LinkedIn out of 100 across three dimensions. About Section (40 points): client clarity, outcome specificity, proof presence, and call to action. This dimension carries the most weight because your About section is where the conversion decision is made. Experience (35 points): whether your roles show specific numbers tied to outcomes rather than task descriptions. Skills and Profile Signals (25 points): whether your top skills align with your positioning and whether completeness signals like a custom URL, location, and education are present. The headline is not scored in the Profile Audit because LinkedIn's PDF export format makes accurate headline extraction unreliable. Use the Headline Audit tab to score your headline directly by pasting it in.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -1033,8 +1033,8 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
   /* ── HOW TO USE CONTENT ── */
   var howToContents={
     full:'<strong>Step by step guide to downloading your LinkedIn PDF:</strong><ol class="how-to-steps"><li><span class="how-to-step-num">01</span><span>Open LinkedIn on a desktop browser. This cannot be done on the LinkedIn mobile app.</span></li><li><span class="how-to-step-num">02</span><span>Go to your LinkedIn profile page.</span></li><li><span class="how-to-step-num">03</span><span>Click the three dots next to the Add Section button on your profile.</span></li><li><span class="how-to-step-num">04</span><span>Click Save to PDF from the dropdown menu.</span></li><li><span class="how-to-step-num">05</span><span>LinkedIn generates and downloads your profile as a PDF instantly.</span></li><li><span class="how-to-step-num">06</span><span>Upload that PDF file using the upload button above.</span></li></ol><div class="how-to-warning">Important: LinkedIn PDF downloads are only available on desktop browsers. The LinkedIn mobile app does not have this feature. This tool supports English language profiles only.</div>',
-    headline:'<strong>Copy your LinkedIn headline exactly as it appears on your profile.</strong> Your headline is the line that appears directly under your name on LinkedIn. It also appears next to your name in every comment you leave, every search result, and every connection request. It is working for you or against you at every moment.',
-    about:'<strong>Go to your LinkedIn profile and click See More under your About section to expand the full text.</strong> Copy everything and paste it below. Do not worry about formatting. The tool reads the plain text. Make sure you copy the complete About section, not just the visible preview.'
+    headline:'<strong>Copy your LinkedIn headline exactly as it appears on your profile.</strong> Your headline is the line that appears directly under your name on LinkedIn. It also appears next to your name in every comment you leave, every search result, and every connection request. It is working for you or against you at every moment.<br><br><strong style="color:var(--gold);">How to find your headline:</strong> Go to your LinkedIn profile and click the <strong>pencil icon next to your name</strong>. Your headline is the field directly below your name in the edit panel. Copy it exactly as it appears and paste it into the field below.',
+    about:'<strong>Go to your LinkedIn profile and click See More under your About section to expand the full text.</strong> Copy everything and paste it below. Do not worry about formatting. The tool reads the plain text. Make sure you copy the complete About section, not just the visible preview.<br><br><strong style="color:var(--gold);">Tip:</strong> You can also click the <strong>pencil icon next to your About section</strong> to open the edit view. This gives you the complete text exactly as stored on LinkedIn. Copy it from the edit box and paste it here.'
   };
 
   /* ── MODE SWITCHER ── */
@@ -1502,6 +1502,9 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
 
   /* Full Profile Audit Button */
   document.getElementById('fullProfileAuditBtn').addEventListener('click',function(){
+    /* Hide green PDF status box immediately on audit click */
+    var pdfSt=document.getElementById('pdfStatus');
+    if(pdfSt)pdfSt.style.display='none';
     var text=window._parsedPdfText||'';
     var valMsg=document.getElementById('fullProfileValMsg');
     if(!text||text.length<50){valMsg.textContent='Please upload your LinkedIn PDF to audit it.';valMsg.style.display='block';return;}
