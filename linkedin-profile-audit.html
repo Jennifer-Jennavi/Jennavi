@@ -1506,6 +1506,10 @@ function animateNum(el,target,duration){duration=duration||1000;var start=perfor
     var pdfSt=document.getElementById('pdfStatus');
     if(pdfSt)pdfSt.style.display='none';
     var text=window._parsedPdfText||'';
+    /* Clear internal stored text after capturing — forces fresh upload for next audit */
+    window._parsedPdfText='';
+    document.getElementById('fullProfileAuditBtn').style.display='none';
+    var fi=document.getElementById('pdfFileInput');if(fi)fi.value='';
     var valMsg=document.getElementById('fullProfileValMsg');
     if(!text||text.length<50){valMsg.textContent='Please upload your LinkedIn PDF to audit it.';valMsg.style.display='block';return;}
     valMsg.style.display='none';
