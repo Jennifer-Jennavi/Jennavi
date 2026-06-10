@@ -1766,6 +1766,9 @@ function updateGateHeading(score){
 
   /* ── CONTENT AUDIT BUTTON ── */
   document.getElementById('contentAuditBtn').addEventListener('click',function(){
+    /* Hide carousel green status box immediately on audit click */
+    var pdfSt=document.getElementById('pdfStatus');
+    if(pdfSt)pdfSt.style.display='none';
     var posts=[];
     /* Capture carousel flag before collecting posts */
     var isCarousel=_isCarouselPost;
