@@ -171,4 +171,18 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-profile-optimisation-for-founders.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-for-b2b-founders.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
