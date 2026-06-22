@@ -1,0 +1,49 @@
+{
+  "name": "Jennavi - LinkedIn Ghostwriting for Founders",
+  "short_name": "Jennavi",
+  "description": "Premium LinkedIn ghostwriting agency for startup founders and CEOs. 873% growth documented. By Jennifer Omaliko.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#C9A84C",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/jennavi-favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book a Strategy Call",
+      "short_name": "Book Call",
+      "url": "https://calendly.com/jennavi/30min",
+      "description": "Book a free 30-minute strategy call with Jennifer"
+    },
+    {
+      "name": "Free LinkedIn Tools",
+      "short_name": "Tools",
+      "url": "/linkedin-tools.html",
+      "description": "Four free LinkedIn diagnostic tools"
+    },
+    {
+      "name": "Services and Pricing",
+      "short_name": "Services",
+      "url": "/hire-linkedin-ghostwriter.html",
+      "description": "Six service tiers from $100 to $1,000 per month"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    {
+      "src": "/jennifer-omaliko-linkedin-ghostwriter-founder.webp",
+      "sizes": "1200x630",
+      "type": "image/webp",
+      "label": "Jennavi homepage"
+    }
+  ]
+}
