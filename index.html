@@ -730,6 +730,21 @@
     .ja-cta-secondary:hover{background:rgba(201,168,76,0.1);border-color:#C9A84C;}
     #jenniferAgentBtn{border:none;cursor:pointer;}
 
+
+    /* ── AGENT TYPING INDICATOR ── */
+    .ja-typing{display:none;flex-direction:column;align-items:flex-start;gap:10px;padding:20px 0;}
+    .ja-typing.active{display:flex;}
+    .ja-typing-label{color:rgba(201,168,76,0.6);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;}
+    .ja-typing-dots{display:flex;gap:6px;align-items:center;}
+    .ja-typing-dot{width:8px;height:8px;border-radius:50%;background:#C9A84C;animation:ja-pulse 1.2s ease-in-out infinite;}
+    .ja-typing-dot:nth-child(2){animation-delay:0.2s;}
+    .ja-typing-dot:nth-child(3){animation-delay:0.4s;}
+    @keyframes ja-pulse{0%,60%,100%{transform:scale(0.7);opacity:0.4;}30%{transform:scale(1);opacity:1;}}
+    .ja-answer-text{opacity:0;transition:opacity 0.4s ease;}
+    .ja-answer-text.visible{opacity:1;}
+    .ja-answer-ctas{opacity:0;transition:opacity 0.3s ease 0.2s;}
+    .ja-answer-ctas.visible{opacity:1;}
+
   </style>
 </head>
 <body>
@@ -1081,21 +1096,21 @@
           </a>
           <a href="https://jennavi.co/linkedin-roi-calculator.html" class="free-tool-card">
             <span class="free-tool-num">Tool 02</span>
-            <span style="font-size:22px;">&#128181;</span>
+            <span style="display:flex;align-items:center;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="22" height="22" aria-hidden="true"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z"/></svg></span>
             <span class="free-tool-name">LinkedIn ROI Calculator</span>
             <span class="free-tool-desc">Calculate exactly how much revenue your invisible LinkedIn is costing you every year. Know the number before you invest.</span>
             <span class="free-tool-cta">Calculate My Loss &#8594;</span>
           </a>
           <a href="https://jennavi.co/linkedin-post-audit.html" class="free-tool-card">
             <span class="free-tool-num">Tool 03</span>
-            <span style="font-size:22px;">&#128202;</span>
+            <span style="display:flex;align-items:center;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="22" height="22" aria-hidden="true"><path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg></span>
             <span class="free-tool-name">LinkedIn Post Audit</span>
             <span class="free-tool-desc">Score your hooks and posts out of 100 across four CRICKETS dimensions. Find out exactly what is stopping your content from converting.</span>
             <span class="free-tool-cta">Audit My Posts &#8594;</span>
           </a>
           <a href="https://jennavi.co/linkedin-profile-audit.html" class="free-tool-card">
             <span class="free-tool-num">Tool 04</span>
-            <span style="font-size:22px;">&#128196;</span>
+            <span style="display:flex;align-items:center;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="22" height="22" aria-hidden="true"><path d="M20 0H4v2h16V0zm0 4H4v2h16V4zM4 22h10v-2H4v2zm14-18H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H4v-1c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1z"/></svg></span>
             <span class="free-tool-name">LinkedIn Profile Audit</span>
             <span class="free-tool-desc">Upload your LinkedIn PDF or paste your headline and About section. Full score out of 100 with a detailed sub-breakdown.</span>
             <span class="free-tool-cta">Audit My Profile &#8594;</span>
@@ -1114,28 +1129,28 @@
         <p class="cta-band-sub">Book a call. Read the newsletter. <strong>Get the CRICKETS manifesto.</strong> Or message Jennifer directly. Every path leads to the same destination: a LinkedIn that works as hard as you do.</p>
         <div class="cta-grid stagger">
           <a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="cta-tile">
-            <span class="cta-tile-icon" aria-hidden="true">&#128197;</span>
+            <span class="cta-tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#C9A84C" width="24" height="24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.9 3 3 3.9 3 5v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H5V9h14v12zm0-14H5V5h14v2zM7 11h5v5H7z"/></svg></span>
             <span class="cta-tile-label">Primary CTA</span>
             <span class="cta-tile-title serif">Secure Your Strategy Call</span>
             <span class="cta-tile-desc">Free 30-minute session. Jennifer reviews your LinkedIn before the call and arrives with specific, honest observations.</span>
             <span class="cta-tile-action">Book Now on Calendly</span>
           </a>
           <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="cta-tile">
-            <span class="cta-tile-icon" aria-hidden="true">&#128203;</span>
+            <span class="cta-tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#C9A84C" width="24" height="24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
             <span class="cta-tile-label">Services</span>
             <span class="cta-tile-title serif">Hire a LinkedIn Ghostwriter</span>
             <span class="cta-tile-desc">Six tiers from $100 one-time audit to $1,000 per month full executive management. See every deliverable before you decide.</span>
             <span class="cta-tile-action">View All Services</span>
           </a>
           <a href="https://www.linkedin.com/newsletters/the-visible-founder-7430923999603367936" target="_blank" rel="noopener noreferrer" class="cta-tile">
-            <span class="cta-tile-icon" aria-hidden="true">&#128240;</span>
+            <span class="cta-tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#C9A84C" width="24" height="24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>
             <span class="cta-tile-label">Newsletter</span>
             <span class="cta-tile-title serif">The Visible Founder</span>
             <span class="cta-tile-desc">Weekly insights on LinkedIn strategy, founder visibility and building authority without paid ads. 1,400+ subscribers. Always free.</span>
             <span class="cta-tile-action">Subscribe on LinkedIn</span>
           </a>
           <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20have%20been%20going%20through%20your%20site%20and%20I%20am%20ready%20to%20discuss.%20When%20can%20we%20talk%3F" target="_blank" rel="noopener noreferrer" class="cta-tile">
-            <span class="cta-tile-icon" aria-hidden="true">&#128172;</span>
+            <span class="cta-tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#C9A84C" width="24" height="24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg></span>
             <span class="cta-tile-label">Direct Access</span>
             <span class="cta-tile-title serif">Message on WhatsApp</span>
             <span class="cta-tile-desc">Skip the form. Talk to Jennifer directly. Real conversations with the person who will personally manage your content.</span>
@@ -1562,7 +1577,7 @@
   </nav>
 
   <!-- JENNAVI CONVERSATIONAL AGENT -->
-  <button class="whatsapp-float" id="jenniferAgentBtn" aria-label="Ask Jennifer a question" aria-expanded="false" aria-controls="jenniferAgent">
+  <button class="whatsapp-float" id="jenniferAgentBtn" aria-label="Ask Jennifer a question" aria-expanded="false" aria-controls="jenniferAgent" onclick="if(typeof showAnswer==='undefined'&&!document.getElementById('jenniferAgent')){window.open('https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20just%20visited%20Jennavi%20and%20I%20am%20ready%20to%20get%20started.%20Can%20we%20talk%3F','_blank','noopener,noreferrer')}">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </button>
 
@@ -1614,6 +1629,14 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
             All questions
           </button>
+          <div class="ja-typing" id="jaTyping">
+            <span class="ja-typing-label">Jennifer is typing</span>
+            <div class="ja-typing-dots">
+              <span class="ja-typing-dot"></span>
+              <span class="ja-typing-dot"></span>
+              <span class="ja-typing-dot"></span>
+            </div>
+          </div>
           <div class="ja-answer-text" id="jaAnswerText"></div>
           <div class="ja-answer-ctas">
             <a href="https://calendly.com/jennavi/30min" target="_blank" rel="noopener noreferrer" class="ja-cta-primary">Book a Free Call</a>
@@ -1707,10 +1730,21 @@
     function showAnswer(html){
       homeView.setAttribute('hidden','');
       answerView.removeAttribute('hidden');
-      answerText.innerHTML=html;
-      answerView.scrollTop=0;
-      var panel=document.querySelector('.ja-panel');
-      if(panel) panel.scrollTop=0;
+      answerText.innerHTML='';
+      answerText.classList.remove('visible');
+      var ctas=document.querySelector('.ja-answer-ctas');
+      if(ctas)ctas.classList.remove('visible');
+      var typing=document.getElementById('jaTyping');
+      if(typing)typing.classList.add('active');
+      var delay=1000+Math.random()*800;
+      setTimeout(function(){
+        if(typing)typing.classList.remove('active');
+        answerText.innerHTML=html;
+        answerText.classList.add('visible');
+        if(ctas)ctas.classList.add('visible');
+        var panel=document.querySelector('.ja-panel');
+        if(panel)panel.scrollTop=0;
+      },delay);
     }
 
     function sendCustom(){
