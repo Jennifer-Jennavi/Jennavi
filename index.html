@@ -355,7 +355,7 @@
     .mono{font-family:'DM Mono',monospace;}
     .container{max-width:1200px;margin:0 auto;width:100%;}
     section{padding:110px 48px;}
-    .btn{display:inline-flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:16px 36px;cursor:pointer;border:none;border-radius:2px;transition:all 0.2s ease;text-decoration:none;position:relative;pointer-events:auto;}
+    .btn{display:inline-flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:16px 36px;cursor:pointer;border:none;border-radius:2px;transition:all 0.2s ease;text-decoration:none;position:relative;pointer-events:auto;}
     .btn:hover{transform:translateY(-2px);}
     .btn-gold{background:var(--gold);color:var(--onyx);}
     .btn-gold:hover{background:var(--gold-light);}
@@ -754,6 +754,20 @@
     .bottom-nav-item.active span{color:#C9A84C!important;font-weight:500;}
     .bottom-nav-item.active{position:relative;opacity:1!important;}
     .bottom-nav-item.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:#C9A84C;border-radius:0 0 2px 2px;}
+
+    /* ── TEXT OVERFLOW AND WRAP FIXES ── */
+    .pricing-card,.pricing-features,.tool-card-full,.who-card,.faq-item{word-wrap:break-word;overflow-wrap:break-word;}
+    .pricing-features li,.tool-card-full p,p,li{word-wrap:break-word;overflow-wrap:break-word;hyphens:auto;}
+    @media(max-width:640px){
+      .pricing-card{padding:24px 16px!important;}
+      .pricing-features li{font-size:13px!important;line-height:1.6!important;}
+      .card-cta{font-size:9px!important;letter-spacing:0.1em!important;padding:13px 10px!important;}
+      .pricing-name{font-size:clamp(28px,7vw,48px)!important;}
+      .pricing-price-num{font-size:clamp(48px,12vw,72px)!important;}
+    }
+
+    /* ── CTA BOLD TEXT ── */
+    .card-cta,.btn,.btn-wa,.btn-gold,.btn-outline,.book-btn,.nl-submit,.ja-cta-primary,.insights-btn,.tool-btn{font-weight:700!important;}
   </style>
 </head>
 <body>
@@ -997,7 +1011,8 @@
               <li>Your name reaching founders and decision makers beyond your existing network every single day</li>
               <li>Visibility acceleration that makes LinkedIn work between posts not just on posting days</li>
             </ul>
-            <a <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;margin-bottom:10px;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="10" height="10" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>2 of 3 slots remaining</span><br>href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20VIP%20tier%20at%20%24800%20per%20month.%20I%20am%20ready%20to%20apply.%20Can%20we%20talk%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready to Apply</a>
+            <div style="display:flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;margin-bottom:10px;width:fit-content;border-radius:3px;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="8" height="8" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;">2 of 3 slots remaining</span></div>
+            <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20VIP%20tier%20at%20%24800%20per%20month.%20I%20am%20ready%20to%20apply.%20Can%20we%20talk%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready to Apply</a>
           </article>
           <article class="pricing-card" role="listitem" itemscope itemtype="https://schema.org/Offer">
             <p class="pricing-tier">Tier 06</p>
@@ -1029,7 +1044,8 @@
               <li>Visibility acceleration that makes LinkedIn work between posts not just on posting days</li>
               <li>The most complete LinkedIn growth engine available at this price point anywhere</li>
             </ul>
-            <a <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;margin-bottom:10px;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="10" height="10" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>1 of 2 slots remaining</span><br>href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20want%20to%20apply%20for%20the%20Executive%20tier%20at%20%241%2C000%20per%20month.%20I%20am%20serious%20about%20this.%20Are%20you%20available%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I Want This, Let's Talk</a>
+            <div style="display:flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;margin-bottom:10px;width:fit-content;border-radius:3px;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="8" height="8" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;">1 of 2 slots remaining</span></div>
+            <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20want%20to%20apply%20for%20the%20Executive%20tier%20at%20%241%2C000%20per%20month.%20I%20am%20serious%20about%20this.%20Are%20you%20available%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready to Apply</a>
           </article>
         </div>
         <p class="services-cta-note">All retainers include unlimited revisions within scope. First month paid upfront. All fees in USD. <a href="https://jennavi.co/hire-linkedin-ghostwriter.html">See full service breakdown and hire a LinkedIn ghostwriter for your business.</a></p>

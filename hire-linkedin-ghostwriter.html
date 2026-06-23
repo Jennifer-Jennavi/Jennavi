@@ -278,7 +278,7 @@
     .mono { font-family:'DM Mono',monospace; }
     .container { max-width:1200px; margin:0 auto; padding:0 24px; }
     section { padding:80px 0; }
-    .btn { display:inline-flex; align-items:center; gap:10px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:14px 28px; background:var(--gold); color:var(--onyx); border:none; border-radius:2px; transition:all 0.2s ease; text-decoration:none; min-height:44px; }
+    .btn { display:inline-flex; align-items:center; gap:10px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:14px 28px; background:var(--gold); color:var(--onyx); border:none; border-radius:2px; transition:all 0.2s ease; text-decoration:none; min-height:44px; }
     .btn:hover { background:var(--gold-light); transform:translateY(-2px); }
     .btn-wa { background:#25D366; color:#fff; }
     .btn-wa:hover { background:#20b859; }
@@ -355,7 +355,7 @@
     .pricing-features { list-style:none; margin-bottom:32px; flex:1; }
     .pricing-features li { padding:5px 0 5px 20px; position:relative; font-size:12.5px; color:var(--ivory-muted); line-height:1.6; }
     .pricing-features li::before { content:'●'; color:var(--gold); position:absolute; left:0; font-size:10px; top:7px; }
-    .card-cta { display:flex; align-items:center; justify-content:center; text-align:center; padding:13px 16px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; font-weight:600; border:1px solid var(--gold-border-s); color:var(--gold); transition:background 0.22s, color 0.22s, transform 0.18s; margin-top:auto; text-decoration:none; min-height:44px; }
+    .card-cta { display:flex; align-items:center; justify-content:center; text-align:center; padding:13px 16px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; font-weight:700; border:1px solid var(--gold-border-s); color:var(--gold); transition:background 0.22s, color 0.22s, transform 0.18s; margin-top:auto; text-decoration:none; min-height:44px; }
     .card-cta:hover { background:var(--gold); color:var(--onyx); transform:translateY(-2px); }
     .pricing-card.featured .card-cta { background:var(--gold); color:var(--onyx); }
     .pricing-card.featured .card-cta:hover { background:var(--gold-light); }
@@ -647,6 +647,19 @@
     .bottom-nav-item.active span{color:#C9A84C!important;font-weight:500;}
     .bottom-nav-item.active{position:relative;opacity:1!important;}
     .bottom-nav-item.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:#C9A84C;border-radius:0 0 2px 2px;}
+
+    /* ── OVERFLOW AND TEXT WRAP FIXES ── */
+    .pricing-card{word-wrap:break-word;overflow-wrap:break-word;}
+    .pricing-features li{word-wrap:break-word;overflow-wrap:break-word;hyphens:auto;}
+    .pricing-grid{overflow:hidden;}
+    @media(max-width:640px){
+      .pricing-card{padding:24px 16px!important;}
+      .pricing-features li{font-size:13px!important;line-height:1.6!important;}
+      .card-cta{font-size:9px!important;letter-spacing:0.1em!important;}
+    }
+
+    /* ── CTA BOLD TEXT ── */
+    .card-cta,.btn,.btn-wa,.btn-gold,.btn-outline,.book-btn,.nl-submit,.ja-cta-primary,.insights-btn,.tool-btn{font-weight:700!important;}
   </style>
 </head>
 <body>
@@ -767,7 +780,7 @@
               <li>Strategy gap analysis report</li>
               <li>Actionable 30-day roadmap</li>
             </ul>
-            <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20Taster%20Profile%20Audit%20at%20%24100.%20How%20do%20I%20get%20started%3F" target="_blank" rel="noopener noreferrer" class="card-cta">Get Started</a>
+            <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20Taster%20Profile%20Audit%20at%20%24100.%20How%20do%20I%20get%20started%3F" target="_blank" rel="noopener noreferrer" class="card-cta">Let's Get Started</a>
           </article>
           <article class="pricing-card" role="listitem" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="USD">
@@ -786,7 +799,7 @@
               <li>Posts written in your authentic voice</li>
               <li>Unlimited revisions within scope</li>
             </ul>
-            <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20Starter%20tier%20at%20%24200%20per%20month.%20Can%20we%20discuss%3F" target="_blank" rel="noopener noreferrer" class="card-cta">Get Started</a>
+            <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20Starter%20tier%20at%20%24200%20per%20month.%20Can%20we%20discuss%3F" target="_blank" rel="noopener noreferrer" class="card-cta">Let's Get Started</a>
           </article>
           <article class="pricing-card featured" role="listitem" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="USD">
@@ -856,7 +869,8 @@
               <li>Your name reaching founders and decision makers beyond your existing network every single day</li>
               <li>Visibility acceleration that makes LinkedIn work between posts not just on posting days</li>
             </ul>
-            <a <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;margin-bottom:10px;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="10" height="10" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>2 of 3 slots remaining</span><br>href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20VIP%20tier%20at%20%24800%20per%20month.%20I%20am%20ready%20to%20apply.%20Can%20we%20talk%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready to Apply</a>
+            <div style="display:flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;margin-bottom:10px;width:fit-content;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="10" height="10" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;">2 of 3 slots remaining</span></div>
+            <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20VIP%20tier%20at%20%24800%20per%20month.%20I%20am%20ready%20to%20apply.%20Can%20we%20talk%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready to Apply</a>
           </article>
           <article class="pricing-card" role="listitem" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="USD">
@@ -890,7 +904,8 @@
               <li>Visibility acceleration that makes LinkedIn work between posts not just on posting days</li>
               <li>The most complete LinkedIn growth engine available at this price point anywhere</li>
             </ul>
-            <a <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;margin-bottom:10px;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="10" height="10" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>1 of 2 slots remaining</span><br>href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20want%20to%20apply%20for%20the%20Executive%20tier%20at%20%241%2C000%20per%20month.%20I%20am%20serious%20about%20this.%20Are%20you%20available%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I Want This, Let's Talk</a>
+            <div style="display:flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;margin-bottom:10px;width:fit-content;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="10" height="10" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;">1 of 2 slots remaining</span></div>
+            <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20want%20to%20apply%20for%20the%20Executive%20tier%20at%20%241%2C000%20per%20month.%20I%20am%20serious%20about%20this.%20Are%20you%20available%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I Want This, Let's Talk</a>
           </article>
         </div>
         <p class="pricing-note">All retainers include unlimited revisions within scope. First month paid upfront before work begins. No payment, no work. No exceptions. All fees in USD. Service agreement signed before work starts.</p>

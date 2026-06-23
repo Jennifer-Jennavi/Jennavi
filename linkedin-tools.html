@@ -397,7 +397,7 @@
     .tool-hero-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:48px;opacity:0;animation:fadeUp 0.9s var(--ease-out) 0.38s forwards;}
     .tool-hero-pill{background:rgba(201,168,76,0.1);border:1px solid var(--gold-border-s);padding:7px 16px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;}
     .tool-hero-cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.9s var(--ease-out) 0.45s forwards;}
-    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--onyx);padding:14px 28px;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;border-radius:2px;border:none;transition:all 0.2s ease;min-height:44px;cursor:pointer;}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--onyx);padding:14px 28px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;border-radius:2px;border:none;transition:all 0.2s ease;min-height:44px;cursor:pointer;}
     .btn:hover{background:var(--gold-light);transform:translateY(-2px);}
     .btn-outline{background:transparent;border:1.5px solid var(--gold-border-s);color:var(--gold);}
     .btn-outline:hover{background:var(--gold);color:var(--onyx);}
@@ -620,6 +620,20 @@
     .ja-cta-secondary{background:transparent;border:1px solid rgba(201,168,76,0.4);color:#C9A84C;padding:13px 20px;border-radius:10px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;min-height:48px;}
     .ja-cta-secondary:hover{background:rgba(201,168,76,0.1);border-color:#C9A84C;}
 
+
+    /* ── TEXT OVERFLOW AND WRAP FIXES ── */
+    .pricing-card,.pricing-features,.tool-card-full,.who-card,.faq-item{word-wrap:break-word;overflow-wrap:break-word;}
+    .pricing-features li,.tool-card-full p,p,li{word-wrap:break-word;overflow-wrap:break-word;hyphens:auto;}
+    @media(max-width:640px){
+      .pricing-card{padding:24px 16px!important;}
+      .pricing-features li{font-size:13px!important;line-height:1.6!important;}
+      .card-cta{font-size:9px!important;letter-spacing:0.1em!important;padding:13px 10px!important;}
+      .pricing-name{font-size:clamp(28px,7vw,48px)!important;}
+      .pricing-price-num{font-size:clamp(48px,12vw,72px)!important;}
+    }
+
+    /* ── CTA BOLD TEXT ── */
+    .card-cta,.btn,.btn-wa,.btn-gold,.btn-outline,.book-btn,.nl-submit,.ja-cta-primary,.insights-btn,.tool-btn{font-weight:700!important;}
   </style>
 </head>
 <body>
