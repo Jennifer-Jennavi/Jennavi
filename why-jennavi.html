@@ -1087,36 +1087,6 @@
   })();
   </script>
 
-  <script>
-  (function(){
-    var triggered=false;
-    setTimeout(function(){
-      if(triggered)return;
-      var overlay=document.getElementById('jenniferAgent');
-      var btn=document.getElementById('jenniferAgentBtn');
-      if(!overlay||!btn)return;
-      if(overlay.hasAttribute('hidden')){
-        triggered=true;
-        overlay.removeAttribute('hidden');
-        btn.setAttribute('aria-expanded','true');
-        document.body.style.overflow='hidden';
-        /* Show home view */
-        var home=document.getElementById('jaHome');
-        var ans=document.getElementById('jaAnswer');
-        if(home)home.removeAttribute('hidden');
-        if(ans)ans.setAttribute('hidden','');
-        var input=document.getElementById('jaInput');
-        if(input)input.value='';
-        /* Close when user interacts with close or backdrop */
-        var closeBtn=document.getElementById('jaClose');
-        var backdrop=document.getElementById('jaBackdrop');
-        function autoClose(){triggered=true;overlay.setAttribute('hidden','');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-        if(closeBtn)closeBtn.addEventListener('click',autoClose,{once:true});
-        if(backdrop)backdrop.addEventListener('click',autoClose,{once:true});
-      }
-    }, 30000);
-  })();
-  </script>
 
   <script>
   if('serviceWorker' in navigator){
