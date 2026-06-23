@@ -1,10 +1,10 @@
 /* ============================================================
-   Jennavi Service Worker v1.0
+   Jennavi Service Worker v1.1
    Caches all core pages, assets and fonts for offline use
    and instant repeat visits.
    ============================================================ */
 
-const CACHE_NAME = 'jennavi-v1';
+const CACHE_NAME = 'jennavi-v2';
 
 const CORE_ASSETS = [
   '/',
@@ -24,6 +24,12 @@ const CORE_ASSETS = [
   '/manifest.json',
   '/jennavi-favicon.svg',
   '/jennavi-logo.svg',
+  '/launchericon-48x48.png',
+  '/launchericon-72x72.png',
+  '/launchericon-96x96.png',
+  '/launchericon-144x144.png',
+  '/launchericon-192x192.png',
+  '/launchericon-512x512.png',
   '/IMG-20260405-WA0008.jpg',
   '/IMG-20260405-WA0009.jpg',
   '/IMG-20260406-WA0015.jpg',
@@ -39,14 +45,17 @@ const CORE_ASSETS = [
   '/jennifer-omaliko-founder-9.jpg',
   '/jennifer-omaliko-founder-10.jpg',
   '/jennifer-omaliko-linkedin-ghostwriter-founder.webp',
-  '/jennifer-linkedin-analytics-873.png',
-  '/jennifer-linkedin-connection-mes.png',
-  '/jennifer-linkedin-featured-section.png',
-  '/jennifer-linkedin-inbound-dm.png',
-  '/jennifer-linkedin-profile-6k.png',
-  '/jennifer-newsletter-subscribers.png',
-  '/jennifer-calendly-discovery-calls.png',
-  '/jennifer-whatsapp-vip-inquiry.png'
+  '/jennifer-linkedin-analytics-873.png.jpg',
+  '/jennifer-linkedin-connection-message.png.jpg',
+  '/jennifer-linkedin-featured-section.png.jpg',
+  '/jennifer-linkedin-inbound-dm.png.jpg',
+  '/jennifer-linkedin-profile-6k.png (1).jpg',
+  '/jennifer-newsletter-subscribers.png.jpg',
+  '/jennifer-calendly-discovery-calls.png (1).jpg',
+  '/jennifer-whatsapp-vip-inquiry.png.jpg',
+  '/Jennavi-Inbound-LinkedIn-DM-RateCardRequest.jpg',
+  '/Jennavi-Inbound-LinkedIn-DM-JobInquiry.jpg',
+  '/Jennavi-Inbound-Email-ContractInquiry.jpg'
 ];
 
 /* ── INSTALL: cache all core assets ── */
