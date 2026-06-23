@@ -1242,11 +1242,7 @@
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay&&!overlay.hasAttribute('hidden'))closeAgent();});
     overlay&&overlay.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=overlay.querySelectorAll('button:not([disabled]),a[href],input,[tabindex]:not([tabindex="-1"])');var first=f[0],last=f[f.length-1];if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}else{if(document.activeElement===last){e.preventDefault();first.focus();}}});
     /* Auto-trigger after 30 seconds */
-    var triggered=false;
-    setTimeout(function(){
-      if(triggered||!overlay||!overlay.hasAttribute('hidden'))return;
-      triggered=true;openAgent();
-    },30000);
+
   })();
   </script>
   <script>
