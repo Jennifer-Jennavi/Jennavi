@@ -95,12 +95,61 @@
   <!-- INSIGHTS HUB - Priority 0.8 -->
   <url>
     <loc>https://jennavi.co/insights/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- INSIGHTS ARTICLES - Priority 0.7 -->
+  <url>
+    <loc>https://jennavi.co/insights/how-long-does-linkedin-ghostwriting-take-to-work.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-personal-branding-vs-ghostwriting.html</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-ghostwriting-for-b2b-saas-founders.html</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/best-linkedin-ghostwriting-agencies-for-founders.html</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/what-is-linkedin-ghostwriting.html</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-profile-optimisation-for-founders.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-for-b2b-founders.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://jennavi.co/insights/how-to-get-inbound-leads-from-linkedin.html</loc>
     <lastmod>2026-06-12</lastmod>
@@ -167,20 +216,6 @@
   <url>
     <loc>https://jennavi.co/insights/linkedin-algorithm-2026-founder-reach.html</loc>
     <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-profile-optimisation-for-founders.html</loc>
-    <lastmod>2026-06-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-for-b2b-founders.html</loc>
-    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
