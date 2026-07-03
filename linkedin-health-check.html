@@ -322,8 +322,7 @@
  .result-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px;}
  .result-eyebrow::before,.result-eyebrow::after{content:'';display:block;width:40px;height:1px;background:var(--gold);}
  .result-score-ring{width:160px;height:160px;border-radius:50%;border:3px solid var(--gold-border-s);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 28px;position:relative;background:var(--onyx-card);}
- .result-score-ring::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--gold-border);}
- .result-score-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:900;color:var(--gold);line-height:1;}
+ .result-score-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:900;color:var(--gold);line-height:1;margin-top:8px;}
  .result-score-denom{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.12em;margin-top:4px;}
  .result-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.1;margin-bottom:12px;}
  .result-tagline{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--gold);line-height:1.5;max-width:600px;margin:0 auto;}
@@ -1090,6 +1089,10 @@
    html+='</div></div></div>';
    questionContainer.innerHTML=html;
    requestAnimationFrame(function(){var card=document.getElementById('qCard');if(card)card.classList.add('visible');});
+   var navEl2=document.querySelector('.nav');
+   var navHeight2=navEl2?navEl2.offsetHeight:80;
+   var qTop=questionContainer.getBoundingClientRect().top+window.pageYOffset-navHeight2-16;
+   window.scrollTo({top:qTop,behavior:'smooth'});
    questionContainer.querySelectorAll('.option').forEach(function(btn){
      btn.addEventListener('click',function(){
        var idx=parseInt(this.getAttribute('data-idx'));
@@ -1097,6 +1100,10 @@
        questionContainer.querySelectorAll('.option').forEach(function(b){b.classList.remove('selected');b.setAttribute('aria-checked','false');});
        this.classList.add('selected');this.setAttribute('aria-checked','true');
        var nxt=document.getElementById('nextBtn');if(nxt)nxt.disabled=false;
+       setTimeout(function(){
+         var navRow=document.querySelector('.q-nav');
+         if(navRow){navRow.scrollIntoView({behavior:'smooth',block:'center'});}
+       },150);
      });
    });
    var prevBtn=document.getElementById('prevBtn');
@@ -1160,8 +1167,7 @@
      var rlHTML='';
      result.links.forEach(function(link){rlHTML+='<a href="'+link.url+'" target="_blank" rel="noopener noreferrer" class="result-link-tile"><span class="rlt-label">'+escHtml(link.label)+'</span><span class="rlt-title serif">'+escHtml(link.title)+'</span><span class="rlt-desc">'+escHtml(link.desc)+'</span><span class="rlt-arrow">'+escHtml(link.arrow)+' &#8594;</span></a>';});
      document.getElementById('resultLinks').innerHTML=rlHTML;
-     resultSection.scrollIntoView({behavior:'smooth',block:'start'});
-     /* For scores below 60, move more-tools section below retake to reduce decision fatigue */
+     /* For scores below 60, move more-tools section below retake to reduce decision fatigue - done BEFORE scrolling so the DOM is fully settled first */
      if(scores.total<60){
        var moreTools=document.querySelector('[data-tools-section]');
        var retakeWrap=document.querySelector('.retake-wrap');
@@ -1170,9 +1176,15 @@
        }
      }
      var lcScore=document.getElementById('lcScore');var lcRange=document.getElementById('lcRange');
-     if(lcScore)lcScore.value=scores.total;if(lcRange)lcRange.value=result.bandText+' - '+result.title;
+     if(lcScore)lcScore.value=scores.total;if(lcRange)lcRange.value=result.title;
      if(typeof gtag!=='undefined'){gtag('event','quiz_complete',{event_category:'LinkedIn Health Check',event_label:result.title,value:scores.total});}
      initFaq();
+     setTimeout(function(){
+       var navEl=document.querySelector('.nav');
+       var navHeight=navEl?navEl.offsetHeight:80;
+       var offset=resultSection.getBoundingClientRect().top+window.pageYOffset-navHeight-16;
+       window.scrollTo({top:offset,behavior:'smooth'});
+     },80);
    },generateDelay());
  }
 
