@@ -638,8 +638,10 @@
     <section class="form-section" id="claim-form-section">
       <div class="page-inner">
         <div class="form-wrap">
-          <div class="form-heading">Claim your free copy.</div>
-          <p class="form-sub">Jennifer reviews every submission personally and sends CRICKETS directly to the founders who qualify. Fill this in carefully and honestly.</p>
+          <div id="claimFormIntro">
+            <div class="form-heading">Claim your free copy.</div>
+            <p class="form-sub">Jennifer reviews every submission personally and sends CRICKETS directly to the founders who qualify. Fill this in carefully and honestly.</p>
+          </div>
           <form id="cricketsForm" action="https://formspree.io/f/mqejgwab" method="POST">
             <div class="form-grid">
               <div class="form-field">
@@ -915,7 +917,7 @@
     function buildFreeCricketsEmailHtml(name, pdfLink) {
       return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0a0a0a;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.cbo{display:inline-block;padding:14px 38px;background:transparent;color:#C9A84C;border:1.5px solid rgba(201,168,76,0.5);font-family:Courier New,monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;}.sub{font-size:13px;color:rgba(250,243,224,0.5);text-align:center;margin:0 0 28px;line-height:1.7;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(250,243,224,0.7);line-height:1.85;margin-bottom:0;}.st2{font-size:16px;font-weight:700;color:#FAF3E0;margin-bottom:10px;}.dg2{font-size:13px;color:rgba(250,243,224,0.65);line-height:1.8;margin-bottom:22px;}.rp{font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;margin-bottom:24px;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for claiming your free copy of CRICKETS. Your submission has been received, and your copy is ready right now.</p><div class="ct"><a href="' + pdfLink + '" class="cb">Download Your CRICKETS Copy &#8594;</a></div><p class="sub">53 pages. No fluff. You committed to implementing at least two frameworks within 30 days, so start today.</p><hr class="hr"><p class="dg">Remember, the one condition is real. Implement two frameworks from the playbook and share one documented result with Jennifer. A screenshot, a DM received, an impression number. Anything real.</p><hr class="hr"><p class="st2">If you would like some help putting it into practice</p><p class="dg2">Some founders read CRICKETS and want to apply it themselves. Others would prefer Jennifer to do it with them directly. If that is you, book a free 30-minute call. She will review your LinkedIn before you even speak and tell you honestly where the gaps are.</p><div class="ct" style="padding:4px 0 26px;"><a href="https://cal.id/jennavi/strategy" class="cbo">Book a Free Strategy Call &#8594;</a></div><p class="rp">You can also just reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a> &middot; <a href="https://cal.id/jennavi/strategy">Book a strategy call</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
     }
-    var form=document.getElementById('cricketsForm'),thanks=document.getElementById('cricketsFormThanks'),declined=document.getElementById('cricketsFormDeclined');
+    var form=document.getElementById('cricketsForm'),thanks=document.getElementById('cricketsFormThanks'),declined=document.getElementById('cricketsFormDeclined'),claimIntro=document.getElementById('claimFormIntro');
     var phoneEl=document.getElementById('cr-phone'),iti;
     if(phoneEl && window.intlTelInput){
       iti=window.intlTelInput(phoneEl,{
@@ -937,6 +939,25 @@
         if(testimonialWarn)testimonialWarn.classList.remove('show');
       });
     });
+    function resetFreeCricketsToFresh(){
+      if(form){form.style.display='';form.reset();}
+      if(claimIntro)claimIntro.style.display='';
+      if(thanks)thanks.style.display='none';
+      if(declined)declined.style.display='none';
+      if(testimonialHidden)testimonialHidden.value='';
+      if(testimonialWarn)testimonialWarn.classList.remove('show');
+      document.querySelectorAll('.yn-btn').forEach(function(b){b.classList.remove('selected');});
+      if(phoneEl && iti) iti.setNumber('');
+      var submitBtn=form?form.querySelector('.btn-submit'):null;
+      if(submitBtn){submitBtn.disabled=false;submitBtn.textContent='CLAIM MY FREE COPY \u2192';}
+    }
+    window.addEventListener('pageshow',function(e){
+      var resultShowing=(thanks&&thanks.style.display==='block')||(declined&&declined.style.display==='block');
+      if(e.persisted&&resultShowing){
+        resetFreeCricketsToFresh();
+        window.scrollTo({top:0,behavior:'instant'});
+      }
+    });
     if(form){
       form.addEventListener('submit',function(e){
         e.preventDefault();
@@ -957,6 +978,7 @@
           .then(function(r){
             if(r.ok){
               form.style.display='none';
+              if(claimIntro)claimIntro.style.display='none';
               if(willTestify){
                 thanks.style.display='block';
                 try{

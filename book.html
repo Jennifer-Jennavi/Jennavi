@@ -644,15 +644,17 @@
               </div>
             </div>
             <div class="book-cta-box" id="crickets-purchase" itemscope itemtype="https://schema.org/Offer">
-              <div class="book-cta-row">
-                <div>
-                  <div class="book-price" itemprop="price" content="29.90">$29.90</div>
-                  <meta itemprop="priceCurrency" content="USD">
-                  <meta itemprop="availability" content="https://schema.org/InStock">
-                  <span class="book-price-note">Digital PDF &middot; Instant Access &middot; No Shipping</span>
+              <div id="cricketsBuyIntro">
+                <div class="book-cta-row">
+                  <div>
+                    <div class="book-price" itemprop="price" content="29.90">$29.90</div>
+                    <meta itemprop="priceCurrency" content="USD">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <span class="book-price-note">Digital PDF &middot; Instant Access &middot; No Shipping</span>
+                  </div>
                 </div>
+                <button onclick="showFlwForm('crickets')" class="book-btn" style="cursor:pointer;width:100%;border:none;" aria-label="Buy CRICKETS for $29.90, instant digital download">GET CRICKETS NOW &#8594;</button>
               </div>
-              <button onclick="showFlwForm('crickets')" class="book-btn" style="cursor:pointer;width:100%;border:none;" aria-label="Buy CRICKETS for $29.90, instant digital download">GET CRICKETS NOW &#8594;</button>
               <div class="flw-mini-form" id="flw-form-crickets">
                 <input type="text" id="flw-name-crickets" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-crickets" placeholder="Your email address" autocomplete="email">
@@ -1132,6 +1134,22 @@
     var form = document.getElementById('flw-form-' + tier);
     if (form) form.classList.remove('active');
   }
+  var CRICKETS_FORM_ORIGINAL = '<input type="text" id="flw-name-crickets" placeholder="Your full name" autocomplete="name"><input type="email" id="flw-email-crickets" placeholder="Your email address" autocomplete="email"><button class="flw-pay-btn" onclick="initFlwPayment(\'crickets\', 29.90, \'CRICKETS LinkedIn Positioning Playbook\')">Proceed to Payment - $29.90</button><button class="flw-cancel" onclick="hideFlwForm(\'crickets\')">Cancel</button>';
+  var cricketsJustPurchased = false;
+  function resetCricketsPurchaseToFresh(){
+    var form = document.getElementById('flw-form-crickets');
+    var intro = document.getElementById('cricketsBuyIntro');
+    if(form){form.innerHTML = CRICKETS_FORM_ORIGINAL;form.classList.remove('active');}
+    if(intro)intro.style.display='';
+    cricketsJustPurchased = false;
+  }
+  window.addEventListener('pageshow', function(e){
+    if(e.persisted && cricketsJustPurchased){
+      resetCricketsPurchaseToFresh();
+      var target=document.getElementById('crickets-purchase');
+      if(target)target.scrollIntoView({behavior:'instant',block:'center'});
+    }
+  });
   function buildCricketsEmailHtml(name, pdfLink) {
     return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0a0a0a;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.cbo{display:inline-block;padding:14px 38px;background:transparent;color:#C9A84C;border:1.5px solid rgba(201,168,76,0.5);font-family:Courier New,monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;}.sub{font-size:13px;color:rgba(250,243,224,0.5);text-align:center;margin:0 0 28px;line-height:1.7;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(250,243,224,0.7);line-height:1.85;margin-bottom:0;}.st2{font-size:16px;font-weight:700;color:#FAF3E0;margin-bottom:10px;}.dg2{font-size:13px;color:rgba(250,243,224,0.65);line-height:1.8;margin-bottom:22px;}.rp{font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;margin-bottom:24px;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you so much for picking up CRICKETS. Your payment went through, and your copy is ready right now.</p><div class="ct"><a href="' + pdfLink + '" class="cb">Download Your CRICKETS Copy &#8594;</a></div><p class="sub">53 pages. No fluff. Read it tonight, and you can start applying it to your profile tomorrow.</p><hr class="hr"><p class="dg">CRICKETS walks you through exactly why founders get views but zero clients. Profile positioning, content architecture, hook science, and the psychology behind why an ideal client scrolls past without ever reaching out.</p><hr class="hr"><p class="st2">If you would like some help putting it into practice</p><p class="dg2">Some founders read CRICKETS and want to apply it themselves. Others would prefer Jennifer to do it with them directly. If that is you, book a free 30-minute call. She will review your LinkedIn before you even speak and tell you honestly where the gaps are.</p><div class="ct" style="padding:4px 0 26px;"><a href="https://cal.id/jennavi/strategy" class="cbo">Book a Free Strategy Call &#8594;</a></div><p class="rp">You can also just reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a> &middot; <a href="https://cal.id/jennavi/strategy">Book a strategy call</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
   }
@@ -1165,6 +1183,9 @@
           var waHref = "https://wa.me/2349024680769?text=" + encodeURIComponent(waMsg);
           if (form) form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;">' + successText + '</p><a href="' + waHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 24px;border-radius:6px;font-family:\'DM Mono\',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">Message Jennifer on WhatsApp</a></div>';
           if (tier === 'crickets') {
+            cricketsJustPurchased = true;
+            var buyIntro = document.getElementById('cricketsBuyIntro');
+            if (buyIntro) buyIntro.style.display = 'none';
             try {
               emailjs.init({publicKey:'XIy6yIQorZRwYz0xf'});
               emailjs.send('service_10a5m5e','template_g32mptd',{
@@ -1188,9 +1209,47 @@
               transaction_ref: response.transaction_id || response.tx_ref || 'N/A'
             })
           });
+        } else {
+          var failForm = document.getElementById('flw-form-' + tier);
+          if (failForm) {
+            var failMsgEl = failForm.querySelector('.flw-fail-msg');
+            if (!failMsgEl) {
+              failMsgEl = document.createElement('p');
+              failMsgEl.className = 'flw-fail-msg';
+              failMsgEl.style.cssText = 'color:#E65100;font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
+              failForm.appendChild(failMsgEl);
+            }
+            failMsgEl.innerHTML = 'Payment was not completed. This sometimes happens if your card blocks international or USD transactions, ask your bank to enable this, or try a different card. <a href="https://wa.me/2349024680769?text=' + encodeURIComponent('Hi Jennifer! My card payment for ' + description + ' did not go through. Can you help?') + '" target="_blank" rel="noopener noreferrer" style="color:#C9A84C;text-decoration:underline;">Message Jennifer on WhatsApp</a> if it keeps happening.';
+          }
+          fetch('https://formspree.io/f/mqejgwab', {
+            method: 'POST',
+            headers: {'Accept':'application/json','Content-Type':'application/json'},
+            body: JSON.stringify({
+              source: 'Payment Failed Notification',
+              subject: 'Payment attempt failed - ' + description,
+              tier: description,
+              amount: '$' + amount + ' USD',
+              client_name: name,
+              client_email: email,
+              status: response.status || 'unknown',
+              transaction_ref: response.transaction_id || response.tx_ref || 'N/A'
+            })
+          }).catch(function(){});
         }
       },
-      onclose: function() {}
+      onclose: function() {
+        var closeForm = document.getElementById('flw-form-' + tier);
+        if (closeForm && closeForm.innerHTML.indexOf('Payment successful') === -1) {
+          var closeMsgEl = closeForm.querySelector('.flw-fail-msg');
+          if (!closeMsgEl && closeForm.querySelector('.flw-pay-btn')) {
+            closeMsgEl = document.createElement('p');
+            closeMsgEl.className = 'flw-fail-msg';
+            closeMsgEl.style.cssText = 'color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
+            closeMsgEl.textContent = 'Checkout closed. Your details are still here whenever you are ready to try again.';
+            closeForm.appendChild(closeMsgEl);
+          }
+        }
+      }
     });
   }
   </script>

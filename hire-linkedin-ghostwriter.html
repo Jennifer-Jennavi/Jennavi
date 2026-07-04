@@ -1778,9 +1778,47 @@
               transaction_ref: response.transaction_id || response.tx_ref || 'N/A'
             })
           });
+        } else {
+          var failForm = document.getElementById('flw-form-' + tier);
+          if (failForm) {
+            var failMsgEl = failForm.querySelector('.flw-fail-msg');
+            if (!failMsgEl) {
+              failMsgEl = document.createElement('p');
+              failMsgEl.className = 'flw-fail-msg';
+              failMsgEl.style.cssText = 'color:#E65100;font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
+              failForm.appendChild(failMsgEl);
+            }
+            failMsgEl.innerHTML = 'Payment was not completed. This sometimes happens if your card blocks international or USD transactions, ask your bank to enable this, or try a different card. <a href="https://wa.me/2349024680769?text=' + encodeURIComponent('Hi Jennifer! My card payment for ' + description + ' did not go through. Can you help?') + '" target="_blank" rel="noopener noreferrer" style="color:#C9A84C;text-decoration:underline;">Message Jennifer on WhatsApp</a> if it keeps happening.';
+          }
+          fetch('https://formspree.io/f/mqejgwab', {
+            method: 'POST',
+            headers: {'Accept':'application/json','Content-Type':'application/json'},
+            body: JSON.stringify({
+              source: 'Payment Failed Notification',
+              subject: 'Payment attempt failed - ' + description,
+              tier: description,
+              amount: '$' + amount + ' USD',
+              client_name: name,
+              client_email: email,
+              status: response.status || 'unknown',
+              transaction_ref: response.transaction_id || response.tx_ref || 'N/A'
+            })
+          }).catch(function(){});
         }
       },
-      onclose: function() {}
+      onclose: function() {
+        var closeForm = document.getElementById('flw-form-' + tier);
+        if (closeForm && closeForm.innerHTML.indexOf('Payment successful') === -1) {
+          var closeMsgEl = closeForm.querySelector('.flw-fail-msg');
+          if (!closeMsgEl && closeForm.querySelector('.flw-pay-btn')) {
+            closeMsgEl = document.createElement('p');
+            closeMsgEl.className = 'flw-fail-msg';
+            closeMsgEl.style.cssText = 'color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
+            closeMsgEl.textContent = 'Checkout closed. Your details are still here whenever you are ready to try again.';
+            closeForm.appendChild(closeMsgEl);
+          }
+        }
+      }
     });
   }
   </script>
