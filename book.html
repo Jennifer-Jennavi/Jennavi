@@ -1158,7 +1158,7 @@
         if (response.status === "successful" || response.status === "completed") {
           var form = document.getElementById('flw-form-' + tier);
           var tierLabels = {taster:'Taster',starter:'Starter',growth:'Growth',authority:'Authority',vip:'VIP',executive:'Executive',crickets:'CRICKETS'};
-          var successText = tier === 'crickets' ? 'Payment successful. Check your email for the CRICKETS PDF within a few minutes.' : 'Payment successful. Jennifer will be in touch within 24 hours.';
+          var successText = tier === 'crickets' ? 'Payment successful. Check your email for the CRICKETS PDF within a few minutes. If you do not see it, please check your spam or junk folder.' : 'Payment successful. Jennifer will be in touch within 24 hours.';
           var waMsg = tier === 'crickets'
             ? "Hi Jennifer! Just purchased CRICKETS for $" + amount.toFixed(2) + ". I'm " + name + ", my email is " + email + ". Excited to get started!"
             : "Hi Jennifer! Just paid for the " + (tierLabels[tier]||tier) + " tier ($" + amount.toFixed(2) + "/month). I'm " + name + ", my email is " + email + ". Ready to get started!";

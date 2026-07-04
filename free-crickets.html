@@ -354,6 +354,12 @@
     .form-field{display:flex;flex-direction:column;gap:8px;}
     .form-field.full{grid-column:1/-1;}
     .form-field label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.8;}
+    .yn-toggle-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+    .yn-btn{flex:1;min-width:140px;padding:14px 16px;background:transparent;border:1px solid var(--gold-border-s);color:var(--ivory-muted);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border-radius:2px;min-height:48px;}
+    .yn-btn:hover{border-color:var(--gold);}
+    .yn-btn.selected{background:var(--gold);border-color:var(--gold);color:var(--onyx);font-weight:700;}
+    .yn-warn{display:none;color:#E65100;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;margin-top:8px;}
+    .yn-warn.show{display:block;}
     .form-field input,.form-field select,.form-field textarea{background:rgba(10,10,10,0.8);border:1px solid var(--gold-border);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:300;padding:14px 18px;outline:none;transition:border-color 0.2s;width:100%;appearance:none;-webkit-appearance:none;border-radius:0;}
     .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold-border-s);}
     .form-field input::placeholder,.form-field textarea::placeholder{color:var(--muted);}
@@ -688,7 +694,12 @@
               </div>
               <div class="form-field full">
                 <label for="cr-testimonial">If CRICKETS works for you, will you leave Jennifer a LinkedIn recommendation or Google review?</label>
-                <input type="text" id="cr-testimonial" name="testimonial_agreement" placeholder="e.g. Yes, I will leave a LinkedIn recommendation once I see results" required>
+                <div class="yn-toggle-row">
+                  <button type="button" class="yn-btn" data-val="Yes">Yes, I will leave a review</button>
+                  <button type="button" class="yn-btn" data-val="No">No</button>
+                </div>
+                <input type="hidden" id="cr-testimonial" name="testimonial_agreement">
+                <p class="yn-warn" id="testimonialWarn">Please select Yes or No before submitting.</p>
               </div>
             </div>
             <input type="hidden" name="_replyto" value="jennifer@jennavi.co">
@@ -699,7 +710,8 @@
           <div class="form-thanks" id="cricketsFormThanks">
             <div class="form-thanks-box">
               <h3>Check your inbox.</h3>
-              <p>Your copy of CRICKETS is on its way to your email right now. Jennifer personally reads every submission and will follow up directly if your answers show you are serious about implementing it.<br><br>While you read, explore these free resources too.</p>
+              <p>Your copy of CRICKETS is on its way to your email right now. If you do not see it within a few minutes, please check your spam or junk folder, it sometimes lands there on the first email from a new sender.</p>
+              <p>Jennifer personally reads every submission and will follow up directly if your answers show you are serious about implementing it.<br><br>While you read, explore these free resources too.</p>
               <div class="thanks-actions">
                 <p>Explore while you read</p>
                 <div class="thanks-grid">
@@ -722,6 +734,38 @@
                     <span class="thanks-card-label">Paid Services</span>
                     <span class="thanks-card-title">Done For You</span>
                     <span class="thanks-card-sub">From $100 one-time audit</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-thanks" id="cricketsFormDeclined">
+            <div class="form-thanks-box">
+              <h3>The free copy has one condition.</h3>
+              <p>CRICKETS is free specifically for founders willing to leave a review once it works for them. That is the whole reason it exists at no cost, so saying no there means the free copy is not the right fit this time.</p>
+              <p>You are still very welcome here. Use the free tools below, or get instant access to CRICKETS for $29.90 with no commitment required at all.</p>
+              <div class="thanks-actions">
+                <p>Your options right now</p>
+                <div class="thanks-grid">
+                  <a href="https://jennavi.co/book.html" class="thanks-card">
+                    <span class="thanks-card-label">Instant Access</span>
+                    <span class="thanks-card-title">Get CRICKETS for $29.90</span>
+                    <span class="thanks-card-sub">No commitment required</span>
+                  </a>
+                  <a href="https://jennavi.co/linkedin-health-check.html" class="thanks-card">
+                    <span class="thanks-card-label">Free Tool</span>
+                    <span class="thanks-card-title">Positioning Health Check</span>
+                    <span class="thanks-card-sub">Score your profile now</span>
+                  </a>
+                  <a href="https://jennavi.co/linkedin-post-audit.html" class="thanks-card">
+                    <span class="thanks-card-label">Free Tool</span>
+                    <span class="thanks-card-title">LinkedIn Post Audit</span>
+                    <span class="thanks-card-sub">Score your posts out of 100</span>
+                  </a>
+                  <a href="https://jennavi.co/insights/" class="thanks-card">
+                    <span class="thanks-card-label">Free Reading</span>
+                    <span class="thanks-card-title">Strategy Insights</span>
+                    <span class="thanks-card-sub">7 deep-dive guides</span>
                   </a>
                 </div>
               </div>
@@ -871,7 +915,7 @@
     function buildFreeCricketsEmailHtml(name, pdfLink) {
       return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0a0a0a;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.cbo{display:inline-block;padding:14px 38px;background:transparent;color:#C9A84C;border:1.5px solid rgba(201,168,76,0.5);font-family:Courier New,monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;}.sub{font-size:13px;color:rgba(250,243,224,0.5);text-align:center;margin:0 0 28px;line-height:1.7;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(250,243,224,0.7);line-height:1.85;margin-bottom:0;}.st2{font-size:16px;font-weight:700;color:#FAF3E0;margin-bottom:10px;}.dg2{font-size:13px;color:rgba(250,243,224,0.65);line-height:1.8;margin-bottom:22px;}.rp{font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;margin-bottom:24px;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for claiming your free copy of CRICKETS. Your submission has been received, and your copy is ready right now.</p><div class="ct"><a href="' + pdfLink + '" class="cb">Download Your CRICKETS Copy &#8594;</a></div><p class="sub">53 pages. No fluff. You committed to implementing at least two frameworks within 30 days, so start today.</p><hr class="hr"><p class="dg">Remember, the one condition is real. Implement two frameworks from the playbook and share one documented result with Jennifer. A screenshot, a DM received, an impression number. Anything real.</p><hr class="hr"><p class="st2">If you would like some help putting it into practice</p><p class="dg2">Some founders read CRICKETS and want to apply it themselves. Others would prefer Jennifer to do it with them directly. If that is you, book a free 30-minute call. She will review your LinkedIn before you even speak and tell you honestly where the gaps are.</p><div class="ct" style="padding:4px 0 26px;"><a href="https://cal.id/jennavi/strategy" class="cbo">Book a Free Strategy Call &#8594;</a></div><p class="rp">You can also just reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a> &middot; <a href="https://cal.id/jennavi/strategy">Book a strategy call</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
     }
-    var form=document.getElementById('cricketsForm'),thanks=document.getElementById('cricketsFormThanks');
+    var form=document.getElementById('cricketsForm'),thanks=document.getElementById('cricketsFormThanks'),declined=document.getElementById('cricketsFormDeclined');
     var phoneEl=document.getElementById('cr-phone'),iti;
     if(phoneEl && window.intlTelInput){
       iti=window.intlTelInput(phoneEl,{
@@ -884,28 +928,49 @@
         }
       });
     }
+    var testimonialHidden=document.getElementById('cr-testimonial'),testimonialWarn=document.getElementById('testimonialWarn');
+    document.querySelectorAll('.yn-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        document.querySelectorAll('.yn-btn').forEach(function(b){b.classList.remove('selected');});
+        btn.classList.add('selected');
+        if(testimonialHidden)testimonialHidden.value=btn.getAttribute('data-val');
+        if(testimonialWarn)testimonialWarn.classList.remove('show');
+      });
+    });
     if(form){
       form.addEventListener('submit',function(e){
         e.preventDefault();
+        if(!testimonialHidden||!testimonialHidden.value){
+          if(testimonialWarn)testimonialWarn.classList.add('show');
+          var toggleRow=document.querySelector('.yn-toggle-row');
+          if(toggleRow)toggleRow.scrollIntoView({behavior:'smooth',block:'center'});
+          return;
+        }
         if(phoneEl && iti) phoneEl.value = iti.getNumber();
         var nameVal=(document.getElementById('cr-name')||{}).value||'';
         var emailVal=(document.getElementById('cr-email')||{}).value||'';
+        var willTestify=testimonialHidden.value==='Yes';
         var data=new FormData(form);
         var submitBtn=form.querySelector('.btn-submit');
         if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Submitting...';}
         fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
           .then(function(r){
             if(r.ok){
-              form.style.display='none';thanks.style.display='block';
-              try{
-                emailjs.init({publicKey:'XIy6yIQorZRwYz0xf'});
-                emailjs.send('service_10a5m5e','template_g32mptd',{
-                  to_email: emailVal,
-                  to_name: nameVal,
-                  pdf_link: 'https://drive.google.com/file/d/1S7IAmMwpqZJCrOo5R1U3m8VwFFwA7rVR/view?usp=drivesdk',
-                  html_content: buildFreeCricketsEmailHtml(nameVal, 'https://drive.google.com/file/d/1S7IAmMwpqZJCrOo5R1U3m8VwFFwA7rVR/view?usp=drivesdk')
-                },{publicKey:'XIy6yIQorZRwYz0xf'}).then(function(){}).catch(function(e){console.error('EJS error:',e);});
-              }catch(e){console.error('EJS init error:',e);}
+              form.style.display='none';
+              if(willTestify){
+                thanks.style.display='block';
+                try{
+                  emailjs.init({publicKey:'XIy6yIQorZRwYz0xf'});
+                  emailjs.send('service_10a5m5e','template_g32mptd',{
+                    to_email: emailVal,
+                    to_name: nameVal,
+                    pdf_link: 'https://drive.google.com/file/d/1S7IAmMwpqZJCrOo5R1U3m8VwFFwA7rVR/view?usp=drivesdk',
+                    html_content: buildFreeCricketsEmailHtml(nameVal, 'https://drive.google.com/file/d/1S7IAmMwpqZJCrOo5R1U3m8VwFFwA7rVR/view?usp=drivesdk')
+                  },{publicKey:'XIy6yIQorZRwYz0xf'}).then(function(){}).catch(function(e){console.error('EJS error:',e);});
+                }catch(e){console.error('EJS init error:',e);}
+              }else{
+                if(declined)declined.style.display='block';
+              }
             }else{
               if(submitBtn){submitBtn.disabled=false;submitBtn.textContent='CLAIM MY FREE COPY \u2192';}
               alert('Something went wrong. Please try WhatsApp instead.');
