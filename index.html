@@ -956,7 +956,7 @@
             </ul>
             <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20Taster%20Profile%20Audit%20at%20%24100.%20How%20do%20I%20get%20started%3F" target="_blank" rel="noopener noreferrer" class="card-cta">Let's Get Started</a>
             <div class="card-cta-pay-wrap">
-              <button onclick="showFlwForm('taster')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $100</button>
+              <button id="payBtn-taster" onclick="showFlwForm('taster')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $100</button>
               <div class="flw-mini-form" id="flw-form-taster">
                 <input type="text" id="flw-name-taster" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-taster" placeholder="Your email address" autocomplete="email">
@@ -982,7 +982,7 @@
             </ul>
             <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20Starter%20tier%20at%20%24200%20per%20month.%20Can%20we%20discuss%3F" target="_blank" rel="noopener noreferrer" class="card-cta">Let's Get Started</a>
             <div class="card-cta-pay-wrap">
-              <button onclick="showFlwForm('starter')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $200/mo</button>
+              <button id="payBtn-starter" onclick="showFlwForm('starter')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $200/mo</button>
               <div class="flw-mini-form" id="flw-form-starter">
                 <input type="text" id="flw-name-starter" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-starter" placeholder="Your email address" autocomplete="email">
@@ -1009,7 +1009,7 @@
             </ul>
             <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20Growth%20tier%20at%20%24400%20per%20month.%20I%20am%20ready%20to%20get%20started.%20Are%20you%20available%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready to Grow</a>
             <div class="card-cta-pay-wrap">
-              <button onclick="showFlwForm('growth')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $400/mo</button>
+              <button id="payBtn-growth" onclick="showFlwForm('growth')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $400/mo</button>
               <div class="flw-mini-form" id="flw-form-growth">
                 <input type="text" id="flw-name-growth" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-growth" placeholder="Your email address" autocomplete="email">
@@ -1039,7 +1039,7 @@
             </ul>
             <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20Authority%20tier%20at%20%24600%20per%20month.%20I%20want%20to%20discuss%20how%20we%20can%20start.%20Are%20you%20available%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready, Let's Talk</a>
             <div class="card-cta-pay-wrap">
-              <button onclick="showFlwForm('authority')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $600/mo</button>
+              <button id="payBtn-authority" onclick="showFlwForm('authority')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $600/mo</button>
               <div class="flw-mini-form" id="flw-form-authority">
                 <input type="text" id="flw-name-authority" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-authority" placeholder="Your email address" autocomplete="email">
@@ -1073,7 +1073,7 @@
             <div style="display:flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;margin-bottom:10px;width:fit-content;border-radius:3px;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="8" height="8" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;">2 of 3 slots remaining</span></div>
             <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20am%20interested%20in%20the%20VIP%20tier%20at%20%24800%20per%20month.%20I%20am%20ready%20to%20apply.%20Can%20we%20talk%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready to Apply</a>
             <div class="card-cta-pay-wrap">
-              <button onclick="showFlwForm('vip')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $800/mo</button>
+              <button id="payBtn-vip" onclick="showFlwForm('vip')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $800/mo</button>
               <div class="flw-mini-form" id="flw-form-vip">
                 <input type="text" id="flw-name-vip" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-vip" placeholder="Your email address" autocomplete="email">
@@ -1115,7 +1115,7 @@
             <div style="display:flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);padding:4px 10px;margin-bottom:10px;width:fit-content;border-radius:3px;"><svg viewBox="0 0 24 24" fill="#C9A84C" width="8" height="8" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;">1 of 2 slots remaining</span></div>
             <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20want%20to%20apply%20for%20the%20Executive%20tier%20at%20%241%2C000%20per%20month.%20I%20am%20serious%20about%20this.%20Are%20you%20available%3F" target="_blank" rel="noopener noreferrer" class="card-cta">I'm Ready to Apply</a>
             <div class="card-cta-pay-wrap">
-              <button onclick="showFlwForm('executive')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $1,000/mo</button>
+              <button id="payBtn-executive" onclick="showFlwForm('executive')" class="card-cta-pay" style="width:100%;cursor:pointer;">Pay Now &middot; $1,000/mo</button>
               <div class="flw-mini-form" id="flw-form-executive">
                 <input type="text" id="flw-name-executive" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-executive" placeholder="Your email address" autocomplete="email">
@@ -1450,9 +1450,11 @@
     <section id="contact-section" style="background:#0f0f0f;padding:100px 48px;border-top:1px solid rgba(201,168,76,0.2);">
       <div class="container">
         <div style="max-width:640px;margin:0 auto;">
+          <div id="contactFormIntro">
           <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;text-align:center;">&#9670; Get In Touch</p>
           <h2 id="contact-heading" style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:#FAF3E0;line-height:1.1;letter-spacing:-0.02em;margin-bottom:12px;text-align:center;">Have a Question for <em style="font-style:italic;color:#C9A84C;font-weight:400;">Jennifer?</em></h2>
           <p style="font-size:15px;color:rgba(250,243,224,0.62);line-height:1.85;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;text-align:center;">A real person reads every message. Jennifer or her team will respond within 24 hours.</p>
+          </div>
 
           <div id="contactSuccess" style="display:none;text-align:center;padding:48px 0;">
             <p style="font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:#C9A84C;line-height:1.6;margin-bottom:10px;">Jennifer has received your message.</p>
@@ -2012,6 +2014,33 @@
     var form = document.getElementById('flw-form-' + tier);
     if (form) form.classList.remove('active');
   }
+  var FLW_TIER_DATA = {
+    taster: {amount:100, description:'Taster Tier - One-Time Profile Audit'},
+    starter: {amount:200, description:'Starter Tier - Monthly Retainer'},
+    growth: {amount:400, description:'Growth Tier - Monthly Retainer'},
+    authority: {amount:600, description:'Authority Tier - Monthly Retainer'},
+    vip: {amount:800, description:'VIP Tier - Monthly Retainer'},
+    executive: {amount:1000, description:'Executive Tier - Monthly Retainer'}
+  };
+  var flwJustPurchased = {};
+  function resetTierPurchaseToFresh(tier){
+    var data = FLW_TIER_DATA[tier];
+    if (!data) return;
+    var form = document.getElementById('flw-form-' + tier);
+    if (form) {
+      form.innerHTML = '<input type="text" id="flw-name-' + tier + '" placeholder="Your full name" autocomplete="name"><input type="email" id="flw-email-' + tier + '" placeholder="Your email address" autocomplete="email"><button class="flw-pay-btn" onclick="initFlwPayment(\'' + tier + '\', ' + data.amount + ', \'' + data.description + '\')">Proceed to Payment</button><button class="flw-cancel" onclick="hideFlwForm(\'' + tier + '\')">Cancel</button>';
+      form.classList.remove('active');
+    }
+    var payBtn = document.getElementById('payBtn-' + tier);
+    if (payBtn) payBtn.style.display = '';
+    flwJustPurchased[tier] = false;
+  }
+  window.addEventListener('pageshow', function(e){
+    if (!e.persisted) return;
+    Object.keys(FLW_TIER_DATA).forEach(function(tier){
+      if (flwJustPurchased[tier]) resetTierPurchaseToFresh(tier);
+    });
+  });
   function initFlwPayment(tier, amount, description) {
     var nameEl = document.getElementById('flw-name-' + tier);
     var emailEl = document.getElementById('flw-email-' + tier);
@@ -2034,6 +2063,9 @@
       callback: function(response) {
         if (response.status === "successful" || response.status === "completed") {
           var form = document.getElementById('flw-form-' + tier);
+          var payBtn = document.getElementById('payBtn-' + tier);
+          if (payBtn) payBtn.style.display = 'none';
+          flwJustPurchased[tier] = true;
           var tierLabels = {taster:'Taster',starter:'Starter',growth:'Growth',authority:'Authority',vip:'VIP',executive:'Executive'};
           var successText = 'Payment successful. Jennifer will be in touch within 24 hours.';
           var waMsg = "Hi Jennifer! Just paid for the " + (tierLabels[tier]||tier) + " tier ($" + amount.toFixed(2) + "/month). I'm " + name + ", my email is " + email + ". Ready to get started!";
@@ -2129,6 +2161,7 @@
           .then(function(r) {
             if (r.ok) {
               contactForm.style.display = 'none';
+              var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = 'none';
               var s = document.getElementById('contactSuccess');
               if (s) s.style.display = 'block';
             } else {

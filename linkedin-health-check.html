@@ -710,9 +710,11 @@
      <!-- LEAD CAPTURE -->
      <div style="background:var(--onyx-card);border:1px solid var(--gold-border-s);padding:40px;margin-bottom:40px;position:relative;overflow:hidden;" id="leadCapture">
        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
-       <p style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;">Get Your Result in Your Inbox</p>
-       <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ivory);margin-bottom:7px;">Send me my score and diagnosis.</h3>
-       <p style="font-size:13px;color:var(--ivory-muted);line-height:1.7;margin-bottom:22px;">Your result will be sent to your inbox instantly. After submitting you will also get a one-tap WhatsApp button to send your score directly to Jennifer. She reviews every submission personally and founders who share their details often hear from her directly.</p>
+       <div id="leadCaptureIntro">
+         <p style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;">Get Your Result in Your Inbox</p>
+         <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ivory);margin-bottom:7px;">Send me my score and diagnosis.</h3>
+         <p style="font-size:13px;color:var(--ivory-muted);line-height:1.7;margin-bottom:22px;">Your result will be sent to your inbox instantly. After submitting you will also get a one-tap WhatsApp button to send your score directly to Jennifer. She reviews every submission personally and founders who share their details often hear from her directly.</p>
+       </div>
        <form id="leadForm" style="display:flex;flex-direction:column;gap:12px;">
          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
            <div style="display:flex;flex-direction:column;gap:5px;">
@@ -726,7 +728,7 @@
          </div>
          <div style="display:flex;flex-direction:column;gap:5px;">
            <label for="lc-phone" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.8;">WhatsApp or Phone Number</label>
-           <input type="tel" id="lc-phone" name="whatsapp_phone" placeholder="+1 234 567 8900 (include country code)" style="background:var(--onyx);border:1px solid var(--gold-border);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:300;padding:11px 13px;border-radius:2px;outline:none;width:100%;">
+           <input type="tel" id="lc-phone" name="whatsapp_phone" placeholder="+1 234 567 8900" style="background:var(--onyx);border:1px solid var(--gold-border);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:300;padding:11px 13px;border-radius:2px;outline:none;width:100%;">
          </div>
          <input type="hidden" name="quiz_score" id="lcScore" value="">
          <input type="hidden" name="score_range" id="lcRange" value="">
@@ -823,9 +825,11 @@
   <section id="contact-section" style="background:#0f0f0f;padding:100px 48px;border-top:1px solid rgba(201,168,76,0.2);">
     <div class="container">
       <div style="max-width:640px;margin:0 auto;">
-        <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;text-align:center;">&#9670; Get In Touch</p>
+        <div id="contactFormIntro">
+          <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;text-align:center;">&#9670; Get In Touch</p>
         <h2 id="contact-heading" style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:#FAF3E0;line-height:1.1;letter-spacing:-0.02em;margin-bottom:12px;text-align:center;">Have a Question for <em style="font-style:italic;color:#C9A84C;font-weight:400;">Jennifer?</em></h2>
         <p style="font-size:15px;color:rgba(250,243,224,0.62);line-height:1.85;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;text-align:center;">A real person reads every message. Jennifer or her team will respond within 24 hours.</p>
+          </div>
 
         <div id="contactSuccess" style="display:none;text-align:center;padding:48px 0;">
           <p style="font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:#C9A84C;line-height:1.6;margin-bottom:10px;">Jennifer has received your message.</p>
@@ -1198,9 +1202,10 @@
    resultSection.classList.remove('show');quizSection.style.display='';questionContainer.innerHTML='';
    var lcContainer=document.getElementById('leadCapture');if(lcContainer)lcContainer.style.display='';
    var lcFormEl=document.getElementById('leadForm');if(lcFormEl){lcFormEl.style.display='';lcFormEl.reset();}
+   var lcIntroEl=document.getElementById('leadCaptureIntro');if(lcIntroEl)lcIntroEl.style.display='';
    var lcNameEl=document.getElementById('lc-name');if(lcNameEl)lcNameEl.value='';
    var lcEmailEl=document.getElementById('lc-email');if(lcEmailEl)lcEmailEl.value='';
-   var lcPhoneEl=document.getElementById('lc-phone');if(lcPhoneEl)lcPhoneEl.value='';
+   var lcPhoneEl=document.getElementById('lc-phone');if(lcPhoneEl)lcPhoneEl.value='';if(window.lcPhoneIti)window.lcPhoneIti.setNumber('');
    var lcThanksEl=document.getElementById('lcThanks');if(lcThanksEl)lcThanksEl.style.display='none';
    var lcSkipEl=document.getElementById('lcSkip');if(lcSkipEl)lcSkipEl.style.display='';
    buildProgressCats();renderQuestion(0);
@@ -1226,12 +1231,12 @@
  function sendEmail(name,email,score,range,rTitle,rBody,ctaText,ctaUrl){if(!email)return;if(typeof emailjs==='undefined')return;try{emailjs.init({publicKey:EJS_PUBLIC_KEY});}catch(e){}var params={to_name:name||'Founder',to_email:email,quiz_score:String(score)+' out of 100',score_range:range,result_title:rTitle,result_body:rBody,cta_text:ctaText,cta_url:ctaUrl,html_content:buildEmailHtml(name,score,range,rTitle,rBody,ctaText,ctaUrl),from_name:'Jennifer Omaliko, Jennavi',reply_to:'jennifer@jennavi.co'};emailjs.send(EJS_SERVICE_ID,EJS_TEMPLATE_ID,params,{publicKey:EJS_PUBLIC_KEY}).then(function(r){}).catch(function(e){console.error('EJS error:',e);});}
 
  /* ── LEAD FORM ── */
- var leadForm=document.getElementById('leadForm'),lcThanks=document.getElementById('lcThanks'),lcSkip=document.getElementById('lcSkip');
+ var leadForm=document.getElementById('leadForm'),lcThanks=document.getElementById('lcThanks'),lcSkip=document.getElementById('lcSkip'),leadCaptureIntro=document.getElementById('leadCaptureIntro');
  function submitLeadForm(data,nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,attempt){
    attempt=attempt||1;
    fetch('https://formspree.io/f/mqejgwab',{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(function(r){
      if(r.ok){
-       try{leadForm.style.display='none';if(lcSkip)lcSkip.style.display='none';if(lcThanks)lcThanks.style.display='block';var waMsg='Hi Jennifer, I just completed the Jennavi LinkedIn Health Check. My name is '+(nameVal||'a founder')+'. My score is '+(scoreVal||'?')+' out of 100. Result: '+(rangeVal||'?')+'. I would love to discuss this with you.';var waBtn=document.getElementById('lcWaBtn');if(waBtn)waBtn.href='https://wa.me/2349024680769?text='+encodeURIComponent(waMsg);if(typeof gtag!=='undefined')gtag('event','lead_captured',{event_category:'LinkedIn Health Check',value:parseInt(scoreVal)||0});}catch(displayErr){console.error('Display update error:',displayErr);}
+       try{leadForm.style.display='none';if(leadCaptureIntro)leadCaptureIntro.style.display='none';if(lcSkip)lcSkip.style.display='none';if(lcThanks)lcThanks.style.display='block';var waMsg='Hi Jennifer, I just completed the Jennavi LinkedIn Health Check. My name is '+(nameVal||'a founder')+'. My score is '+(scoreVal||'?')+' out of 100. Result: '+(rangeVal||'?')+'. I would love to discuss this with you.';var waBtn=document.getElementById('lcWaBtn');if(waBtn)waBtn.href='https://wa.me/2349024680769?text='+encodeURIComponent(waMsg);if(typeof gtag!=='undefined')gtag('event','lead_captured',{event_category:'LinkedIn Health Check',value:parseInt(scoreVal)||0});}catch(displayErr){console.error('Display update error:',displayErr);}
        try{sendEmail(nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,'Book Your Free Discovery Call','https://cal.id/jennavi/strategy');}catch(emailErr){console.error('sendEmail error:',emailErr);}
      }else if(attempt<2){
        setTimeout(function(){submitLeadForm(data,nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,attempt+1);},600);
@@ -1246,7 +1251,7 @@
      }
    });
  }
- if(leadForm){leadForm.addEventListener('submit',function(e){e.preventDefault();var nameVal=(document.getElementById('lc-name')||{}).value||'';var emailVal=(document.getElementById('lc-email')||{}).value||'';var scoreVal=(document.getElementById('lcScore')||{}).value||'';var rangeVal=(document.getElementById('lcRange')||{}).value||'';var rTitle=(document.getElementById('resultTitle')||{}).textContent||'';var rBody=(document.getElementById('resultTagline')||{}).textContent||'';var data=new FormData(leadForm);var sc=computeScores();CATEGORIES.forEach(function(name,i){data.append('score_'+name.toLowerCase().replace(' ','_'),sc.byCat[i]);});QUESTIONS.forEach(function(q,i){var a=answers[i];data.append('q'+(i+1)+'_'+CATEGORIES[q.cat].toLowerCase().replace(' ','_'),a!==null?q.opts[a]:'Not answered');});submitLeadForm(data,nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody);});}
+ if(leadForm){leadForm.addEventListener('submit',function(e){e.preventDefault();var lcPhoneEl2=document.getElementById('lc-phone');if(lcPhoneEl2&&window.lcPhoneIti)lcPhoneEl2.value=window.lcPhoneIti.getNumber();var nameVal=(document.getElementById('lc-name')||{}).value||'';var emailVal=(document.getElementById('lc-email')||{}).value||'';var scoreVal=(document.getElementById('lcScore')||{}).value||'';var rangeVal=(document.getElementById('lcRange')||{}).value||'';var rTitle=(document.getElementById('resultTitle')||{}).textContent||'';var rBody=(document.getElementById('resultTagline')||{}).textContent||'';var data=new FormData(leadForm);var sc=computeScores();CATEGORIES.forEach(function(name,i){data.append('score_'+name.toLowerCase().replace(' ','_'),sc.byCat[i]);});QUESTIONS.forEach(function(q,i){var a=answers[i];data.append('q'+(i+1)+'_'+CATEGORIES[q.cat].toLowerCase().replace(' ','_'),a!==null?q.opts[a]:'Not answered');});submitLeadForm(data,nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody);});}
  if(lcSkip){lcSkip.addEventListener('click',function(){var lc=document.getElementById('leadCapture');if(lc)lc.style.display='none';});}
 
  /* ── SHARE BUTTONS ── */
@@ -1448,6 +1453,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
   <script>
   (function(){
+    var lcPhoneEl = document.querySelector('#lc-phone');
+    if (lcPhoneEl) {
+      window.lcPhoneIti = window.intlTelInput(lcPhoneEl, {
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        separateDialCode: true,
+        initialCountry: "auto",
+        preferredCountries: ["us", "gb", "au", "ca", "ng"],
+        geoIpLookup: function(callback) {
+          fetch("https://ipapi.co/json")
+            .then(function(r){ return r.json(); })
+            .then(function(d){ callback(d.country_code); })
+            .catch(function(){ callback("us"); });
+        }
+      });
+    }
+  })();
+  (function(){
     var phoneEl = document.querySelector('#contact-phone');
     var iti;
     if (phoneEl) {
@@ -1476,6 +1498,7 @@
           .then(function(r) {
             if (r.ok) {
               contactForm.style.display = 'none';
+              var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = 'none';
               var s = document.getElementById('contactSuccess');
               if (s) s.style.display = 'block';
             } else {

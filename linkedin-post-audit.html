@@ -935,7 +935,7 @@
           </div>
           <div class="gate-field" style="max-width:480px;margin:0 auto;">
             <label for="gate-phone">WhatsApp Number</label>
-            <input type="tel" id="gate-phone" name="whatsapp_phone" placeholder="+1 234 567 8900 (include country code)">
+            <input type="tel" id="gate-phone" name="whatsapp_phone" placeholder="+1 234 567 8900">
           </div>
           <input type="hidden" name="overall_score" id="gateScore" value="">
           <input type="hidden" name="audit_mode" id="gateMode" value="">
@@ -1062,9 +1062,11 @@
   <section id="contact-section" style="background:#0f0f0f;padding:100px 48px;border-top:1px solid rgba(201,168,76,0.2);">
     <div class="container">
       <div style="max-width:640px;margin:0 auto;">
-        <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;text-align:center;">&#9670; Get In Touch</p>
+        <div id="contactFormIntro">
+          <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;text-align:center;">&#9670; Get In Touch</p>
         <h2 id="contact-heading" style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:#FAF3E0;line-height:1.1;letter-spacing:-0.02em;margin-bottom:12px;text-align:center;">Have a Question for <em style="font-style:italic;color:#C9A84C;font-weight:400;">Jennifer?</em></h2>
         <p style="font-size:15px;color:rgba(250,243,224,0.62);line-height:1.85;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;text-align:center;">A real person reads every message. Jennifer or her team will respond within 24 hours.</p>
+          </div>
 
         <div id="contactSuccess" style="display:none;text-align:center;padding:48px 0;">
           <p style="font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:#C9A84C;line-height:1.6;margin-bottom:10px;">Jennifer has received your message.</p>
@@ -2044,7 +2046,13 @@ function updateGateHeading(score){
             if(interpEl){
               interpEl.innerHTML='<span class="perf-interpretation-label" style="color:#E65100;">&#9650; Please Complete All Fields</span><p class="perf-interpretation-text">Enter your approximate impressions and answer both questions above before requesting an interpretation.</p>';
               interpEl.classList.add('show');
-              interpEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+              var perfCtxEl=document.getElementById('perfCtx'+idx3);
+              if(perfCtxEl){
+                var navEl=document.querySelector('.nav');
+                var navHeight=navEl?navEl.offsetHeight:80;
+                var ctxOffset=perfCtxEl.getBoundingClientRect().top+window.pageYOffset-navHeight-16;
+                window.scrollTo({top:ctxOffset,behavior:'smooth'});
+              }
             }
             return;
           }
@@ -2083,6 +2091,7 @@ function updateGateHeading(score){
   /* ── GATE FORM ── */
   document.getElementById('gateForm').addEventListener('submit',function(e){
     e.preventDefault();
+    var gatePhoneEl2=document.getElementById('gate-phone');if(gatePhoneEl2&&window.gatePhoneIti)gatePhoneEl2.value=window.gatePhoneIti.getNumber();
     var nameVal=(document.getElementById('gate-name')||{}).value||'';
     var scoreVal=(document.getElementById('gateScore')||{}).value||'';
     var modeVal=(document.getElementById('gateMode')||{}).value||'';
@@ -2099,8 +2108,8 @@ function updateGateHeading(score){
           var waBtn=document.getElementById('gateWaBtn');
           if(waBtn)waBtn.href='https://wa.me/2349024680769?text='+encodeURIComponent(waMsg);
           if(typeof gtag!=='undefined')gtag('event','post_audit_lead',{event_category:'LinkedIn Post Audit',value:parseInt(scoreVal)||0});
-        }else{if(btn){btn.disabled=false;btn.textContent='Send Me Jennifer\'s Fix Plan →';}alert('Something went wrong. Please email jennifer@jennavi.co directly.');}
-      }).catch(function(){if(btn){btn.disabled=false;btn.textContent='Send Me Jennifer\'s Fix Plan →';}alert('Something went wrong. Please email jennifer@jennavi.co directly.');});
+        }else{if(btn){btn.disabled=false;btn.textContent='Send Me Jennifer\'s Fix Plan →';}alert('Something went wrong. Please try WhatsApp instead.');}
+      }).catch(function(){if(btn){btn.disabled=false;btn.textContent='Send Me Jennifer\'s Fix Plan →';}alert('Something went wrong. Please try WhatsApp instead.');});
   });
   document.getElementById('gateSkip').addEventListener('click',function(){document.getElementById('unlockGate').style.display='none';});
 
@@ -2125,6 +2134,7 @@ function updateGateHeading(score){
     var gateFormEl=document.getElementById('gateForm');
     if(gateFormEl){gateFormEl.style.display='';gateFormEl.reset();}
     var gateNameEl=document.getElementById('gate-name');if(gateNameEl)gateNameEl.value='';
+    var gatePhoneEl3=document.getElementById('gate-phone');if(gatePhoneEl3)gatePhoneEl3.value='';if(window.gatePhoneIti)window.gatePhoneIti.setNumber('');
     var gateEmailEl=document.getElementById('gate-email');if(gateEmailEl)gateEmailEl.value='';
     var gateThanksEl=document.getElementById('gateThanks');if(gateThanksEl)gateThanksEl.style.display='none';
     var gateSkipEl=document.getElementById('gateSkip');if(gateSkipEl)gateSkipEl.style.display='';
@@ -2334,6 +2344,23 @@ function updateGateHeading(score){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
   <script>
   (function(){
+    var gatePhoneEl = document.querySelector('#gate-phone');
+    if (gatePhoneEl) {
+      window.gatePhoneIti = window.intlTelInput(gatePhoneEl, {
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        separateDialCode: true,
+        initialCountry: "auto",
+        preferredCountries: ["us", "gb", "au", "ca", "ng"],
+        geoIpLookup: function(callback) {
+          fetch("https://ipapi.co/json")
+            .then(function(r){ return r.json(); })
+            .then(function(d){ callback(d.country_code); })
+            .catch(function(){ callback("us"); });
+        }
+      });
+    }
+  })();
+  (function(){
     var phoneEl = document.querySelector('#contact-phone');
     var iti;
     if (phoneEl) {
@@ -2362,6 +2389,7 @@ function updateGateHeading(score){
           .then(function(r) {
             if (r.ok) {
               contactForm.style.display = 'none';
+              var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = 'none';
               var s = document.getElementById('contactSuccess');
               if (s) s.style.display = 'block';
             } else {

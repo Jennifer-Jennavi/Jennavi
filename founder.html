@@ -1079,9 +1079,11 @@
     <section id="contact-section" style="background:#0f0f0f;padding:100px 48px;border-top:1px solid rgba(201,168,76,0.2);">
       <div class="container">
         <div style="max-width:640px;margin:0 auto;">
+          <div id="contactFormIntro">
           <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;text-align:center;">&#9670; Get In Touch</p>
           <h2 id="contact-heading" style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:#FAF3E0;line-height:1.1;letter-spacing:-0.02em;margin-bottom:12px;text-align:center;">Have a Question for <em style="font-style:italic;color:#C9A84C;font-weight:400;">Jennifer?</em></h2>
           <p style="font-size:15px;color:rgba(250,243,224,0.62);line-height:1.85;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;text-align:center;">A real person reads every message. Jennifer or her team will respond within 24 hours.</p>
+          </div>
 
           <div id="contactSuccess" style="display:none;text-align:center;padding:48px 0;">
             <p style="font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:#C9A84C;line-height:1.6;margin-bottom:10px;">Jennifer has received your message.</p>
@@ -1483,6 +1485,7 @@
           .then(function(r) {
             if (r.ok) {
               contactForm.style.display = 'none';
+              var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = 'none';
               var s = document.getElementById('contactSuccess');
               if (s) s.style.display = 'block';
             } else {
