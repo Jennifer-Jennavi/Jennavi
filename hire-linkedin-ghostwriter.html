@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <!-- CAL.ID POPUP (moved early for faster first-tap reliability) -->
+  <!-- CAL.ID POPUP -->
+  <script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://cal.id/embed-link/embed.js", "init");
+  Cal("init", "default", {origin:"https://cal.id"});
+  Cal.ns["default"]("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#C9A84C"},"dark":{"cal-brand":"#C9A84C"}},"hideEventTypeDetails":false,"layout":"month_view"});
+  </script>
+
   <meta name="google-site-verification" content="5FuNKCVY0tOLD_qChBmZ_56GD-fEDqFDh5wjBNF9-oU">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -635,7 +643,6 @@
     .ja-cta-secondary{background:transparent;border:1px solid rgba(201,168,76,0.4);color:#C9A84C;padding:13px 20px;border-radius:10px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;min-height:48px;}
     .ja-cta-secondary:hover{background:rgba(201,168,76,0.1);border-color:#C9A84C;}
 
-
     /* ── AGENT TYPING INDICATOR ── */
     .ja-typing{display:none;flex-direction:column;align-items:flex-start;gap:10px;padding:20px 0;}
     .ja-typing.active{display:flex;}
@@ -649,8 +656,6 @@
     .ja-answer-text.visible{opacity:1;}
     .ja-answer-ctas{opacity:0;transition:opacity 0.3s ease 0.2s;}
     .ja-answer-ctas.visible{opacity:1;}
-
-
 
     .ja-label-bubble{display:none;position:fixed;bottom:calc(152px + env(safe-area-inset-bottom));right:10px;background:#0a0a0a;border:1px solid #C9A84C;color:#C9A84C;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border-radius:4px;z-index:9998;white-space:nowrap;}
     .ja-label-bubble::after{content:'';position:absolute;bottom:-6px;right:20px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid #C9A84C;}
@@ -1720,13 +1725,6 @@
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay&&!overlay.hasAttribute('hidden'))closeAgent();});
     overlay&&overlay.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=overlay.querySelectorAll('button:not([disabled]),a[href],input,[tabindex]:not([tabindex="-1"])');var first=f[0],last=f[f.length-1];if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}else{if(document.activeElement===last){e.preventDefault();first.focus();}}});
   })();
-  </script>
-
-  <!-- CAL.ID POPUP -->
-  <script type="text/javascript">
-  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://cal.id/embed-link/embed.js", "init");
-  Cal("init", "default", {origin:"https://cal.id"});
-  Cal.ns["default"]("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#C9A84C"},"dark":{"cal-brand":"#C9A84C"}},"hideEventTypeDetails":false,"layout":"month_view"});
   </script>
 
   <!-- FLUTTERWAVE INLINE PAYMENT -->
