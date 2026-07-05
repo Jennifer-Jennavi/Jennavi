@@ -2208,13 +2208,22 @@ function updateGateHeading(score){
   });
 
   /* Reset everything if the page is restored from back/forward cache, since bfcache skips normal page load and would otherwise show stale audit results or a stale lead-gate state. Only resets if results are actually showing, so a pristine never-touched page is left alone. */
+  function resetContactFormToFresh(){
+    var cf=document.getElementById('contactForm');
+    if(cf){cf.style.display='';cf.reset();}
+    var cfIntro=document.getElementById('contactFormIntro');if(cfIntro)cfIntro.style.display='';
+    var cs=document.getElementById('contactSuccess');if(cs)cs.style.display='none';
+    var btn=document.getElementById('contactSubmitBtn');if(btn){btn.disabled=false;btn.innerHTML='Send Message &#8594;';}
+  }
   window.addEventListener('pageshow',function(e){
+    if(!e.persisted)return;
     var hookShowing=document.getElementById('hookAuditResults').classList.contains('show');
     var contentShowing=document.getElementById('contentAuditResults').classList.contains('show');
-    if(e.persisted&&(hookShowing||contentShowing)){
+    if(hookShowing||contentShowing){
       resetPostAuditToFresh();
       window.scrollTo({top:0,behavior:'instant'});
     }
+    resetContactFormToFresh();
   });
 
   /* ── FAQ ── */

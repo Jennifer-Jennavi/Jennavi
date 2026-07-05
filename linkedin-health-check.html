@@ -1239,12 +1239,19 @@
      if(lcScore)lcScore.value=scores.total;if(lcRange)lcRange.value=result.title;
      if(typeof gtag!=='undefined'){gtag('event','quiz_complete',{event_category:'LinkedIn Health Check',event_label:result.title,value:scores.total});}
      initFaq();
-     setTimeout(function(){
-       var navEl=document.querySelector('.nav');
-       var navHeight=navEl?navEl.offsetHeight:80;
-       var offset=resultSection.getBoundingClientRect().top+window.pageYOffset-navHeight-16;
-       window.scrollTo({top:offset,behavior:'smooth'});
-     },80);
+     (function(){
+       var header=resultSection.querySelector('.result-header');
+       function scrollToScore(behavior){
+         var target=header||resultSection;
+         var navEl=document.querySelector('.nav');
+         var navHeight=navEl?navEl.offsetHeight:80;
+         var offset=target.getBoundingClientRect().top+window.pageYOffset-navHeight-16;
+         window.scrollTo({top:offset,behavior:behavior});
+       }
+       setTimeout(function(){scrollToScore('smooth');},80);
+       /* Corrective pass in case late layout shifts (fonts, breakdown bar widths) moved the score after the first scroll */
+       setTimeout(function(){scrollToScore('instant');},450);
+     })();
    },generateDelay());
  }
 
@@ -1273,8 +1280,17 @@
  });
 
  /* Reset everything if the page is restored from back/forward cache (browser back button), since bfcache skips normal page load and would otherwise show stale quiz/result state. Only resets if the quiz was actually started or completed, so a pristine never-touched page is left alone. */
+ function resetContactFormToFresh(){
+   var cf=document.getElementById('contactForm');
+   if(cf){cf.style.display='';cf.reset();}
+   var cfIntro=document.getElementById('contactFormIntro');if(cfIntro)cfIntro.style.display='';
+   var cs=document.getElementById('contactSuccess');if(cs)cs.style.display='none';
+   var btn=document.getElementById('contactSubmitBtn');if(btn){btn.disabled=false;btn.innerHTML='Send Message &#8594;';}
+ }
  window.addEventListener('pageshow',function(e){
-   if(e.persisted&&(started||resultSection.classList.contains('show'))){resetQuizToFresh(true);}
+   if(!e.persisted)return;
+   if(started||resultSection.classList.contains('show')){resetQuizToFresh(true);}
+   resetContactFormToFresh();
  });
 
  /* ── EMAILJS ── */

@@ -1807,11 +1807,19 @@
     if (payBtn) payBtn.style.display = '';
     flwJustPurchased[tier] = false;
   }
+  function resetContactFormToFresh(){
+    var cf=document.getElementById('contactForm');
+    if(cf){cf.style.display='';cf.reset();}
+    var cfIntro=document.getElementById('contactFormIntro');if(cfIntro)cfIntro.style.display='';
+    var cs=document.getElementById('contactSuccess');if(cs)cs.style.display='none';
+    var btn=document.getElementById('contactSubmitBtn');if(btn){btn.disabled=false;btn.innerHTML='Send Message &#8594;';}
+  }
   window.addEventListener('pageshow', function(e){
     if (!e.persisted) return;
     Object.keys(FLW_TIER_DATA).forEach(function(tier){
       if (flwJustPurchased[tier]) resetTierPurchaseToFresh(tier);
     });
+    resetContactFormToFresh();
   });
   function initFlwPayment(tier, amount, description) {
     var nameEl = document.getElementById('flw-name-' + tier);

@@ -1112,6 +1112,24 @@
    window.scrollTo({top:0,behavior:'smooth'});
  });
 
+ /* Reset everything if the page is restored from back/forward cache, so a returning visitor always lands on a fresh calculator and contact form instead of stale results. */
+ function resetContactFormToFresh(){
+   var cf=document.getElementById('contactForm');
+   if(cf){cf.style.display='';cf.reset();}
+   var cfIntro=document.getElementById('contactFormIntro');if(cfIntro)cfIntro.style.display='';
+   var cs=document.getElementById('contactSuccess');if(cs)cs.style.display='none';
+   var btn=document.getElementById('contactSubmitBtn');if(btn){btn.disabled=false;btn.innerHTML='Send Message &#8594;';}
+ }
+ window.addEventListener('pageshow',function(e){
+   if(!e.persisted)return;
+   var results=document.getElementById('calcResults');
+   if(results&&results.classList.contains('show')){
+     results.classList.remove('show');
+     window.scrollTo({top:0,behavior:'instant'});
+   }
+   resetContactFormToFresh();
+ });
+
  /* FAQ */
  document.querySelectorAll('.faq-q').forEach(function(q){
    q.addEventListener('click',function(){

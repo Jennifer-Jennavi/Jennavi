@@ -1561,6 +1561,15 @@
           });
       });
     }
+    /* Reset the contact form if the page is restored from back/forward cache, so a returning visitor always sees a fresh form instead of a stale success message. */
+    window.addEventListener('pageshow', function(e){
+      if (!e.persisted) return;
+      var cf = document.getElementById('contactForm');
+      if (cf) { cf.style.display = ''; cf.reset(); }
+      var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = '';
+      var cs = document.getElementById('contactSuccess'); if (cs) cs.style.display = 'none';
+      var submitBtn = document.getElementById('contactSubmitBtn'); if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = 'Send Message &#8594;'; }
+    });
   })();
   </script>
 
