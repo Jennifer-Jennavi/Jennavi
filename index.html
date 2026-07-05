@@ -14,6 +14,30 @@
       "hideEventTypeDetails": false,
       "layout": "month_view"
     });
+    Cal.ns["default"]("on", {
+      action: "bookingSuccessful",
+      callback: function(e) {
+        console.log('[Cal.id test] bookingSuccessful fired', e.detail);
+        var banner = document.getElementById('bookingSuccessBanner');
+        if (banner) {
+          var navEl = document.querySelector('.nav');
+          banner.style.top = navEl ? navEl.offsetHeight + 'px' : '0px';
+          banner.style.display = 'flex';
+        }
+      }
+    });
+    Cal.ns["default"]("on", {
+      action: "bookingSuccessfulV2",
+      callback: function(e) {
+        console.log('[Cal.id test] bookingSuccessfulV2 fired', e.detail);
+        var banner = document.getElementById('bookingSuccessBanner');
+        if (banner) {
+          var navEl = document.querySelector('.nav');
+          banner.style.top = navEl ? navEl.offsetHeight + 'px' : '0px';
+          banner.style.display = 'flex';
+        }
+      }
+    });
   </script>
 
   <meta name="google-site-verification" content="5FuNKCVY0tOLD_qChBmZ_56GD-fEDqFDh5wjBNF9-oU">
@@ -804,6 +828,11 @@
   </style>
 </head>
 <body>
+  <div id="bookingSuccessBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:20000;background:#0a0a0a;border-bottom:2px solid #C9A84C;padding:14px 20px;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,0.5);">
+    <span style="font-family:'Playfair Display',serif;font-size:14px;color:#FAF3E0;">Call booked! One more step, say hi so Jennifer knows to expect you.</span>
+    <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20just%20booked%20a%20strategy%20call.%20Looking%20forward%20to%20it!" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:9px 18px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;">Message Jennifer &#8594;</a>
+    <button onclick="document.getElementById('bookingSuccessBanner').style.display='none';" aria-label="Close" style="background:none;border:none;color:rgba(250,243,224,0.5);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;">&times;</button>
+  </div>
   <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
     <a href="https://jennavi.co/" class="nav-logo">
       <img src="/jennavi-logo.svg" alt="Jennavi, LinkedIn Ghostwriting for Founders" width="140" height="30">
@@ -1826,7 +1855,7 @@
     var Q=[
       {
         q:"What are Jennavi’s prices?",
-        a:"<p>Jennavi has six service tiers built for exactly where you are right now.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Taster $100</strong> one-time. A full LinkedIn profile audit. No commitment. Just clarity on what is broken.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Starter $200/month.</strong> 8 strategic posts written in your exact voice.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Growth $400/month.</strong> 12 posts, full profile optimisation and bi-monthly performance reviews.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Authority $600/month.</strong> 16 posts, twice-monthly strategy calls and daily strategic presence in conversations your ideal clients are already having.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>VIP $800/month.</strong> 20 posts, monthly newsletter, weekly calls and visibility acceleration between posting days. Limited to 3 clients.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Executive $1,000/month.</strong> 25 posts, 2 newsletter editions, 1 blog article, weekly calls, 12-hour response and the most complete LinkedIn growth engine at this price point anywhere. Limited to 2 clients.</p><p>All fees in USD. First month paid upfront before work begins.</p><p><a href='https://jennavi.co/hire-linkedin-ghostwriter.html'>See full tier details</a> or <a href='https://jennavi.co/linkedin-health-check.html'>run the free Health Check</a> and get a personalised tier recommendation.</p>"
+        a:"<p>Jennavi has six service tiers built for exactly where you are right now.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Taster $100</strong> one-time. A full LinkedIn profile audit. No commitment. Just clarity on what is broken.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Starter $200/month.</strong> 8 strategic posts written in your exact voice.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Growth $400/month.</strong> 12 posts, full profile optimisation and bi-monthly performance reviews.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Authority $600/month.</strong> 16 posts, a monthly strategy call and daily strategic presence in conversations your ideal clients are already having.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>VIP $800/month.</strong> 20 posts, monthly newsletter, twice-monthly strategy calls and visibility acceleration between posting days. Limited to 3 clients.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Executive $1,000/month.</strong> 25 posts, 2 newsletter editions, 1 blog article, weekly calls, 12-hour response and the most complete LinkedIn growth engine at this price point anywhere. Limited to 2 clients.</p><p>All fees in USD. First month paid upfront before work begins.</p><p><a href='https://jennavi.co/hire-linkedin-ghostwriter.html'>See full tier details</a> or <a href='https://jennavi.co/linkedin-health-check.html'>run the free Health Check</a> and get a personalised tier recommendation.</p>"
       },
       {
         q:"How does the process work?",
@@ -2066,6 +2095,12 @@
           var waMsg = "Hi Jennifer! Just paid for the " + (tierLabels[tier]||tier) + " tier ($" + amount.toFixed(2) + "/month). I'm " + name + ", my email is " + email + ". Ready to get started!";
           var waHref = "https://wa.me/2349024680769?text=" + encodeURIComponent(waMsg);
           if (form) form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;">' + successText + '</p><a href="' + waHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 24px;border-radius:6px;font-family:\'DM Mono\',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">Message Jennifer on WhatsApp</a></div>';
+          if (form) {
+            var navElP = document.querySelector('.nav');
+            var navHeightP = navElP ? navElP.offsetHeight : 80;
+            var formOffset = form.getBoundingClientRect().top + window.pageYOffset - navHeightP - 16;
+            window.scrollTo({top: formOffset, behavior: 'smooth'});
+          }
           fetch('https://formspree.io/f/mqejgwab', {
             method: 'POST',
             headers: {'Accept':'application/json','Content-Type':'application/json'},
@@ -2158,7 +2193,13 @@
               contactForm.style.display = 'none';
               var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = 'none';
               var s = document.getElementById('contactSuccess');
-              if (s) s.style.display = 'block';
+              if (s) {
+                s.style.display = 'block';
+                var navElCF = document.querySelector('.nav');
+                var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
+                var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
+                window.scrollTo({top: cfOffset, behavior: 'smooth'});
+              }
             } else {
               if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message &#8594;'; }
               alert('Something went wrong. Please try WhatsApp instead.');
