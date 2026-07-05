@@ -9,6 +9,38 @@
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://cal.id/embed-link/embed.js", "init");
   Cal("init", "default", {origin:"https://cal.id"});
   Cal.ns["default"]("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#C9A84C"},"dark":{"cal-brand":"#C9A84C"}},"hideEventTypeDetails":false,"layout":"month_view"});
+    var bookingDismissTimer = null;
+    function closeBookingBanner() {
+      var banner = document.getElementById('bookingSuccessBanner');
+      if (banner) banner.style.display = 'none';
+      if (bookingDismissTimer) { clearTimeout(bookingDismissTimer); bookingDismissTimer = null; }
+    }
+    function handleBookingSuccess() {
+      var banner = document.getElementById('bookingSuccessBanner');
+      if (!banner) return;
+      var navEl = document.querySelector('.nav');
+      banner.style.top = navEl ? navEl.offsetHeight + 'px' : '0px';
+      banner.style.display = 'flex';
+      banner.style.animation = 'none';
+      void banner.offsetWidth;
+      banner.style.animation = 'bookingSlideIn 0.4s ease-out';
+      var bar = document.getElementById('bookingProgressBar');
+      if (bar) {
+        bar.style.animation = 'none';
+        void bar.offsetWidth;
+        bar.style.animation = 'bookingProgressShrink 30s linear forwards';
+      }
+      var checkIcon = document.getElementById('bookingCheckIcon');
+      if (checkIcon) {
+        checkIcon.style.animation = 'none';
+        void checkIcon.offsetWidth;
+        checkIcon.style.animation = 'bookingCheckPop 0.5s ease-out 0.15s both';
+      }
+      if (bookingDismissTimer) clearTimeout(bookingDismissTimer);
+      bookingDismissTimer = setTimeout(function(){ closeBookingBanner(); }, 30000);
+    }
+    Cal.ns["default"]("on", { action: "bookingSuccessful", callback: handleBookingSuccess });
+    Cal.ns["default"]("on", { action: "bookingSuccessfulV2", callback: handleBookingSuccess });
   </script>
 
   <meta name="google-site-verification" content="5FuNKCVY0tOLD_qChBmZ_56GD-fEDqFDh5wjBNF9-oU">
@@ -422,6 +454,22 @@
   </style>
 </head>
 <body>
+  <style>
+    @keyframes bookingSlideIn { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes bookingCheckPop { 0% { transform:scale(0); opacity:0; } 60% { transform:scale(1.15); opacity:1; } 100% { transform:scale(1); opacity:1; } }
+    @keyframes bookingBtnGlow { 0%,100% { box-shadow:0 0 0 0 rgba(201,168,76,0.55); } 50% { box-shadow:0 0 0 9px rgba(201,168,76,0); } }
+    @keyframes bookingProgressShrink { from { width:100%; } to { width:0%; } }
+  </style>
+  <div id="bookingSuccessBanner" style="display:none;position:fixed;top:0;left:12px;right:12px;z-index:20000;max-width:420px;margin:12px auto 0;background:#0a0a0a;border:1.5px solid #C9A84C;border-radius:10px;padding:20px 18px 0;flex-direction:column;align-items:center;text-align:center;gap:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);overflow:hidden;">
+    <button onclick="closeBookingBanner();" aria-label="Close" style="position:absolute;top:8px;right:10px;background:none;border:none;color:rgba(250,243,224,0.5);font-size:18px;cursor:pointer;padding:0 4px;line-height:1;">&times;</button>
+    <div id="bookingCheckIcon" style="width:38px;height:38px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;animation:bookingCheckPop 0.5s ease-out 0.15s both;">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <span style="font-family:'Playfair Display',serif;font-size:14px;color:#FAF3E0;line-height:1.5;">Call booked! One more step, say hi so Jennifer knows to expect you.</span>
+    <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20just%20booked%20a%20strategy%20call.%20Looking%20forward%20to%20it!" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#C9A84C;color:#0a0a0a;padding:10px 20px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;margin-bottom:16px;animation:bookingBtnGlow 2.2s ease-in-out infinite;">Message Jennifer</a>
+    <div id="bookingProgressBar" style="position:absolute;bottom:0;left:0;height:3px;background:#C9A84C;width:100%;"></div>
+  </div>
+  
 
   <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
     <a href="https://jennavi.co/" class="nav-logo"><img src="/jennavi-logo.svg" alt="Jennavi: LinkedIn Ghostwriting for Founders" width="140" height="30"></a>
@@ -1392,7 +1440,7 @@
   <script>
   (function(){
     var Q=[
-      {a:"<p>Jennavi's pricing is structured across six service tiers, built for exactly where you are right now.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Taster $100</strong> one-time. A full LinkedIn profile audit. No commitment.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Starter $200/month.</strong> 8 strategic posts written in your exact voice.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Growth $400/month.</strong> 12 posts, full profile optimisation and bi-monthly performance reviews.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Authority $600/month.</strong> 16 posts, twice-monthly strategy calls, complete LinkedIn management.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>VIP $800/month.</strong> 20 posts, monthly newsletter, weekly calls and visibility acceleration. Limited to 3 clients.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Executive $1,000/month.</strong> 25 posts, 2 newsletter editions, 1 blog article, weekly calls. Limited to 2 clients.</p><p><a href='https://jennavi.co/hire-linkedin-ghostwriter.html'>See full tier details</a>.</p>"},
+      {a:"<p>Jennavi's pricing is structured across six service tiers, built for exactly where you are right now.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Taster $100</strong> one-time. A full LinkedIn profile audit. No commitment.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Starter $200/month.</strong> 8 strategic posts written in your exact voice.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Growth $400/month.</strong> 12 posts, full profile optimisation and bi-monthly performance reviews.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Authority $600/month.</strong> 16 posts, a monthly strategy call, complete LinkedIn management.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>VIP $800/month.</strong> 20 posts, monthly newsletter, twice-monthly strategy calls and visibility acceleration. Limited to 3 clients.</p><p><span class=\"ja-arrow\">&#8594;</span> <strong>Executive $1,000/month.</strong> 25 posts, 2 newsletter editions, 1 blog article, weekly calls. Limited to 2 clients.</p><p><a href='https://jennavi.co/hire-linkedin-ghostwriter.html'>See full tier details</a>.</p>"},
       {a:"<p>Here is how the process works, in four steps from first call to content going live.</p><p><span class=\"ja-arrow\">1.</span> <strong>Free 30-minute strategy call.</strong> Jennifer reviews your LinkedIn before the call and arrives with specific observations. You leave with clarity regardless of what you decide next.</p><p><span class=\"ja-arrow\">2.</span> <strong>Proposal and agreement.</strong> If it is a fit, you receive a proposal, sign a service agreement and pay the first month upfront.</p><p><span class=\"ja-arrow\">3.</span> <strong>Voice capture session.</strong> A call on Google Meet where Jennifer learns exactly how you think, speak and what your audience needs to hear.</p><p><span class=\"ja-arrow\">4.</span> <strong>Content delivery.</strong> Delivered via Google Docs for your review. Revisions within 48 hours.</p><p><a data-cal-link='jennavi/strategy' data-cal-namespace='default' data-cal-config='{\"layout\":\"month_view\"}' style='cursor:pointer;'>Book your free strategy call</a>.</p>"},
       {a:"<p>Before taking a single client, Jennifer ran the full Jennavi methodology on her own LinkedIn and documented every result publicly.</p><p><strong>873% impression growth. 6,000+ followers built organically. 106,000+ organic impressions. Zero paid ads.</strong></p><p><a href='https://jennavi.co/founder.html#proof-heading'>See the full proof wall on this page</a>.</p>"},
       {a:"<p>Jennifer Mmesoma Omaliko is the founder and CEO of Jennavi, based in Kano, Nigeria. She built her LinkedIn from under 500 followers to 6,000+ organically, with 873% impression growth using zero paid ads. Author of CRICKETS. She writes every word for every client personally. No outsourcing. No templates.</p>"},
@@ -1495,7 +1543,13 @@
               contactForm.style.display = 'none';
               var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = 'none';
               var s = document.getElementById('contactSuccess');
-              if (s) s.style.display = 'block';
+              if (s) {
+                s.style.display = 'block';
+                var navElCF = document.querySelector('.nav');
+                var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
+                var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
+                window.scrollTo({top: cfOffset, behavior: 'smooth'});
+              }
             } else {
               if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message &#8594;'; }
               alert('Something went wrong. Please try WhatsApp instead.');

@@ -33,7 +33,7 @@
       if (bar) {
         bar.style.animation = 'none';
         void bar.offsetWidth;
-        bar.style.animation = 'bookingProgressShrink 12s linear forwards';
+        bar.style.animation = 'bookingProgressShrink 30s linear forwards';
       }
       var checkIcon = document.getElementById('bookingCheckIcon');
       if (checkIcon) {
@@ -42,7 +42,7 @@
         checkIcon.style.animation = 'bookingCheckPop 0.5s ease-out 0.15s both';
       }
       if (bookingDismissTimer) clearTimeout(bookingDismissTimer);
-      bookingDismissTimer = setTimeout(function(){ closeBookingBanner(); }, 12000);
+      bookingDismissTimer = setTimeout(function(){ closeBookingBanner(); }, 30000);
     }
     Cal.ns["default"]("on", { action: "bookingSuccessful", callback: handleBookingSuccess });
     Cal.ns["default"]("on", { action: "bookingSuccessfulV2", callback: handleBookingSuccess });
