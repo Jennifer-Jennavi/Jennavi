@@ -14,30 +14,36 @@
       "hideEventTypeDetails": false,
       "layout": "month_view"
     });
-    Cal.ns["default"]("on", {
-      action: "bookingSuccessful",
-      callback: function(e) {
-        console.log('[Cal.id test] bookingSuccessful fired', e.detail);
-        var banner = document.getElementById('bookingSuccessBanner');
-        if (banner) {
-          var navEl = document.querySelector('.nav');
-          banner.style.top = navEl ? navEl.offsetHeight + 'px' : '0px';
-          banner.style.display = 'flex';
-        }
+    function handleBookingSuccess(e) {
+      var payloadStr = JSON.stringify(e.detail, null, 2);
+      console.log('[Cal.id test] FULL PAYLOAD:', payloadStr);
+      var debugBox = document.getElementById('bookingDebugBox');
+      if (debugBox) {
+        debugBox.textContent = payloadStr;
+        debugBox.style.display = 'block';
       }
-    });
-    Cal.ns["default"]("on", {
-      action: "bookingSuccessfulV2",
-      callback: function(e) {
-        console.log('[Cal.id test] bookingSuccessfulV2 fired', e.detail);
-        var banner = document.getElementById('bookingSuccessBanner');
-        if (banner) {
-          var navEl = document.querySelector('.nav');
-          banner.style.top = navEl ? navEl.offsetHeight + 'px' : '0px';
-          banner.style.display = 'flex';
-        }
+      var banner = document.getElementById('bookingSuccessBanner');
+      if (!banner) return;
+      var attendeeName = '';
+      try {
+        var d = e.detail.data;
+        attendeeName = (d.attendees && d.attendees[0] && d.attendees[0].name)
+          || (d.booking && d.booking.attendees && d.booking.attendees[0] && d.booking.attendees[0].name)
+          || d.name || '';
+      } catch (err) { attendeeName = ''; }
+      var waLink = document.getElementById('bookingWaLink');
+      if (waLink) {
+        var msg = attendeeName
+          ? "Hi Jennifer! I'm " + attendeeName + ", just booked a call. Looking forward to it!"
+          : "Hi Jennifer! Just booked a call. Looking forward to it!";
+        waLink.href = 'https://wa.me/2349024680769?text=' + encodeURIComponent(msg);
       }
-    });
+      var navEl = document.querySelector('.nav');
+      banner.style.top = navEl ? navEl.offsetHeight + 'px' : '0px';
+      banner.style.display = 'flex';
+    }
+    Cal.ns["default"]("on", { action: "bookingSuccessful", callback: handleBookingSuccess });
+    Cal.ns["default"]("on", { action: "bookingSuccessfulV2", callback: handleBookingSuccess });
   </script>
 
   <meta name="google-site-verification" content="5FuNKCVY0tOLD_qChBmZ_56GD-fEDqFDh5wjBNF9-oU">
@@ -830,9 +836,10 @@
 <body>
   <div id="bookingSuccessBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:20000;background:#0a0a0a;border-bottom:2px solid #C9A84C;padding:14px 20px;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,0.5);">
     <span style="font-family:'Playfair Display',serif;font-size:14px;color:#FAF3E0;">Call booked! One more step, say hi so Jennifer knows to expect you.</span>
-    <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20just%20booked%20a%20strategy%20call.%20Looking%20forward%20to%20it!" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:9px 18px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;">Message Jennifer &#8594;</a>
+    <a id="bookingWaLink" href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20Just%20booked%20a%20call.%20Looking%20forward%20to%20it!" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:9px 18px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;">Message Jennifer &#8594;</a>
     <button onclick="document.getElementById('bookingSuccessBanner').style.display='none';" aria-label="Close" style="background:none;border:none;color:rgba(250,243,224,0.5);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;">&times;</button>
   </div>
+  <pre id="bookingDebugBox" style="display:none;position:fixed;top:70px;left:12px;right:12px;z-index:20001;background:#111;color:#7CFC00;border:2px solid #C9A84C;border-radius:8px;padding:14px;font-size:11px;line-height:1.5;max-height:60vh;overflow:auto;white-space:pre-wrap;word-break:break-word;-webkit-user-select:text;user-select:text;"></pre>
   <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
     <a href="https://jennavi.co/" class="nav-logo">
       <img src="/jennavi-logo.svg" alt="Jennavi, LinkedIn Ghostwriting for Founders" width="140" height="30">
