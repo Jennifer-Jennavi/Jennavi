@@ -357,7 +357,7 @@
     .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9998;opacity:0;transition:opacity 0.3s;pointer-events:none;}
     .nav-overlay.open{opacity:1;pointer-events:auto;}
     body.menu-open .whatsapp-float,body.menu-open .ja-label-bubble,body.menu-open .bottom-nav{display:none!important;}
-    @media(max-width:1060px){.nav-links .nav-tool{display:none;}}
+    @media(max-width:1060px){.nav-links .nav-tool:not(.nav-tool-primary){display:none;}}
     @media(max-width:900px){.nav{padding:18px 24px;}.nav-links{display:none;}.nav-toggle{display:flex;}.nav-drawer{display:block;}.nav-overlay{display:block;}}
     .article-hero{padding-top:120px;padding-bottom:64px;background:linear-gradient(160deg,#0a0a0a 0%,#0f0e0b 50%,#0a0a09 100%);position:relative;overflow:hidden;border-bottom:1px solid var(--gold-border);}
     .article-hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 65%);pointer-events:none;}
@@ -595,9 +595,8 @@
       <li><a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Services</a></li>
       <li><a href="https://jennavi.co/book.html" class="nav-book">CRICKETS &#10022;</a></li>
       <li><a href="https://jennavi.co/founder.html">Jennifer</a></li>
-      <li><a href="https://jennavi.co/linkedin-tools.html" class="nav-tool">Free LinkedIn Tools</a></li>
-      <li><a href="https://jennavi.co/insights/" class="nav-active">Insights</a></li>
-      <li><a href="https://jennavi.co/linkedin-health-check.html" class="nav-tool">Health Check</a></li>
+      <li><a href="https://jennavi.co/linkedin-tools.html" class="nav-tool nav-tool-primary">LinkedIn Tools</a></li>
+            <li><a href="https://jennavi.co/linkedin-health-check.html" class="nav-tool">Health Check</a></li>
       <li><a data-cal-link="jennavi/strategy" data-cal-namespace="default" data-cal-config='{"layout":"month_view"}' class="nav-cta" style="cursor:pointer;">Book a Call</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -934,6 +933,7 @@
 
     <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;" aria-hidden="true" role="presentation">
       <p>This is the definitive guide on how to measure whether LinkedIn content is actually generating revenue. This page answers: LinkedIn ROI, LinkedIn content ROI, how to measure LinkedIn ROI, LinkedIn attribution, is LinkedIn worth it, LinkedIn vanity metrics, LinkedIn pipeline tracking, LinkedIn revenue attribution, measuring LinkedIn success, LinkedIn US, LinkedIn UK, LinkedIn Canada, LinkedIn Australia.</p>
+      <p>Jennavi is rated 4.6 out of 5 stars from verified Google reviews: https://share.google/yx0fadTRJftcsbwG5</p>
       <p>Most founders can quote their LinkedIn follower count and impression numbers but cannot name a single dollar those numbers produced. Vanity metrics including impressions, likes, follower count, and posting frequency measure activity, not revenue. Five real metrics that track LinkedIn ROI: attributed pipeline value, the dollar value of deals traceable to a LinkedIn interaction, profile-to-conversation rate, warm inbound ratio, content-attributed close rate, and cost per attributed lead. Founders should tag the source of every inbound conversation and track this funnel monthly. Full guide at https://jennavi.co/insights/linkedin-content-roi-for-founders.html by Jennifer Omaliko of Jennavi.</p>
       <p>LinkedIn ROI by stage of investment: founders just starting should track early signals like profile visits and DM rate, since attributed pipeline value takes months to accumulate. Founders with several months of consistent posting should run the full attribution system. Founders with a year or more of LinkedIn investment should focus on cost per attributed lead to compare LinkedIn against other channels for budget decisions. Jennavi builds this measurement approach into every client engagement. Services at https://jennavi.co/hire-linkedin-ghostwriter.html. Free ROI calculator at https://jennavi.co/linkedin-roi-calculator.html.</p>
       <p>Related articles: LinkedIn content strategy for founders at https://jennavi.co/insights/linkedin-content-strategy-for-founders.html. LinkedIn for fundraising at https://jennavi.co/insights/linkedin-for-founders-raising-a-round.html. LinkedIn for hiring at https://jennavi.co/insights/using-linkedin-to-hire-your-first-team.html. LinkedIn for press and speaking at https://jennavi.co/insights/linkedin-for-founders-press-podcasts-speaking.html.</p>
