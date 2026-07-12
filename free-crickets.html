@@ -1057,7 +1057,7 @@
           if(toggleRow)toggleRow.scrollIntoView({behavior:'smooth',block:'center'});
           return;
         }
-        if(phoneEl && iti) phoneEl.value = iti.getNumber();
+        try{if(phoneEl && iti && typeof iti.getNumber==='function'){var frFullNum=iti.getNumber();if(frFullNum)phoneEl.value=frFullNum;}}catch(phoneErr){console.error('Phone number read error, using raw input value instead:',phoneErr);}
         var nameVal=(document.getElementById('cr-name')||{}).value||'';
         var emailVal=(document.getElementById('cr-email')||{}).value||'';
         var willTestify=testimonialHidden.value==='Yes';
