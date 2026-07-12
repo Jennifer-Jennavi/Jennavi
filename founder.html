@@ -1097,9 +1097,11 @@
           <div style="flex:1;min-width:240px;max-width:340px;margin:0 auto;">
             <div style="position:relative;width:100%;overflow:hidden;border-radius:6px;" id="founderBookCarousel">
               <div style="display:flex;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);" id="founderCarouselTrack">
-                <div style="flex:0 0 100%;"><img src="/IMG-20260406-WA0015.jpg" alt="CRICKETS book cover by Jennifer Mmesoma Omaliko, LinkedIn positioning playbook for founders" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);"></div>
-                <div style="flex:0 0 100%;"><img src="/IMG-20260405-WA0009.jpg" alt="CRICKETS LinkedIn playbook by Jennifer Omaliko on laptop and phone digital mockup" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
-                <div style="flex:0 0 100%;"><img src="/IMG-20260405-WA0008.jpg" alt="Open CRICKETS book pages by Jennifer Omaliko showing the complete LinkedIn positioning system" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-01-cover.png" alt="CRICKETS book cover by Jennifer Mmesoma Omaliko, LinkedIn positioning playbook for founders" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-02-whatsinside.jpg" alt="What's inside CRICKETS, the complete LinkedIn positioning system by Jennifer Omaliko" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-03-instantdownload.jpg" alt="CRICKETS instant digital download, available immediately after purchase" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-04-readanywhere.jpg" alt="CRICKETS LinkedIn playbook by Jennifer Omaliko displayed on laptop and phone, read anywhere" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-05-lifestyle.png" alt="Founder reading CRICKETS by Jennifer Omaliko, the LinkedIn positioning playbook" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
               </div>
               <button onclick="founderCarousel(-1)" aria-label="Previous" style="position:absolute;top:50%;left:8px;transform:translateY(-50%);background:rgba(0,0,0,0.7);border:1px solid rgba(201,168,76,0.45);color:#C9A84C;font-size:18px;padding:8px 12px;border-radius:4px;cursor:pointer;z-index:10;">&#10094;</button>
               <button onclick="founderCarousel(1)" aria-label="Next" style="position:absolute;top:50%;right:8px;transform:translateY(-50%);background:rgba(0,0,0,0.7);border:1px solid rgba(201,168,76,0.45);color:#C9A84C;font-size:18px;padding:8px 12px;border-radius:4px;cursor:pointer;z-index:10;">&#10095;</button>
@@ -1108,6 +1110,8 @@
               <span style="width:8px;height:8px;border-radius:50%;background:#C9A84C;display:inline-block;cursor:pointer;" onclick="founderGoTo(0)"></span>
               <span style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,0.35);display:inline-block;cursor:pointer;" onclick="founderGoTo(1)"></span>
               <span style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,0.35);display:inline-block;cursor:pointer;" onclick="founderGoTo(2)"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,0.35);display:inline-block;cursor:pointer;" onclick="founderGoTo(3)"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,0.35);display:inline-block;cursor:pointer;" onclick="founderGoTo(4)"></span>
             </div>
           </div>
           <div style="flex:1.2;min-width:240px;">
@@ -1329,7 +1333,7 @@
     drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
     document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
 
-    var founderIdx=0,founderTotal=3;
+    var founderIdx=0,founderTotal=5;
     function founderGoTo(n){founderIdx=((n%founderTotal)+founderTotal)%founderTotal;var track=document.getElementById('founderCarouselTrack');var w=track.parentElement.getBoundingClientRect().width;track.style.transform='translateX(-'+(founderIdx*w)+'px)';var dots=document.querySelectorAll('#founderCarouselDots span');dots.forEach(function(d,i){d.style.background=i===founderIdx?'#C9A84C':'rgba(201,168,76,0.35)';});}
     function founderCarousel(dir){founderGoTo(founderIdx+dir);}
     window.addEventListener('resize',function(){founderGoTo(founderIdx);});

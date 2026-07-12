@@ -242,7 +242,7 @@
         "name": "CRICKETS",
         "description": "complete LinkedIn positioning playbook by Jennifer Omaliko. $9.99. jennavi.co/book.html",
         "author": {"@id": "https://jennavi.co/founder.html#person"},
-        "numberOfPages": "53",
+        "numberOfPages": "155",
         "bookFormat": "EBook",
         "offers": {"@type": "Offer", "price": "9.99", "priceCurrency": "USD", "url": "https://jennavi.co/book.html"}
       },
@@ -861,9 +861,11 @@
           <div style="flex:1;min-width:240px;max-width:320px;margin:0 auto;">
             <div style="position:relative;width:100%;overflow:hidden;border-radius:6px;" id="wjCarousel">
               <div style="display:flex;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);" id="wjCarouselTrack">
-                <div style="flex:0 0 100%;"><img src="/IMG-20260406-WA0015.jpg" alt="CRICKETS LinkedIn positioning playbook by Jennifer Omaliko of Jennavi, $9.99 instant PDF" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);"></div>
-                <div style="flex:0 0 100%;"><img src="/IMG-20260405-WA0009.jpg" alt="CRICKETS by Jennifer Omaliko on laptop and phone" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
-                <div style="flex:0 0 100%;"><img src="/IMG-20260405-WA0008.jpg" alt="Open CRICKETS book showing the complete LinkedIn positioning system" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-01-cover.png" alt="CRICKETS LinkedIn positioning playbook by Jennifer Omaliko of Jennavi, $9.99 instant PDF" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-02-whatsinside.jpg" alt="What's inside CRICKETS, the complete LinkedIn positioning system by Jennifer Omaliko" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-03-instantdownload.jpg" alt="CRICKETS instant digital download, available immediately after purchase" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-04-readanywhere.jpg" alt="CRICKETS by Jennifer Omaliko displayed on laptop and phone, read anywhere" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
+                <div style="flex:0 0 100%;"><img src="/jennavi-crickets-carousel-05-lifestyle.png" alt="Founder reading CRICKETS by Jennifer Omaliko, the LinkedIn positioning playbook" style="width:100%;display:block;border-radius:4px;box-shadow:0 0 0 2px rgba(201,168,76,0.45),0 20px 40px rgba(0,0,0,0.5);" loading="lazy"></div>
               </div>
               <button onclick="wjCarousel(-1)" aria-label="Previous" style="position:absolute;top:50%;left:8px;transform:translateY(-50%);background:rgba(0,0,0,0.7);border:1px solid rgba(201,168,76,0.45);color:#C9A84C;font-size:18px;padding:8px 12px;border-radius:4px;cursor:pointer;z-index:10;min-width:44px;min-height:44px;">&#10094;</button>
               <button onclick="wjCarousel(1)" aria-label="Next" style="position:absolute;top:50%;right:8px;transform:translateY(-50%);background:rgba(0,0,0,0.7);border:1px solid rgba(201,168,76,0.45);color:#C9A84C;font-size:18px;padding:8px 12px;border-radius:4px;cursor:pointer;z-index:10;min-width:44px;min-height:44px;">&#10095;</button>
@@ -872,6 +874,8 @@
               <span style="width:8px;height:8px;border-radius:50%;background:#C9A84C;display:inline-block;cursor:pointer;" onclick="wjGoTo(0)"></span>
               <span style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,0.35);display:inline-block;cursor:pointer;" onclick="wjGoTo(1)"></span>
               <span style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,0.35);display:inline-block;cursor:pointer;" onclick="wjGoTo(2)"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,0.35);display:inline-block;cursor:pointer;" onclick="wjGoTo(3)"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,0.35);display:inline-block;cursor:pointer;" onclick="wjGoTo(4)"></span>
             </div>
           </div>
           <div style="flex:1.2;min-width:240px;">
@@ -1058,7 +1062,7 @@
       q.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); this.click(); } });
     });
 
-    var wjIdx = 0, wjTotal = 3;
+    var wjIdx = 0, wjTotal = 5;
     function wjGoTo(n){
       wjIdx = ((n % wjTotal) + wjTotal) % wjTotal;
       var track = document.getElementById('wjCarouselTrack');
