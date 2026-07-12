@@ -905,6 +905,14 @@
       </div>
     </section>
 
+    <section aria-labelledby="leave-review-heading" style="padding:60px 24px;text-align:center;">
+      <div style="max-width:520px;margin:0 auto;">
+        <h2 id="leave-review-heading" style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,26px);font-weight:700;color:var(--ivory);margin-bottom:14px;">Implemented a Framework Already?</h2>
+        <p style="font-size:14px;color:var(--ivory-muted);line-height:1.8;margin-bottom:24px;">Part of claiming CRICKETS free is sharing one real result. A quick Google review is another way to help the next founder find this, and takes less than a minute.</p>
+        <a href="https://g.page/r/CU9ZHpnUfx1eEBI/review" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:14px 32px;background:transparent;color:#C9A84C;border:1px solid var(--gold-border-s);border-radius:2px;text-decoration:none;">&#9733; Leave a Google Review &#8594;</a>
+      </div>
+    </section>
+
   </main>
 
   <footer role="contentinfo">
@@ -1080,8 +1088,8 @@
                   emailjs.send('service_10a5m5e','template_g32mptd',{
                     to_email: emailVal,
                     to_name: nameVal,
-                    pdf_link: 'https://drive.google.com/file/d/1SojYfO2OACVLsl8Bxc8b2qbdoh6oq4Xf/view?usp=drivesdk',
-                    html_content: buildFreeCricketsEmailHtml(nameVal, 'https://drive.google.com/file/d/1SojYfO2OACVLsl8Bxc8b2qbdoh6oq4Xf/view?usp=drivesdk')
+                    pdf_link: 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk',
+                    html_content: buildFreeCricketsEmailHtml(nameVal, 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk')
                   },{publicKey:'XIy6yIQorZRwYz0xf'}).then(function(){}).catch(function(e){console.error('EJS error:',e);});
                 }catch(e){console.error('EJS init error:',e);}
               }else{
