@@ -719,6 +719,7 @@
     .flw-mini-form .flw-pay-btn{width:100%;background:#C9A84C;color:#0a0a0a;border:none;padding:13px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;cursor:pointer;}
     .flw-mini-form .flw-cancel{display:block;text-align:center;margin-top:8px;font-family:'DM Mono',monospace;font-size:10px;color:rgba(201,168,76,0.5);cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;border:none;background:none;width:100%;}
   </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
   <style>
@@ -1822,6 +1823,60 @@
       if (flwJustPurchased[tier]) resetTierPurchaseToFresh(tier);
     });
   });
+  var EJS_PUBLIC_KEY_HIRE='XIy6yIQorZRwYz0xf',EJS_SERVICE_ID_HIRE='service_10a5m5e',EJS_TEMPLATE_ID_HIRE='template_g32mptd';
+  var TIER_PDF_LINK = 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk';
+  function buildTierCricketsEmailHtml(name, pdfLink, tierLabel) {
+    return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0a0a0a;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.sub{font-size:13px;color:rgba(250,243,224,0.5);text-align:center;margin:0 0 28px;line-height:1.7;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(250,243,224,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for joining the ' + tierLabel + ' tier. Your payment went through, and since CRICKETS is included free for ' + tierLabel + ' clients, your copy is ready right now.</p><div class="ct"><a href="' + pdfLink + '" class="cb">Download Your CRICKETS Copy &#8594;</a></div><p class="sub">Jennifer will personally reach out within 24 hours to get started.</p><hr class="hr"><p class="dg">In the meantime, feel free to read through CRICKETS, the exact positioning system behind Jennifer\'s own 873% LinkedIn growth, so you already know the language and framework she\'ll be using with you.</p><hr class="hr"><p class="rp" style="font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;margin-bottom:24px;">Questions in the meantime? Just reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+  }
+  function sendTierCricketsEmail(name, email, tierLabel, retryCount) {
+    retryCount = retryCount || 0;
+    if (!email) return;
+    if (typeof emailjs === 'undefined') {
+      if (retryCount < 5) {
+        setTimeout(function(){ sendTierCricketsEmail(name, email, tierLabel, retryCount+1); }, 500);
+      } else {
+        console.error('EmailJS failed to load after 5 attempts. Tier CRICKETS email was not sent for:', email);
+      }
+      return;
+    }
+    try { emailjs.init({publicKey: EJS_PUBLIC_KEY_HIRE}); } catch(e) {}
+    var params = {
+      to_name: name || 'Founder',
+      to_email: email,
+      pdf_link: TIER_PDF_LINK,
+      subject: 'Your CRICKETS Playbook is Here, ' + (name || 'Founder') + '!',
+      html_content: buildTierCricketsEmailHtml(name, TIER_PDF_LINK, tierLabel)
+    };
+    emailjs.send(EJS_SERVICE_ID_HIRE, EJS_TEMPLATE_ID_HIRE, params, {publicKey: EJS_PUBLIC_KEY_HIRE})
+      .then(function(r){ console.log('Tier CRICKETS email sent:', r.status); })
+      .catch(function(e){ console.error('Tier CRICKETS email error:', e); });
+  }
+  function buildGeneralConfirmationEmailHtml(name, tierLabel) {
+    return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0a0a0a;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(201,168,76,0.3);}.h{background:#0a0a0a;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(250,243,224,0.75);line-height:1.8;margin-bottom:20px;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(250,243,224,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#FAF3E0;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.rp{font-size:13px;color:rgba(250,243,224,0.5);line-height:1.85;margin-bottom:0;}.ft{background:#0a0a0a;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(250,243,224,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for joining the ' + tierLabel + ' tier. Your payment went through successfully, and Jennifer will personally reach out within 24 hours to get started.</p><hr class="hr"><p class="dg">In the meantime, feel free to message her directly if you have any questions before your first session.</p><hr class="hr"><p class="rp">Reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><br><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+  }
+  function sendGeneralConfirmationEmail(name, email, tierLabel, retryCount) {
+    retryCount = retryCount || 0;
+    if (!email) return;
+    if (typeof emailjs === 'undefined') {
+      if (retryCount < 5) {
+        setTimeout(function(){ sendGeneralConfirmationEmail(name, email, tierLabel, retryCount+1); }, 500);
+      } else {
+        console.error('EmailJS failed to load after 5 attempts. General confirmation email was not sent for:', email);
+      }
+      return;
+    }
+    try { emailjs.init({publicKey: EJS_PUBLIC_KEY_HIRE}); } catch(e) {}
+    var params = {
+      to_name: name || 'Founder',
+      to_email: email,
+      pdf_link: '',
+      subject: 'Welcome to Jennavi, ' + (name || 'Founder') + '! Your ' + tierLabel + ' Tier is Confirmed',
+      html_content: buildGeneralConfirmationEmailHtml(name, tierLabel)
+    };
+    emailjs.send(EJS_SERVICE_ID_HIRE, EJS_TEMPLATE_ID_HIRE, params, {publicKey: EJS_PUBLIC_KEY_HIRE})
+      .then(function(r){ console.log('General confirmation email sent:', r.status); })
+      .catch(function(e){ console.error('General confirmation email error:', e); });
+  }
   function initFlwPayment(tier, amount, description) {
     var nameEl = document.getElementById('flw-name-' + tier);
     var emailEl = document.getElementById('flw-email-' + tier);
@@ -1834,7 +1889,7 @@
       tx_ref: "jennavi-" + tier + "-" + Date.now(),
       amount: amount,
       currency: "USD",
-      payment_options: "card",
+      payment_options: "card,banktransfer,ussd",
       customer: { email: email, name: name },
       customizations: {
         title: "Jennavi Ghostwriting Services",
@@ -1871,6 +1926,15 @@
               transaction_ref: response.transaction_id || response.tx_ref || 'N/A'
             })
           });
+          try {
+            if (tier === 'executive') {
+              sendTierCricketsEmail(name, email, tierLabels[tier] || tier);
+            } else {
+              sendGeneralConfirmationEmail(name, email, tierLabels[tier] || tier);
+            }
+          } catch (emailDispatchErr) {
+            console.error('Confirmation email dispatch error:', emailDispatchErr);
+          }
         } else {
           var failForm = document.getElementById('flw-form-' + tier);
           if (failForm) {

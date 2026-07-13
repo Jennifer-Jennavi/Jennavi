@@ -1310,6 +1310,7 @@
                 to_email: email,
                 to_name: name,
                 pdf_link: 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk',
+                subject: 'Your CRICKETS Playbook is Here, ' + (name || 'Founder') + '!',
                 html_content: buildCricketsEmailHtml(name, 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk')
               },{publicKey:'XIy6yIQorZRwYz0xf'}).then(function(r){}).catch(function(e){console.error('EJS error:',e);});
             } catch(e) { console.error('EJS init error:', e); }
