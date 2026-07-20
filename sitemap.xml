@@ -7,14 +7,14 @@
   <!-- CRITICAL PAGES - Priority 1.0 -->
   <url>
     <loc>https://jennavi.co/</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://jennavi.co/hire-linkedin-ghostwriter.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -66,7 +66,7 @@
   <!-- FREE TOOLS - Priority 0.8 -->
   <url>
     <loc>https://jennavi.co/linkedin-health-check.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -95,12 +95,33 @@
   <!-- INSIGHTS HUB - Priority 0.8 -->
   <url>
     <loc>https://jennavi.co/insights/</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- INSIGHTS ARTICLES - Priority 0.7 -->
+  <url>
+    <loc>https://jennavi.co/insights/why-isnt-my-linkedin-converting.html</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/best-linkedin-ghostwriter-for-founders.html</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/linkedin-ghostwriting-agency-vs-independent-ghostwriter.html</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://jennavi.co/insights/best-time-to-post-on-linkedin-for-founders.html</loc>
     <lastmod>2026-07-15</lastmod>
@@ -194,7 +215,7 @@
 
   <url>
     <loc>https://jennavi.co/insights/best-linkedin-ghostwriting-agencies-for-founders.html</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -250,7 +271,7 @@
 
   <url>
     <loc>https://jennavi.co/insights/how-to-choose-a-linkedin-ghostwriting-agency.html</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
