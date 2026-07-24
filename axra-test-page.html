@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Axra Test Payment</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #111; color: #eee; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+  .box { background: #1a1a1a; padding: 40px; border-radius: 10px; text-align: center; max-width: 360px; }
+  input { width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: none; box-sizing: border-box; }
+  button { width: 100%; padding: 14px; background: #C9A84C; color: #111; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+  button:disabled { opacity: 0.6; cursor: not-allowed; }
+  #status { margin-top: 16px; font-size: 13px; color: #ccc; min-height: 20px; }
+</style>
+</head>
+<body>
+  <div class="box">
+    <h2>Axra $1 Test Payment</h2>
+    <p style="font-size:13px;color:#aaa;">This is a real $1 charge, used only to confirm the integration works end to end.</p>
+    <input type="text" id="name" placeholder="Your name">
+    <input type="email" id="email" placeholder="Your email">
+    <button id="payBtn">Pay $1 (Test)</button>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    // IMPORTANT: replace this with your actual Netlify site URL if different
+    var FUNCTION_URL = 'https://splendid-ganache-d832db.netlify.app/.netlify/functions/create-axra-session';
+
+    document.getElementById('payBtn').addEventListener('click', async function () {
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var statusEl = document.getElementById('status');
+      var btn = document.getElementById('payBtn');
+
+      if (!name || !email) {
+        statusEl.textContent = 'Please enter your name and email.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Processing...';
+      statusEl.textContent = 'Creating secure checkout session...';
+
+      try {
+        var response = await fetch(FUNCTION_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: 1.00,
+            currency: 'usd',
+            description: 'Axra Integration Test Payment',
+            customerEmail: email,
+            tier: 'test'
+          })
+        });
+
+        var data = await response.json();
+
+        if (!response.ok) {
+          statusEl.textContent = 'Error: ' + (data.error || 'Something went wrong.');
+          btn.disabled = false;
+          btn.textContent = 'Pay $1 (Test)';
+          return;
+        }
+
+        statusEl.textContent = 'Redirecting to secure payment page...';
+        window.location.href = data.checkoutUrl;
+
+      } catch (err) {
+        statusEl.textContent = 'Network error: ' + err.message;
+        btn.disabled = false;
+        btn.textContent = 'Pay $1 (Test)';
+      }
+    });
+  </script>
+</body>
+</html>
