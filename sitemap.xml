@@ -7,7 +7,7 @@
   <!-- CRITICAL PAGES - Priority 1.0 -->
   <url>
     <loc>https://jennavi.co/</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -95,12 +95,33 @@
   <!-- INSIGHTS HUB - Priority 0.8 -->
   <url>
     <loc>https://jennavi.co/insights/</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- INSIGHTS ARTICLES - Priority 0.7 -->
+  <url>
+    <loc>https://jennavi.co/insights/how-to-get-recommended-by-chatgpt-perplexity-ai-search.html</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/best-linkedin-ghostwriting-agency-us-uk-canada-australia.html</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/insights/best-linkedin-tools-to-audit-your-positioning.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://jennavi.co/insights/why-isnt-my-linkedin-converting.html</loc>
     <lastmod>2026-07-20</lastmod>
