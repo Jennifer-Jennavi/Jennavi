@@ -722,7 +722,7 @@
               <div class="flw-mini-form" id="flw-form-taster">
                 <input type="text" id="flw-name-taster" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-taster" placeholder="Your email address" autocomplete="email">
-                <button class="flw-pay-btn" onclick="initFlwPayment('taster', 100, 'Taster Tier - One-Time Profile Audit')">Proceed to Payment</button>
+                <button class="flw-pay-btn" onclick="initAxraPayment('taster', 100, 'Taster Tier - One-Time Profile Audit')">Proceed to Payment</button>
                 <button class="flw-cancel" onclick="hideFlwForm('taster')">Cancel</button>
               </div>
             </div>
@@ -750,7 +750,7 @@
               <div class="flw-mini-form" id="flw-form-starter">
                 <input type="text" id="flw-name-starter" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-starter" placeholder="Your email address" autocomplete="email">
-                <button class="flw-pay-btn" onclick="initFlwPayment('starter', 200, 'Starter Tier - Monthly Retainer')">Proceed to Payment</button>
+                <button class="flw-pay-btn" onclick="initAxraPayment('starter', 200, 'Starter Tier - Monthly Retainer')">Proceed to Payment</button>
                 <button class="flw-cancel" onclick="hideFlwForm('starter')">Cancel</button>
               </div>
             </div>
@@ -779,7 +779,7 @@
               <div class="flw-mini-form" id="flw-form-growth">
                 <input type="text" id="flw-name-growth" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-growth" placeholder="Your email address" autocomplete="email">
-                <button class="flw-pay-btn" onclick="initFlwPayment('growth', 400, 'Growth Tier - Monthly Retainer')">Proceed to Payment</button>
+                <button class="flw-pay-btn" onclick="initAxraPayment('growth', 400, 'Growth Tier - Monthly Retainer')">Proceed to Payment</button>
                 <button class="flw-cancel" onclick="hideFlwForm('growth')">Cancel</button>
               </div>
             </div>
@@ -811,7 +811,7 @@
               <div class="flw-mini-form" id="flw-form-authority">
                 <input type="text" id="flw-name-authority" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-authority" placeholder="Your email address" autocomplete="email">
-                <button class="flw-pay-btn" onclick="initFlwPayment('authority', 600, 'Authority Tier - Monthly Retainer')">Proceed to Payment</button>
+                <button class="flw-pay-btn" onclick="initAxraPayment('authority', 600, 'Authority Tier - Monthly Retainer')">Proceed to Payment</button>
                 <button class="flw-cancel" onclick="hideFlwForm('authority')">Cancel</button>
               </div>
             </div>
@@ -848,7 +848,7 @@
               <div class="flw-mini-form" id="flw-form-vip">
                 <input type="text" id="flw-name-vip" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-vip" placeholder="Your email address" autocomplete="email">
-                <button class="flw-pay-btn" onclick="initFlwPayment('vip', 800, 'VIP Tier - Monthly Retainer')">Proceed to Payment</button>
+                <button class="flw-pay-btn" onclick="initAxraPayment('vip', 800, 'VIP Tier - Monthly Retainer')">Proceed to Payment</button>
                 <button class="flw-cancel" onclick="hideFlwForm('vip')">Cancel</button>
               </div>
             </div>
@@ -892,7 +892,7 @@
               <div class="flw-mini-form" id="flw-form-executive">
                 <input type="text" id="flw-name-executive" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-executive" placeholder="Your email address" autocomplete="email">
-                <button class="flw-pay-btn" onclick="initFlwPayment('executive', 1000, 'Executive Tier - Monthly Retainer')">Proceed to Payment</button>
+                <button class="flw-pay-btn" onclick="initAxraPayment('executive', 1000, 'Executive Tier - Monthly Retainer')">Proceed to Payment</button>
                 <button class="flw-cancel" onclick="hideFlwForm('executive')">Cancel</button>
               </div>
             </div>
@@ -1360,7 +1360,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&#169; 2026 Jennavi &middot; Jennifer Mmesoma Omaliko &middot; All Rights Reserved &middot; jennavi.co &middot; Kano, Nigeria &middot; Global Remote</p>
+      <p>&#169; 2026 Jennavi &middot; Jennifer Mmesoma Omaliko &middot; All Rights Reserved &middot; jennavi.co &middot; Kano, Nigeria &middot; Global Remote<br>
+      <a href="https://jennavi.co/about.html" style="color:var(--gold);">About</a> &middot; <a href="https://jennavi.co/privacy-policy.html" style="color:var(--gold);">Privacy Policy</a> &middot; <a href="https://jennavi.co/terms-and-conditions.html" style="color:var(--gold);">Terms &amp; Conditions</a> &middot; <a href="https://jennavi.co/refund-policy.html" style="color:var(--gold);">Refund Policy</a></p>
       <span class="footer-mission serif">"I will not be outworked. I will not be outsmarted. I will never stop building."</span>
     </div>
   </footer>
@@ -1684,7 +1685,7 @@
     if (!data) return;
     var form = document.getElementById('flw-form-' + tier);
     if (form) {
-      form.innerHTML = '<input type="text" id="flw-name-' + tier + '" placeholder="Your full name" autocomplete="name"><input type="email" id="flw-email-' + tier + '" placeholder="Your email address" autocomplete="email"><button class="flw-pay-btn" onclick="initFlwPayment(\'' + tier + '\', ' + data.amount + ', \'' + data.description + '\')">Proceed to Payment</button><button class="flw-cancel" onclick="hideFlwForm(\'' + tier + '\')">Cancel</button>';
+      form.innerHTML = '<input type="text" id="flw-name-' + tier + '" placeholder="Your full name" autocomplete="name"><input type="email" id="flw-email-' + tier + '" placeholder="Your email address" autocomplete="email"><button class="flw-pay-btn" onclick="initAxraPayment(\'' + tier + '\', ' + data.amount + ', \'' + data.description + '\')">Proceed to Payment</button><button class="flw-cancel" onclick="hideFlwForm(\'' + tier + '\')">Cancel</button>';
       form.classList.remove('active');
     }
     var payBtn = document.getElementById('payBtn-' + tier);
@@ -1852,6 +1853,159 @@
       }
     });
   }
+  </script>
+
+  <!-- AXRA REDIRECT PAYMENT (ACTIVE) -->
+  <script>
+  var AXRA_FUNCTION_URL = 'https://splendid-ganache-d832db.netlify.app/.netlify/functions/create-axra-session';
+  var AXRA_TIER_LABELS = {taster:'Taster',starter:'Starter',growth:'Growth',authority:'Authority',vip:'VIP',executive:'Executive'};
+
+  function initAxraPayment(tier, amount, description) {
+    var nameEl = document.getElementById('flw-name-' + tier);
+    var emailEl = document.getElementById('flw-email-' + tier);
+    var name = nameEl ? nameEl.value.trim() : '';
+    var email = emailEl ? emailEl.value.trim() : '';
+    if (!name || !email) { alert('Please enter your name and email to proceed.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'begin_checkout', {
+        currency: 'USD',
+        value: amount,
+        items: [{ item_id: tier, item_name: description, price: amount }]
+      });
+    }
+
+    // Save details so we can personalize the confirmation after the redirect back
+    try {
+      sessionStorage.setItem('axra_pending_' + tier, JSON.stringify({ name: name, email: email, amount: amount, description: description }));
+    } catch (e) {}
+
+    var form = document.getElementById('flw-form-' + tier);
+    var payBtnEl = form ? form.querySelector('.flw-pay-btn') : null;
+    if (payBtnEl) { payBtnEl.disabled = true; payBtnEl.textContent = 'Redirecting...'; }
+
+    fetch(AXRA_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: amount,
+        currency: 'usd',
+        description: description,
+        customerEmail: email,
+        tier: tier,
+        returnPath: '/hire-linkedin-ghostwriter.html'
+      })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.checkoutUrl) {
+          window.location.href = data.checkoutUrl;
+        } else {
+          if (payBtnEl) { payBtnEl.disabled = false; payBtnEl.textContent = 'Proceed to Payment'; }
+          alert('Something went wrong starting checkout. Please try again, or message Jennifer on WhatsApp if it keeps happening.');
+        }
+      })
+      .catch(function () {
+        if (payBtnEl) { payBtnEl.disabled = false; payBtnEl.textContent = 'Proceed to Payment'; }
+        alert('Something went wrong starting checkout. Please try again, or message Jennifer on WhatsApp if it keeps happening.');
+      });
+  }
+
+  // Handle the redirect back from Axra's hosted checkout page
+  (function handleAxraRedirectReturn() {
+    var params = new URLSearchParams(window.location.search);
+    var tier = params.get('tier');
+    if (!tier) return;
+
+    var stored = null;
+    try {
+      var raw = sessionStorage.getItem('axra_pending_' + tier);
+      if (raw) stored = JSON.parse(raw);
+    } catch (e) {}
+
+    var name = stored ? stored.name : '';
+    var email = stored ? stored.email : '';
+    var amount = stored ? stored.amount : (FLW_TIER_DATA[tier] ? FLW_TIER_DATA[tier].amount : 0);
+    var description = stored ? stored.description : (FLW_TIER_DATA[tier] ? FLW_TIER_DATA[tier].description : tier);
+    var tierLabel = AXRA_TIER_LABELS[tier] || tier;
+
+    if (params.get('axra_success') === '1') {
+      if (typeof gtag === 'function') {
+        gtag('event', 'purchase', {
+          transaction_id: 'jennavi-' + tier + '-' + Date.now(),
+          currency: 'USD',
+          value: amount,
+          items: [{ item_id: tier, item_name: description, price: amount }]
+        });
+      }
+
+      var form = document.getElementById('flw-form-' + tier);
+      var payBtn = document.getElementById('payBtn-' + tier);
+      if (payBtn) payBtn.style.display = 'none';
+
+      var successText = 'Payment successful. Jennifer will be in touch within 24 hours.';
+      var waMsg = "Hi Jennifer! Just paid for the " + tierLabel + " tier ($" + Number(amount).toFixed(2) + "/month). I'm " + name + ", my email is " + email + ". Ready to get started!";
+      var waHref = "https://wa.me/2349024680769?text=" + encodeURIComponent(waMsg);
+      if (form) {
+        form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;">' + successText + '</p><a href="' + waHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 24px;border-radius:6px;font-family:\'DM Mono\',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">Message Jennifer on WhatsApp</a></div>';
+        form.classList.add('active');
+        window.addEventListener('load', function () {
+          var navElP = document.querySelector('.nav');
+          var navHeightP = navElP ? navElP.offsetHeight : 80;
+          var formOffset = form.getBoundingClientRect().top + window.pageYOffset - navHeightP - 16;
+          window.scrollTo({ top: formOffset, behavior: 'smooth' });
+        });
+      }
+
+      fetch('https://formspree.io/f/mqejgwab', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'Payment Notification (Axra)',
+          subject: 'New Payment ' + description,
+          tier: description,
+          amount: '$' + amount + ' USD',
+          client_name: name,
+          client_email: email,
+          transaction_ref: 'axra-' + tier + '-' + Date.now()
+        })
+      });
+
+      try {
+        if (tier === 'executive') {
+          sendTierCricketsEmail(name, email, tierLabel);
+        } else {
+          sendGeneralConfirmationEmail(name, email, tierLabel);
+        }
+      } catch (emailDispatchErr) {
+        console.error('Confirmation email dispatch error:', emailDispatchErr);
+      }
+
+      try { sessionStorage.removeItem('axra_pending_' + tier); } catch (e) {}
+      history.replaceState(null, '', window.location.pathname);
+
+    } else if (params.get('axra_cancelled') === '1') {
+      if (typeof gtag === 'function') {
+        gtag('event', 'checkout_abandoned', {
+          currency: 'USD',
+          value: amount,
+          tier: tier
+        });
+      }
+
+      var cancelForm = document.getElementById('flw-form-' + tier);
+      if (cancelForm) {
+        cancelForm.classList.add('active');
+        var cancelMsgEl = document.createElement('p');
+        cancelMsgEl.className = 'flw-fail-msg';
+        cancelMsgEl.style.cssText = 'color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
+        cancelMsgEl.textContent = 'Checkout was cancelled. Your details are still here whenever you are ready to try again.';
+        cancelForm.appendChild(cancelMsgEl);
+      }
+      history.replaceState(null, '', window.location.pathname);
+    }
+  })();
   </script>
 
   <!-- INTL-TEL-INPUT FOR PHONE FIELDS -->
