@@ -1857,7 +1857,7 @@
 
   <!-- AXRA REDIRECT PAYMENT (ACTIVE) -->
   <script>
-  var AXRA_FUNCTION_URL = 'https://splendid-ganache-d832db.netlify.app/.netlify/functions/create-axra-session';
+  var AXRA_FUNCTION_URL = 'https://jennavi-axra.omalikojennifermmesoma.workers.dev/create-session';
   var AXRA_TIER_LABELS = {taster:'Taster',starter:'Starter',growth:'Growth',authority:'Authority',vip:'VIP',executive:'Executive'};
 
   function initAxraPayment(tier, amount, description) {
@@ -1912,7 +1912,13 @@
       });
   }
 
-  // Handle the redirect back from Axra's hosted checkout page
+  // Handle the redirect back from Axra's hosted checkout page.
+  // IMPORTANT: we cannot verify server-side, in real time, whether a payment
+  // genuinely completed (that would need a persistent store we don't have set
+  // up yet). So we deliberately do NOT claim "payment successful" here. We
+  // tell the customer it's being confirmed, and flag it clearly for Jennifer
+  // to manually cross-check against Axra's own confirmation email/dashboard
+  // before treating it as a real, paid client.
   (function handleAxraRedirectReturn() {
     var params = new URLSearchParams(window.location.search);
     var tier = params.get('tier');
@@ -1929,8 +1935,9 @@
     var amount = stored ? stored.amount : (FLW_TIER_DATA[tier] ? FLW_TIER_DATA[tier].amount : 0);
     var description = stored ? stored.description : (FLW_TIER_DATA[tier] ? FLW_TIER_DATA[tier].description : tier);
     var tierLabel = AXRA_TIER_LABELS[tier] || tier;
+    var CHECK_STATUS_URL = 'https://jennavi-axra.omalikojennifermmesoma.workers.dev/check-status';
 
-    if (params.get('axra_success') === '1') {
+    function showConfirmedSuccess() {
       if (typeof gtag === 'function') {
         gtag('event', 'purchase', {
           transaction_id: 'jennavi-' + tier + '-' + Date.now(),
@@ -1939,11 +1946,9 @@
           items: [{ item_id: tier, item_name: description, price: amount }]
         });
       }
-
       var form = document.getElementById('flw-form-' + tier);
       var payBtn = document.getElementById('payBtn-' + tier);
       if (payBtn) payBtn.style.display = 'none';
-
       var successText = 'Payment successful. Jennifer will be in touch within 24 hours.';
       var waMsg = "Hi Jennifer! Just paid for the " + tierLabel + " tier ($" + Number(amount).toFixed(2) + "/month). I'm " + name + ", my email is " + email + ". Ready to get started!";
       var waHref = "https://wa.me/2349024680769?text=" + encodeURIComponent(waMsg);
@@ -1957,12 +1962,11 @@
           window.scrollTo({ top: formOffset, behavior: 'smooth' });
         });
       }
-
       fetch('https://formspree.io/f/mqejgwab', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          source: 'Payment Notification (Axra)',
+          source: 'Payment Notification (Axra, webhook-verified)',
           subject: 'New Payment ' + description,
           tier: description,
           amount: '$' + amount + ' USD',
@@ -1971,7 +1975,6 @@
           transaction_ref: 'axra-' + tier + '-' + Date.now()
         })
       });
-
       try {
         if (tier === 'executive') {
           sendTierCricketsEmail(name, email, tierLabel);
@@ -1981,9 +1984,88 @@
       } catch (emailDispatchErr) {
         console.error('Confirmation email dispatch error:', emailDispatchErr);
       }
-
       try { sessionStorage.removeItem('axra_pending_' + tier); } catch (e) {}
+    }
+
+    function showAlreadyDeliveredMessage() {
+      var form = document.getElementById('flw-form-' + tier);
+      if (form) {
+        form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">This payment was already confirmed.</p><p style="color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;">Jennifer already has this on file and will be in touch. No need to pay again.</p></div>';
+        form.classList.add('active');
+      }
+    }
+
+    function showUnverifiedMessage(sessionId) {
+      var form = document.getElementById('flw-form-' + tier);
+      if (form) {
+        form.classList.add('active');
+        var msgEl = document.createElement('div');
+        msgEl.className = 'flw-fail-msg';
+        msgEl.style.cssText = 'color:#E65100;font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
+        msgEl.innerHTML = "We could not yet verify this payment with our processor. This can happen if your bank is still processing the charge. <button id=\"axra-check-again-" + tier + "\" style=\"display:block;margin:10px auto 8px;background:#C9A84C;color:#0a0a0a;border:none;padding:10px 20px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;\">Check Again</button>If you completed a real payment and it still doesn't confirm, message Jennifer directly. <a href=\"https://wa.me/2349024680769?text=" + encodeURIComponent('Hi Jennifer! I completed a payment for ' + description + ' but the site could not verify it automatically. My email is ' + email + '.') + "\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:#C9A84C;text-decoration:underline;\">Message Jennifer on WhatsApp</a>";
+        form.appendChild(msgEl);
+        var retryBtn = document.getElementById('axra-check-again-' + tier);
+        if (retryBtn) {
+          retryBtn.addEventListener('click', function () {
+            msgEl.remove();
+            pollForSession(sessionId, 5); // shorter follow-up check, ~10 seconds
+          });
+        }
+      }
+    }
+
+    function pollForSession(sessionId, maxAttemptsOverride) {
+      var attempts = 0;
+      var maxAttempts = maxAttemptsOverride || 8; // ~16 seconds on first try, ~10s on retry
+      (function poll() {
+        attempts++;
+        fetch(CHECK_STATUS_URL + '?sessionId=' + encodeURIComponent(sessionId))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data && data.confirmed) {
+              if (data.alreadyDelivered) {
+                showAlreadyDeliveredMessage();
+              } else {
+                showConfirmedSuccess();
+              }
+            } else if (attempts < maxAttempts) {
+              setTimeout(poll, 2000);
+            } else {
+              showUnverifiedMessage(sessionId);
+            }
+          })
+          .catch(function () {
+            if (attempts < maxAttempts) {
+              setTimeout(poll, 2000);
+            } else {
+              showUnverifiedMessage(sessionId);
+            }
+          });
+      })();
+    }
+
+    if (params.get('axra_success') === '1') {
+      var sessionId = params.get('session');
       history.replaceState(null, '', window.location.pathname);
+
+      if (!sessionId) {
+        showUnverifiedMessage(null);
+        return;
+      }
+
+      var verifyForm = document.getElementById('flw-form-' + tier);
+      if (verifyForm) {
+        verifyForm.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Verifying your payment...</p><p style="color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;">This takes a few seconds. Please don\'t close this page.</p></div>';
+        verifyForm.classList.add('active');
+        window.addEventListener('load', function () {
+          var navElV = document.querySelector('.nav');
+          var navHeightV = navElV ? navElV.offsetHeight : 80;
+          var formOffsetV = verifyForm.getBoundingClientRect().top + window.pageYOffset - navHeightV - 16;
+          window.scrollTo({ top: formOffsetV, behavior: 'smooth' });
+        });
+      }
+
+      pollForSession(sessionId);
 
     } else if (params.get('axra_cancelled') === '1') {
       if (typeof gtag === 'function') {
