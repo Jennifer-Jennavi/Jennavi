@@ -588,7 +588,7 @@
               <div class="flw-mini-form" id="flw-form-crickets">
                 <input type="text" id="flw-name-crickets" placeholder="Your full name" autocomplete="name">
                 <input type="email" id="flw-email-crickets" placeholder="Your email address" autocomplete="email">
-                <button class="flw-pay-btn" onclick="initFlwPayment('crickets', 9.99, 'CRICKETS LinkedIn Positioning Playbook')">Proceed to Payment - $9.99</button>
+                <button class="flw-pay-btn" onclick="initAxraPayment('crickets', 9.99, 'CRICKETS LinkedIn Positioning Playbook')">Proceed to Payment - $9.99</button>
                 <button class="flw-cancel" onclick="hideFlwForm('crickets')">Cancel</button>
               </div>
               <div class="book-guarantee">
@@ -913,7 +913,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&#169; 2026 Jennavi &middot; Jennifer Mmesoma Omaliko &middot; All Rights Reserved &middot; jennavi.co &middot; Kano, Nigeria &middot; Global Remote</p>
+      <p>&#169; 2026 Jennavi &middot; Jennifer Mmesoma Omaliko &middot; All Rights Reserved &middot; jennavi.co &middot; Kano, Nigeria &middot; Global Remote<br>
+      <a href="https://jennavi.co/about.html" style="color:var(--gold);">About</a> &middot; <a href="https://jennavi.co/privacy-policy.html" style="color:var(--gold);">Privacy Policy</a> &middot; <a href="https://jennavi.co/terms-and-conditions.html" style="color:var(--gold);">Terms &amp; Conditions</a> &middot; <a href="https://jennavi.co/refund-policy.html" style="color:var(--gold);">Refund Policy</a></p>
       <span class="footer-mission serif">"I will not be outworked. I will not be outsmarted. I will never stop building."</span>
     </div>
   </footer>
@@ -1105,7 +1106,7 @@
     var form = document.getElementById('flw-form-' + tier);
     if (form) form.classList.remove('active');
   }
-  var CRICKETS_FORM_ORIGINAL = '<input type="text" id="flw-name-crickets" placeholder="Your full name" autocomplete="name"><input type="email" id="flw-email-crickets" placeholder="Your email address" autocomplete="email"><button class="flw-pay-btn" onclick="initFlwPayment(\'crickets\', 9.99, \'CRICKETS LinkedIn Positioning Playbook\')">Proceed to Payment - $9.99</button><button class="flw-cancel" onclick="hideFlwForm(\'crickets\')">Cancel</button>';
+  var CRICKETS_FORM_ORIGINAL = '<input type="text" id="flw-name-crickets" placeholder="Your full name" autocomplete="name"><input type="email" id="flw-email-crickets" placeholder="Your email address" autocomplete="email"><button class="flw-pay-btn" onclick="initAxraPayment(\'crickets\', 9.99, \'CRICKETS LinkedIn Positioning Playbook\')">Proceed to Payment - $9.99</button><button class="flw-cancel" onclick="hideFlwForm(\'crickets\')">Cancel</button>';
   var cricketsJustPurchased = false;
   function resetCricketsPurchaseToFresh(){
     var form = document.getElementById('flw-form-crickets');
@@ -1232,7 +1233,225 @@
   }
   </script>
 
-  <!-- INTL-TEL-INPUT FOR PHONE FIELDS -->
+  <!-- AXRA REDIRECT PAYMENT (ACTIVE) -->
+  <script>
+  var AXRA_FUNCTION_URL = 'https://jennavi-axra.omalikojennifermmesoma.workers.dev/create-session';
+  var CHECK_STATUS_URL = 'https://jennavi-axra.omalikojennifermmesoma.workers.dev/check-status';
+
+  function initAxraPayment(tier, amount, description) {
+    var nameEl = document.getElementById('flw-name-' + tier);
+    var emailEl = document.getElementById('flw-email-' + tier);
+    var name = nameEl ? nameEl.value.trim() : '';
+    var email = emailEl ? emailEl.value.trim() : '';
+    if (!name || !email) { alert('Please enter your name and email to proceed.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'begin_checkout', {
+        currency: 'USD',
+        value: amount,
+        items: [{ item_id: tier, item_name: description, price: amount }]
+      });
+    }
+
+    try {
+      sessionStorage.setItem('axra_pending_' + tier, JSON.stringify({ name: name, email: email, amount: amount, description: description }));
+    } catch (e) {}
+
+    var form = document.getElementById('flw-form-' + tier);
+    var payBtnEl = form ? form.querySelector('.flw-pay-btn') : null;
+    if (payBtnEl) { payBtnEl.disabled = true; payBtnEl.textContent = 'Redirecting...'; }
+
+    fetch(AXRA_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: amount,
+        currency: 'usd',
+        description: description,
+        customerEmail: email,
+        tier: tier,
+        returnPath: '/book.html'
+      })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.checkoutUrl) {
+          window.location.href = data.checkoutUrl;
+        } else {
+          if (payBtnEl) { payBtnEl.disabled = false; payBtnEl.textContent = 'Proceed to Payment - $9.99'; }
+          alert('Something went wrong starting checkout. Please try again, or message Jennifer on WhatsApp if it keeps happening.');
+        }
+      })
+      .catch(function () {
+        if (payBtnEl) { payBtnEl.disabled = false; payBtnEl.textContent = 'Proceed to Payment - $9.99'; }
+        alert('Something went wrong starting checkout. Please try again, or message Jennifer on WhatsApp if it keeps happening.');
+      });
+  }
+
+  // Handle the redirect back from Axra's hosted checkout page
+  (function handleAxraRedirectReturn() {
+    var params = new URLSearchParams(window.location.search);
+    var tier = params.get('tier');
+    if (!tier) return;
+
+    var stored = null;
+    try {
+      var raw = sessionStorage.getItem('axra_pending_' + tier);
+      if (raw) stored = JSON.parse(raw);
+    } catch (e) {}
+
+    var name = stored ? stored.name : '';
+    var email = stored ? stored.email : '';
+    var amount = stored ? stored.amount : 9.99;
+    var description = stored ? stored.description : 'CRICKETS LinkedIn Positioning Playbook';
+
+    function showConfirmedSuccess() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'purchase', {
+          transaction_id: 'jennavi-' + tier + '-' + Date.now(),
+          currency: 'USD',
+          value: amount,
+          items: [{ item_id: tier, item_name: description, price: amount }]
+        });
+      }
+
+      var form = document.getElementById('flw-form-' + tier);
+      var successText = 'Payment successful. Check your email for the CRICKETS PDF within a few minutes. If you do not see it, please check your spam or junk folder.';
+      var waMsg = "Hi Jennifer! Just purchased CRICKETS for $" + Number(amount).toFixed(2) + ". I'm " + name + ", my email is " + email + ". Excited to get started!";
+      var waHref = "https://wa.me/2349024680769?text=" + encodeURIComponent(waMsg);
+      if (form) {
+        form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;">' + successText + '</p><a href="' + waHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 24px;border-radius:6px;font-family:\'DM Mono\',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">Message Jennifer on WhatsApp</a></div>';
+        var navElP = document.querySelector('.nav');
+        var navHeightP = navElP ? navElP.offsetHeight : 80;
+        var formOffset = form.getBoundingClientRect().top + window.pageYOffset - navHeightP - 16;
+        window.scrollTo({ top: formOffset, behavior: 'smooth' });
+      }
+
+      var buyIntro = document.getElementById('cricketsBuyIntro');
+      if (buyIntro) buyIntro.style.display = 'none';
+      if (typeof cricketsJustPurchased !== 'undefined') { cricketsJustPurchased = true; }
+
+      // Only send the actual PDF once the payment is genuinely webhook-confirmed
+      try {
+        emailjs.init({ publicKey: 'XIy6yIQorZRwYz0xf' });
+        emailjs.send('service_10a5m5e', 'template_g32mptd', {
+          to_email: email,
+          to_name: name,
+          pdf_link: 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk',
+          subject: 'Your CRICKETS Playbook is Here, ' + (name || 'Founder') + '!',
+          html_content: buildCricketsEmailHtml(name, 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk')
+        }, { publicKey: 'XIy6yIQorZRwYz0xf' }).then(function (r) {}).catch(function (e) { console.error('EJS error:', e); });
+      } catch (e) { console.error('EJS init error:', e); }
+
+      fetch('https://formspree.io/f/mqejgwab', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'Payment Notification (Axra, webhook-verified)',
+          subject: 'New Payment ' + description,
+          tier: description,
+          amount: '$' + amount + ' USD',
+          client_name: name,
+          client_email: email,
+          transaction_ref: 'axra-' + tier + '-' + Date.now()
+        })
+      });
+
+      try { sessionStorage.removeItem('axra_pending_' + tier); } catch (e) {}
+    }
+
+    function showAlreadyDeliveredMessage() {
+      var form = document.getElementById('flw-form-' + tier);
+      if (form) {
+        form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">This payment was already confirmed.</p><p style="color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;">Your CRICKETS PDF was already sent. Check your email, including spam, or message Jennifer if you can\'t find it.</p></div>';
+      }
+    }
+
+    function showUnverifiedMessage(sessionId) {
+      var form = document.getElementById('flw-form-' + tier);
+      if (form) {
+        var msgEl = document.createElement('div');
+        msgEl.className = 'flw-fail-msg';
+        msgEl.style.cssText = 'color:#E65100;font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
+        msgEl.innerHTML = "We could not yet verify this payment with our processor. This can happen if your bank is still processing the charge. <button id=\"axra-check-again-" + tier + "\" style=\"display:block;margin:10px auto 8px;background:#C9A84C;color:#0a0a0a;border:none;padding:10px 20px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;\">Check Again</button>If you completed a real payment and it still doesn't confirm, message Jennifer directly. <a href=\"https://wa.me/2349024680769?text=" + encodeURIComponent('Hi Jennifer! I completed a payment for CRICKETS but the site could not verify it automatically. My email is ' + email + '.') + "\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:#C9A84C;text-decoration:underline;\">Message Jennifer on WhatsApp</a>";
+        if (form) form.appendChild(msgEl);
+        var retryBtn = document.getElementById('axra-check-again-' + tier);
+        if (retryBtn) {
+          retryBtn.addEventListener('click', function () {
+            msgEl.remove();
+            pollForSession(sessionId, 5);
+          });
+        }
+      }
+    }
+
+    function pollForSession(sessionId, maxAttemptsOverride) {
+      var attempts = 0;
+      var maxAttempts = maxAttemptsOverride || 8;
+      (function poll() {
+        attempts++;
+        fetch(CHECK_STATUS_URL + '?sessionId=' + encodeURIComponent(sessionId))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data && data.confirmed) {
+              if (data.alreadyDelivered) {
+                showAlreadyDeliveredMessage();
+              } else {
+                showConfirmedSuccess();
+              }
+            } else if (attempts < maxAttempts) {
+              setTimeout(poll, 2000);
+            } else {
+              showUnverifiedMessage(sessionId);
+            }
+          })
+          .catch(function () {
+            if (attempts < maxAttempts) {
+              setTimeout(poll, 2000);
+            } else {
+              showUnverifiedMessage(sessionId);
+            }
+          });
+      })();
+    }
+
+    if (params.get('axra_success') === '1') {
+      var sessionId = params.get('session');
+      history.replaceState(null, '', window.location.pathname);
+
+      if (!sessionId) {
+        showUnverifiedMessage(null);
+        return;
+      }
+
+      var verifyForm = document.getElementById('flw-form-' + tier);
+      if (verifyForm) {
+        verifyForm.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Verifying your payment...</p><p style="color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;">This takes a few seconds. Please don\'t close this page.</p></div>';
+        var navElV = document.querySelector('.nav');
+        var navHeightV = navElV ? navElV.offsetHeight : 80;
+        var formOffsetV = verifyForm.getBoundingClientRect().top + window.pageYOffset - navHeightV - 16;
+        window.scrollTo({ top: formOffsetV, behavior: 'smooth' });
+      }
+
+      pollForSession(sessionId);
+
+    } else if (params.get('axra_cancelled') === '1') {
+      if (typeof gtag === 'function') {
+        gtag('event', 'checkout_abandoned', { currency: 'USD', value: amount, tier: tier });
+      }
+      var cancelForm = document.getElementById('flw-form-' + tier);
+      if (cancelForm) {
+        var cancelMsgEl = document.createElement('p');
+        cancelMsgEl.className = 'flw-fail-msg';
+        cancelMsgEl.style.cssText = 'color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
+        cancelMsgEl.textContent = 'Checkout was cancelled. Your details are still here whenever you are ready to try again.';
+        cancelForm.appendChild(cancelMsgEl);
+      }
+      history.replaceState(null, '', window.location.pathname);
+    }
+  })();
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
   <script>
   (function(){
