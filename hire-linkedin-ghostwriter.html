@@ -2019,7 +2019,7 @@
         var retryBtn = document.getElementById('axra-check-again-' + tier);
         if (retryBtn) {
           retryBtn.addEventListener('click', function () {
-            msgEl.remove();
+            form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Verifying your payment...</p><p style="color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;">This takes a few seconds. Please don\'t close this page.</p></div>';
             pollForSession(sessionId, 5); // shorter follow-up check, ~10 seconds
           });
         }
