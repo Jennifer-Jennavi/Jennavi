@@ -23,14 +23,19 @@
 
   <style>
     :root {
-      --onyx: #0a0a0a; --gold: #C9A84C; --gold-border: rgba(201,168,76,0.22);
-      --ivory: #FAF3E0; --ivory-muted: rgba(250,243,224,0.62); --muted: #7a7060;
+      --onyx: #0a0a0a; --onyx-2: #100e0a; --gold: #C9A84C; --gold-soft: #E0C687;
+      --gold-border: rgba(201,168,76,0.22); --oxblood: #6E1423;
+      --ivory: #FAF3E0; --ivory-muted: rgba(250,243,224,0.62); --ivory-dim: rgba(250,243,224,0.38);
+      --muted: #7a7060;
     }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; max-width:100%; }
-    body { background:var(--onyx); color:var(--ivory); font-family:'Montserrat',sans-serif; font-weight:300; line-height:1.75; }
-    a { color:var(--gold); text-decoration:none; }
-    a:hover { text-decoration:underline; }
+    * , *::before, *::after { margin:0; padding:0; box-sizing:border-box; max-width:100%; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--onyx); color:var(--ivory); font-family:'Montserrat',sans-serif; font-weight:300; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    a { color:var(--gold); text-decoration:none; transition:opacity .2s ease; }
+    a:hover { opacity:.75; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } * { transition:none !important; animation:none !important; } }
 
+    /* NAV */
     .nav { position:fixed; top:0; left:0; right:0; z-index:10000; padding:18px 48px; display:flex; justify-content:space-between; align-items:center; background:rgba(10,10,10,0.97); backdrop-filter:blur(14px); border-bottom:1px solid var(--gold-border); }
     .nav-logo img { height:30px; width:auto; display:block; }
     .nav-links { display:flex; gap:18px; list-style:none; align-items:center; }
@@ -38,26 +43,150 @@
     .nav-links a:hover { opacity:1; color:var(--gold); }
     @media (max-width:900px) { .nav { padding:18px 24px; } .nav-links { display:none; } }
 
-    .legal-hero { padding:120px 0 0; background:linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 55%); border-bottom:1px solid var(--gold-border); margin-bottom:56px; }
-    .legal-hero-inner { max-width:760px; margin:0 auto; padding:0 24px 48px; }
-    .breadcrumb { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:24px; display:flex; gap:8px; align-items:center; }
-    .breadcrumb a { color:var(--gold); }
-    main { max-width:760px; margin:0 auto; padding:0 24px 100px; }
-    .legal-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
-    .legal-eyebrow::before { content:'◆'; font-size:7px; }
-    h1 { font-family:'Playfair Display',serif; font-size:clamp(32px,5vw,52px); font-weight:900; margin-bottom:20px; line-height:1.1; }
-    h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--gold); margin:36px 0 12px; }
-    p { font-size:15px; color:var(--ivory-muted); margin-bottom:16px; line-height:1.85; }
+    /* HERO */
+    .legal-hero { position:relative; padding:148px 0 64px; background:
+        radial-gradient(ellipse 900px 400px at 15% 0%, rgba(201,168,76,0.10), transparent 60%),
+        radial-gradient(ellipse 700px 500px at 100% 10%, rgba(110,20,35,0.14), transparent 65%),
+        var(--onyx);
+      overflow:hidden; border-bottom:1px solid var(--gold-border); }
+    .legal-hero::after { content:''; position:absolute; inset:0; background-image:
+        linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+      background-size:64px 64px; mask-image:linear-gradient(to bottom, black, transparent 85%); pointer-events:none; }
+    .legal-hero-inner { position:relative; max-width:760px; margin:0 auto; padding:0 24px; }
+    .breadcrumb { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:32px; display:flex; gap:9px; align-items:center; }
+    .breadcrumb a { color:var(--gold-soft); }
+    .breadcrumb span.sep { opacity:.35; }
+    .legal-eyebrow { font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.32em; text-transform:uppercase; color:var(--gold); margin-bottom:22px; display:flex; align-items:center; gap:11px; }
+    .legal-eyebrow::before { content:''; width:22px; height:1px; background:linear-gradient(90deg, var(--gold), transparent); }
+    h1 { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(38px,6.4vw,66px); font-weight:400; letter-spacing:-0.01em; margin-bottom:22px; line-height:1.04; color:var(--ivory); }
+    h1 em { font-style:normal; font-weight:900; color:var(--gold); }
+    .hero-sub { max-width:560px; font-size:16.5px; color:var(--ivory-muted); line-height:1.8; }
+
+    main { position:relative; max-width:760px; margin:0 auto; padding:64px 24px 110px; }
+
+    /* AT-A-GLANCE SUMMARY — signature element */
+    .glance-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.26em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; text-align:center; }
+    .glance-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--gold-border); border:1px solid var(--gold-border); margin-bottom:20px; }
+    .glance-card { background:var(--onyx-2); padding:34px 20px 28px; text-align:center; position:relative; transition:background .25s ease; }
+    .glance-card:hover { background:rgba(201,168,76,0.045); }
+    .glance-pct { font-family:'Playfair Display',serif; font-weight:900; font-size:clamp(34px,6vw,50px); line-height:1; color:var(--gold); display:block; margin-bottom:6px; letter-spacing:-0.01em; }
+    .glance-pct.mid { color:var(--gold-soft); }
+    .glance-pct.zero { color:var(--ivory-dim); }
+    .glance-title { font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ivory); font-weight:500; margin-bottom:8px; }
+    .glance-desc { font-size:12.5px; color:var(--ivory-dim); line-height:1.6; }
+    @media (max-width:640px) { .glance-grid { grid-template-columns:1fr; } .glance-card { padding:24px 20px; } .glance-card + .glance-card { border-top:1px solid var(--gold-border); } }
+    .glance-footnote { font-family:'DM Mono',monospace; font-size:10.5px; color:var(--muted); text-align:center; margin-bottom:60px; letter-spacing:.02em; }
+
+    section.policy-section { margin-bottom:52px; }
+    .section-num { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:10px; }
+    h2 { font-family:'Playfair Display',serif; font-size:clamp(22px,3vw,27px); font-weight:700; color:var(--ivory); margin-bottom:18px; letter-spacing:-0.005em; }
+    h2 .accent { color:var(--gold); }
+    h3 { font-family:'Montserrat',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.04em; color:var(--gold-soft); text-transform:uppercase; margin:26px 0 10px; display:flex; align-items:center; gap:10px; }
+    h3::before { content:''; width:14px; height:1px; background:var(--gold-border); }
+    p { font-size:15.5px; color:var(--ivory-muted); margin-bottom:16px; line-height:1.85; }
     strong { color:var(--ivory); font-weight:600; }
-    ul { list-style:none; margin:0 0 16px 0; }
-    li { font-size:15px; color:var(--ivory-muted); line-height:1.85; margin-bottom:10px; padding-left:22px; position:relative; }
-    li::before { content:'→'; position:absolute; left:0; color:var(--gold); }
-    .highlight-box { background:rgba(201,168,76,0.07); border:1px solid var(--gold-border); padding:20px 22px; margin:24px 0; }
-    .highlight-box p { margin-bottom:0; }
-    .last-updated { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); margin-top:56px; padding-top:24px; border-top:1px solid var(--gold-border); }
-    footer { border-top:1px solid var(--gold-border); padding:40px 24px; text-align:center; }
-    footer p { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.05em; }
+
+    .outcome-strip { display:flex; align-items:stretch; gap:0; border:1px solid var(--gold-border); margin:18px 0 22px; background:rgba(201,168,76,0.035); }
+    .outcome-strip .tag { flex-shrink:0; width:88px; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:22px; color:var(--gold); border-right:1px solid var(--gold-border); }
+    .outcome-strip .body { padding:16px 20px; }
+    .outcome-strip .body p { margin-bottom:0; font-size:14.5px; }
+    @media (max-width:560px) { .outcome-strip { flex-direction:column; } .outcome-strip .tag { width:100%; height:44px; border-right:none; border-bottom:1px solid var(--gold-border); } }
+
+    .divider { height:1px; background:linear-gradient(90deg, var(--gold-border), transparent); margin:44px 0; }
+
+    .cta-block { border:1px solid var(--gold-border); background:linear-gradient(150deg, rgba(201,168,76,0.06), rgba(110,20,35,0.05)); padding:34px 32px; margin-top:8px; }
+    .cta-block h2 { margin-bottom:12px; }
+    .cta-block p { font-size:15px; }
+    .cta-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:20px; }
+    .cta-btn { font-family:'DM Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; padding:13px 26px; border:1px solid var(--gold); color:var(--gold); transition:all .22s ease; display:inline-block; }
+    .cta-btn.solid { background:var(--gold); color:var(--onyx); font-weight:600; }
+    .cta-btn:hover { background:var(--gold); color:var(--onyx); }
+    .cta-btn.solid:hover { background:transparent; color:var(--gold); }
+    .timeline-note { display:flex; gap:22px; margin-top:26px; padding-top:22px; border-top:1px solid var(--gold-border); flex-wrap:wrap; }
+    .timeline-note .t { flex:1; min-width:160px; }
+    .timeline-note .t .n { font-family:'Playfair Display',serif; font-weight:700; font-size:20px; color:var(--gold); display:block; }
+    .timeline-note .t .l { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ivory-dim); margin-top:2px; display:block; }
+
+    .last-updated { font-family:'DM Mono',monospace; font-size:10.5px; color:var(--muted); margin-top:56px; padding-top:24px; border-top:1px solid var(--gold-border); letter-spacing:.03em; }
+
+    footer { border-top:1px solid var(--gold-border); padding:44px 24px; text-align:center; }
+    footer p { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.05em; line-height:1.9; }
     footer a { color:var(--gold); }
+        body.menu-open .whatsapp-float,body.menu-open .ja-label-bubble,body.menu-open .bottom-nav{display:none!important;}
+        .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;width:100%;max-width:100vw;height:60px;background:#0a0a0a;border-top:1px solid #C9A84C;z-index:10001;padding-bottom:env(safe-area-inset-bottom);overflow:hidden;}
+          .bottom-nav{display:flex;align-items:stretch;}
+        .bottom-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:#C9A84C;padding:6px 2px;transition:opacity 0.2s;-webkit-tap-highlight-color:rgba(201,168,76,0.2);touch-action:manipulation;}
+        .bottom-nav-item:hover,.bottom-nav-item.active{opacity:1;color:#dfc06a;}
+        .bottom-nav-item svg{width:20px;height:20px;fill:#C9A84C;flex-shrink:0;}
+        .bottom-nav-item span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;line-height:1;}
+        .whatsapp-float{display:none;position:fixed;bottom:calc(90px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;min-width:52px;min-height:52px;background:#C9A84C;border-radius:50%;align-items:center;justify-content:center;z-index:9999;box-shadow:0 4px 16px rgba(201,168,76,0.4);text-decoration:none;-webkit-tap-highlight-color:rgba(201,168,76,0.2);touch-action:manipulation;flex-shrink:0;border:none;cursor:pointer;}
+        @media(max-width:900px){.whatsapp-float{display:flex;}}
+        .whatsapp-float svg{width:28px;height:28px;fill:#fff;}
+        .ja-overlay{position:fixed;inset:0;z-index:10000;pointer-events:none;}
+        .ja-overlay:not([hidden]){pointer-events:all;}
+        .ja-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.55);opacity:0;transition:opacity 0.3s ease;}
+        .ja-overlay:not([hidden]) .ja-backdrop{opacity:1;}
+        .ja-panel{position:absolute;bottom:0;left:0;right:0;background:#0f0f0f;border-top:1px solid #C9A84C;border-radius:20px 20px 0 0;height:78vh;max-height:78vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);overflow:hidden;}
+        .ja-overlay:not([hidden]) .ja-panel{transform:translateY(0);}
+          @media(min-width:901px){
+          .ja-view{padding-bottom:20px;}
+          .ja-panel{top:50%;left:50%;right:auto;bottom:auto;width:480px;height:600px;max-height:600px;border-radius:16px;border:1px solid #C9A84C;transform:translate(-50%,-44%) scale(0.96);transition:transform 0.3s cubic-bezier(0.32,0.72,0,1),opacity 0.3s ease;opacity:0;}
+          .ja-overlay:not([hidden]) .ja-panel{transform:translate(-50%,-50%) scale(1);opacity:1;}
+          }
+        .ja-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,168,76,0.2);flex-shrink:0;}
+        .ja-header-info{display:flex;align-items:center;gap:12px;}
+        .ja-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#C9A84C,#a0832e);color:#0a0a0a;font-family:'DM Mono',monospace;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+        .ja-name{color:#f5f0e8;font-family:'Playfair Display',serif;font-size:16px;font-weight:600;line-height:1.2;}
+        .ja-status{display:flex;align-items:center;gap:6px;color:#C9A84C;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px;}
+        .ja-dot{width:7px;height:7px;border-radius:50%;background:#4caf50;display:inline-block;flex-shrink:0;}
+        .ja-close{background:none;border:1px solid rgba(201,168,76,0.3);color:#C9A84C;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;line-height:1;padding:0;}
+        .ja-close:hover{background:rgba(201,168,76,0.15);border-color:#C9A84C;}
+        .ja-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:env(safe-area-inset-bottom);}
+        .ja-view{padding:20px;padding-bottom:80px;}
+        .ja-welcome{color:#f5f0e8;font-family:'Playfair Display',serif;font-size:18px;line-height:1.5;margin:0 0 20px;}
+        .ja-questions{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+        .ja-q{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);color:#f5f0e8;padding:13px 16px;border-radius:10px;text-align:left;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:13px;line-height:1.4;transition:all 0.2s;-webkit-tap-highlight-color:rgba(201,168,76,0.1);}
+        .ja-q:hover,.ja-q:focus-visible{background:rgba(201,168,76,0.12);border-color:#C9A84C;color:#C9A84C;outline:none;}
+        .ja-custom{border-top:1px solid rgba(201,168,76,0.15);padding-top:20px;}
+        .ja-custom-label{display:block;color:rgba(245,240,232,0.5);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;}
+        .ja-input-row{display:flex;gap:10px;}
+        .ja-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);color:#f5f0e8;padding:12px 14px;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
+        .ja-input:focus{border-color:#C9A84C;}
+        .ja-input::placeholder{color:rgba(245,240,232,0.3);}
+        .ja-send{background:#C9A84C;border:none;color:#0a0a0a;width:46px;height:46px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s;}
+        .ja-send:hover{background:#dfc06a;}
+        .ja-send svg{width:20px;height:20px;fill:#0a0a0a;}
+        .ja-back{display:flex;align-items:center;gap:8px;background:none;border:none;color:#C9A84C;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;padding:0 0 16px;margin-bottom:4px;border-bottom:1px solid rgba(201,168,76,0.15);width:100%;}
+        .ja-back svg{width:16px;height:16px;fill:#C9A84C;flex-shrink:0;}
+        .ja-answer-text{color:#f5f0e8;font-family:'Montserrat',sans-serif;font-size:14px;line-height:1.8;padding:16px 0 24px;}
+        .ja-arrow{color:#C9A84C;font-weight:700;}
+        .ja-answer-text strong{color:#C9A84C;}
+        .ja-answer-text a{color:#C9A84C;text-decoration:underline;text-underline-offset:3px;}
+        .ja-answer-ctas{display:flex;flex-direction:column;gap:10px;padding-top:4px;border-top:1px solid rgba(201,168,76,0.15);}
+        .ja-cta-primary{display:flex;align-items:center;justify-content:center;background:#C9A84C;color:#0a0a0a;padding:14px 20px;border-radius:10px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;font-weight:700;transition:background 0.2s;min-height:48px;}
+        .ja-cta-primary:hover{background:#dfc06a;}
+        .ja-cta-secondary{background:transparent;border:1px solid rgba(201,168,76,0.4);color:#C9A84C;padding:13px 20px;border-radius:10px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;min-height:48px;}
+        .ja-cta-secondary:hover{background:rgba(201,168,76,0.1);border-color:#C9A84C;}
+        .ja-typing{display:none;flex-direction:column;align-items:flex-start;gap:10px;padding:20px 0;}
+        .ja-typing.active{display:flex;}
+        .ja-typing-label{color:rgba(201,168,76,0.6);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;}
+        .ja-typing-dots{display:flex;gap:6px;align-items:center;}
+        .ja-typing-dot{width:8px;height:8px;border-radius:50%;background:#C9A84C;animation:ja-pulse 1.2s ease-in-out infinite;}
+        .ja-typing-dot:nth-child(2){animation-delay:0.2s;}
+        .ja-typing-dot:nth-child(3){animation-delay:0.4s;}
+        .ja-answer-text{opacity:0;transition:opacity 0.4s ease;}
+        .ja-answer-text.visible{opacity:1;}
+        .ja-answer-ctas{opacity:0;transition:opacity 0.3s ease 0.2s;}
+        .ja-answer-ctas.visible{opacity:1;}
+        .ja-label-bubble{display:none;position:fixed;bottom:calc(152px + env(safe-area-inset-bottom));right:10px;background:#0a0a0a;border:1px solid #C9A84C;color:#C9A84C;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border-radius:4px;z-index:9998;white-space:nowrap;}
+        .ja-label-bubble::after{content:'';position:absolute;bottom:-6px;right:20px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid #C9A84C;}
+        @media(max-width:900px){.ja-label-bubble{display:block;}}
+        .bottom-nav-item.active svg{fill:#C9A84C!important;}
+        .bottom-nav-item.active span{color:#C9A84C!important;font-weight:500;}
+        .bottom-nav-item.active{position:relative;opacity:1!important;}
+        .bottom-nav-item.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:#C9A84C;border-radius:0 0 2px 2px;}
+        .card-cta,.btn,.btn-wa,.btn-gold,.btn-outline,.book-btn,.nl-submit,.ja-cta-primary,.insights-btn,.tool-btn{font-weight:700!important;}
   </style>
 </head>
 <body>
@@ -76,41 +205,278 @@
   <div class="legal-hero">
     <div class="legal-hero-inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="https://jennavi.co/">Home</a><span style="opacity:0.4;">&#8250;</span><span>Refund Policy</span>
+        <a href="https://jennavi.co/">Home</a><span class="sep">&#8250;</span><span>Refund Policy</span>
       </nav>
-      <span class="legal-eyebrow">Legal</span>
-      <h1>Refund Policy</h1>
+      <span class="legal-eyebrow">Legal &middot; Effective July 26, 2026</span>
+      <h1>What happens if <em>you change your mind</em></h1>
+      <p class="hero-sub">A clear, honest breakdown of what you're owed, and when, across every Jennavi service tier. No fine print designed to confuse you.</p>
     </div>
   </div>
 
   <main>
-    <p>We want every client to feel confident before committing to work with Jennavi. This policy outlines when refunds are available across our service tiers.</p>
 
-    <h2>Monthly Retainer Tiers (Starter, Growth, Authority, VIP, Executive)</h2>
-    <div class="highlight-box">
-      <p><strong>Full refund available within 48 hours of payment</strong>, provided your voice capture session has not yet taken place and no content drafting has begun.</p>
+    <p class="glance-label">The Retainer Refund, At a Glance</p>
+    <div class="glance-grid">
+      <div class="glance-card">
+        <span class="glance-pct">100%</span>
+        <div class="glance-title">Change of Mind</div>
+        <div class="glance-desc">Before onboarding begins, minus processing fees</div>
+      </div>
+      <div class="glance-card">
+        <span class="glance-pct mid">50%</span>
+        <div class="glance-title">14+ Days Inactive</div>
+        <div class="glance-desc">If you go quiet before we ever begin</div>
+      </div>
+      <div class="glance-card">
+        <span class="glance-pct zero">0%</span>
+        <div class="glance-title">After Onboarding</div>
+        <div class="glance-desc">Cancel anytime to stop future billing</div>
+      </div>
     </div>
-    <p>Once your voice capture session has been completed, or content drafting has started, the month's payment becomes non-refundable, as strategy time and writing work have already been committed on your behalf. You may still cancel at any time to prevent future billing; see our <a href="https://jennavi.co/terms-and-conditions.html">Terms & Conditions</a> for cancellation details.</p>
+    <p class="glance-footnote">Full detail on every tier below &darr;</p>
 
-    <h2>Taster Tier (One-Time Profile Audit)</h2>
-    <p>Because this is a one-time deliverable typically completed quickly after purchase, refunds are only available if the audit has not yet been started. Once delivered, the Taster tier is non-refundable.</p>
+    <p>We want every client to feel confident before committing to work with Jennavi. This policy outlines exactly when refunds are available, and why, across our service tiers.</p>
 
-    <h2>CRICKETS Manifesto (Book, $9.99)</h2>
-    <p>As a digital product delivered instantly upon purchase, the CRICKETS Manifesto is non-refundable once the download link has been sent, except in cases of a technical error preventing access, in which case contact us and we will resolve it promptly.</p>
+    <div class="divider"></div>
 
-    <h2>How to Request a Refund</h2>
-    <p>If you believe you qualify for a refund under the terms above, message us directly via <a href="https://wa.me/2349024680769">WhatsApp</a> or email <a href="mailto:jennifer@jennavi.co?subject=Refund%20Request">jennifer@jennavi.co</a> with your name, email used at checkout, and the tier purchased.</p>
-    <div class="highlight-box">
-      <p>We respond to all refund requests within <strong>48 hours</strong>. If approved, refunds are processed within <strong>5 working days</strong>.</p>
+    <section class="policy-section">
+      <span class="section-num">01 &mdash; Retainers</span>
+      <h2>Monthly Retainer Tiers <span class="accent">&middot;</span> Starter, Growth, Authority, VIP, Executive</h2>
+
+      <h3>Change of Mind, Before Onboarding Begins</h3>
+      <div class="outcome-strip">
+        <div class="tag">100%</div>
+        <div class="body"><p><strong>Full refund, minus non-refundable payment processing fees</strong> (typically 3&ndash;5%, charged by our payment processor and not recoverable by us), provided your voice capture session has not yet taken place and no content drafting has begun.</p></div>
+      </div>
+
+      <h3>Delayed Response or Client Inactivity</h3>
+      <p>If you do not respond to outreach or schedule your voice capture session within <strong>14 days</strong> of payment, and later request a refund, only <strong>50% of your payment</strong> will be refunded. This reflects the planning, strategy time, and availability already committed on your behalf during that period, even though drafting had not yet begun.</p>
+
+      <h3>After Onboarding or Content Drafting Has Begun</h3>
+      <p>Once your voice capture session has been completed, or content drafting has started, the month's payment becomes <strong>non-refundable</strong>, as strategy time and writing work have already been committed on your behalf. You may still cancel at any time to prevent future billing; see our <a href="https://jennavi.co/terms-and-conditions.html">Terms &amp; Conditions</a> for cancellation details.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="policy-section">
+      <span class="section-num">02 &mdash; One-Time</span>
+      <h2>Taster Tier <span class="accent">&middot;</span> One-Time Profile Audit</h2>
+      <p>Because this is a one-time deliverable typically completed quickly after purchase, refunds are only available if the audit has not yet been started. Once delivered, the Taster tier is <strong>non-refundable</strong>.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="policy-section">
+      <span class="section-num">03 &mdash; Digital Product</span>
+      <h2>CRICKETS Manifesto <span class="accent">&middot;</span> Book, $9.99</h2>
+      <p>As a digital product delivered instantly upon purchase, the CRICKETS Manifesto is <strong>non-refundable</strong> once the download link has been sent, except in cases of a technical error preventing access, in which case contact us and we will resolve it promptly.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <div class="cta-block">
+      <h2>How to Request a Refund</h2>
+      <p>If you believe you qualify under the terms above, message us directly, we'll walk you through it personally.</p>
+      <div class="cta-row">
+        <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%27d%20like%20to%20request%20a%20refund.%20My%20name%20is%20%5Byour%20name%5D%2C%20email%20used%20at%20checkout%3A%20%5Byour%20email%5D%2C%20tier%20purchased%3A%20%5Btier%5D." class="cta-btn solid">Message on WhatsApp</a>
+        <a href="mailto:jennifer@jennavi.co?subject=Refund%20Request&body=Hi%20Jennifer%2C%0A%0AI%27d%20like%20to%20request%20a%20refund.%0A%0AName%3A%20%0AEmail%20used%20at%20checkout%3A%20%0ATier%20purchased%3A%20%0AReason%20(optional)%3A%20%0A%0AThank%20you." class="cta-btn">Email Jennifer &#8594;</a>
+      </div>
+      <div class="timeline-note">
+        <div class="t"><span class="n">48 hrs</span><span class="l">We respond to every request</span></div>
+        <div class="t"><span class="n">14 days</span><span class="l">Approved refunds are processed, allowing time for your original payment to fully settle to us first</span></div>
+      </div>
     </div>
 
-    <p class="last-updated">Last updated: July 2026</p>
+    <p class="last-updated">Last updated: July 26, 2026</p>
   </main>
 
   <footer>
     <p>&copy; 2026 Jennavi &middot; Jennifer Mmesoma Omaliko &middot; jennavi.co &middot; Kano, Nigeria<br>
-    <a href="https://jennavi.co/about.html">About</a> &middot; <a href="https://jennavi.co/privacy-policy.html">Privacy Policy</a> &middot; <a href="https://jennavi.co/terms-and-conditions.html">Terms & Conditions</a> &middot; <a href="https://jennavi.co/refund-policy.html">Refund Policy</a></p>
+    <a href="https://jennavi.co/about.html">About</a> &middot; <a href="https://jennavi.co/privacy-policy.html">Privacy Policy</a> &middot; <a href="https://jennavi.co/terms-and-conditions.html">Terms &amp; Conditions</a> &middot; <a href="https://jennavi.co/refund-policy.html">Refund Policy</a></p>
   </footer>
+
+  <nav class="bottom-nav" aria-label="Mobile bottom navigation">
+    <a href="https://jennavi.co" class="bottom-nav-item" aria-label="Home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="https://jennavi.co/linkedin-tools.html" class="bottom-nav-item" aria-label="Tools">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+      <span>Tools</span>
+    </a>
+    <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="bottom-nav-item" aria-label="Services">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Services</span>
+    </a>
+    <a href="https://jennavi.co/founder.html" class="bottom-nav-item" aria-label="Jennifer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      <span>Jennifer</span>
+    </a>
+    <a data-cal-link="jennavi/strategy" data-cal-namespace="default" data-cal-config='{"layout":"month_view"}' class="bottom-nav-item" aria-label="Book a call" style="cursor:pointer;">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.9 3 3 3.9 3 5v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H5V9h14v12zm0-14H5V5h14v2zM7 11h5v5H7z"/></svg>
+      <span>Book</span>
+    </a>
+  </nav>
+
+  <!-- JENNAVI CONVERSATIONAL AGENT -->
+  <div class="ja-label-bubble" aria-hidden="true">Ask Jennifer</div>
+  <button class="whatsapp-float" id="jenniferAgentBtn" aria-label="Ask Jennifer a question" aria-expanded="false" aria-controls="jenniferAgent">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </button>
+
+  <!-- AGENT OVERLAY -->
+  <div id="jenniferAgent" class="ja-overlay" role="dialog" aria-modal="true" aria-label="Ask Jennifer" hidden>
+    <div class="ja-backdrop" id="jaBackdrop"></div>
+    <div class="ja-panel" role="document">
+      <div class="ja-header">
+        <div class="ja-header-info">
+          <div class="ja-avatar" aria-hidden="true">JO</div>
+          <div>
+            <div class="ja-name">Jennifer Omaliko</div>
+            <div class="ja-status"><span class="ja-dot" aria-hidden="true"></span>Ask me anything</div>
+          </div>
+        </div>
+        <button class="ja-close" id="jaClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="ja-body" id="jaBody">
+        <div id="jaHome" class="ja-view">
+          <p class="ja-welcome">Most people who open this on the refund policy page have a question about a specific payment or situation. If that is you, you are in the right place. What would you like to know?</p>
+          <div class="ja-questions" role="list">
+            <button class="ja-q" data-q="0" role="listitem">Can I get a full refund?</button>
+            <button class="ja-q" data-q="1" role="listitem">What if I paid but haven't started onboarding?</button>
+            <button class="ja-q" data-q="2" role="listitem">What if I've gone quiet for a few weeks?</button>
+            <button class="ja-q" data-q="3" role="listitem">Can I cancel my monthly retainer?</button>
+            <button class="ja-q" data-q="4" role="listitem">Is the Taster tier refundable?</button>
+            <button class="ja-q" data-q="5" role="listitem">Can I get a refund on the CRICKETS book?</button>
+            <button class="ja-q" data-q="6" role="listitem">How long does a refund take?</button>
+            <button class="ja-q" data-q="7" role="listitem">Why do you deduct processing fees?</button>
+            <button class="ja-q" data-q="8" role="listitem">How do I actually request a refund?</button>
+            <button class="ja-q" data-q="9" role="listitem">What counts as "onboarding has begun"?</button>
+            <button class="ja-q" data-q="10" role="listitem">Will I be charged again after I cancel?</button>
+            <button class="ja-q" data-q="11" role="listitem">What if my refund request is disputed?</button>
+          </div>
+          <div class="ja-custom">
+            <label for="jaInput" class="ja-custom-label">Not listed above? Type your question:</label>
+            <div class="ja-input-row">
+              <input type="text" id="jaInput" class="ja-input" placeholder="Type your question..." autocomplete="off" maxlength="200">
+              <button class="ja-send" id="jaSend" aria-label="Send to Jennifer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="jaAnswer" class="ja-view" hidden>
+          <button class="ja-back" id="jaBack" aria-label="Back to questions">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            All questions
+          </button>
+          <div class="ja-typing" id="jaTyping">
+            <span class="ja-typing-label">Jennifer is typing</span>
+            <div class="ja-typing-dots">
+              <span class="ja-typing-dot"></span>
+              <span class="ja-typing-dot"></span>
+              <span class="ja-typing-dot"></span>
+            </div>
+          </div>
+          <div class="ja-answer-text" id="jaAnswerText"></div>
+          <div class="ja-answer-ctas">
+            <a data-cal-link="jennavi/strategy" data-cal-namespace="default" data-cal-config='{"layout":"month_view"}' class="ja-cta-primary" style="cursor:pointer;">Book a Free Strategy Call</a>
+            <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="ja-cta-secondary" style="display:flex;align-items:center;justify-content:center;font-weight:700;">See Pricing First</a>
+            <button id="jaAskAnother" style="background:none;border:none;color:rgba(201,168,76,0.6);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;padding:8px 0 0;text-decoration:underline;text-underline-offset:3px;">Ask another question</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var Q=[
+      {a:"<p>Yes, if your voice capture session has not yet taken place and no content drafting has begun. In that case you get a <strong>full refund, minus non-refundable payment processing fees</strong> (typically 3-5%, charged by our payment processor).</p><p>The Taster Tier and the CRICKETS book have their own, narrower rules, since one is a quick one-time deliverable and the other is an instant digital download. Once onboarding or drafting begins on a retainer, that month becomes non-refundable, though you can still cancel to stop future billing.</p><p><a href='https://jennavi.co/refund-policy.html'>See the full breakdown above</a> or message Jennifer directly if you want a straight answer for your specific situation.</p>"},
+      {a:"<p>If you've paid but your voice capture session hasn't happened yet and no drafting has started, you qualify for a <strong>full refund, minus payment processing fees</strong>.</p><p>This is the simplest, cleanest refund scenario. Nothing has been committed on our side yet, so there's no reason to hold onto your payment if you've changed your mind.</p><p>Message <a href='https://wa.me/2349024680769'>Jennifer on WhatsApp</a> with your name, email, and tier purchased, and she'll confirm and process it.</p>"},
+      {a:"<p>If you go 14 or more days without responding to outreach or scheduling your voice capture session, and then request a refund, you'll receive <strong>50% of your payment back</strong>, not the full amount.</p><p>This isn't a penalty, it reflects real planning time and availability that was already committed on your behalf during that window, even though no actual drafting happened yet.</p><p>If you're just running behind but still intend to move forward, reach out, there's no rush or pressure, this only applies once a refund is actually requested after that 14-day mark.</p>"},
+      {a:"<p>Yes, always. You can cancel a monthly retainer at any time to stop future billing, regardless of whether you're inside or outside a refund window.</p><p>Cancelling is different from a refund. Cancelling stops the <em>next</em> charge. A refund returns money already paid for the <em>current</em> period, and that depends on whether onboarding or drafting has started.</p><p>See our <a href='https://jennavi.co/terms-and-conditions.html'>Terms & Conditions</a> for the exact cancellation process.</p>"},
+      {a:"<p>The Taster Tier is refundable only if the audit hasn't been started yet. Since it's a one-time deliverable usually completed quickly after purchase, there's a narrow window before work actually begins.</p><p>Once the audit has been delivered, it's <strong>non-refundable</strong>, the deliverable itself is the value, and it's already in your hands at that point.</p><p>If you're unsure whether yours has started, message <a href='https://wa.me/2349024680769'>Jennifer directly</a> to check.</p>"},
+      {a:"<p>No, the CRICKETS Manifesto is non-refundable once the download link has been sent, since it's a digital product delivered instantly upon purchase.</p><p>The one exception is a genuine technical error preventing you from accessing it, if that happens, contact us and we'll resolve it promptly, that's not a refund situation, it's just making sure you actually get what you paid for.</p>"},
+      {a:"<p>Once approved, refunds are processed within <strong>14 working days</strong>. We respond to every refund request within <strong>48 hours</strong> to confirm whether it qualifies.</p><p>The 14-day window exists because your original payment sometimes hasn't fully settled to us yet by the time a refund is approved, payment processors often hold funds for a few days before releasing them. We'd rather give you an honest, reliable timeline than promise something faster and risk not delivering on it.</p>"},
+      {a:"<p>Payment processors like Axra or Flutterwave charge us a transaction fee, typically 3-5%, every time a payment is processed. That fee isn't refunded back to us when we issue you a refund, it's kept by the processor regardless.</p><p>So on a full refund, we deduct that fee since it's a real cost that already happened and can't be recovered on our end, not something we're keeping ourselves.</p>"},
+      {a:"<p>Message us directly, either <a href='https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%27d%20like%20to%20request%20a%20refund.'>WhatsApp</a> or <a href='mailto:jennifer@jennavi.co?subject=Refund%20Request'>email</a>, with your name, the email used at checkout, and the tier you purchased.</p><p>We respond within 48 hours to confirm whether your specific situation qualifies, and under which scenario (full refund, 50%, or non-refundable), based on the policy above.</p>"},
+      {a:"<p>Onboarding is considered to have begun once your <strong>voice capture session has taken place</strong>, that's the call where Jennifer learns how you think, speak, and what your audience needs to hear, or once actual content drafting has started.</p><p>Before that point, nothing has been produced yet on your behalf. After it, real strategy time and writing work are already committed, which is why the refund terms change at that specific line.</p>"},
+      {a:"<p>No. Cancelling your retainer stops all future billing immediately, you will not be charged again after cancellation takes effect.</p><p>The only payment you may still owe or have already paid is for the current billing period you're in, whether that's refundable depends on whether onboarding or drafting has started for that specific month.</p><p>See our <a href='https://jennavi.co/terms-and-conditions.html'>Terms & Conditions</a> for the full cancellation process.</p>"},
+      {a:"<p>If you believe a refund decision was made incorrectly, message <a href='https://wa.me/2349024680769'>Jennifer directly</a> and explain your situation clearly, including dates and what was or wasn't completed on your account.</p><p>Every request is reviewed personally, not by an automated system, so genuine misunderstandings or edge cases get looked at individually rather than being forced into a rigid rule.</p>"}
+    ];
+    var overlay=document.getElementById('jenniferAgent');
+    var btn=document.getElementById('jenniferAgentBtn');
+    var closeBtn=document.getElementById('jaClose');
+    var backdrop=document.getElementById('jaBackdrop');
+    var homeView=document.getElementById('jaHome');
+    var answerView=document.getElementById('jaAnswer');
+    var answerText=document.getElementById('jaAnswerText');
+    var backBtn=document.getElementById('jaBack');
+    var askAnother=document.getElementById('jaAskAnother');
+    var input=document.getElementById('jaInput');
+    var sendBtn=document.getElementById('jaSend');
+    function openAgent(){overlay.removeAttribute('hidden');btn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';showHome();closeBtn.focus();}
+    function closeAgent(){overlay.setAttribute('hidden','');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';btn.focus();}
+    function showHome(){homeView.removeAttribute('hidden');answerView.setAttribute('hidden','');input.value='';}
+    function typeWriterHTML(container,html,speed,onDone){
+      container.innerHTML=html;
+      var walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT,null,false);
+      var textNodes=[];
+      var node;
+      while(node=walker.nextNode()){
+        textNodes.push({node:node,text:node.textContent});
+        node.textContent='';
+      }
+      var ni=0,ci=0;
+      function step(){
+        if(ni>=textNodes.length){ if(onDone) onDone(); return; }
+        var current=textNodes[ni];
+        if(ci<current.text.length){
+          current.node.textContent+=current.text.charAt(ci);
+          ci++;
+          setTimeout(step,speed);
+        }else{
+          ni++;ci=0;
+          setTimeout(step,speed);
+        }
+      }
+      step();
+    }
+    function showAnswer(h){
+      homeView.setAttribute('hidden','');
+      answerView.removeAttribute('hidden');
+      answerText.innerHTML='';
+      answerText.classList.remove('visible');
+      var body=document.getElementById('jaBody');
+      if(body)body.scrollTop=0;
+      var ctas=document.querySelector('.ja-answer-ctas');
+      if(ctas)ctas.classList.remove('visible');
+      var typing=document.getElementById('jaTyping');
+      if(typing)typing.classList.add('active');
+      var delay=700+Math.random()*500;
+      setTimeout(function(){
+        if(typing)typing.classList.remove('active');
+        answerText.classList.add('visible');
+        typeWriterHTML(answerText,h,10,function(){
+          if(ctas)ctas.classList.add('visible');
+        });
+      },delay);
+    }
+    function sendCustom(){var txt=(input.value||'').trim();if(!txt)return;var enc=encodeURIComponent('Hi Jennifer! I have a question about Jennavi. '+txt);window.open('https://wa.me/2349024680769?text='+enc,'_blank','noopener,noreferrer');closeAgent();}
+    if(btn)btn.addEventListener('click',openAgent);
+    if(closeBtn)closeBtn.addEventListener('click',closeAgent);
+    if(backdrop)backdrop.addEventListener('click',closeAgent);
+    if(backBtn)backBtn.addEventListener('click',showHome);
+    if(askAnother)askAnother.addEventListener('click',showHome);
+    if(sendBtn)sendBtn.addEventListener('click',sendCustom);
+    if(input)input.addEventListener('keydown',function(e){if(e.key==='Enter')sendCustom();});
+    document.querySelectorAll('.ja-q').forEach(function(el){el.addEventListener('click',function(){var idx=parseInt(el.getAttribute('data-q'),10);if(Q[idx])showAnswer(Q[idx].a);});});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay&&!overlay.hasAttribute('hidden'))closeAgent();});
+    overlay&&overlay.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=overlay.querySelectorAll('button:not([disabled]),a[href],input,[tabindex]:not([tabindex="-1"])');var first=f[0],last=f[f.length-1];if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}else{if(document.activeElement===last){e.preventDefault();first.focus();}}});
+  })();
+  </script>
+
 
 </body>
 </html>

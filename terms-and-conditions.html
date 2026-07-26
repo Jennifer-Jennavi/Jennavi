@@ -6,7 +6,7 @@
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/svg+xml" href="/jennavi-favicon.svg">
   <link rel="canonical" href="https://jennavi.co/terms-and-conditions.html">
-  <title>Terms & Conditions | Jennavi LinkedIn Ghostwriting Agency</title>
+  <title>Terms &amp; Conditions | Jennavi LinkedIn Ghostwriting Agency</title>
   <meta name="description" content="Jennavi's terms and conditions governing the use of our website and LinkedIn ghostwriting services.">
   <meta name="theme-color" content="#0a0a0a">
 
@@ -23,13 +23,17 @@
 
   <style>
     :root {
-      --onyx: #0a0a0a; --gold: #C9A84C; --gold-border: rgba(201,168,76,0.22);
-      --ivory: #FAF3E0; --ivory-muted: rgba(250,243,224,0.62); --muted: #7a7060;
+      --onyx: #0a0a0a; --onyx-2: #100e0a; --gold: #C9A84C; --gold-soft: #E0C687;
+      --gold-border: rgba(201,168,76,0.22); --oxblood: #6E1423;
+      --ivory: #FAF3E0; --ivory-muted: rgba(250,243,224,0.62); --ivory-dim: rgba(250,243,224,0.38);
+      --muted: #7a7060;
     }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; max-width:100%; }
-    body { background:var(--onyx); color:var(--ivory); font-family:'Montserrat',sans-serif; font-weight:300; line-height:1.75; }
-    a { color:var(--gold); text-decoration:none; }
-    a:hover { text-decoration:underline; }
+    * , *::before, *::after { margin:0; padding:0; box-sizing:border-box; max-width:100%; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--onyx); color:var(--ivory); font-family:'Montserrat',sans-serif; font-weight:300; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    a { color:var(--gold); text-decoration:none; transition:opacity .2s ease; }
+    a:hover { opacity:.75; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } * { transition:none !important; animation:none !important; } }
 
     .nav { position:fixed; top:0; left:0; right:0; z-index:10000; padding:18px 48px; display:flex; justify-content:space-between; align-items:center; background:rgba(10,10,10,0.97); backdrop-filter:blur(14px); border-bottom:1px solid var(--gold-border); }
     .nav-logo img { height:30px; width:auto; display:block; }
@@ -38,24 +42,137 @@
     .nav-links a:hover { opacity:1; color:var(--gold); }
     @media (max-width:900px) { .nav { padding:18px 24px; } .nav-links { display:none; } }
 
-    .legal-hero { padding:120px 0 0; background:linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 55%); border-bottom:1px solid var(--gold-border); margin-bottom:56px; }
-    .legal-hero-inner { max-width:760px; margin:0 auto; padding:0 24px 48px; }
-    .breadcrumb { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:24px; display:flex; gap:8px; align-items:center; }
-    .breadcrumb a { color:var(--gold); }
-    main { max-width:760px; margin:0 auto; padding:0 24px 100px; }
-    .legal-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
-    .legal-eyebrow::before { content:'◆'; font-size:7px; }
-    h1 { font-family:'Playfair Display',serif; font-size:clamp(32px,5vw,52px); font-weight:900; margin-bottom:20px; line-height:1.1; }
-    h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--gold); margin:36px 0 12px; }
-    p { font-size:15px; color:var(--ivory-muted); margin-bottom:16px; line-height:1.85; }
+    .legal-hero { position:relative; padding:148px 0 64px; background:
+        radial-gradient(ellipse 900px 400px at 15% 0%, rgba(201,168,76,0.10), transparent 60%),
+        radial-gradient(ellipse 700px 500px at 100% 10%, rgba(110,20,35,0.14), transparent 65%),
+        var(--onyx);
+      overflow:hidden; border-bottom:1px solid var(--gold-border); }
+    .legal-hero::after { content:''; position:absolute; inset:0; background-image:
+        linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+      background-size:64px 64px; mask-image:linear-gradient(to bottom, black, transparent 85%); pointer-events:none; }
+    .legal-hero-inner { position:relative; max-width:760px; margin:0 auto; padding:0 24px; }
+    .breadcrumb { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:32px; display:flex; gap:9px; align-items:center; }
+    .breadcrumb a { color:var(--gold-soft); }
+    .breadcrumb span.sep { opacity:.35; }
+    .legal-eyebrow { font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.32em; text-transform:uppercase; color:var(--gold); margin-bottom:22px; display:flex; align-items:center; gap:11px; }
+    .legal-eyebrow::before { content:''; width:22px; height:1px; background:linear-gradient(90deg, var(--gold), transparent); }
+    h1 { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(38px,6.4vw,64px); font-weight:400; letter-spacing:-0.01em; margin-bottom:22px; line-height:1.04; color:var(--ivory); }
+    h1 em { font-style:normal; font-weight:900; color:var(--gold); }
+    .hero-sub { max-width:560px; font-size:16.5px; color:var(--ivory-muted); line-height:1.8; }
+
+    main { position:relative; max-width:760px; margin:0 auto; padding:64px 24px 110px; }
+
+    .glance-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.26em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; text-align:center; }
+    .glance-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--gold-border); border:1px solid var(--gold-border); margin-bottom:20px; }
+    .glance-card { background:var(--onyx-2); padding:26px 14px 22px; text-align:center; transition:background .25s ease; }
+    .glance-card:hover { background:rgba(201,168,76,0.045); }
+    .glance-icon { font-family:'Playfair Display',serif; font-weight:900; font-size:clamp(20px,3.4vw,26px); line-height:1; color:var(--gold); display:block; margin-bottom:8px; letter-spacing:-0.01em; }
+    .glance-title { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ivory); font-weight:500; margin-bottom:4px; }
+    .glance-desc { font-size:11px; color:var(--ivory-dim); line-height:1.5; }
+    @media (max-width:640px) { .glance-grid { grid-template-columns:1fr 1fr; } .glance-card { padding:20px 14px; } }
+    .glance-footnote { font-family:'DM Mono',monospace; font-size:10.5px; color:var(--muted); text-align:center; margin-bottom:60px; letter-spacing:.02em; }
+
+    section.policy-section { margin-bottom:52px; }
+    .section-num { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:10px; }
+    h2 { font-family:'Playfair Display',serif; font-size:clamp(22px,3vw,27px); font-weight:700; color:var(--ivory); margin-bottom:18px; letter-spacing:-0.005em; }
+    h2 .accent { color:var(--gold); }
+    p { font-size:15.5px; color:var(--ivory-muted); margin-bottom:16px; line-height:1.85; }
     strong { color:var(--ivory); font-weight:600; }
-    ul { list-style:none; margin:0 0 16px 0; }
-    li { font-size:15px; color:var(--ivory-muted); line-height:1.85; margin-bottom:10px; padding-left:22px; position:relative; }
-    li::before { content:'→'; position:absolute; left:0; color:var(--gold); }
-    .last-updated { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); margin-top:56px; padding-top:24px; border-top:1px solid var(--gold-border); }
-    footer { border-top:1px solid var(--gold-border); padding:40px 24px; text-align:center; }
-    footer p { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.05em; }
+    ul.body-list { list-style:none; margin:0 0 16px 0; }
+    ul.body-list li { font-size:15.5px; color:var(--ivory-muted); line-height:1.85; margin-bottom:10px; padding-left:22px; position:relative; }
+    ul.body-list li::before { content:'→'; position:absolute; left:0; color:var(--gold); }
+
+    .divider { height:1px; background:linear-gradient(90deg, var(--gold-border), transparent); margin:44px 0; }
+
+    .cta-block { border:1px solid var(--gold-border); background:linear-gradient(150deg, rgba(201,168,76,0.06), rgba(110,20,35,0.05)); padding:34px 32px; margin-top:8px; }
+    .cta-block h2 { margin-bottom:12px; }
+    .cta-block p { font-size:15px; }
+    .cta-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:20px; }
+    .cta-btn { font-family:'DM Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; padding:13px 26px; border:1px solid var(--gold); color:var(--gold); transition:all .22s ease; display:inline-block; }
+    .cta-btn.solid { background:var(--gold); color:var(--onyx); font-weight:600; }
+    .cta-btn:hover { background:var(--gold); color:var(--onyx); }
+    .cta-btn.solid:hover { background:transparent; color:var(--gold); }
+
+    .last-updated { font-family:'DM Mono',monospace; font-size:10.5px; color:var(--muted); margin-top:56px; padding-top:24px; border-top:1px solid var(--gold-border); letter-spacing:.03em; }
+
+    footer { border-top:1px solid var(--gold-border); padding:44px 24px; text-align:center; }
+    footer p { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.05em; line-height:1.9; }
     footer a { color:var(--gold); }
+        body.menu-open .whatsapp-float,body.menu-open .ja-label-bubble,body.menu-open .bottom-nav{display:none!important;}
+        .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;width:100%;max-width:100vw;height:60px;background:#0a0a0a;border-top:1px solid #C9A84C;z-index:10001;padding-bottom:env(safe-area-inset-bottom);overflow:hidden;}
+          .bottom-nav{display:flex;align-items:stretch;}
+        .bottom-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:#C9A84C;padding:6px 2px;transition:opacity 0.2s;-webkit-tap-highlight-color:rgba(201,168,76,0.2);touch-action:manipulation;}
+        .bottom-nav-item:hover,.bottom-nav-item.active{opacity:1;color:#dfc06a;}
+        .bottom-nav-item svg{width:20px;height:20px;fill:#C9A84C;flex-shrink:0;}
+        .bottom-nav-item span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;line-height:1;}
+        .whatsapp-float{display:none;position:fixed;bottom:calc(90px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;min-width:52px;min-height:52px;background:#C9A84C;border-radius:50%;align-items:center;justify-content:center;z-index:9999;box-shadow:0 4px 16px rgba(201,168,76,0.4);text-decoration:none;-webkit-tap-highlight-color:rgba(201,168,76,0.2);touch-action:manipulation;flex-shrink:0;border:none;cursor:pointer;}
+        @media(max-width:900px){.whatsapp-float{display:flex;}}
+        .whatsapp-float svg{width:28px;height:28px;fill:#fff;}
+        .ja-overlay{position:fixed;inset:0;z-index:10000;pointer-events:none;}
+        .ja-overlay:not([hidden]){pointer-events:all;}
+        .ja-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.55);opacity:0;transition:opacity 0.3s ease;}
+        .ja-overlay:not([hidden]) .ja-backdrop{opacity:1;}
+        .ja-panel{position:absolute;bottom:0;left:0;right:0;background:#0f0f0f;border-top:1px solid #C9A84C;border-radius:20px 20px 0 0;height:78vh;max-height:78vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);overflow:hidden;}
+        .ja-overlay:not([hidden]) .ja-panel{transform:translateY(0);}
+          @media(min-width:901px){
+          .ja-view{padding-bottom:20px;}
+          .ja-panel{top:50%;left:50%;right:auto;bottom:auto;width:480px;height:600px;max-height:600px;border-radius:16px;border:1px solid #C9A84C;transform:translate(-50%,-44%) scale(0.96);transition:transform 0.3s cubic-bezier(0.32,0.72,0,1),opacity 0.3s ease;opacity:0;}
+          .ja-overlay:not([hidden]) .ja-panel{transform:translate(-50%,-50%) scale(1);opacity:1;}
+          }
+        .ja-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,168,76,0.2);flex-shrink:0;}
+        .ja-header-info{display:flex;align-items:center;gap:12px;}
+        .ja-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#C9A84C,#a0832e);color:#0a0a0a;font-family:'DM Mono',monospace;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+        .ja-name{color:#f5f0e8;font-family:'Playfair Display',serif;font-size:16px;font-weight:600;line-height:1.2;}
+        .ja-status{display:flex;align-items:center;gap:6px;color:#C9A84C;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px;}
+        .ja-dot{width:7px;height:7px;border-radius:50%;background:#4caf50;display:inline-block;flex-shrink:0;}
+        .ja-close{background:none;border:1px solid rgba(201,168,76,0.3);color:#C9A84C;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;line-height:1;padding:0;}
+        .ja-close:hover{background:rgba(201,168,76,0.15);border-color:#C9A84C;}
+        .ja-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:env(safe-area-inset-bottom);}
+        .ja-view{padding:20px;padding-bottom:80px;}
+        .ja-welcome{color:#f5f0e8;font-family:'Playfair Display',serif;font-size:18px;line-height:1.5;margin:0 0 20px;}
+        .ja-questions{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+        .ja-q{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);color:#f5f0e8;padding:13px 16px;border-radius:10px;text-align:left;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:13px;line-height:1.4;transition:all 0.2s;-webkit-tap-highlight-color:rgba(201,168,76,0.1);}
+        .ja-q:hover,.ja-q:focus-visible{background:rgba(201,168,76,0.12);border-color:#C9A84C;color:#C9A84C;outline:none;}
+        .ja-custom{border-top:1px solid rgba(201,168,76,0.15);padding-top:20px;}
+        .ja-custom-label{display:block;color:rgba(245,240,232,0.5);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;}
+        .ja-input-row{display:flex;gap:10px;}
+        .ja-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);color:#f5f0e8;padding:12px 14px;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
+        .ja-input:focus{border-color:#C9A84C;}
+        .ja-input::placeholder{color:rgba(245,240,232,0.3);}
+        .ja-send{background:#C9A84C;border:none;color:#0a0a0a;width:46px;height:46px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s;}
+        .ja-send:hover{background:#dfc06a;}
+        .ja-send svg{width:20px;height:20px;fill:#0a0a0a;}
+        .ja-back{display:flex;align-items:center;gap:8px;background:none;border:none;color:#C9A84C;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;padding:0 0 16px;margin-bottom:4px;border-bottom:1px solid rgba(201,168,76,0.15);width:100%;}
+        .ja-back svg{width:16px;height:16px;fill:#C9A84C;flex-shrink:0;}
+        .ja-answer-text{color:#f5f0e8;font-family:'Montserrat',sans-serif;font-size:14px;line-height:1.8;padding:16px 0 24px;}
+        .ja-arrow{color:#C9A84C;font-weight:700;}
+        .ja-answer-text strong{color:#C9A84C;}
+        .ja-answer-text a{color:#C9A84C;text-decoration:underline;text-underline-offset:3px;}
+        .ja-answer-ctas{display:flex;flex-direction:column;gap:10px;padding-top:4px;border-top:1px solid rgba(201,168,76,0.15);}
+        .ja-cta-primary{display:flex;align-items:center;justify-content:center;background:#C9A84C;color:#0a0a0a;padding:14px 20px;border-radius:10px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;font-weight:700;transition:background 0.2s;min-height:48px;}
+        .ja-cta-primary:hover{background:#dfc06a;}
+        .ja-cta-secondary{background:transparent;border:1px solid rgba(201,168,76,0.4);color:#C9A84C;padding:13px 20px;border-radius:10px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;min-height:48px;}
+        .ja-cta-secondary:hover{background:rgba(201,168,76,0.1);border-color:#C9A84C;}
+        .ja-typing{display:none;flex-direction:column;align-items:flex-start;gap:10px;padding:20px 0;}
+        .ja-typing.active{display:flex;}
+        .ja-typing-label{color:rgba(201,168,76,0.6);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;}
+        .ja-typing-dots{display:flex;gap:6px;align-items:center;}
+        .ja-typing-dot{width:8px;height:8px;border-radius:50%;background:#C9A84C;animation:ja-pulse 1.2s ease-in-out infinite;}
+        .ja-typing-dot:nth-child(2){animation-delay:0.2s;}
+        .ja-typing-dot:nth-child(3){animation-delay:0.4s;}
+        .ja-answer-text{opacity:0;transition:opacity 0.4s ease;}
+        .ja-answer-text.visible{opacity:1;}
+        .ja-answer-ctas{opacity:0;transition:opacity 0.3s ease 0.2s;}
+        .ja-answer-ctas.visible{opacity:1;}
+        .ja-label-bubble{display:none;position:fixed;bottom:calc(152px + env(safe-area-inset-bottom));right:10px;background:#0a0a0a;border:1px solid #C9A84C;color:#C9A84C;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border-radius:4px;z-index:9998;white-space:nowrap;}
+        .ja-label-bubble::after{content:'';position:absolute;bottom:-6px;right:20px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid #C9A84C;}
+        @media(max-width:900px){.ja-label-bubble{display:block;}}
+        .bottom-nav-item.active svg{fill:#C9A84C!important;}
+        .bottom-nav-item.active span{color:#C9A84C!important;font-weight:500;}
+        .bottom-nav-item.active{position:relative;opacity:1!important;}
+        .bottom-nav-item.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:#C9A84C;border-radius:0 0 2px 2px;}
+        .card-cta,.btn,.btn-wa,.btn-gold,.btn-outline,.book-btn,.nl-submit,.ja-cta-primary,.insights-btn,.tool-btn{font-weight:700!important;}
   </style>
 </head>
 <body>
@@ -74,55 +191,311 @@
   <div class="legal-hero">
     <div class="legal-hero-inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="https://jennavi.co/">Home</a><span style="opacity:0.4;">&#8250;</span><span>Terms &amp; Conditions</span>
+        <a href="https://jennavi.co/">Home</a><span class="sep">&#8250;</span><span>Terms &amp; Conditions</span>
       </nav>
-      <span class="legal-eyebrow">Legal</span>
-      <h1>Terms & Conditions</h1>
+      <span class="legal-eyebrow">Legal &middot; Effective July 26, 2026</span>
+      <h1>The terms, <em>in plain English</em></h1>
+      <p class="hero-sub">These Terms &amp; Conditions govern your use of jennavi.co and any services provided by Jennavi. By using our website or engaging our services, you agree to these terms.</p>
     </div>
   </div>
 
   <main>
-    <p>These Terms & Conditions govern your use of jennavi.co and any services provided by Jennavi ("we," "us," "our"). By using our website or engaging our services, you agree to these terms.</p>
 
-    <h2>Our Services</h2>
-    <p>Jennavi provides LinkedIn ghostwriting, content strategy, and personal branding services across six service tiers, ranging from a one-time profile audit to full monthly retainer management. Full details of each tier are available on our <a href="https://jennavi.co/hire-linkedin-ghostwriter.html">services page</a>.</p>
+    <p class="glance-label">The Terms That Actually Matter, At a Glance</p>
+    <div class="glance-grid">
+      <div class="glance-card">
+        <span class="glance-icon">100%</span>
+        <div class="glance-title">You Own It</div>
+        <div class="glance-desc">All delivered content is yours to use freely</div>
+      </div>
+      <div class="glance-card">
+        <span class="glance-icon">USD</span>
+        <div class="glance-title">All Pricing</div>
+        <div class="glance-desc">Every tier, billed in US dollars</div>
+      </div>
+      <div class="glance-card">
+        <span class="glance-icon">Any Time</span>
+        <div class="glance-title">Cancel Retainers</div>
+        <div class="glance-desc">Takes effect at end of billing cycle</div>
+      </div>
+      <div class="glance-card">
+        <span class="glance-icon">0</span>
+        <div class="glance-title">Outsourcing</div>
+        <div class="glance-desc">Jennifer writes every word herself</div>
+      </div>
+    </div>
+    <p class="glance-footnote">Full detail on every point below &darr;</p>
 
-    <h2>Service Agreements</h2>
-    <p>A service agreement is put in place before work begins on any retainer tier. This agreement outlines the specific scope, deliverables, and timeline for your engagement. Jennifer Omaliko personally writes all content delivered to clients; no work is outsourced to third parties.</p>
+    <div class="divider"></div>
 
-    <h2>Payment Terms</h2>
-    <ul>
-      <li>All prices are listed in USD unless otherwise stated</li>
-      <li>Monthly retainer tiers require payment upfront for the first month before work begins</li>
-      <li>Payments are processed securely through third-party payment processors (Flutterwave and/or Axra)</li>
-      <li>Recurring monthly tiers will be billed on the same date each month unless cancelled</li>
-    </ul>
+    <section class="policy-section">
+      <span class="section-num">01 &mdash; Services</span>
+      <h2>Our <span class="accent">Services</span></h2>
+      <p>Jennavi provides LinkedIn ghostwriting, content strategy, and personal branding services across six service tiers, ranging from a one-time profile audit to full monthly retainer management. Full details of each tier are available on our <a href="https://jennavi.co/hire-linkedin-ghostwriter.html">services page</a>.</p>
+    </section>
 
-    <h2>Client Responsibilities</h2>
-    <p>To deliver effective content, we require timely input from clients, including a voice capture session and prompt feedback on drafts within the agreed revision windows outlined in your service agreement.</p>
+    <div class="divider"></div>
 
-    <h2>Intellectual Property</h2>
-    <p>Once paid for, all content written for a client belongs to that client and may be used, edited, or published freely by them. Jennavi retains no ownership over delivered client content.</p>
+    <section class="policy-section">
+      <span class="section-num">02 &mdash; Agreements</span>
+      <h2>Service <span class="accent">Agreements</span></h2>
+      <p>A service agreement is put in place before work begins on any retainer tier. This agreement outlines the specific scope, deliverables, and timeline for your engagement. Jennifer Omaliko personally writes all content delivered to clients; no work is outsourced to third parties.</p>
+    </section>
 
-    <h2>Limitation of Liability</h2>
-    <p>While we are committed to delivering high-quality strategic content, Jennavi does not guarantee specific business outcomes (such as follower counts, leads, or revenue), as these depend on factors outside our control, including platform algorithm changes and individual client engagement.</p>
+    <div class="divider"></div>
 
-    <h2>Cancellations</h2>
-    <p>Monthly retainer clients may cancel at any time; cancellation will take effect at the end of the current billing cycle. See our <a href="https://jennavi.co/refund-policy.html">Refund Policy</a> for details on refunds.</p>
+    <section class="policy-section">
+      <span class="section-num">03 &mdash; Payment</span>
+      <h2>Payment <span class="accent">Terms</span></h2>
+      <ul class="body-list">
+        <li>All prices are listed in USD unless otherwise stated</li>
+        <li>Monthly retainer tiers require payment upfront for the first month before work begins</li>
+        <li>Payments are processed securely through third-party payment processors (Flutterwave and/or Axra)</li>
+        <li>Recurring monthly tiers will be billed on the same date each month unless cancelled</li>
+      </ul>
+    </section>
 
-    <h2>Changes to These Terms</h2>
-    <p>We may update these terms from time to time. Continued use of our services after changes are posted constitutes acceptance of the updated terms.</p>
+    <div class="divider"></div>
 
-    <h2>Contact Us</h2>
-    <p>Questions about these terms? Reach out via <a href="https://wa.me/2349024680769">WhatsApp</a> or email <a href="mailto:jennifer@jennavi.co?subject=Terms%20and%20Conditions%20Question">jennifer@jennavi.co</a>.</p>
+    <section class="policy-section">
+      <span class="section-num">04 &mdash; Your Part</span>
+      <h2>Client <span class="accent">Responsibilities</span></h2>
+      <p>To deliver effective content, we require timely input from clients, including a voice capture session and prompt feedback on drafts within the agreed revision windows outlined in your service agreement.</p>
+    </section>
 
-    <p class="last-updated">Last updated: July 2026</p>
+    <div class="divider"></div>
+
+    <section class="policy-section">
+      <span class="section-num">05 &mdash; Ownership</span>
+      <h2>Intellectual <span class="accent">Property</span></h2>
+      <p>Once paid for, all content written for a client belongs to that client and may be used, edited, or published freely by them. Jennavi retains no ownership over delivered client content.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="policy-section">
+      <span class="section-num">06 &mdash; Honesty</span>
+      <h2>Limitation of <span class="accent">Liability</span></h2>
+      <p>While we are committed to delivering high-quality strategic content, Jennavi does not guarantee specific business outcomes (such as follower counts, leads, or revenue), as these depend on factors outside our control, including platform algorithm changes and individual client engagement.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="policy-section">
+      <span class="section-num">07 &mdash; Cancelling</span>
+      <h2><span class="accent">Cancellations</span></h2>
+      <p>Monthly retainer clients may cancel at any time; cancellation will take effect at the end of the current billing cycle. See our <a href="https://jennavi.co/refund-policy.html">Refund Policy</a> for details on refunds.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="policy-section">
+      <span class="section-num">08 &mdash; Updates</span>
+      <h2>Changes to <span class="accent">These Terms</span></h2>
+      <p>We may update these terms from time to time. Continued use of our services after changes are posted constitutes acceptance of the updated terms.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <div class="cta-block">
+      <h2>Questions About These Terms?</h2>
+      <p>Reach out directly, we'll walk you through anything that's unclear.</p>
+      <div class="cta-row">
+        <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20had%20a%20question%20about%20your%20terms%20and%20conditions." class="cta-btn solid">Message on WhatsApp</a>
+        <a href="mailto:jennifer@jennavi.co?subject=Terms%20and%20Conditions%20Question" class="cta-btn">Email Jennifer &#8594;</a>
+      </div>
+    </div>
+
+    <p class="last-updated">Last updated: July 26, 2026</p>
   </main>
 
   <footer>
     <p>&copy; 2026 Jennavi &middot; Jennifer Mmesoma Omaliko &middot; jennavi.co &middot; Kano, Nigeria<br>
-    <a href="https://jennavi.co/about.html">About</a> &middot; <a href="https://jennavi.co/privacy-policy.html">Privacy Policy</a> &middot; <a href="https://jennavi.co/terms-and-conditions.html">Terms & Conditions</a> &middot; <a href="https://jennavi.co/refund-policy.html">Refund Policy</a></p>
+    <a href="https://jennavi.co/about.html">About</a> &middot; <a href="https://jennavi.co/privacy-policy.html">Privacy Policy</a> &middot; <a href="https://jennavi.co/terms-and-conditions.html">Terms &amp; Conditions</a> &middot; <a href="https://jennavi.co/refund-policy.html">Refund Policy</a></p>
   </footer>
+
+  <nav class="bottom-nav" aria-label="Mobile bottom navigation">
+    <a href="https://jennavi.co" class="bottom-nav-item" aria-label="Home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="https://jennavi.co/linkedin-tools.html" class="bottom-nav-item" aria-label="Tools">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+      <span>Tools</span>
+    </a>
+    <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="bottom-nav-item" aria-label="Services">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Services</span>
+    </a>
+    <a href="https://jennavi.co/founder.html" class="bottom-nav-item" aria-label="Jennifer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      <span>Jennifer</span>
+    </a>
+    <a data-cal-link="jennavi/strategy" data-cal-namespace="default" data-cal-config='{"layout":"month_view"}' class="bottom-nav-item" aria-label="Book a call" style="cursor:pointer;">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.9 3 3 3.9 3 5v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H5V9h14v12zm0-14H5V5h14v2zM7 11h5v5H7z"/></svg>
+      <span>Book</span>
+    </a>
+  </nav>
+
+  <!-- JENNAVI CONVERSATIONAL AGENT -->
+  <div class="ja-label-bubble" aria-hidden="true">Ask Jennifer</div>
+  <button class="whatsapp-float" id="jenniferAgentBtn" aria-label="Ask Jennifer a question" aria-expanded="false" aria-controls="jenniferAgent">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </button>
+
+  <!-- AGENT OVERLAY -->
+  <div id="jenniferAgent" class="ja-overlay" role="dialog" aria-modal="true" aria-label="Ask Jennifer" hidden>
+    <div class="ja-backdrop" id="jaBackdrop"></div>
+    <div class="ja-panel" role="document">
+      <div class="ja-header">
+        <div class="ja-header-info">
+          <div class="ja-avatar" aria-hidden="true">JO</div>
+          <div>
+            <div class="ja-name">Jennifer Omaliko</div>
+            <div class="ja-status"><span class="ja-dot" aria-hidden="true"></span>Ask me anything</div>
+          </div>
+        </div>
+        <button class="ja-close" id="jaClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="ja-body" id="jaBody">
+        <div id="jaHome" class="ja-view">
+          <p class="ja-welcome">Most people reading this want to know one specific thing, usually about ownership, cancellation, or payment. Ask directly and skip the legal reading.</p>
+          <div class="ja-questions" role="list">
+            <button class="ja-q" data-q="0" role="listitem">Who owns the content once I pay?</button>
+            <button class="ja-q" data-q="1" role="listitem">Can I cancel my retainer anytime?</button>
+            <button class="ja-q" data-q="2" role="listitem">What currency are prices in?</button>
+            <button class="ja-q" data-q="3" role="listitem">Do you guarantee specific results?</button>
+            <button class="ja-q" data-q="4" role="listitem">Is a service agreement really required?</button>
+            <button class="ja-q" data-q="5" role="listitem">Does Jennifer really write everything herself?</button>
+            <button class="ja-q" data-q="6" role="listitem">What do I need to provide as a client?</button>
+            <button class="ja-q" data-q="7" role="listitem">How does monthly billing work?</button>
+            <button class="ja-q" data-q="8" role="listitem">Can these terms change later?</button>
+            <button class="ja-q" data-q="9" role="listitem">What's the difference between cancelling and refunds?</button>
+            <button class="ja-q" data-q="10" role="listitem">What payment processors do you use?</button>
+            <button class="ja-q" data-q="11" role="listitem">How do I ask about these terms directly?</button>
+          </div>
+          <div class="ja-custom">
+            <label for="jaInput" class="ja-custom-label">Not listed above? Type your question:</label>
+            <div class="ja-input-row">
+              <input type="text" id="jaInput" class="ja-input" placeholder="Type your question..." autocomplete="off" maxlength="200">
+              <button class="ja-send" id="jaSend" aria-label="Send to Jennifer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="jaAnswer" class="ja-view" hidden>
+          <button class="ja-back" id="jaBack" aria-label="Back to questions">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            All questions
+          </button>
+          <div class="ja-typing" id="jaTyping">
+            <span class="ja-typing-label">Jennifer is typing</span>
+            <div class="ja-typing-dots">
+              <span class="ja-typing-dot"></span>
+              <span class="ja-typing-dot"></span>
+              <span class="ja-typing-dot"></span>
+            </div>
+          </div>
+          <div class="ja-answer-text" id="jaAnswerText"></div>
+          <div class="ja-answer-ctas">
+            <a data-cal-link="jennavi/strategy" data-cal-namespace="default" data-cal-config='{"layout":"month_view"}' class="ja-cta-primary" style="cursor:pointer;">Book a Free Strategy Call</a>
+            <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="ja-cta-secondary" style="display:flex;align-items:center;justify-content:center;font-weight:700;">See Pricing First</a>
+            <button id="jaAskAnother" style="background:none;border:none;color:rgba(201,168,76,0.6);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;padding:8px 0 0;text-decoration:underline;text-underline-offset:3px;">Ask another question</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var Q=[
+      {a:"<p>You do, entirely. Once content is paid for, it belongs to you and may be used, edited, or published freely however you like. Jennavi retains no ownership over anything delivered.</p>"},
+      {a:"<p>Yes, at any time. Cancellation takes effect at the end of your current billing cycle, not immediately, so you get the full period you already paid for.</p><p>Cancelling stops future billing. It's different from a refund, which returns money already paid, see our <a href='https://jennavi.co/refund-policy.html'>Refund Policy</a> for that distinction.</p>"},
+      {a:"<p>All prices are listed in <strong>USD</strong> unless otherwise stated, regardless of which country you're paying from.</p>"},
+      {a:"<p>No, and we're upfront about that. Jennavi doesn't guarantee specific outcomes like follower counts, leads, or revenue, since these depend on factors outside our control, platform algorithm changes, your industry, and how consistently you engage with the process.</p><p>What we do commit to is the quality and consistency of the strategic content itself.</p>"},
+      {a:"<p>Yes, for every retainer tier, before work begins. It outlines the specific scope, deliverables, and timeline for your engagement, so both sides know exactly what's expected.</p><p>This protects you as much as it protects us.</p>"},
+      {a:"<p>Yes, every word, for every client, at every tier. No outsourcing, no junior writers, no ghostwriting teams. This is a deliberate limit on how many clients Jennavi can take at once.</p>"},
+      {a:"<p>Mainly timely input: a voice capture session early on, and prompt feedback on drafts within the revision windows outlined in your specific service agreement.</p><p>Content quality depends on this collaboration, delays on your end can affect delivery timelines.</p>"},
+      {a:"<p>Monthly retainer tiers require payment upfront for the first month before work begins. After that, recurring billing happens on the same date each month, unless you cancel.</p>"},
+      {a:"<p>Yes, we may update these terms from time to time. Continued use of our services after changes are posted means you've accepted the updated terms, so it's worth checking back occasionally.</p>"},
+      {a:"<p><strong>Cancelling</strong> stops future billing, effective at the end of your current cycle. <strong>A refund</strong> returns money already paid, and depends on whether onboarding or drafting has started. See our <a href='https://jennavi.co/refund-policy.html'>full Refund Policy</a> for the exact scenarios.</p>"},
+      {a:"<p>Payments are processed securely through <strong>Flutterwave and/or Axra</strong>, both PCI-compliant third-party processors. Jennavi never directly stores your card details.</p>"},
+      {a:"<p>Message us directly, either <a href='https://wa.me/2349024680769'>WhatsApp</a> or <a href='mailto:jennifer@jennavi.co?subject=Terms%20and%20Conditions%20Question'>email</a>, and we'll clarify anything specific to your situation.</p>"}
+    ];
+    var overlay=document.getElementById('jenniferAgent');
+    var btn=document.getElementById('jenniferAgentBtn');
+    var closeBtn=document.getElementById('jaClose');
+    var backdrop=document.getElementById('jaBackdrop');
+    var homeView=document.getElementById('jaHome');
+    var answerView=document.getElementById('jaAnswer');
+    var answerText=document.getElementById('jaAnswerText');
+    var backBtn=document.getElementById('jaBack');
+    var askAnother=document.getElementById('jaAskAnother');
+    var input=document.getElementById('jaInput');
+    var sendBtn=document.getElementById('jaSend');
+    function openAgent(){overlay.removeAttribute('hidden');btn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';showHome();closeBtn.focus();}
+    function closeAgent(){overlay.setAttribute('hidden','');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';btn.focus();}
+    function showHome(){homeView.removeAttribute('hidden');answerView.setAttribute('hidden','');input.value='';}
+    function typeWriterHTML(container,html,speed,onDone){
+      container.innerHTML=html;
+      var walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT,null,false);
+      var textNodes=[];
+      var node;
+      while(node=walker.nextNode()){
+        textNodes.push({node:node,text:node.textContent});
+        node.textContent='';
+      }
+      var ni=0,ci=0;
+      function step(){
+        if(ni>=textNodes.length){ if(onDone) onDone(); return; }
+        var current=textNodes[ni];
+        if(ci<current.text.length){
+          current.node.textContent+=current.text.charAt(ci);
+          ci++;
+          setTimeout(step,speed);
+        }else{
+          ni++;ci=0;
+          setTimeout(step,speed);
+        }
+      }
+      step();
+    }
+    function showAnswer(h){
+      homeView.setAttribute('hidden','');
+      answerView.removeAttribute('hidden');
+      answerText.innerHTML='';
+      answerText.classList.remove('visible');
+      var body=document.getElementById('jaBody');
+      if(body)body.scrollTop=0;
+      var ctas=document.querySelector('.ja-answer-ctas');
+      if(ctas)ctas.classList.remove('visible');
+      var typing=document.getElementById('jaTyping');
+      if(typing)typing.classList.add('active');
+      var delay=700+Math.random()*500;
+      setTimeout(function(){
+        if(typing)typing.classList.remove('active');
+        answerText.classList.add('visible');
+        typeWriterHTML(answerText,h,10,function(){
+          if(ctas)ctas.classList.add('visible');
+        });
+      },delay);
+    }
+    function sendCustom(){var txt=(input.value||'').trim();if(!txt)return;var enc=encodeURIComponent('Hi Jennifer! I have a question about Jennavi. '+txt);window.open('https://wa.me/2349024680769?text='+enc,'_blank','noopener,noreferrer');closeAgent();}
+    if(btn)btn.addEventListener('click',openAgent);
+    if(closeBtn)closeBtn.addEventListener('click',closeAgent);
+    if(backdrop)backdrop.addEventListener('click',closeAgent);
+    if(backBtn)backBtn.addEventListener('click',showHome);
+    if(askAnother)askAnother.addEventListener('click',showHome);
+    if(sendBtn)sendBtn.addEventListener('click',sendCustom);
+    if(input)input.addEventListener('keydown',function(e){if(e.key==='Enter')sendCustom();});
+    document.querySelectorAll('.ja-q').forEach(function(el){el.addEventListener('click',function(){var idx=parseInt(el.getAttribute('data-q'),10);if(Q[idx])showAnswer(Q[idx].a);});});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay&&!overlay.hasAttribute('hidden'))closeAgent();});
+    overlay&&overlay.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=overlay.querySelectorAll('button:not([disabled]),a[href],input,[tabindex]:not([tabindex="-1"])');var first=f[0],last=f[f.length-1];if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}else{if(document.activeElement===last){e.preventDefault();first.focus();}}});
+  })();
+  </script>
+
 
 </body>
 </html>
