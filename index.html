@@ -2107,11 +2107,21 @@
       try { sessionStorage.removeItem('axra_pending_' + tier); } catch (e) {}
     }
 
+    function scrollToForm(form) {
+      window.addEventListener('load', function () {
+        var navElS = document.querySelector('.nav');
+        var navHeightS = navElS ? navElS.offsetHeight : 80;
+        var formOffsetS = form.getBoundingClientRect().top + window.pageYOffset - navHeightS - 16;
+        window.scrollTo({ top: formOffsetS, behavior: 'smooth' });
+      });
+    }
+
     function showAlreadyDeliveredMessage() {
       var form = document.getElementById('flw-form-' + tier);
       if (form) {
         form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">This payment was already confirmed.</p><p style="color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;">Jennifer already has this on file and will be in touch. No need to pay again.</p></div>';
         form.classList.add('active');
+        scrollToForm(form);
       }
     }
 
@@ -2124,6 +2134,7 @@
         msgEl.style.cssText = 'color:#E65100;font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
         msgEl.innerHTML = "We could not yet verify this payment with our processor. This can happen if your bank is still processing the charge. <button id=\"axra-check-again-" + tier + "\" style=\"display:block;margin:10px auto 8px;background:#C9A84C;color:#0a0a0a;border:none;padding:10px 20px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;\">Check Again</button>If you completed a real payment and it still doesn't confirm, message Jennifer directly. <a href=\"https://wa.me/2349024680769?text=" + encodeURIComponent('Hi Jennifer! I completed a payment for ' + description + ' but the site could not verify it automatically. My email is ' + email + '.') + "\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:#C9A84C;text-decoration:underline;\">Message Jennifer on WhatsApp</a>";
         form.appendChild(msgEl);
+        scrollToForm(form);
         var retryBtn = document.getElementById('axra-check-again-' + tier);
         if (retryBtn) {
           retryBtn.addEventListener('click', function () {
@@ -2199,11 +2210,18 @@
       var cancelForm = document.getElementById('flw-form-' + tier);
       if (cancelForm) {
         cancelForm.classList.add('active');
+
+        var cNameEl = document.getElementById('flw-name-' + tier);
+        var cEmailEl = document.getElementById('flw-email-' + tier);
+        if (cNameEl && name) cNameEl.value = name;
+        if (cEmailEl && email) cEmailEl.value = email;
+
         var cancelMsgEl = document.createElement('p');
         cancelMsgEl.className = 'flw-fail-msg';
         cancelMsgEl.style.cssText = 'color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.05em;line-height:1.6;margin:10px 0 0;text-align:center;';
         cancelMsgEl.textContent = 'Checkout was cancelled. Your details are still here whenever you are ready to try again.';
         cancelForm.appendChild(cancelMsgEl);
+        scrollToForm(cancelForm);
       }
       history.replaceState(null, '', window.location.pathname);
     }
