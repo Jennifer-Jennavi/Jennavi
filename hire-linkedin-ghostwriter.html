@@ -1955,12 +1955,12 @@
       if (form) {
         form.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;">' + successText + '</p><a href="' + waHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 24px;border-radius:6px;font-family:\'DM Mono\',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">Message Jennifer on WhatsApp</a></div>';
         form.classList.add('active');
-        window.addEventListener('load', function () {
+        setTimeout(function () {
           var navElP = document.querySelector('.nav');
           var navHeightP = navElP ? navElP.offsetHeight : 80;
           var formOffset = form.getBoundingClientRect().top + window.pageYOffset - navHeightP - 16;
           window.scrollTo({ top: formOffset, behavior: 'smooth' });
-        });
+        }, 50);
       }
       fetch('https://formspree.io/f/mqejgwab', {
         method: 'POST',
@@ -1988,12 +1988,12 @@
     }
 
     function scrollToForm(form) {
-      window.addEventListener('load', function () {
+      setTimeout(function () {
         var navElS = document.querySelector('.nav');
         var navHeightS = navElS ? navElS.offsetHeight : 80;
         var formOffsetS = form.getBoundingClientRect().top + window.pageYOffset - navHeightS - 16;
         window.scrollTo({ top: formOffsetS, behavior: 'smooth' });
-      });
+      }, 50);
     }
 
     function showAlreadyDeliveredMessage() {
@@ -2068,12 +2068,12 @@
       if (verifyForm) {
         verifyForm.innerHTML = '<div style="text-align:center;padding:16px 0;"><p style="color:#C9A84C;font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Verifying your payment...</p><p style="color:rgba(250,243,224,0.5);font-family:\'DM Mono\',monospace;font-size:10px;">This takes a few seconds. Please don\'t close this page.</p></div>';
         verifyForm.classList.add('active');
-        window.addEventListener('load', function () {
+        setTimeout(function () {
           var navElV = document.querySelector('.nav');
           var navHeightV = navElV ? navElV.offsetHeight : 80;
           var formOffsetV = verifyForm.getBoundingClientRect().top + window.pageYOffset - navHeightV - 16;
           window.scrollTo({ top: formOffsetV, behavior: 'smooth' });
-        });
+        }, 50);
       }
 
       pollForSession(sessionId);
@@ -2104,12 +2104,12 @@
         cancelMsgEl.textContent = 'Checkout was cancelled. Your details are still here whenever you are ready to try again.';
         cancelForm.appendChild(cancelMsgEl);
 
-        window.addEventListener('load', function () {
+        setTimeout(function () {
           var navElC = document.querySelector('.nav');
           var navHeightC = navElC ? navElC.offsetHeight : 80;
           var formOffsetC = cancelForm.getBoundingClientRect().top + window.pageYOffset - navHeightC - 16;
           window.scrollTo({ top: formOffsetC, behavior: 'smooth' });
-        });
+        }, 50);
       }
       history.replaceState(null, '', window.location.pathname);
     }
