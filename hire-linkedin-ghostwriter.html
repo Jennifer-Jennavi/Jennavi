@@ -8,7 +8,7 @@
 <script type="text/javascript">
 (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://cal.id/embed-link/embed.js", "init");
 Cal("init", "default", {origin:"https://cal.id"});
-Cal.ns["default"]("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#B8925A"},"dark":{"cal-brand":"#B8925A"}},"hideEventTypeDetails": false,"layout":"month_view"});
+Cal.ns["default"]("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#C9A84C"},"dark":{"cal-brand":"#C9A84C"}},"hideEventTypeDetails": false,"layout":"month_view"});
 </script>
 
 <meta name="google-site-verification" content="5FuNKCVY0tOLD_qChBmZ_56GD-fEDqFDh5wjBNF9-oU">
@@ -35,7 +35,8 @@ gtag('config', 'G-TTV1M66PEZ');
 <link rel="canonical" href="https://jennavi.co/hire-linkedin-ghostwriter.html">
 
 <title>LinkedIn Ghostwriter for Founders | Pipeline & Voice, Hire Jennavi</title>
-<meta name="description" content="Hire Jennifer Omaliko, the LinkedIn ghostwriter for startup founders who builds real inbound pipeline through voice-first positioning, not just content output. 873% documented impression growth, 6,000+ followers built, 106,000+ organic impressions, zero paid ads. Six tiers from $100 audit to $1,000 per month full executive management. US, UK, Australia, Canada, Nigeria and global.">
+<meta name="description" content="Hire Jennifer Omaliko for LinkedIn lead generation and ghostwriting that builds real inbound sales pipeline for startup founders, SaaS CEOs, executives and B2B consultants, not just content output. 873% documented impression growth, zero paid ads. Six tiers from $100 audit to $1,000 per month full executive management. US, UK, Australia, Canada, Nigeria and global.">
+<meta name="keywords" content="LinkedIn lead generation, inbound leads, sales pipeline, LinkedIn ghostwriter, LinkedIn ghostwriting agency, boutique LinkedIn agency, LinkedIn positioning, hire LinkedIn ghostwriter, startup founders, SaaS founders, CEOs, executives, B2B consultants, business consultants">
 <meta name="keywords" content="hire LinkedIn ghostwriter, LinkedIn ghostwriter, LinkedIn ghostwriting agency, LinkedIn ghostwriting agency for founders, ghostwriting agency for founders, ghostwriting agency, affordable LinkedIn ghostwriting agency, LinkedIn ghostwriter for founders, LinkedIn ghostwriting services, LinkedIn ghostwriting packages, LinkedIn ghostwriting pricing, what does LinkedIn ghostwriting include, LinkedIn ghostwriting tiers, LinkedIn ghostwriter for CEOs, LinkedIn ghostwriter for startups, LinkedIn ghostwriter Nigeria, LinkedIn ghostwriter globally, LinkedIn ghostwriter United States, LinkedIn ghostwriter UK, LinkedIn ghostwriter Australia, LinkedIn ghostwriter Canada, done for you LinkedIn content, founder LinkedIn strategy, Jennifer Omaliko, Jennavi, LinkedIn management retainer, LinkedIn content strategy for founders, LinkedIn personal branding founders, premium LinkedIn ghostwriting, LinkedIn authority building for founders, LinkedIn lead generation for founders, invisible on LinkedIn, ghostwriter for founders">
 <meta name="author" content="Jennifer Mmesoma Omaliko">
 <meta name="publisher" content="Jennavi">
@@ -123,7 +124,7 @@ gtag('config', 'G-TTV1M66PEZ');
   --shadow:0 30px 60px -20px rgba(0,0,0,0.6);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;overflow-x:hidden;}
+html{scroll-behavior:smooth;}
 body{
   background:var(--ink);
   color:var(--parchment);
@@ -131,7 +132,6 @@ body{
   font-size:16px;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
 }
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
@@ -292,6 +292,7 @@ section{padding:104px 0;position:relative;}
 .why-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;}
 .why-grid > div{min-width:0;}
 .why-edges{display:grid;gap:2px;background:var(--line-soft);}
+.why-edge-num{font-family:'Fraunces',serif;font-size:44px;font-weight:700;display:block;margin-bottom:8px;line-height:1;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 40%,#FFF3D6 55%,var(--brass-bright) 70%,var(--brass-deep) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0.9;}
 .why-edge{background:var(--ink);padding:28px 30px;position:relative;}
 .why-edge-title{font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin-bottom:10px;color:var(--parchment);}
 .why-edge-body{font-size:14.5px;color:var(--parchment-dim);line-height:1.7;}
@@ -387,10 +388,17 @@ section{padding:104px 0;position:relative;}
 .reviews-badge:hover{border-color:var(--brass);transform:translateY(-2px);}
 
 /* floating whatsapp quick contact */
-.whatsapp-float{position:fixed;bottom:22px;right:20px;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px -6px rgba(37,211,102,0.55);z-index:998;transition:transform 0.2s;}
+.whatsapp-float{position:fixed;bottom:20px;right:18px;width:46px;height:46px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(37,211,102,0.55);z-index:998;transition:transform 0.2s;}
+
+/* post-booking banner, matches original live site exactly */
+@keyframes bookingSlideIn{from{transform:translateY(-30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@keyframes bookingProgressShrink{from{width:100%;}to{width:0%;}}
+@keyframes bookingCheckPop{0%{transform:scale(0);}70%{transform:scale(1.15);}100%{transform:scale(1);}}
+@keyframes bookingBtnGlow{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.4);}50%{box-shadow:0 0 0 6px rgba(201,168,76,0);}}
+#bookingSuccessBanner{display:none;position:fixed;top:0;left:12px;right:12px;z-index:20000;max-width:420px;margin:12px auto 0;background:var(--ink);border:1.5px solid var(--brass);border-radius:10px;padding:20px 18px 0;flex-direction:column;align-items:center;text-align:center;gap:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);overflow:hidden;}
 .whatsapp-float:hover{transform:scale(1.08);}
-.whatsapp-float svg{width:27px;height:27px;fill:#fff;}
-@media(max-width:900px){.whatsapp-float{bottom:18px;right:16px;width:50px;height:50px;}}
+.whatsapp-float svg{width:22px;height:22px;fill:#fff;}
+@media(max-width:900px){.whatsapp-float{bottom:16px;right:14px;width:44px;height:44px;}}
 .reviews-score{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--brass-bright);}
 .reviews-stars{color:var(--brass);font-size:16px;letter-spacing:2px;}
 .reviews-count{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--parchment-faint);}
@@ -411,6 +419,7 @@ section{padding:104px 0;position:relative;}
 footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:44px;padding-bottom:40px;border-bottom:1px solid var(--line);}
 .footer-brand{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--brass-bright);margin-bottom:12px;display:block;}
+.footer-logo-mask{display:block;width:150px;height:26px;background-color:var(--brass-bright);-webkit-mask-image:url(/jennavi-logo.svg);mask-image:url(/jennavi-logo.svg);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:left center;mask-position:left center;}
 .footer-tagline{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--parchment-faint);line-height:1.7;}
 .footer-col-title{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brass);margin-bottom:16px;display:block;opacity:0.8;}
 .footer-links{display:flex;flex-direction:column;gap:9px;}
@@ -470,7 +479,8 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
       <a href="#pricing">Pricing</a>
       <a href="#compare">Compare</a>
       <a href="#process">Process</a>
-      <a href="#reviews">Reviews</a>
+      <a href="https://jennavi.co/insights/">Blog</a>
+      <a href="https://jennavi.co/linkedin-tools.html">Tools</a>
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-cta">
@@ -717,18 +727,22 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
       </div>
       <div class="why-edges stagger">
         <div class="why-edge">
+          <span class="why-edge-num">01</span>
           <h3 class="why-edge-title">Revenue Over Vanity</h3>
           <p class="why-edge-body">Follower counts are decorative. Every post, profile element and DM strategy is built around one outcome, a qualified founder reaching out ready to pay.</p>
         </div>
         <div class="why-edge">
+          <span class="why-edge-num">02</span>
           <h3 class="why-edge-title">Voice-First Methodology</h3>
           <p class="why-edge-body">Jennifer doesn't write templates and fit your name in. Real time learning how you think, how you speak, how you see your industry. Every post sounds like you on your best day.</p>
         </div>
         <div class="why-edge">
+          <span class="why-edge-num">03</span>
           <h3 class="why-edge-title">Founder Credibility</h3>
           <p class="why-edge-body">Jennifer is building Jennavi while building your brand. She understands early-stage anxiety, the hunger for traction, and the frustration of posting to silence.</p>
         </div>
         <div class="why-edge">
+          <span class="why-edge-num">04</span>
           <h3 class="why-edge-title">Global. Remote. Premium.</h3>
           <p class="why-edge-body">Active clients across the US, UK, Australia, Canada, Pakistan, India and Nigeria. All services delivered remotely. All pricing in USD. Every time zone covered.</p>
         </div>
@@ -835,13 +849,16 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   <div class="container" style="text-align:center;">
     <p class="eyebrow">Verified Client Reviews</p>
     <h2 class="section-title reveal" id="reviews-heading">What clients say<br><em>about working with Jennavi</em></h2>
-    <a href="https://share.google/yx0fadTRJftcsbwG5" target="_blank" rel="noopener noreferrer" class="reviews-badge" style="margin:32px auto 0;text-decoration:none;">
+    <a href="https://share.google/yx0fadTRJftcsbwG5" target="_blank" rel="noopener noreferrer" class="reviews-badge" style="margin:32px auto 24px;text-decoration:none;">
       <span class="reviews-score">4.5</span>
       <div style="text-align:left;">
         <div class="reviews-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
         <div class="reviews-count">Average rating from verified Google reviews</div>
       </div>
     </a>
+    <p>
+      <a href="https://g.page/r/CU9ZHpnUfx1eEBM/review" target="_blank" rel="noopener noreferrer" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;color:var(--brass-bright);text-decoration:underline;">Worked with Jennifer? Leave a Google review &#8594;</a>
+    </p>
   </div>
 </section>
 
@@ -1016,6 +1033,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
                 <option>Free Strategy Call</option>
                 <option>Partnership or Collaboration</option>
                 <option>Press or Media</option>
+                <option>Complaint</option>
                 <option>Other</option>
               </select>
             </div>
@@ -1053,7 +1071,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="/" style="display:block;margin-bottom:14px;"><img src="/jennavi-logo.svg" alt="Jennavi" style="height:26px;width:auto;filter:brightness(0) saturate(100%) invert(78%) sepia(29%) saturate(414%) hue-rotate(346deg) brightness(92%) contrast(88%);"></a>
+        <a href="/" style="display:block;margin-bottom:14px;"><span class="footer-logo-mask" role="img" aria-label="Jennavi"></span></a>
         <p class="footer-tagline">"From invisible to inevitable. One founder at a time."</p>
       </div>
       <div>
@@ -1095,11 +1113,22 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<div id="bookingSuccessBanner">
+  <button onclick="closeBookingBanner();" aria-label="Close" style="position:absolute;top:8px;right:10px;background:none;border:none;color:rgba(243,238,227,0.5);font-size:18px;cursor:pointer;padding:0 4px;line-height:1;">&times;</button>
+  <div id="bookingCheckIcon" style="width:38px;height:38px;border-radius:50%;background:var(--brass);display:flex;align-items:center;justify-content:center;">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0B0D12" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+  </div>
+  <span style="font-family:'Fraunces',serif;font-size:14px;color:var(--parchment);line-height:1.5;">Call booked! One more step, say hi so Jennifer knows to expect you.</span>
+  <a href="https://wa.me/2349024680769?text=Hi%20Jennifer!%20I%20just%20booked%20a%20strategy%20call.%20Looking%20forward%20to%20it!" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:var(--brass);color:#0B0D12;padding:10px 20px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;margin-bottom:16px;animation:bookingBtnGlow 2.2s ease-in-out infinite;">Message Jennifer</a>
+  <div id="bookingProgressBar" style="position:absolute;bottom:0;left:0;height:3px;background:var(--brass);width:100%;"></div>
+</div>
+
 <script src="https://checkout.flutterwave.com/v3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
 <script>
 /* ============ CONFIG ============ */
-var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbzOMMuzLlE76ht9EnbKIu14IXZZyKsvn_LyRKRbihbXmKqhgAY95xJEMVziZN53x2wm/exec";
+var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbxSfV_8m-E1pkwmoPtWxuCOf5vw5cj-y4XjeidPq2-EWEt-mPNvD6Dm-dwlkJeSGa6e_g/exec";
 /* NOTE FOR JENNIFER: this is the same Formspree endpoint your original live site uses (mqejgwab),
    so every submission below also lands in your email inbox instantly, in addition to the Google Sheet. */
 var FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejgwab";
@@ -1126,6 +1155,8 @@ function buildHiddenNotes(extra){
   return JSON.stringify(data);
 }
 function submitLead(payload, onSuccess, onError){
+  /* NOTE: routes to the Google Sheet only. Formspree is reserved for payment
+     success/failure alerts (see initFlwPayment) to stay within the 50/month limit. */
   fetch(LEAD_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
@@ -1135,13 +1166,6 @@ function submitLead(payload, onSuccess, onError){
   }).catch(function(err){
     if (onError) onError(err); else onSuccess();
   });
-  if (FORMSPREE_ENDPOINT) {
-    fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(function(){ /* sheet submission above is the source of truth; ignore Formspree errors */ });
-  }
 }
 
 /* ============ INTL-TEL-INPUT: FULL COUNTRY LIST + IP AUTO-DETECT, DEFAULTS TO US ============ */
@@ -1210,6 +1234,62 @@ if (newsletterForm) {
 
 /* ============ FLUTTERWAVE PAYMENTS ============ */
 var FLW_TIER_LABELS = {taster:'Taster',starter:'Starter',growth:'Growth',authority:'Authority',vip:'VIP',executive:'Executive'};
+
+/* ============ EMAILJS: CLIENT CONFIRMATION EMAILS ============ */
+var EJS_PUBLIC_KEY_HIRE='XIy6yIQorZRwYz0xf',EJS_SERVICE_ID_HIRE='service_10a5m5e',EJS_TEMPLATE_ID_HIRE='template_g32mptd';
+var TIER_PDF_LINK = 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk';
+function buildTierCricketsEmailHtml(name, pdfLink, tierLabel) {
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:20px;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0B0D12;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.sub{font-size:13px;color:rgba(243,238,227,0.5);text-align:center;margin:0 0 28px;line-height:1.7;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for joining the ' + tierLabel + ' tier. Your payment went through, and since CRICKETS is included free for ' + tierLabel + ' clients, your copy is ready right now.</p><div class="ct"><a href="' + pdfLink + '" class="cb">Download Your CRICKETS Copy &#8594;</a></div><p class="sub">Jennifer will personally reach out within 24 hours to get started.</p><hr class="hr"><p class="dg">In the meantime, feel free to read through CRICKETS, the exact positioning system behind Jennifer\'s own 873% LinkedIn growth, so you already know the language and framework she\'ll be using with you.</p><hr class="hr"><p class="rp" style="font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;margin-bottom:24px;">Questions in the meantime? Just reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+}
+function sendTierCricketsEmail(name, email, tierLabel, retryCount) {
+  retryCount = retryCount || 0;
+  if (!email) return;
+  if (typeof emailjs === 'undefined') {
+    if (retryCount < 5) {
+      setTimeout(function(){ sendTierCricketsEmail(name, email, tierLabel, retryCount+1); }, 500);
+    } else {
+      console.error('EmailJS failed to load after 5 attempts. Tier CRICKETS email was not sent for:', email);
+    }
+    return;
+  }
+  try { emailjs.init({publicKey: EJS_PUBLIC_KEY_HIRE}); } catch(e) {}
+  var params = {
+    to_name: name || 'Founder',
+    to_email: email,
+    pdf_link: TIER_PDF_LINK,
+    subject: 'Your CRICKETS Playbook is Here, ' + (name || 'Founder') + '!',
+    html_content: buildTierCricketsEmailHtml(name, TIER_PDF_LINK, tierLabel)
+  };
+  emailjs.send(EJS_SERVICE_ID_HIRE, EJS_TEMPLATE_ID_HIRE, params, {publicKey: EJS_PUBLIC_KEY_HIRE})
+    .then(function(r){ console.log('Tier CRICKETS email sent:', r.status); })
+    .catch(function(e){ console.error('Tier CRICKETS email error:', e); });
+}
+function buildGeneralConfirmationEmailHtml(name, tierLabel) {
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:20px;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.rp{font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;margin-bottom:0;}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for joining the ' + tierLabel + ' tier. Your payment went through successfully, and Jennifer will personally reach out within 24 hours to get started.</p><hr class="hr"><p class="dg">In the meantime, feel free to message her directly if you have any questions before your first session.</p><hr class="hr"><p class="rp">Reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><br><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+}
+function sendGeneralConfirmationEmail(name, email, tierLabel, retryCount) {
+  retryCount = retryCount || 0;
+  if (!email) return;
+  if (typeof emailjs === 'undefined') {
+    if (retryCount < 5) {
+      setTimeout(function(){ sendGeneralConfirmationEmail(name, email, tierLabel, retryCount+1); }, 500);
+    } else {
+      console.error('EmailJS failed to load after 5 attempts. General confirmation email was not sent for:', email);
+    }
+    return;
+  }
+  try { emailjs.init({publicKey: EJS_PUBLIC_KEY_HIRE}); } catch(e) {}
+  var params = {
+    to_name: name || 'Founder',
+    to_email: email,
+    pdf_link: '',
+    subject: 'Welcome to Jennavi, ' + (name || 'Founder') + '! Your ' + tierLabel + ' Tier is Confirmed',
+    html_content: buildGeneralConfirmationEmailHtml(name, tierLabel)
+  };
+  emailjs.send(EJS_SERVICE_ID_HIRE, EJS_TEMPLATE_ID_HIRE, params, {publicKey: EJS_PUBLIC_KEY_HIRE})
+    .then(function(r){ console.log('General confirmation email sent:', r.status); })
+    .catch(function(e){ console.error('General confirmation email error:', e); });
+}
 var flwCompleted = {};
 
 function showFlwForm(tier, amount, description){
@@ -1268,6 +1348,15 @@ function initFlwPayment(tier, amount, description){
       if (wasSuccessful) {
         flwCompleted[tier] = true;
         if (typeof gtag === 'function') gtag('event', 'purchase', { tier: tier, value: amount, currency: 'USD' });
+        try {
+          if (tier === 'executive') {
+            sendTierCricketsEmail(name, email, FLW_TIER_LABELS[tier]);
+          } else {
+            sendGeneralConfirmationEmail(name, email, FLW_TIER_LABELS[tier]);
+          }
+        } catch (emailDispatchErr) {
+          console.error('Confirmation email dispatch error:', emailDispatchErr);
+        }
         waMsg = "Hi Jennifer, I just paid for the " + FLW_TIER_LABELS[tier] + " tier ($" + amount + "/month). I'm " + name + ", my email is " + email + ". Ready to get started.";
         waHref = "https://wa.me/2349024680769?text=" + encodeURIComponent(waMsg);
         if (block) {
@@ -1287,20 +1376,29 @@ function initFlwPayment(tier, amount, description){
         }
       }
 
+      var paymentPayload = {
+        source: wasSuccessful ? 'payment_notification' : 'payment_failed_notification',
+        subject: (wasSuccessful ? 'PAID: ' : 'Payment Attempt Failed: ') + description,
+        tier: tier,
+        amount: '$' + amount + ' USD',
+        client_name: name,
+        client_email: email,
+        includes_crickets: tier === 'executive' ? 'yes' : 'no',
+        transaction_ref: (data && (data.transaction_id || data.tx_ref)) || 'N/A',
+        status: (data && data.status) || 'unknown'
+      };
+      /* Logged to the Sheet so the Apps Script can auto-email the client on payment_notification.
+         See the Apps Script snippet provided separately for the email-sending logic. */
+      fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(paymentPayload)
+      }).catch(function(){});
       if (FORMSPREE_ENDPOINT) {
         fetch(FORMSPREE_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            source: wasSuccessful ? 'payment_notification' : 'payment_failed_notification',
-            subject: (wasSuccessful ? 'PAID: ' : 'Payment Attempt Failed: ') + description,
-            tier: tier,
-            amount: '$' + amount + ' USD',
-            client_name: name,
-            client_email: email,
-            transaction_ref: (data && (data.transaction_id || data.tx_ref)) || 'N/A',
-            status: (data && data.status) || 'unknown'
-          })
+          body: JSON.stringify(paymentPayload)
         }).catch(function(){});
       }
     },
@@ -1466,6 +1564,43 @@ document.querySelectorAll('.faq-q').forEach(function(q){
   }, { threshold: 0.15 });
   els.forEach(function(el){ io.observe(el); });
 })();
+
+/* ============ POST-BOOKING BANNER, exact original behavior ============ */
+var bookingDismissTimer = null;
+function closeBookingBanner(){
+  var banner = document.getElementById('bookingSuccessBanner');
+  if (banner) banner.style.display = 'none';
+  if (bookingDismissTimer) { clearTimeout(bookingDismissTimer); bookingDismissTimer = null; }
+}
+function handleBookingSuccess(){
+  var banner = document.getElementById('bookingSuccessBanner');
+  if (!banner) return;
+  var navEl = document.querySelector('.nav');
+  banner.style.top = navEl ? navEl.offsetHeight + 'px' : '0px';
+  banner.style.display = 'flex';
+  banner.style.animation = 'none';
+  void banner.offsetWidth;
+  banner.style.animation = 'bookingSlideIn 0.4s ease-out';
+  var bar = document.getElementById('bookingProgressBar');
+  if (bar) {
+    bar.style.animation = 'none';
+    void bar.offsetWidth;
+    bar.style.animation = 'bookingProgressShrink 30s linear forwards';
+  }
+  var checkIcon = document.getElementById('bookingCheckIcon');
+  if (checkIcon) {
+    checkIcon.style.animation = 'none';
+    void checkIcon.offsetWidth;
+    checkIcon.style.animation = 'bookingCheckPop 0.5s ease-out 0.15s both';
+  }
+  if (typeof gtag === 'function') gtag('event', 'booking_success_banner_shown', {});
+  if (bookingDismissTimer) clearTimeout(bookingDismissTimer);
+  bookingDismissTimer = setTimeout(function(){ closeBookingBanner(); }, 30000);
+}
+if (typeof Cal === 'function') {
+  Cal.ns['default']('on', { action: 'bookingSuccessful', callback: handleBookingSuccess });
+  Cal.ns['default']('on', { action: 'bookingSuccessfulV2', callback: handleBookingSuccess });
+}
 
 /* ============ MOBILE NAV ============ */
 var burger = document.getElementById('navBurger');
