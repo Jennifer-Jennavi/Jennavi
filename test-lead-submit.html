@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Lead Submission</title>
+<style>
+  body { font-family: sans-serif; padding: 24px; background: #0a0a0a; color: #FAF3E0; }
+  button { background: #C9A84C; color: #0a0a0a; border: none; padding: 16px 24px; font-size: 16px; border-radius: 6px; width: 100%; margin-top: 16px; }
+  #result { margin-top: 20px; padding: 16px; border-radius: 6px; background: #1A1714; word-break: break-word; }
+</style>
+</head>
+<body>
+  <h2>Test Lead Submission</h2>
+  <p>Tap the button below to send one test entry to the Jennavi Lead Capture Log sheet.</p>
+  <button onclick="sendTest()">Send Test Lead</button>
+  <div id="result">Result will show here...</div>
+
+<script>
+async function sendTest() {
+  document.getElementById('result').innerText = 'Sending...';
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzOMMuzLlE76ht9EnbKIu14IXZZyKsvn_LyRKRbihbXmKqhgAY95xJEMVziZN53x2wm/exec', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: 'Test Lead',
+        email: 'test@example.com',
+        whatsapp: '+2349000000000',
+        linkedin: 'linkedin.com/in/testlead',
+        source: 'Manual Test Page',
+        notes: 'This is a test submission'
+      })
+    });
+    const text = await response.text();
+    document.getElementById('result').innerText = 'Response: ' + text;
+  } catch (err) {
+    document.getElementById('result').innerText = 'Error: ' + err.message;
+  }
+}
+</script>
+</body>
+</html>
