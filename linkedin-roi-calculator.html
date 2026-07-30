@@ -395,7 +395,10 @@ section{padding:104px 0;position:relative;}
 .testimonial-mark{font-size:52px;color:var(--brass);display:block;margin-bottom:6px;line-height:1;font-style:italic;}
 .testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:22px;overflow-wrap:break-word;word-wrap:break-word;}
 .testimonial-divider{width:40px;height:1px;background:var(--brass);margin:0 auto 16px;}
+.testimonial-stars{text-align:center;color:var(--brass);font-size:13px;letter-spacing:2px;margin-top:10px;}
 .testimonial-source{font-family:'DM Mono',monospace;font-size:12px;color:var(--parchment-faint);letter-spacing:0.04em;}
+.testimonial-source-row{display:flex;align-items:center;justify-content:center;gap:12px;}
+.testimonial-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
 .testimonial-dots{display:flex;gap:8px;justify-content:center;margin-top:30px;}
 .testimonial-dot{width:7px;height:7px;border-radius:50%;background:var(--line);}
 .testimonial-dot.active{background:var(--brass);}
@@ -574,19 +577,22 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">The calculator told me LinkedIn had already cost me $144,000 in potential revenue. I booked a call with Jennifer the same day. That number made the decision very easy.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">&#127482;&#127480; Felicia H. &middot; Executive Director, Non-Profit &middot; United States</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">FH</span><cite class="testimonial-source">&#127482;&#127480; Felicia H. &middot; Executive Director, Non-Profit &middot; United States</cite></div>
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       </div>
       <div class="testimonial-slide">
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">I had been posting for eleven months with no inbound. The ROI calculator showed me the gap in real numbers. Seeing it as a dollar figure rather than a feeling changed how seriously I took the problem.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">&#127468;&#127469; Kwame B. &middot; Founder, Data Consulting &middot; Ghana</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">KB</span><cite class="testimonial-source">&#127468;&#127469; Kwame B. &middot; Founder, Data Consulting &middot; Ghana</cite></div>
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       </div>
       <div class="testimonial-slide">
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">Every founder I know in Sydney talks about being active on LinkedIn. None of us were measuring what it was actually costing us to do it badly. This tool changes that conversation.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">&#127462;&#127482; Sarah M. &middot; Co-Founder, Legal Tech &middot; Australia</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">SM</span><cite class="testimonial-source">&#127462;&#127482; Sarah M. &middot; Co-Founder, Legal Tech &middot; Australia</cite></div>
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       </div>
     </div>
     <div class="testimonial-dots" id="testimonialDots"></div>
@@ -660,12 +666,14 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
       </div>
 
       <div class="email-result-box" id="emailResultBox">
-        <p>Want this result saved? Get it emailed to you, no spam, just your number.</p>
-        <form class="email-result-form" id="emailResultForm">
-          <input type="text" id="er-name" placeholder="Your name" required>
-          <input type="email" id="er-email" placeholder="Your email" required>
-          <button type="submit">Email It &#8594;</button>
-        </form>
+        <div id="emailResultIntro">
+          <p>Want Jennifer's take on what to do next? Get this result sent to your inbox, along with the recommended next step for your numbers. No spam, just your number.</p>
+          <form class="email-result-form" id="emailResultForm">
+            <input type="text" id="er-name" placeholder="Your name" required>
+            <input type="email" id="er-email" placeholder="Your email" required>
+            <button type="submit">Email It &#8594;</button>
+          </form>
+        </div>
         <p class="email-result-success" id="emailResultSuccess">Sent. Check your inbox shortly.</p>
       </div>
 
@@ -1036,7 +1044,7 @@ if (emailResultForm) {
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload)
     }).then(function(){
-      emailResultForm.style.display = 'none';
+      var erIntro = document.getElementById('emailResultIntro'); if (erIntro) erIntro.style.display = 'none';
       var s = document.getElementById('emailResultSuccess');
       if (s) s.style.display = 'block';
     }).catch(function(){

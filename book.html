@@ -269,11 +269,11 @@ section{padding:104px 0;position:relative;}
 @media(prefers-reduced-motion:reduce){.ledger-track{animation:none;}}
 
 /* book carousel: single slide, transform-based, matches original live site, safe on mobile */
-.book-carousel-wrap{position:relative;}
+.book-carousel-wrap{position:relative;max-width:400px;margin:0 auto;}
 .book-carousel-viewport{overflow:hidden;border-radius:6px;background:var(--ink-2);}
-.book-carousel-track{display:flex;transition:transform 0.4s cubic-bezier(.16,1,.3,1);}
+.book-carousel-track{display:flex;align-items:flex-start;transition:transform 0.4s cubic-bezier(.16,1,.3,1);}
 .book-carousel-slide{flex:0 0 100%;min-width:0;background:var(--ink-2);}
-.book-carousel-slide img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;background:var(--ink-2);}
+.book-carousel-slide img{width:100%;display:block;height:auto;background:var(--ink-2);}
 .book-carousel-nav{display:flex;justify-content:space-between;margin-top:14px;}
 .book-carousel-dots{display:flex;gap:7px;justify-content:center;}
 .book-carousel-dot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:all 0.3s;}
@@ -394,6 +394,8 @@ section{padding:104px 0;position:relative;}
 .testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:22px;overflow-wrap:break-word;word-wrap:break-word;}
 .testimonial-divider{width:40px;height:1px;background:var(--brass);margin:0 auto 16px;}
 .testimonial-source{font-family:'DM Mono',monospace;font-size:12px;color:var(--parchment-faint);letter-spacing:0.04em;}
+.testimonial-source-row{display:flex;align-items:center;justify-content:center;gap:12px;}
+.testimonial-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
 .testimonial-dots{display:flex;gap:8px;justify-content:center;margin-top:30px;}
 .testimonial-dot{width:7px;height:7px;border-radius:50%;background:var(--line);}
 .testimonial-dot.active{background:var(--brass);}
@@ -547,8 +549,8 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
             <div class="book-carousel-track" id="bookTrack">
               <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-01-cover.png" alt="CRICKETS book cover by Jennifer Omaliko, LinkedIn positioning playbook for startup founders, $9.99 instant PDF" loading="eager"></div>
               <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-02-whatsinside.jpg" alt="What's inside CRICKETS, the complete LinkedIn positioning system by Jennifer Omaliko of Jennavi" loading="lazy"></div>
-              <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-03-instantdownload.jpg" alt="CRICKETS instant digital download, available immediately after purchase" loading="lazy" style="object-fit:contain;"></div>
-              <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-04-readanywhere.jpg" alt="CRICKETS displayed on laptop and phone, read anywhere digital PDF" loading="lazy" style="object-fit:contain;"></div>
+              <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-03-instantdownload.jpg" alt="CRICKETS instant digital download, available immediately after purchase" loading="lazy"></div>
+              <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-04-readanywhere.jpg" alt="CRICKETS displayed on laptop and phone, read anywhere digital PDF" loading="lazy"></div>
               <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-05-lifestyle.png" alt="Founder reading CRICKETS by Jennifer Omaliko, the LinkedIn positioning playbook for founders" loading="lazy"></div>
             </div>
           </div>
@@ -664,25 +666,25 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">I read CRICKETS in one sitting. The DM script alone paid for the book 10 times over. My first inbound inquiry came the week I implemented the positioning shift. I had been trying for 9 months. It took 7 days after CRICKETS.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">&#127470;&#127475; Arjun S. &middot; Founder, SaaS Startup &middot; India</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">AS</span><cite class="testimonial-source">&#127470;&#127475; Arjun S. &middot; Founder, SaaS Startup &middot; India</cite></div>
       </div>
       <div class="testimonial-slide">
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">The chapter on the About section rewrote everything I thought I knew about LinkedIn. I had 2,400 followers and zero clients. Three weeks after implementing CRICKETS, two discovery calls booked from people who found me organically.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">&#127477;&#127472; Zainab K. &middot; Founder, E-commerce Agency &middot; Pakistan</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">ZK</span><cite class="testimonial-source">&#127477;&#127472; Zainab K. &middot; Founder, E-commerce Agency &middot; Pakistan</cite></div>
       </div>
       <div class="testimonial-slide">
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">I have bought four LinkedIn courses. CRICKETS is the only one that told me the truth. The rest taught me to post more. This one taught me to post differently. My impressions doubled and three founders reached out in 30 days.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">&#127482;&#127480; Marcus T. &middot; Founder, Tech Consulting &middot; United States</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">MT</span><cite class="testimonial-source">&#127482;&#127480; Marcus T. &middot; Founder, Tech Consulting &middot; United States</cite></div>
       </div>
       <div class="testimonial-slide">
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">As a Lagos-based founder targeting UK clients, I always felt my LinkedIn was not working for my market. CRICKETS showed me exactly why. The positioning shift is not theory. It is a surgical fix. I applied it. It worked.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">&#127475;&#127468; Chidi O. &middot; CEO, Digital Agency &middot; Nigeria</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">CO</span><cite class="testimonial-source">&#127475;&#127468; Chidi O. &middot; CEO, Digital Agency &middot; Nigeria</cite></div>
       </div>
     </div>
     <div class="testimonial-dots" id="testimonialDots"></div>

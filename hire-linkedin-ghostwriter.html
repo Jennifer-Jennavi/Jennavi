@@ -370,6 +370,8 @@ section{padding:104px 0;position:relative;}
 .testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:22px;overflow-wrap:break-word;word-wrap:break-word;}
 .testimonial-divider{width:40px;height:1px;background:var(--brass);margin:0 auto 16px;}
 .testimonial-source{font-family:'DM Mono',monospace;font-size:12px;color:var(--parchment-faint);letter-spacing:0.04em;}
+.testimonial-source-row{display:flex;align-items:center;justify-content:center;gap:12px;}
+.testimonial-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
 .testimonial-dots{display:flex;gap:8px;justify-content:center;margin-top:30px;}
 .testimonial-dot{width:7px;height:7px;border-radius:50%;background:var(--line);}
 .testimonial-dot.active{background:var(--brass);}
@@ -437,8 +439,10 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .breadcrumb li::after{content:"";}
 
 /* trust bar */
-.trust-bar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink-2);padding:16px 0;overflow-x:auto;}
-.trust-bar-inner{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;padding:0 24px;}
+.trust-bar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink-2);padding:16px 0;overflow:hidden;}
+.trust-bar-inner{display:flex;white-space:nowrap;animation:trustScroll 30s linear infinite;width:max-content;gap:28px;}
+@keyframes trustScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
 .trust-item{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--parchment-dim);white-space:nowrap;}
 
 /* comparison table */
@@ -522,6 +526,12 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 
 <div class="trust-bar">
   <div class="trust-bar-inner">
+    <span class="trust-item">Zero Paid Ads, Ever</span>
+    <span class="trust-item">First Month Paid Upfront</span>
+    <span class="trust-item">Agreement Before Work Begins</span>
+    <span class="trust-item">All Fees in USD</span>
+    <span class="trust-item">Global. Remote. Delivered.</span>
+    <span class="trust-item">Jennifer Writes Every Word</span>
     <span class="trust-item">Zero Paid Ads, Ever</span>
     <span class="trust-item">First Month Paid Upfront</span>
     <span class="trust-item">Agreement Before Work Begins</span>
@@ -820,36 +830,35 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">Jennifer did more research on me before our first conversation than anyone who had ever pitched me. The proposal felt built in a room where I was the only person in it.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">Edwin N. &middot; Founder, Healthcare Sector &middot; Australia</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">EN</span><cite class="testimonial-source">Edwin N. &middot; Founder, Healthcare Sector &middot; Australia</cite></div>
       </div>
       <div class="testimonial-slide">
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">Within three months she delivered 80% follower growth and completely transformed how our donors and partners perceived us online.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">Felicia H. &middot; Executive Director, Non-Profit &middot; United States</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">FH</span><cite class="testimonial-source">Felicia H. &middot; Executive Director, Non-Profit &middot; United States</cite></div>
       </div>
       <div class="testimonial-slide">
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">She built a narrative that positioned me as the go-to expert. My inbound leads tripled in 90 days.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">Mirian N. &middot; Founder, Data Governance &middot; Nigeria</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">MN</span><cite class="testimonial-source">Mirian N. &middot; Founder, Data Governance &middot; Nigeria</cite></div>
       </div>
       <div class="testimonial-slide">
         <span class="testimonial-mark">&#8220;</span>
         <p class="testimonial-text">Her content strategy helped me attract enterprise clients who previously would not return my calls. Worth every penny.</p>
         <div class="testimonial-divider"></div>
-        <cite class="testimonial-source">Emeka A. &middot; Founder, AI Technology &middot; United Kingdom</cite>
+        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">EA</span><cite class="testimonial-source">Emeka A. &middot; Founder, AI Technology &middot; United Kingdom</cite></div>
       </div>
     </div>
     <div class="testimonial-dots" id="testimonialDots"></div>
   </div>
 </section>
 
-<section id="reviews" aria-labelledby="reviews-heading">
+<section id="reviews" aria-labelledby="reviews-heading" style="padding-top:20px;">
   <div class="container" style="text-align:center;">
-    <p class="eyebrow">Verified Client Reviews</p>
-    <h2 class="section-title reveal" id="reviews-heading">What clients say<br><em>about working with Jennavi</em></h2>
-    <a href="https://share.google/yx0fadTRJftcsbwG5" target="_blank" rel="noopener noreferrer" class="reviews-badge" style="margin:32px auto 24px;text-decoration:none;">
+    <h2 class="section-title reveal" id="reviews-heading" style="font-size:clamp(22px,3vw,32px);margin-top:20px;">Verified by <em>Google</em></h2>
+    <a href="https://share.google/yx0fadTRJftcsbwG5" target="_blank" rel="noopener noreferrer" class="reviews-badge" style="margin:24px auto 24px;text-decoration:none;">
       <span class="reviews-score">4.5</span>
       <div style="text-align:left;">
         <div class="reviews-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
