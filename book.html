@@ -273,7 +273,7 @@ section{padding:104px 0;position:relative;}
 .book-carousel-viewport{overflow:hidden;border-radius:6px;background:var(--ink-2);}
 .book-carousel-track{display:flex;transition:transform 0.4s cubic-bezier(.16,1,.3,1);}
 .book-carousel-slide{flex:0 0 100%;min-width:0;background:var(--ink-2);}
-.book-carousel-slide img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;background:var(--ink-2);}
+.book-carousel-slide img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;background:var(--ink-2);}
 .book-carousel-nav{display:flex;justify-content:space-between;margin-top:14px;}
 .book-carousel-dots{display:flex;gap:7px;justify-content:center;}
 .book-carousel-dot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:all 0.3s;}
@@ -489,8 +489,6 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .flw-mini-form{display:none;flex-direction:column;gap:10px;margin-top:18px;}
 .flw-mini-form.active{display:flex;}
 .flw-mini-form input{background:var(--ink);border:1px solid var(--line);border-radius:3px;padding:12px 13px;color:var(--parchment);font-size:14px;}
-.flw-mini-form .flw-pay-btn{width:100%;background:var(--brass);color:#14100A;border:none;padding:13px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;cursor:pointer;}
-.flw-mini-form .flw-cancel{width:100%;background:transparent;border:1px solid var(--line);color:var(--parchment-dim);padding:11px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;}
 
 .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line-soft);}
 .result-item{background:var(--ink);padding:24px 16px;text-align:center;}
@@ -549,8 +547,8 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
             <div class="book-carousel-track" id="bookTrack">
               <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-01-cover.png" alt="CRICKETS book cover by Jennifer Omaliko, LinkedIn positioning playbook for startup founders, $9.99 instant PDF" loading="eager"></div>
               <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-02-whatsinside.jpg" alt="What's inside CRICKETS, the complete LinkedIn positioning system by Jennifer Omaliko of Jennavi" loading="lazy"></div>
-              <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-03-instantdownload.jpg" alt="CRICKETS instant digital download, available immediately after purchase" loading="lazy"></div>
-              <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-04-readanywhere.jpg" alt="CRICKETS displayed on laptop and phone, read anywhere digital PDF" loading="lazy"></div>
+              <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-03-instantdownload.jpg" alt="CRICKETS instant digital download, available immediately after purchase" loading="lazy" style="object-fit:contain;"></div>
+              <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-04-readanywhere.jpg" alt="CRICKETS displayed on laptop and phone, read anywhere digital PDF" loading="lazy" style="object-fit:contain;"></div>
               <div class="book-carousel-slide"><img src="/jennavi-crickets-carousel-05-lifestyle.png" alt="Founder reading CRICKETS by Jennifer Omaliko, the LinkedIn positioning playbook for founders" loading="lazy"></div>
             </div>
           </div>
@@ -607,12 +605,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
             <p style="font-size:12px;color:var(--brass-bright);opacity:0.9;margin-top:14px;max-width:480px;font-style:italic;">CRICKETS is included free for every <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" style="color:var(--brass-bright);text-decoration:underline;">Executive tier</a> client.</p>
             <button onclick="buyCrickets()" class="book-btn" style="width:100%;border:none;cursor:pointer;" aria-label="Buy CRICKETS for $9.99, instant digital download">GET CRICKETS NOW &middot; $9.99 &#8594;</button>
           </div>
-          <div class="flw-mini-form" id="flw-block-crickets">
-            <input type="text" id="flw-name-crickets" placeholder="Your full name" autocomplete="name">
-            <input type="email" id="flw-email-crickets" placeholder="Your email address" autocomplete="email">
-            <button class="flw-pay-btn" onclick="initFlwPayment('crickets',9.99,'CRICKETS LinkedIn Positioning Playbook')">Proceed to Payment &middot; $9.99</button>
-            <button class="flw-cancel" onclick="cancelCrickets()">Cancel</button>
-          </div>
+          <div class="flw-mini-form" id="flw-block-crickets"></div>
           <div class="book-guarantee">
             <svg viewBox="0 0 24 24" fill="#C9A84C" width="22" height="22" aria-hidden="true" style="flex-shrink:0;"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
             <p class="book-guarantee-text"><strong>Instant access guaranteed.</strong> You receive the PDF immediately after purchase, delivered straight to your email. No waiting. No shipping.</p>
@@ -957,7 +950,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
 <script>
 /* ============ CONFIG ============ */
-var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbxSfV_8m-E1pkwmoPtWxuCOf5vw5cj-y4XjeidPq2-EWEt-mPNvD6Dm-dwlkJeSGa6e_g/exec";
+var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwHgYSlK5acg63gE7u0zXjJFmxBZ53wLKC-DlwtLDX6zrHIyef1iTgllySypU_ge0TD/exec";
 /* NOTE FOR JENNIFER: this is the same Formspree endpoint your original live site uses (mqejgwab),
    so every submission below also lands in your email inbox instantly, in addition to the Google Sheet. */
 var FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejgwab";
@@ -971,7 +964,7 @@ function getQueryParam(name){
 function getDeviceType(){
   return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
 }
-function buildHiddenNotes(extra){
+function buildHiddenNotes(){
   var data = {
     utm_source: getQueryParam('utm_source'),
     utm_medium: getQueryParam('utm_medium'),
@@ -980,7 +973,6 @@ function buildHiddenNotes(extra){
     landing_page: window.location.pathname,
     device: getDeviceType()
   };
-  if (extra) { for (var k in extra) { data[k] = extra[k]; } }
   return JSON.stringify(data);
 }
 function submitLead(payload, onSuccess, onError){
@@ -1015,7 +1007,7 @@ function submitLead(payload, onSuccess, onError){
   if (phoneEl && window.intlTelInput) window.intlTelInput(phoneEl, itiConfig);
 })();
 
-/* ============ CONTACT FORM (native FormData, matches original book.html, already tested) ============ */
+/* ============ CONTACT FORM (Sheet only, Formspree reserved for payments) ============ */
 var contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
@@ -1025,29 +1017,27 @@ if (contactForm) {
     if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
     var sheetPayload = {};
     data.forEach(function(value, key){ sheetPayload[key] = value; });
+    sheetPayload.whatsapp = sheetPayload.phone || '';
+    delete sheetPayload.phone;
+    sheetPayload.linkedin = sheetPayload.linkedin || '';
     sheetPayload.source = 'book_page_contact_form';
+    sheetPayload.notes = buildHiddenNotes();
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'contact', page: 'book' });
     fetch(LEAD_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(sheetPayload)
-    }).catch(function(){});
-    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'contact', page: 'book' });
-    fetch(contactForm.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-      .then(function(r) {
-        if (r.ok) {
-          contactForm.style.display = 'none';
-          var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = 'none';
-          var s = document.getElementById('contactSuccess');
-          if (s) {
-            s.style.display = 'block';
-            var navElCF = document.querySelector('.nav');
-            var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
-            var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
-            window.scrollTo({top: cfOffset, behavior: 'smooth'});
-          }
-        } else {
-          if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message &#8594;'; }
-          alert('Something went wrong. Please try WhatsApp instead.');
+    })
+      .then(function() {
+        contactForm.style.display = 'none';
+        var cfIntro = document.getElementById('contactFormIntro'); if (cfIntro) cfIntro.style.display = 'none';
+        var s = document.getElementById('contactSuccess');
+        if (s) {
+          s.style.display = 'block';
+          var navElCF = document.querySelector('.nav');
+          var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
+          var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
+          window.scrollTo({top: cfOffset, behavior: 'smooth'});
         }
       })
       .catch(function(){
@@ -1130,13 +1120,18 @@ function buyCrickets(){
 function showFlwForm(tier, amount, description){
   var block = document.getElementById('flw-block-' + tier);
   if (!block) return;
+  if (typeof window.pauseAllCarousels === 'function') window.pauseAllCarousels(180000);
+  block.classList.add('active');
+  var cancelAction = tier === 'crickets'
+    ? 'cancelCrickets()'
+    : "hideFlwForm('" + tier + "'," + amount + ",'" + description.replace(/'/g,"\\'") + "')";
   block.innerHTML =
     '<div class="flw-capture">' +
       '<input type="text" id="flw-name-' + tier + '" placeholder="Your full name" autocomplete="name">' +
       '<input type="email" id="flw-email-' + tier + '" placeholder="Your email address" autocomplete="email">' +
       '<div class="flw-capture-actions">' +
         '<button type="button" class="flw-proceed" onclick="initFlwPayment(\'' + tier + '\',' + amount + ',\'' + description.replace(/'/g,"\\'") + '\')">Proceed to Payment</button>' +
-        '<button type="button" class="flw-cancel" onclick="hideFlwForm(\'' + tier + '\',' + amount + ',\'' + description.replace(/'/g,"\\'") + '\')">Cancel</button>' +
+        '<button type="button" class="flw-cancel" onclick="' + cancelAction + '">Cancel</button>' +
       '</div>' +
     '</div>';
 }
@@ -1144,6 +1139,7 @@ function showFlwForm(tier, amount, description){
 function hideFlwForm(tier, amount, description){
   var block = document.getElementById('flw-block-' + tier);
   if (!block) return;
+  block.classList.remove('active');
   var label = (tier === 'taster' || tier === 'crickets') ? '$' + amount : '$' + amount + '/mo';
   block.innerHTML = '<button class="pricing-pay" onclick="showFlwForm(\'' + tier + '\',' + amount + ',\'' + description.replace(/'/g,"\\'") + '\')">Pay Now &middot; ' + label + '</button>';
 }
@@ -1215,15 +1211,14 @@ function initFlwPayment(tier, amount, description){
       }
 
       var paymentPayload = {
+        name: name,
+        email: email,
+        whatsapp: '',
+        linkedin: '',
         source: wasSuccessful ? 'payment_notification' : 'payment_failed_notification',
         subject: (wasSuccessful ? 'PAID: ' : 'Payment Attempt Failed: ') + description,
-        tier: tier,
-        amount: '$' + amount + ' USD',
-        client_name: name,
-        client_email: email,
-        includes_crickets: tier === 'executive' ? 'yes' : 'no',
-        transaction_ref: (data && (data.transaction_id || data.tx_ref)) || 'N/A',
-        status: (data && data.status) || 'unknown'
+        message: (wasSuccessful ? 'Payment successful for ' : 'Payment attempt failed for ') + description + ', $' + amount + ' USD.' + (tier === 'crickets' ? ' CRICKETS PDF sent by email.' : '') + ' Transaction ref: ' + ((data && (data.transaction_id || data.tx_ref)) || 'N/A') + '. Status: ' + ((data && data.status) || 'unknown') + '.',
+        notes: buildHiddenNotes()
       };
       /* Logged to the Sheet so the Apps Script can auto-email the client on payment_notification.
          See the Apps Script snippet provided separately for the email-sending logic. */
@@ -1251,6 +1246,9 @@ function initFlwPayment(tier, amount, description){
 /* ============ GENERIC HORIZONTAL CAROUSEL ============ */
 (function(){
   var carousels = {};
+  window.pauseAllCarousels = function(ms){
+    for (var k in carousels) { carousels[k].pausedUntil = Date.now() + ms; }
+  };
   function initCarousel(id){
     var track = document.getElementById(id);
     if (!track) return;
