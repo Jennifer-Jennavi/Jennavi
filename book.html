@@ -213,6 +213,8 @@ section{padding:104px 0;position:relative;}
 .hero-grid > div{min-width:0;}
 .hero-kicker{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--parchment-faint);margin-bottom:22px;font-weight:400;}
 .hero-kicker b{color:var(--brass);font-weight:500;}
+.hero-kicker-accent{position:relative;padding-left:16px;}
+.hero-kicker-accent::before{content:'';position:absolute;left:0;top:1px;bottom:1px;width:2.5px;border-radius:2px;background:linear-gradient(180deg,var(--brass-deep) 0%,var(--brass-bright) 35%,#FFF3D6 50%,var(--brass-bright) 65%,var(--brass-deep) 100%);box-shadow:0 0 8px 0 rgba(201,168,76,0.6);}
 .hero-headline{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(38px,5vw,64px);line-height:1.04;letter-spacing:-0.015em;color:var(--parchment);margin-bottom:22px;}
 .hero-headline em{font-style:italic;font-weight:500;background:linear-gradient(120deg,var(--brass-deep) 0%,var(--brass-bright) 30%,#FFF3D6 50%,var(--brass-bright) 70%,var(--brass-deep) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hero-sub{font-size:17px;color:var(--parchment-dim);max-width:520px;line-height:1.75;margin-bottom:26px;}
@@ -387,16 +389,20 @@ section{padding:104px 0;position:relative;}
 @media(max-width:900px){.wa-inner{grid-template-columns:1fr;}}
 
 /* testimonials */
-.testimonial-slider{position:relative;max-width:760px;margin:0 auto;min-height:auto;padding:0 8px;}
+.testimonial-slider{position:relative;max-width:640px;margin:0 auto;min-height:auto;padding:0 8px;}
 .testimonial-slide{display:none;text-align:center;}
 .testimonial-slide.active{display:block;}
-.testimonial-mark{font-size:52px;color:var(--brass);display:block;margin-bottom:6px;line-height:1;font-style:italic;}
-.testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:22px;overflow-wrap:break-word;word-wrap:break-word;}
-.testimonial-divider{width:40px;height:1px;background:var(--brass);margin:0 auto 16px;}
-.testimonial-source{font-family:'DM Mono',monospace;font-size:12px;color:var(--parchment-faint);letter-spacing:0.04em;}
-.testimonial-source-row{display:flex;align-items:center;justify-content:center;gap:12px;}
-.testimonial-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
-.testimonial-dots{display:flex;gap:8px;justify-content:center;margin-top:30px;}
+.testimonial-byline{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
+.testimonial-byline-text{text-align:left;}
+.testimonial-mark{font-size:64px;color:var(--brass);display:block;margin-bottom:-14px;line-height:1;font-style:italic;font-family:'Fraunces',serif;opacity:0.22;}
+.testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:0;overflow-wrap:break-word;word-wrap:break-word;}
+.testimonial-stars{text-align:left;color:var(--brass);font-size:11px;letter-spacing:2px;margin-top:3px;}
+.testimonial-source{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--parchment-faint);letter-spacing:0.03em;display:block;}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
+.testimonial-progress{display:flex;gap:6px;justify-content:center;margin-top:32px;max-width:220px;margin-left:auto;margin-right:auto;}
+.testimonial-progress-track{flex:1;height:2.5px;background:var(--line);border-radius:2px;overflow:hidden;cursor:pointer;}
+.testimonial-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--brass-deep),var(--brass-bright));border-radius:2px;}
+.testimonial-progress-fill.filling{transition:width linear;}
 .testimonial-dot{width:7px;height:7px;border-radius:50%;background:var(--line);}
 .testimonial-dot.active{background:var(--brass);}
 
@@ -444,6 +450,7 @@ section{padding:104px 0;position:relative;}
 /* footer */
 footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:44px;padding-bottom:40px;border-bottom:1px solid var(--line);}
+.footer-grid > *{min-width:0;}
 .footer-brand{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--brass-bright);margin-bottom:12px;display:block;}
 .footer-logo-mask{display:block;width:150px;height:26px;background-color:var(--brass-bright);-webkit-mask-image:url(/jennavi-logo.svg);mask-image:url(/jennavi-logo.svg);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:left center;mask-position:left center;}
 .footer-tagline{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--parchment-faint);line-height:1.7;}
@@ -493,12 +500,15 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .flw-mini-form input{background:var(--ink);border:1px solid var(--line);border-radius:3px;padding:12px 13px;color:var(--parchment);font-size:14px;}
 
 .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line-soft);}
+.results-grid > *{min-width:0;}
 .result-item{background:var(--ink);padding:24px 16px;text-align:center;}
 .result-num{display:block;font-family:'Fraunces',serif;font-size:38px;font-weight:800;color:var(--brass-bright);}
 .result-label{font-size:11.5px;color:var(--parchment-faint);line-height:1.5;display:block;margin-top:6px;}
 @media(max-width:700px){.results-grid{grid-template-columns:repeat(2,1fr);}}
 
 .who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line-soft);margin-top:30px;}
+.who-grid > *{min-width:0;}
+.book-tools-grid > *{min-width:0;}
 .who-card{background:var(--ink);padding:28px 26px;}
 .who-card-title{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--parchment);margin:12px 0 8px;}
 .who-card-body{font-size:13.5px;color:var(--parchment-dim);line-height:1.65;}
@@ -585,7 +595,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
           <span class="trust-badge">10+ Countries</span>
           <span class="trust-badge">$9.99 USD</span>
         </div>
-        <p class="hero-kicker">LinkedIn Book for Founders &middot; <b>By Jennifer Omaliko of Jennavi</b></p>
+        <p class="hero-kicker hero-kicker-accent">LinkedIn Book for Founders &middot; <b>By Jennifer Omaliko of Jennavi</b></p>
         <h1 class="book-title" itemprop="headline"><a href="javascript:void(0)" onclick="buyCrickets()" style="cursor:pointer;" aria-label="Buy CRICKETS for $9.99">CRICKETS</a></h1>
         <p class="book-subtitle">Why your LinkedIn sounds loud, pays nothing, and the exact shift that changes everything. The LinkedIn strategy book for founders who are done posting to silence.</p>
         <div class="book-hook">"You hit 1,000 views. You smiled. Then you checked your Stripe. Nothing moved. That gap? CRICKETS."</div>
@@ -663,31 +673,47 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
     <p class="section-body reveal" style="margin:14px auto 0;">Real results from real founders across 10+ countries. No paid testimonials.</p>
     <div class="testimonial-slider" id="testimonialSlider" style="margin-top:40px;">
       <div class="testimonial-slide active">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">AS</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">&#127470;&#127475; Arjun S. &middot; Founder, SaaS Startup &middot; India</cite>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">I read CRICKETS in one sitting. The DM script alone paid for the book 10 times over. My first inbound inquiry came the week I implemented the positioning shift. I had been trying for 9 months. It took 7 days after CRICKETS.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">AS</span><cite class="testimonial-source">&#127470;&#127475; Arjun S. &middot; Founder, SaaS Startup &middot; India</cite></div>
       </div>
       <div class="testimonial-slide">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">ZK</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">&#127477;&#127472; Zainab K. &middot; Founder, E-commerce Agency &middot; Pakistan</cite>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">The chapter on the About section rewrote everything I thought I knew about LinkedIn. I had 2,400 followers and zero clients. Three weeks after implementing CRICKETS, two discovery calls booked from people who found me organically.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">ZK</span><cite class="testimonial-source">&#127477;&#127472; Zainab K. &middot; Founder, E-commerce Agency &middot; Pakistan</cite></div>
       </div>
       <div class="testimonial-slide">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">MT</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">&#127482;&#127480; Marcus T. &middot; Founder, Tech Consulting &middot; United States</cite>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">I have bought four LinkedIn courses. CRICKETS is the only one that told me the truth. The rest taught me to post more. This one taught me to post differently. My impressions doubled and three founders reached out in 30 days.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">MT</span><cite class="testimonial-source">&#127482;&#127480; Marcus T. &middot; Founder, Tech Consulting &middot; United States</cite></div>
       </div>
       <div class="testimonial-slide">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">CO</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">&#127475;&#127468; Chidi O. &middot; CEO, Digital Agency &middot; Nigeria</cite>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">As a Lagos-based founder targeting UK clients, I always felt my LinkedIn was not working for my market. CRICKETS showed me exactly why. The positioning shift is not theory. It is a surgical fix. I applied it. It worked.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">CO</span><cite class="testimonial-source">&#127475;&#127468; Chidi O. &middot; CEO, Digital Agency &middot; Nigeria</cite></div>
       </div>
     </div>
-    <div class="testimonial-dots" id="testimonialDots"></div>
+    <div class="testimonial-progress" id="testimonialDots"></div>
   </div>
 </section>
 
@@ -795,7 +821,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
     <p class="eyebrow">Free From Jennifer &middot; No Signup Needed</p>
     <h2 class="section-title reveal" id="tools-heading">Diagnose your LinkedIn<br><em>before we talk.</em></h2>
     <p class="section-body reveal">Jennifer built four free tools on the CRICKETS framework. Use them to understand exactly what's broken before booking a call or buying the book.</p>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:30px;max-width:720px;">
+    <div class="book-tools-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:30px;max-width:720px;">
       <a href="https://jennavi.co/linkedin-health-check.html" class="book-tool-card">
         <span class="book-tool-name">LinkedIn Positioning Health Check</span>
         <span class="book-tool-desc">Score your full profile out of 100 across 6 categories.</span>
@@ -1036,10 +1062,14 @@ if (contactForm) {
         var s = document.getElementById('contactSuccess');
         if (s) {
           s.style.display = 'block';
-          var navElCF = document.querySelector('.nav');
-          var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
-          var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
-          window.scrollTo({top: cfOffset, behavior: 'smooth'});
+          requestAnimationFrame(function(){
+            requestAnimationFrame(function(){
+              var navElCF = document.querySelector('.nav');
+              var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
+              var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
+              window.scrollTo({top: cfOffset, behavior: 'smooth'});
+            });
+          });
         }
       })
       .catch(function(){
@@ -1361,24 +1391,47 @@ function initFlwPayment(tier, amount, description){
 /* ============ TESTIMONIAL SLIDER ============ */
 (function(){
   var slides = document.querySelectorAll('.testimonial-slide');
-  var dotsWrap = document.getElementById('testimonialDots');
-  if (!slides.length || !dotsWrap) return;
+  var barsWrap = document.getElementById('testimonialDots');
+  if (!slides.length || !barsWrap) return;
+  var DURATION = 6000;
   var current = 0;
   slides.forEach(function(_, i){
-    var dot = document.createElement('button');
-    dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', function(){ show(i); });
-    dotsWrap.appendChild(dot);
+    var track = document.createElement('div');
+    track.className = 'testimonial-progress-track';
+    var fill = document.createElement('div');
+    fill.className = 'testimonial-progress-fill';
+    track.appendChild(fill);
+    track.addEventListener('click', function(){ show(i); restart(); });
+    barsWrap.appendChild(track);
   });
-  var dots = dotsWrap.querySelectorAll('.testimonial-dot');
+  var fills = barsWrap.querySelectorAll('.testimonial-progress-fill');
+  function fillActive(){
+    fills.forEach(function(f, i){
+      f.classList.remove('filling');
+      f.style.transition = 'none';
+      f.style.width = i < current ? '100%' : (i === current ? '0%' : '0%');
+    });
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        var activeFill = fills[current];
+        activeFill.style.transition = 'width ' + DURATION + 'ms linear';
+        activeFill.style.width = '100%';
+      });
+    });
+  }
   function show(i){
     slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
     current = i;
     slides[current].classList.add('active');
-    dots[current].classList.add('active');
+    fillActive();
   }
-  setInterval(function(){ show((current + 1) % slides.length); }, 6000);
+  var timer;
+  function restart(){
+    clearInterval(timer);
+    fillActive();
+    timer = setInterval(function(){ show((current + 1) % slides.length); }, DURATION);
+  }
+  restart();
 })();
 
 /* ============ FAQ ACCORDION ============ */

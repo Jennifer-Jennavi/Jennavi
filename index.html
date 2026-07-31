@@ -184,6 +184,8 @@ section{padding:104px 0;position:relative;}
 .hero-grid > div{min-width:0;}
 .hero-kicker{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--parchment-faint);margin-bottom:22px;font-weight:400;}
 .hero-kicker b{color:var(--brass);font-weight:500;}
+.hero-kicker-accent{position:relative;padding-left:16px;}
+.hero-kicker-accent::before{content:'';position:absolute;left:0;top:1px;bottom:1px;width:2.5px;border-radius:2px;background:linear-gradient(180deg,var(--brass-deep) 0%,var(--brass-bright) 35%,#FFF3D6 50%,var(--brass-bright) 65%,var(--brass-deep) 100%);box-shadow:0 0 8px 0 rgba(201,168,76,0.6);}
 .hero-headline{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(38px,5vw,64px);line-height:1.04;letter-spacing:-0.015em;color:var(--parchment);margin-bottom:22px;}
 .hero-headline em{font-style:italic;font-weight:500;background:linear-gradient(120deg,var(--brass-deep) 0%,var(--brass-bright) 30%,#FFF3D6 50%,var(--brass-bright) 70%,var(--brass-deep) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hero-sub{font-size:17px;color:var(--parchment-dim);max-width:520px;line-height:1.75;margin-bottom:26px;}
@@ -358,16 +360,20 @@ section{padding:104px 0;position:relative;}
 @media(max-width:900px){.wa-inner{grid-template-columns:1fr;}}
 
 /* testimonials */
-.testimonial-slider{position:relative;max-width:760px;margin:0 auto;min-height:auto;padding:0 8px;}
+.testimonial-slider{position:relative;max-width:640px;margin:0 auto;min-height:auto;padding:0 8px;}
 .testimonial-slide{display:none;text-align:center;}
 .testimonial-slide.active{display:block;}
-.testimonial-mark{font-size:52px;color:var(--brass);display:block;margin-bottom:6px;line-height:1;font-style:italic;}
-.testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:22px;overflow-wrap:break-word;word-wrap:break-word;}
-.testimonial-divider{width:40px;height:1px;background:var(--brass);margin:0 auto 16px;}
-.testimonial-source{font-family:'DM Mono',monospace;font-size:12px;color:var(--parchment-faint);letter-spacing:0.04em;}
-.testimonial-source-row{display:flex;align-items:center;justify-content:center;gap:12px;}
-.testimonial-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
-.testimonial-dots{display:flex;gap:8px;justify-content:center;margin-top:30px;}
+.testimonial-byline{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
+.testimonial-byline-text{text-align:left;}
+.testimonial-mark{font-size:64px;color:var(--brass);display:block;margin-bottom:-14px;line-height:1;font-style:italic;font-family:'Fraunces',serif;opacity:0.22;}
+.testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:0;overflow-wrap:break-word;word-wrap:break-word;}
+.testimonial-stars{text-align:left;color:var(--brass);font-size:11px;letter-spacing:2px;margin-top:3px;}
+.testimonial-source{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--parchment-faint);letter-spacing:0.03em;display:block;}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
+.testimonial-progress{display:flex;gap:6px;justify-content:center;margin-top:32px;max-width:220px;margin-left:auto;margin-right:auto;}
+.testimonial-progress-track{flex:1;height:2.5px;background:var(--line);border-radius:2px;overflow:hidden;cursor:pointer;}
+.testimonial-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--brass-deep),var(--brass-bright));border-radius:2px;}
+.testimonial-progress-fill.filling{transition:width linear;}
 .testimonial-dot{width:7px;height:7px;border-radius:50%;background:var(--line);}
 .testimonial-dot.active{background:var(--brass);}
 
@@ -456,7 +462,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   <div class="container">
     <div class="hero-grid">
       <div>
-        <p class="hero-kicker">LinkedIn Ghostwriting for Founders &middot; <b>873% Growth Documented</b></p>
+        <p class="hero-kicker hero-kicker-accent">LinkedIn Ghostwriting for Founders &middot; <b>873% Growth Documented</b></p>
         <h1 class="hero-headline">The real product isn't a post.<br>It's the <em>DM that arrives</em><br>two days later.</h1>
         <p class="hero-sub">Jennavi writes the LinkedIn content behind documented inbound leads: rate card requests, contract inquiries, and premium tier applications, arriving before Jennifer ever pitches anyone. The voice is authentic. <a href="#pricing">The pipeline is the point.</a></p>
         <div class="hero-proof-bar" aria-label="Proof points">
@@ -499,7 +505,6 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         <div class="hero-img-wrap">
           <img src="/jennavi-founder-02-headshot-clean.jpg" alt="Jennifer Mmesoma Omaliko, Founder and CEO of Jennavi, LinkedIn ghostwriter for founders, based in Kano Nigeria" class="hero-img" loading="eager" fetchpriority="high">
           <div class="hero-img-frame"></div>
-          <div class="hero-badge">JO</div>
         </div>
       </div>
     </div>
@@ -967,31 +972,47 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
     <h2 class="section-title reveal" id="testimonial-heading" style="text-align:center;">Trusted by founders<br><em>worldwide</em></h2>
     <div class="testimonial-slider" id="testimonialSlider" style="margin-top:40px;">
       <div class="testimonial-slide active">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">EN</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">Edwin N. &middot; Founder, Healthcare Sector &middot; Australia</cite>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">Jennifer did more research on me before our first conversation than anyone who had ever pitched me. The proposal felt built in a room where I was the only person in it.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">EN</span><cite class="testimonial-source">Edwin N. &middot; Founder, Healthcare Sector &middot; Australia</cite></div>
       </div>
       <div class="testimonial-slide">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">FH</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">Felicia H. &middot; Executive Director, Non-Profit &middot; United States</cite>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">Within three months she delivered 80% follower growth and completely transformed how our donors and partners perceived us online.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">FH</span><cite class="testimonial-source">Felicia H. &middot; Executive Director, Non-Profit &middot; United States</cite></div>
       </div>
       <div class="testimonial-slide">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">MN</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">Mirian N. &middot; Founder, Data Governance &middot; Nigeria</cite>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">She built a narrative that positioned me as the go-to expert. My inbound leads tripled in 90 days.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">MN</span><cite class="testimonial-source">Mirian N. &middot; Founder, Data Governance &middot; Nigeria</cite></div>
       </div>
       <div class="testimonial-slide">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">EA</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">Emeka A. &middot; Founder, AI Technology &middot; United Kingdom</cite>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">Her content strategy helped me attract enterprise clients who previously would not return my calls. Worth every penny.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">EA</span><cite class="testimonial-source">Emeka A. &middot; Founder, AI Technology &middot; United Kingdom</cite></div>
       </div>
     </div>
-    <div class="testimonial-dots" id="testimonialDots"></div>
+    <div class="testimonial-progress" id="testimonialDots"></div>
   </div>
 </section>
 
@@ -1316,7 +1337,7 @@ var FLW_TIER_LABELS = {taster:'Taster',starter:'Starter',growth:'Growth',authori
 /* ============ EMAILJS: CLIENT CONFIRMATION EMAILS ============ */
 var EJS_PUBLIC_KEY_HIRE='XIy6yIQorZRwYz0xf',EJS_SERVICE_ID_HIRE='service_10a5m5e',EJS_TEMPLATE_ID_HIRE='template_g32mptd';
 function buildAuditReceiptEmailHtml(name, linkedinUrl){
-  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:22px;}.pb{background:#0B0D12;border:1px solid rgba(201,168,76,0.25);border-radius:6px;padding:16px 20px;margin-bottom:22px;font-size:12.5px;color:rgba(243,238,227,0.6);word-break:break-all;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0B0D12;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:24px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Jennifer is currently reviewing your profile. She\'ll be in touch as soon as she completes it, usually within 24 hours.</p><div class="pb">' + (linkedinUrl || 'Your submitted profile') + '</div><p class="dg">While you wait, a few things worth a look: <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" style="color:#C9A84C;">the six Jennavi service tiers</a>, or <a href="https://jennavi.co/book.html" style="color:#C9A84C;">CRICKETS</a>, the $9.99 playbook behind everything Jennifer does.</p><div class="ct"><a href="https://jennavi.co/book.html" class="cb">Get CRICKETS &middot; $9.99</a></div><hr class="hr"><p style="font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;font-style:italic;margin-bottom:0;">Questions in the meantime? Reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><br><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:22px;}.pb{background:#0B0D12;border:1px solid rgba(201,168,76,0.25);border-radius:6px;padding:16px 20px;margin-bottom:22px;font-size:12.5px;color:rgba(243,238,227,0.6);word-break:break-all;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0B0D12;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:24px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Your profile just landed in front of me, not a queue, not a template. I read every submission myself, and I\'m looking at yours within the next 24 hours.</p><div class="pb">' + (linkedinUrl || 'Your submitted profile') + '</div><p class="dg">I\'m looking for the same three things I look for on every profile I audit: what makes a stranger stop scrolling, what makes them trust you, and what\'s quietly costing you the conversation you should already be having. You\'ll hear from me directly, in plain language, no jargon.</p><div class="ct"><a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="cb">See How I Can Help &middot; 6 Tiers</a></div><hr class="hr"><p class="dg">If you\'d rather start fixing things yourself tonight, <a href="https://jennavi.co/book.html" style="color:#C9A84C;">CRICKETS</a> is the exact system behind everything I do, $9.99, yours to keep.</p><hr class="hr"><p style="font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;font-style:italic;margin-bottom:0;">Anything urgent before then? Message me directly on WhatsApp at +234 902 468 0769. I read those myself too.</p><br><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
 }
 function sendAuditReceiptEmail(name, email, linkedinUrl, retryCount){
   retryCount = retryCount || 0;
@@ -1630,24 +1651,47 @@ function initFlwPayment(tier, amount, description){
 /* ============ TESTIMONIAL SLIDER ============ */
 (function(){
   var slides = document.querySelectorAll('.testimonial-slide');
-  var dotsWrap = document.getElementById('testimonialDots');
-  if (!slides.length || !dotsWrap) return;
+  var barsWrap = document.getElementById('testimonialDots');
+  if (!slides.length || !barsWrap) return;
+  var DURATION = 6000;
   var current = 0;
   slides.forEach(function(_, i){
-    var dot = document.createElement('button');
-    dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', function(){ show(i); });
-    dotsWrap.appendChild(dot);
+    var track = document.createElement('div');
+    track.className = 'testimonial-progress-track';
+    var fill = document.createElement('div');
+    fill.className = 'testimonial-progress-fill';
+    track.appendChild(fill);
+    track.addEventListener('click', function(){ show(i); restart(); });
+    barsWrap.appendChild(track);
   });
-  var dots = dotsWrap.querySelectorAll('.testimonial-dot');
+  var fills = barsWrap.querySelectorAll('.testimonial-progress-fill');
+  function fillActive(){
+    fills.forEach(function(f, i){
+      f.classList.remove('filling');
+      f.style.transition = 'none';
+      f.style.width = i < current ? '100%' : (i === current ? '0%' : '0%');
+    });
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        var activeFill = fills[current];
+        activeFill.style.transition = 'width ' + DURATION + 'ms linear';
+        activeFill.style.width = '100%';
+      });
+    });
+  }
   function show(i){
     slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
     current = i;
     slides[current].classList.add('active');
-    dots[current].classList.add('active');
+    fillActive();
   }
-  setInterval(function(){ show((current + 1) % slides.length); }, 6000);
+  var timer;
+  function restart(){
+    clearInterval(timer);
+    fillActive();
+    timer = setInterval(function(){ show((current + 1) % slides.length); }, DURATION);
+  }
+  restart();
 })();
 
 /* ============ FAQ ACCORDION ============ */

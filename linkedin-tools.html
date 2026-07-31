@@ -231,6 +231,8 @@ section{padding:104px 0;position:relative;}
 .hero-grid > div{min-width:0;}
 .hero-kicker{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--parchment-faint);margin-bottom:22px;font-weight:400;}
 .hero-kicker b{color:var(--brass);font-weight:500;}
+.hero-kicker-accent{position:relative;padding-left:16px;}
+.hero-kicker-accent::before{content:'';position:absolute;left:0;top:1px;bottom:1px;width:2.5px;border-radius:2px;background:linear-gradient(180deg,var(--brass-deep) 0%,var(--brass-bright) 35%,#FFF3D6 50%,var(--brass-bright) 65%,var(--brass-deep) 100%);box-shadow:0 0 8px 0 rgba(201,168,76,0.6);}
 .hero-headline{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(38px,5vw,64px);line-height:1.04;letter-spacing:-0.015em;color:var(--parchment);margin-bottom:22px;}
 .hero-headline em{font-style:italic;font-weight:500;background:linear-gradient(120deg,var(--brass-deep) 0%,var(--brass-bright) 30%,#FFF3D6 50%,var(--brass-bright) 70%,var(--brass-deep) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hero-sub{font-size:17px;color:var(--parchment-dim);max-width:520px;line-height:1.75;margin-bottom:26px;}
@@ -556,7 +558,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
       </ol>
     </nav>
     <div style="max-width:780px;margin-top:32px;">
-      <p class="hero-kicker">The CRICKETS Toolkit &middot; <b>Four Free Tools, No Signup</b></p>
+      <p class="hero-kicker hero-kicker-accent">The CRICKETS Toolkit &middot; <b>Four Free Tools, No Signup</b></p>
       <h1 class="hero-headline">Four free tools.<br><em>One goal.</em></h1>
       <p class="hero-sub" style="max-width:660px;">Every tool here runs on CRICKETS, the same methodology Jennifer Omaliko used to grow her LinkedIn from 500 to 6,000+ followers with 873% impression growth and zero paid ads. No login. No credit card. No catch. Just clarity on exactly what's broken and what to fix first.</p>
       <div class="hero-proof-bar">
@@ -997,10 +999,14 @@ if (contactForm) {
         var s = document.getElementById('contactSuccess');
         if (s) {
           s.style.display = 'block';
-          var navElCF = document.querySelector('.nav');
-          var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
-          var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
-          window.scrollTo({top: cfOffset, behavior: 'smooth'});
+          requestAnimationFrame(function(){
+            requestAnimationFrame(function(){
+              var navElCF = document.querySelector('.nav');
+              var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
+              var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
+              window.scrollTo({top: cfOffset, behavior: 'smooth'});
+            });
+          });
         }
       })
       .catch(function(){

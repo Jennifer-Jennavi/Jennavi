@@ -225,6 +225,8 @@ section{padding:104px 0;position:relative;}
 .hero-grid > div{min-width:0;}
 .hero-kicker{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--parchment-faint);margin-bottom:22px;font-weight:400;}
 .hero-kicker b{color:var(--brass);font-weight:500;}
+.hero-kicker-accent{position:relative;padding-left:16px;}
+.hero-kicker-accent::before{content:'';position:absolute;left:0;top:1px;bottom:1px;width:2.5px;border-radius:2px;background:linear-gradient(180deg,var(--brass-deep) 0%,var(--brass-bright) 35%,#FFF3D6 50%,var(--brass-bright) 65%,var(--brass-deep) 100%);box-shadow:0 0 8px 0 rgba(201,168,76,0.6);}
 .hero-headline{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(38px,5vw,64px);line-height:1.04;letter-spacing:-0.015em;color:var(--parchment);margin-bottom:22px;}
 .hero-headline em{font-style:italic;font-weight:500;background:linear-gradient(120deg,var(--brass-deep) 0%,var(--brass-bright) 30%,#FFF3D6 50%,var(--brass-bright) 70%,var(--brass-deep) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hero-sub{font-size:17px;color:var(--parchment-dim);max-width:520px;line-height:1.75;margin-bottom:26px;}
@@ -399,17 +401,20 @@ section{padding:104px 0;position:relative;}
 @media(max-width:900px){.wa-inner{grid-template-columns:1fr;}}
 
 /* testimonials */
-.testimonial-slider{position:relative;max-width:760px;margin:0 auto;min-height:auto;padding:0 8px;}
+.testimonial-slider{position:relative;max-width:640px;margin:0 auto;min-height:auto;padding:0 8px;}
 .testimonial-slide{display:none;text-align:center;}
 .testimonial-slide.active{display:block;}
-.testimonial-mark{font-size:52px;color:var(--brass);display:block;margin-bottom:6px;line-height:1;font-style:italic;}
-.testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:22px;overflow-wrap:break-word;word-wrap:break-word;}
-.testimonial-divider{width:40px;height:1px;background:var(--brass);margin:0 auto 16px;}
-.testimonial-stars{text-align:center;color:var(--brass);font-size:13px;letter-spacing:2px;margin-top:10px;}
-.testimonial-source{font-family:'DM Mono',monospace;font-size:12px;color:var(--parchment-faint);letter-spacing:0.04em;}
-.testimonial-source-row{display:flex;align-items:center;justify-content:center;gap:12px;}
-.testimonial-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
-.testimonial-dots{display:flex;gap:8px;justify-content:center;margin-top:30px;}
+.testimonial-byline{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
+.testimonial-byline-text{text-align:left;}
+.testimonial-mark{font-size:64px;color:var(--brass);display:block;margin-bottom:-14px;line-height:1;font-style:italic;font-family:'Fraunces',serif;opacity:0.22;}
+.testimonial-text{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);font-weight:500;font-style:italic;line-height:1.5;color:var(--parchment);margin-bottom:0;overflow-wrap:break-word;word-wrap:break-word;}
+.testimonial-stars{text-align:left;color:var(--brass);font-size:11px;letter-spacing:2px;margin-top:3px;}
+.testimonial-source{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--parchment-faint);letter-spacing:0.03em;display:block;}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brass-deep) 0%,var(--brass) 45%,var(--brass-bright) 100%);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.02em;color:#14100A;border:1px solid rgba(255,243,214,0.5);box-shadow:0 4px 12px -4px rgba(201,168,76,0.5);}
+.testimonial-progress{display:flex;gap:6px;justify-content:center;margin-top:32px;max-width:220px;margin-left:auto;margin-right:auto;}
+.testimonial-progress-track{flex:1;height:2.5px;background:var(--line);border-radius:2px;overflow:hidden;cursor:pointer;}
+.testimonial-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--brass-deep),var(--brass-bright));border-radius:2px;}
+.testimonial-progress-fill.filling{transition:width linear;}
 .testimonial-dot{width:7px;height:7px;border-radius:50%;background:var(--line);}
 .testimonial-dot.active{background:var(--brass);}
 
@@ -539,9 +544,10 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
 .cta-col{flex:1;min-width:200px;}
 .cta-primary{display:inline-flex;width:100%;justify-content:center;padding:15px;background:linear-gradient(120deg,var(--brass-deep) 0%,var(--brass) 22%,#FFF3D6 42%,var(--brass-bright) 58%,var(--brass) 80%,var(--brass-deep) 100%);color:#14100A;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;}
-.cta-secondary{display:inline-flex;width:100%;justify-content:center;padding:15px;border:1px solid var(--line);color:var(--parchment-dim);border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;}
+.cta-secondary{display:inline-flex;width:100%;justify-content:center;align-items:center;padding:15px;border:1.5px solid var(--brass);background:rgba(201,168,76,0.08);color:var(--brass-bright);border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background 0.2s,transform 0.2s;}
+.cta-secondary:hover{background:rgba(201,168,76,0.16);transform:translateY(-2px);}
 .cta-subtext{font-size:11px;color:var(--parchment-faint);margin-top:8px;text-align:center;}
-.result-links{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line-soft);margin:0 32px 32px;}
+.result-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--line-soft);margin:0 32px 32px;}
 .result-link-tile{background:var(--ink-2);padding:20px 18px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:background 0.2s;}
 .result-link-tile:hover{background:var(--ink-3);}
 .rlt-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--brass);}
@@ -592,17 +598,17 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         <li>Health Check</li>
       </ol>
     </nav>
-    <div style="max-width:720px;margin:32px auto 0;text-align:center;">
-      <p class="hero-kicker" style="justify-content:center;display:flex;">Free Tool &middot; <b>20 Questions &middot; Instant Score</b></p>
-      <h1 class="hero-headline" style="text-align:center;">Is your LinkedIn<br><em>actually working?</em></h1>
-      <p class="hero-sub" style="max-width:560px;margin:0 auto 26px;text-align:center;">Twenty questions across six categories. Four minutes. A real score out of 100, and the exact reason your profile earns views but not replies.</p>
-      <div class="hero-proof-bar" style="justify-content:center;">
+    <div style="max-width:720px;margin:32px 0 0;">
+      <p class="hero-kicker hero-kicker-accent">Free Tool &middot; <b>20 Questions &middot; Instant Score</b></p>
+      <h1 class="hero-headline">Is your LinkedIn<br><em>actually working?</em></h1>
+      <p class="hero-sub" style="max-width:560px;margin:0 0 26px;">Twenty questions across six categories. Four minutes. A real score out of 100, and the exact reason your profile earns views but not replies.</p>
+      <div class="hero-proof-bar">
         <span class="hero-proof-item">Built on CRICKETS</span>
         <span class="hero-proof-item">No Signup</span>
         <span class="hero-proof-item">Instant Personalised Result</span>
         <span class="hero-proof-item">Jennifer Omaliko &middot; Jennavi</span>
       </div>
-      <div class="hero-actions" style="justify-content:center;margin-top:8px;">
+      <div class="hero-actions" style="margin-top:8px;">
         <button class="btn btn-brass" id="heroStartBtn" onclick="if(typeof startQuiz==='function'){startQuiz();}" style="border:none;cursor:pointer;">Take the Health Check &#8594;</button>
       </div>
     </div>
@@ -613,32 +619,44 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   <div class="container">
     <div class="testimonial-slider" id="testimonialSlider">
       <div class="testimonial-slide active">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">PR</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">&#127482;&#127480; Priya R. &middot; Founder, HealthTech Startup &middot; United States</cite>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">I scored 34. Painful to see written out, but it explained exactly why eight months of posting had gone nowhere. Fixed my About section that week and had my first real inbound message within ten days.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">PR</span><cite class="testimonial-source">&#127482;&#127480; Priya R. &middot; Founder, HealthTech Startup &middot; United States</cite></div>
-        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       </div>
       <div class="testimonial-slide">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">DO</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">&#127468;&#127463; Daniel O. &middot; Founder, Fintech &middot; United Kingdom</cite>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">The category breakdown was the useful part. I thought my content was the problem. It was actually my headline the whole time, still reading like a job title.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">DO</span><cite class="testimonial-source">&#127468;&#127463; Daniel O. &middot; Founder, Fintech &middot; United Kingdom</cite></div>
-        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       </div>
       <div class="testimonial-slide">
-        <span class="testimonial-mark">&#8220;</span>
+        <div class="testimonial-byline">
+          <span class="testimonial-avatar" aria-hidden="true">MT</span>
+          <div class="testimonial-byline-text">
+            <cite class="testimonial-source">&#127462;&#127482; Michael T. &middot; Founder, B2B Consulting &middot; Australia</cite>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          </div>
+        </div>
+        <span class="testimonial-mark" aria-hidden="true">&#8220;</span>
         <p class="testimonial-text">Four minutes for a score this specific is genuinely rare. Most quizzes like this feel generic. This one told me exactly which of my last posts had no proof point.</p>
-        <div class="testimonial-divider"></div>
-        <div class="testimonial-source-row"><span class="testimonial-avatar" aria-hidden="true">MT</span><cite class="testimonial-source">&#127462;&#127482; Michael T. &middot; Founder, B2B Consulting &middot; Australia</cite></div>
-        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       </div>
     </div>
-    <div class="testimonial-dots" id="testimonialDots"></div>
+    <div class="testimonial-progress" id="testimonialDots"></div>
   </div>
 </section>
 
-<section id="quiz-top" aria-label="LinkedIn Health Check Quiz">
+<section id="quiz-top" aria-label="LinkedIn Health Check Quiz" style="padding:32px 0 60px;">
   <div class="container">
     <div class="quiz-panel" id="quizArea" style="display:none;">
 
@@ -676,33 +694,6 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         </div>
 
         <div id="diagnosisCard"></div>
-        <div class="result-links" id="resultLinks"></div>
-
-        <div data-tools-section style="margin:0 32px 32px;">
-          <p class="eyebrow">More Free Jennavi Tools</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-            <a href="https://jennavi.co/linkedin-roi-calculator.html" class="book-tool-card" style="background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:5px;text-decoration:none;">
-              <span class="book-tool-name" style="font-family:'Fraunces',serif;font-size:14px;font-weight:600;color:var(--parchment);">LinkedIn ROI Calculator</span>
-              <span class="book-tool-desc" style="font-size:11.5px;color:var(--parchment-dim);line-height:1.5;">Find out exactly how much your invisible LinkedIn costs every year.</span>
-              <span class="book-tool-cta" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--brass);">Calculate My Loss &#8594;</span>
-            </a>
-            <a href="https://jennavi.co/linkedin-post-audit.html" class="book-tool-card" style="background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:5px;text-decoration:none;">
-              <span class="book-tool-name" style="font-family:'Fraunces',serif;font-size:14px;font-weight:600;color:var(--parchment);">LinkedIn Post Audit</span>
-              <span class="book-tool-desc" style="font-size:11.5px;color:var(--parchment-dim);line-height:1.5;">Score your hooks and posts out of 100 across four dimensions.</span>
-              <span class="book-tool-cta" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--brass);">Audit My Posts &#8594;</span>
-            </a>
-            <a href="https://jennavi.co/linkedin-profile-audit.html" class="book-tool-card" style="background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:5px;text-decoration:none;">
-              <span class="book-tool-name" style="font-family:'Fraunces',serif;font-size:14px;font-weight:600;color:var(--parchment);">LinkedIn Profile Audit</span>
-              <span class="book-tool-desc" style="font-size:11.5px;color:var(--parchment-dim);line-height:1.5;">Upload your PDF or audit your headline and About section directly.</span>
-              <span class="book-tool-cta" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--brass);">Audit My Profile &#8594;</span>
-            </a>
-            <a href="https://jennavi.co/linkedin-tools.html" class="book-tool-card" style="background:var(--ink);border:1px solid rgba(201,168,76,0.4);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:5px;text-decoration:none;">
-              <span class="book-tool-name" style="font-family:'Fraunces',serif;font-size:14px;font-weight:600;color:var(--parchment);">The CRICKETS Toolkit</span>
-              <span class="book-tool-desc" style="font-size:11.5px;color:var(--parchment-dim);line-height:1.5;">All four free LinkedIn tools by Jennifer Omaliko, in one place.</span>
-              <span class="book-tool-cta" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--brass);">See All Four Tools &#8594;</span>
-            </a>
-          </div>
-        </div>
 
         <div class="lead-capture-box" id="leadCapture">
           <div id="leadCaptureIntro">
@@ -978,10 +969,14 @@ if (contactForm) {
         var s = document.getElementById('contactSuccess');
         if (s) {
           s.style.display = 'block';
-          var navElCF = document.querySelector('.nav');
-          var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
-          var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
-          window.scrollTo({top: cfOffset, behavior: 'smooth'});
+          requestAnimationFrame(function(){
+            requestAnimationFrame(function(){
+              var navElCF = document.querySelector('.nav');
+              var navHeightCF = navElCF ? navElCF.offsetHeight : 80;
+              var cfOffset = s.getBoundingClientRect().top + window.pageYOffset - navHeightCF - 16;
+              window.scrollTo({top: cfOffset, behavior: 'smooth'});
+            });
+          });
         }
       })
       .catch(function(){
@@ -1023,10 +1018,11 @@ if (contactForm) {
 
  var RESULTS=[
  {min:0,max:20,title:'Complete Rebuild Required',tagline:'Your LinkedIn is actively working against you. This is not a content problem. This is a positioning emergency.',colorClass:'red',bandText:'Score 0 to 20',body:'Every founder who visits your profile and leaves without reaching out is a direct result of what is on that page right now. The banner is not communicating. The headline is not converting. The About section is not closing. And no amount of posting will fix what is fundamentally broken at the structural level. The good news: a complete rebuild takes days, not months, when done with surgical precision. But it has to happen before you publish another word.',serviceName:'Jennavi Taster Audit at $100 one-time',serviceDesc:'The Taster Profile Audit is a full forensic diagnosis of your LinkedIn: what is broken, why it is costing you clients, and a precise 30-day roadmap to fix it. Jennifer writes the rebuilt headline and About section personally. One investment. Immediate clarity.',cta1Text:'Get the Taster Audit ($100)',cta1Sub:'I rewrite your headline and about section.',cta1Url:'https://jennavi.co/hire-linkedin-ghostwriter.html',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'CRICKETS',title:'The Book Behind This Quiz',desc:' The complete positioning system. $9.99.',url:'https://jennavi.co/book.html',arrow:'Get CRICKETS ($9.99)'},{label:'Why Jennavi',title:'Strategy Over Syntax',desc:'Why positioning beats content volume. Read the methodology.',url:'https://jennavi.co/why-jennavi.html',arrow:'Read Why Jennavi'}]},
- {min:21,max:40,title:'Significant Repositioning Needed',tagline:'Your LinkedIn is invisible to the exact people you built it for.',colorClass:'amber',bandText:'Score 21 to 40',body:'You are posting. You are connected to the right people. But your Banner, Headline and About section are written for peers, not clients. That is why you get views but zero DMs. Every month your profile stays like this is revenue you will never get back. The profile is not broken beyond repair. It is broken in specific, fixable ways. But each month you wait compounds the loss. The pattern here is a founder who has the right audience but the wrong message for that audience.',serviceName:'Jennavi Taster Audit at $100 one-time',serviceDesc:'The Taster Profile Audit is a full forensic diagnosis of your LinkedIn: what is broken, why it is costing you clients, and a precise 30-day roadmap to fix it. Jennifer rewrites your Headline and About Section personally. Sending 8 posts per month before fixing the profile foundation is painting over a cracked wall. Fix the foundation first.',cta1Text:'Get the Taster Audit ($100)',cta1Sub:'I rewrite your headline and about section.',cta1Url:'https://jennavi.co/hire-linkedin-ghostwriter.html',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'CRICKETS',title:'The Book Behind This Quiz',desc:' The exact positioning system for founders posting without results. $9.99.',url:'https://jennavi.co/book.html',arrow:'Get CRICKETS ($9.99)'},{label:'Insights',title:'Why Your LinkedIn Is Active But Clients Are Not Coming',desc:'The full breakdown of posting without converting.',url:'https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html',arrow:'Read the Breakdown'}]},
- {min:41,max:60,title:'Posting But Not Converting',tagline:'You are close. But close does not convert.',colorClass:'gold-c',bandText:'Score 41 to 60',body:'Your profile has the foundation. Your content has traction. But something in your positioning is creating friction at exactly the moment a potential client decides whether to reach out or scroll past. Most founders at this score lose 30 to 50 percent of warm profile visitors without ever knowing it. The gap is not obvious. It is a hook that informs instead of disrupts. A proof post that has the story but buries the number. A CTA that is there but does not feel urgent. These are fixable in weeks, not months.',serviceName:'Jennavi Growth Tier at $400 per month',serviceDesc:'The Growth tier delivers 12 posts per month, full profile optimisation, analytics tracking, and a bi-monthly performance review. This is where LinkedIn starts compounding. Your content becomes consistent, your profile converts, and inbound conversations begin to arrive reliably.',cta1Text:'Get the Growth Tier ($400/mo)',cta1Sub:'12 posts a month, written in your voice.',cta1Url:'WA_GROWTH',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'Insights',title:'Why Your LinkedIn Is Active But Clients Are Not Coming',desc:'The full strategic breakdown of the posting-without-converting problem.',url:'https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html',arrow:'Read the Breakdown'},{label:'Why Jennavi',title:'Strategy Over Syntax',desc:'Why Jennavi focuses on positioning over grammar and revenue over reach.',url:'https://jennavi.co/why-jennavi.html',arrow:'Read Why Jennavi'}]},
- {min:61,max:80,title:'Visible But Not Converting at Scale',tagline:'You have real presence and real traction. The gap between your visibility and your revenue is a strategy gap, not a content gap.',colorClass:'gold-c',bandText:'Score 61 to 80',body:'Your LinkedIn is doing more right than most founders at this level. Your profile is reasonably positioned, your content has momentum, and you are getting some inbound activity. But the volume is not there yet. The gap between good and great on LinkedIn is where most clients are lost. Founders who push from this range to 80 plus typically see inbound conversations double within 60 days. You need sharper positioning across every touchpoint, more posts per month, and someone executing your DM strategy consistently.',serviceName:'Jennavi Authority Tier at $600 per month',serviceDesc:'The Authority tier delivers 16 posts per month in your authentic voice, complete LinkedIn management, bi-weekly strategy calls with Jennifer, a full DM strategy, and a monthly deep-dive analytics report. This is where LinkedIn stops being a task on your list and becomes a full client acquisition system.',cta1Text:'Get the Authority Tier ($600/mo)',cta1Sub:'16 posts, strategy calls, full LinkedIn management.',cta1Url:'WA_AUTHORITY',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'Why Jennavi',title:'Strategy Over Syntax',desc:'Why Jennavi focuses on positioning over grammar and revenue over reach.',url:'https://jennavi.co/why-jennavi.html',arrow:'Read Why Jennavi'},{label:'Insights',title:'Why Your LinkedIn Is Active But Clients Are Not Coming',desc:'The full breakdown of the posting-without-converting problem.',url:'https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html',arrow:'Read the Breakdown'}]},
- {min:81,max:100,title:'Authority-Level Presence',tagline:'You are in the top 5 percent of founder LinkedIn profiles. The question now is whether your content strategy is converting that authority into pipeline.',colorClass:'green',bandText:'Score 81 to 100',body:'Your LinkedIn is working. Your profile converts. Your content is consistent and pointed. At this score, the bottleneck is not the foundation. It is execution at scale. You need more posts per month, a newsletter to compound your authority over time, weekly strategic direction, and someone thinking about your positioning full-time so you are not the bottleneck in your own growth.',serviceName:'Jennavi Executive Tier at $1,000 per month',serviceDesc:'The Executive tier is the complete authority system: 25 posts per month, 2 LinkedIn newsletter editions per month, 1 blog article for your website per month, weekly 1-to-1 strategy calls with Jennifer, priority 12-hour response, a dedicated growth roadmap, and bi-weekly performance reviews. CRICKETS positioning playbook included free. Limited to 2 clients only.',cta1Text:'Apply for Executive ($1,000/mo)',cta1Sub:'25 posts, newsletter, weekly calls, CRICKETS included.',cta1Url:'WA_EXECUTIVE',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'About Jennifer',title:'The Founder Behind the Strategy',desc:'873% impression growth. 6,000+ followers. Zero paid ads. Documented publicly.',url:'https://jennavi.co/founder.html',arrow:'Read Jennifer\'s Story'},{label:'Ghostwriter vs DIY',title:'The Math of Doing It Yourself',desc:'An honest calculation of the DIY path versus working with Jennifer.',url:'https://jennavi.co/insights/linkedin-ghostwriter-vs-diy.html',arrow:'See the Comparison'}]}
+ {min:21,max:40,title:'Significant Repositioning Needed',tagline:'Your LinkedIn is invisible to the exact people you built it for.',colorClass:'amber',bandText:'Score 21 to 40',body:'You are posting. You are connected to the right people. But your Banner, Headline and About section are written for peers, not clients. That is why you get views but zero DMs. Every month your profile stays like this is revenue you will never get back. The profile is not broken beyond repair. It is broken in specific, fixable ways. But each month you wait compounds the loss. The pattern here is a founder who has the right audience but the wrong message for that audience.',serviceName:'Jennavi Taster Audit at $100 one-time',serviceDesc:'The Taster Profile Audit is a full forensic diagnosis of your LinkedIn: what is broken, why it is costing you clients, and a precise 30-day roadmap to fix it. Jennifer rewrites your Headline and About Section personally. Sending 8 posts per month before fixing the profile foundation is painting over a cracked wall. Fix the foundation first.',cta1Text:'Get the Taster Audit ($100)',cta1Sub:'I rewrite your headline and about section.',cta1Url:'https://jennavi.co/hire-linkedin-ghostwriter.html',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'CRICKETS',title:'The Book Behind This Quiz',desc:' The exact positioning system for founders posting without results. $9.99.',url:'https://jennavi.co/book.html',arrow:'Get CRICKETS ($9.99)'}]},
+ {min:41,max:55,title:'Posting But Not Converting',tagline:'You are close. But close does not convert.',colorClass:'gold-c',bandText:'Score 41 to 55',body:'Your profile has the foundation. Your content has traction. But something in your positioning is creating friction at exactly the moment a potential client decides whether to reach out or scroll past. Most founders at this score lose 30 to 50 percent of warm profile visitors without ever knowing it. The gap is not obvious. It is a hook that informs instead of disrupts. A proof post that has the story but buries the number. A CTA that is there but does not feel urgent. These are fixable in weeks, not months.',serviceName:'Jennavi Growth Tier at $400 per month',serviceDesc:'The Growth tier delivers 12 posts per month, full profile optimisation, analytics tracking, and a bi-monthly performance review. This is where LinkedIn starts compounding. Your content becomes consistent, your profile converts, and inbound conversations begin to arrive reliably.',cta1Text:'Get the Growth Tier ($400/mo)',cta1Sub:'12 posts a month, written in your voice.',cta1Url:'WA_GROWTH',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'Why Jennavi',title:'Strategy Over Syntax',desc:'Why Jennavi focuses on positioning over grammar and revenue over reach.',url:'https://jennavi.co/why-jennavi.html',arrow:'Read Why Jennavi'}]},
+ {min:56,max:70,title:'Visible But Not Converting at Scale',tagline:'You have real presence and real traction. The gap between your visibility and your revenue is a strategy gap, not a content gap.',colorClass:'gold-c',bandText:'Score 56 to 70',body:'Your LinkedIn is doing more right than most founders at this level. Your profile is reasonably positioned, your content has momentum, and you are getting some inbound activity. But the volume is not there yet. The gap between good and great on LinkedIn is where most clients are lost. Founders who push from this range up typically see inbound conversations double within 60 days. You need sharper positioning across every touchpoint, more posts per month, and someone executing your DM strategy consistently.',serviceName:'Jennavi Authority Tier at $600 per month',serviceDesc:'The Authority tier delivers 16 posts per month in your authentic voice, complete LinkedIn management, bi-weekly strategy calls with Jennifer, a full DM strategy, and a monthly deep-dive analytics report. This is where LinkedIn stops being a task on your list and becomes a full client acquisition system.',cta1Text:'Get the Authority Tier ($600/mo)',cta1Sub:'16 posts, strategy calls, full LinkedIn management.',cta1Url:'WA_AUTHORITY',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'Why Jennavi',title:'Strategy Over Syntax',desc:'Why Jennavi focuses on positioning over grammar and revenue over reach.',url:'https://jennavi.co/why-jennavi.html',arrow:'Read Why Jennavi'}]},
+ {min:71,max:85,title:'Strong Positioning, Room to Scale',tagline:'You are ahead of most founders on LinkedIn. The remaining gap is consistency and reach, not fundamentals.',colorClass:'gold-c',bandText:'Score 71 to 85',body:'Your profile converts. Your content works. Founders at this level have already solved the problems that stop most people, the positioning is sharp, the proof is present, the CTA lands. What is missing is volume and a system executing your DM strategy without you having to think about it every week. This is the range where a good LinkedIn presence becomes a genuine client acquisition channel, if someone is pushing it consistently.',serviceName:'Jennavi VIP Tier at $800 per month',serviceDesc:'The VIP tier delivers 20 posts per month in your authentic voice, complete LinkedIn management, weekly strategy calls with Jennifer, a full DM strategy executed on your behalf, and a monthly deep-dive analytics report. This is the tier for founders ready to treat LinkedIn as a real acquisition channel, not a side project.',cta1Text:'Get the VIP Tier ($800/mo)',cta1Sub:'20 posts, weekly calls, DM strategy executed for you.',cta1Url:'WA_VIP',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'Why Jennavi',title:'Strategy Over Syntax',desc:'Why Jennavi focuses on positioning over grammar and revenue over reach.',url:'https://jennavi.co/why-jennavi.html',arrow:'Read Why Jennavi'}]},
+ {min:86,max:100,title:'Authority-Level Presence',tagline:'You are in the top 5 percent of founder LinkedIn profiles. The question now is whether your content strategy is converting that authority into pipeline.',colorClass:'green',bandText:'Score 86 to 100',body:'Your LinkedIn is working. Your profile converts. Your content is consistent and pointed. At this score, the bottleneck is not the foundation. It is execution at scale. You need more posts per month, a newsletter to compound your authority over time, weekly strategic direction, and someone thinking about your positioning full-time so you are not the bottleneck in your own growth.',serviceName:'Jennavi Executive Tier at $1,000 per month',serviceDesc:'The Executive tier is the complete authority system: 25 posts per month, 2 LinkedIn newsletter editions per month, 1 blog article for your website per month, weekly 1-to-1 strategy calls with Jennifer, priority 12-hour response, a dedicated growth roadmap, and bi-weekly performance reviews. CRICKETS positioning playbook included free. Limited to 2 clients only.',cta1Text:'Apply for Executive ($1,000/mo)',cta1Sub:'25 posts, newsletter, weekly calls, CRICKETS included.',cta1Url:'WA_EXECUTIVE',cta2Text:'Book a free strategy call',cta2Url:'https://cal.id/jennavi/strategy',links:[{label:'About Jennifer',title:'The Founder Behind the Strategy',desc:'873% impression growth. 6,000+ followers. Zero paid ads. Documented publicly.',url:'https://jennavi.co/founder.html',arrow:'Read Jennifer\'s Story'},{label:'Ghostwriter vs DIY',title:'The Math of Doing It Yourself',desc:'An honest calculation of the DIY path versus working with Jennifer.',url:'https://jennavi.co/insights/linkedin-ghostwriter-vs-diy.html',arrow:'See the Comparison'}]}
  ];
 
  /* ── STATE ── */
@@ -1191,36 +1187,27 @@ if (contactForm) {
      setTimeout(function(){document.querySelectorAll('.breakdown-bar').forEach(function(bar){bar.style.width=bar.getAttribute('data-pct')+'%';});},200);
      /* Fix This First */
      (function(){
-       var CAT_THRESHOLDS=[8,8,10,8,10,8];
        var actionMap={'Banner':{text:'Your banner should show your name, your niche, and one proof point. No stock photos. No blank space.',link:null},'Headline':{text:'Your headline is the first thing every visitor reads.',link:'https://jennavi.co/linkedin-profile-audit.html',linkText:'Audit your headline free.'},'About Section':{text:'Your About section is your silent sales page. It opens on your client world, not your biography.',link:'https://jennavi.co/linkedin-profile-audit.html',linkText:'Audit your About section free.'},'Featured Section':{text:'Pin your booking link first. Every item must advance a buying decision. Review and update it now.',link:null},'Content':{text:'Your content is visible but not converting. Check your hooks, proof and conversion intent.',link:'https://jennavi.co/linkedin-post-audit.html',linkText:'Audit your last post free.'},'Positioning':{text:'Positioning problems always start with the headline. If a stranger cannot understand your value in 5 seconds, your positioning needs work.',link:'https://jennavi.co/linkedin-profile-audit.html',linkText:'Audit your headline free.'}};
-       var catData=CATEGORIES.map(function(name,i){return{name:name,score:scores.byCat[i],max:CAT_MAX[i],pct:CAT_MAX[i]>0?scores.byCat[i]/CAT_MAX[i]:0,threshold:CAT_THRESHOLDS[i]};});
+       var catData=CATEGORIES.map(function(name,i){return{name:name,score:scores.byCat[i],max:CAT_MAX[i],pct:CAT_MAX[i]>0?scores.byCat[i]/CAT_MAX[i]:0,threshold:Math.ceil(CAT_MAX[i]*0.8)};});
        catData.sort(function(a,b){return a.pct-b.pct;});
        var poorCats=catData.filter(function(d){return d.score<d.threshold;});
        var fixEl=document.getElementById('fixThisFirst');if(!fixEl)return;
+       if(poorCats.length===0){fixEl.style.display='none';fixEl.innerHTML='';return;}
        var html='<span class="ftf-label">Fix This First</span>';
-       if(poorCats.length===0){var lowest=catData[0];var action=actionMap[lowest.name]||{text:'Continue refining this area.',link:null};html+='<p class="ftf-category">'+escHtml(lowest.name)+' '+lowest.score+'/'+lowest.max+'</p><p class="ftf-text">Your profile is performing well. '+escHtml(action.text)+'</p>';if(action.link)html+='<a href="'+action.link+'" class="ftf-link">'+escHtml(action.linkText)+' &rarr;</a>';}
-       else if(poorCats.length===catData.length){html+='<p class="ftf-category" style="color:var(--score-crit);">All Categories Need Attention</p><p class="ftf-text">Every section of your LinkedIn profile needs work. Start with your Banner, then your Headline, then your About Section. Work through each category in order. Do not post more content until the profile foundation is fixed.</p>';}
+       if(poorCats.length===catData.length){html+='<p class="ftf-category" style="color:var(--score-crit);">All Categories Need Attention</p><p class="ftf-text">Every section of your LinkedIn profile needs work. Start with your Banner, then your Headline, then your About Section. Work through each category in order. Do not post more content until the profile foundation is fixed.</p>';}
        else{poorCats.forEach(function(cat,idx){var action=actionMap[cat.name]||{text:'This area needs attention.',link:null};html+='<p class="ftf-category">'+(idx+1)+'. '+escHtml(cat.name)+' '+cat.score+'/'+cat.max+'</p><p class="ftf-text">'+escHtml(action.text)+'</p>';if(action.link)html+='<a href="'+action.link+'" class="ftf-link">'+escHtml(action.linkText)+' &rarr;</a>';if(idx<poorCats.length-1)html+='<hr style="border:none;border-top:1px solid var(--gold-border);margin:12px 0;">';});}
        fixEl.innerHTML=html;fixEl.style.display='block';
      })();
      var weightEl=document.getElementById('weightingNote');if(weightEl)weightEl.style.display='block';
      /* diagnosis card */
-     var urgencyLine=scores.total<60?'<p style="font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;">Every week your profile stays like this is a week your ideal clients find someone else.</p>':'';var s=scores.total;var waMessages={'WA_GROWTH':'Hi Jennifer, I scored '+s+' out of 100 on your LinkedIn Health Check. I am interested in the Growth tier at $400 per month. When can we start?','WA_AUTHORITY':'Hi Jennifer, I scored '+s+' out of 100 on your LinkedIn Health Check. I am interested in the Authority tier at $600 per month. When can we start?','WA_EXECUTIVE':'Hi Jennifer, I scored '+s+' out of 100 on your LinkedIn Health Check. I am interested in the Executive tier at $1,000 per month. When can we start?'};
+     var urgencyLine=scores.total<60?'<p style="font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;">Every week your profile stays like this is a week your ideal clients find someone else.</p>':'';var s=scores.total;var waMessages={'WA_GROWTH':'Hi Jennifer, I scored '+s+' out of 100 on your LinkedIn Health Check. I am interested in the Growth tier at $400 per month. When can we start?','WA_AUTHORITY':'Hi Jennifer, I scored '+s+' out of 100 on your LinkedIn Health Check. I am interested in the Authority tier at $600 per month. When can we start?','WA_VIP':'Hi Jennifer, I scored '+s+' out of 100 on your LinkedIn Health Check. I am interested in the VIP tier at $800 per month. When can we start?','WA_EXECUTIVE':'Hi Jennifer, I scored '+s+' out of 100 on your LinkedIn Health Check. I am interested in the Executive tier at $1,000 per month. When can we start?'};
      var cta1FinalUrl=waMessages[result.cta1Url]?'https://wa.me/2349024680769?text='+encodeURIComponent(waMessages[result.cta1Url]):result.cta1Url;
      var dc='<div class="diagnosis-card '+result.colorClass+'"><div class="diag-band '+result.colorClass+'" style="display:none;" aria-hidden="true">'+result.bandText+'</div><h3 class="diag-heading serif">'+escHtml(result.title)+'</h3><p class="diag-body">'+escHtml(result.body)+'</p><p class="diag-service">Recommended for you</p><p class="diag-service-name serif">'+escHtml(result.serviceName)+'</p><p class="diag-desc">'+escHtml(result.serviceDesc)+'</p>'+urgencyLine+'<div class="cta-row"><div class="cta-col"><a href="'+cta1FinalUrl+'" target="_blank" rel="noopener noreferrer" class="cta-primary">'+escHtml(result.cta1Text)+' &#8594;</a><p class="cta-subtext">'+escHtml(result.cta1Sub)+'</p></div><div class="cta-col"><a data-cal-link="jennavi/strategy" data-cal-namespace="default" data-cal-config=\'{"layout":"month_view"}\' class="cta-secondary" style="cursor:pointer;">'+escHtml(result.cta2Text)+'</a><p class="cta-subtext">I will review your LinkedIn profile before the call.</p></div></div></div>';
      document.getElementById('diagnosisCard').innerHTML=dc;
      /* secondary links */
      var rlHTML='';
      result.links.forEach(function(link){rlHTML+='<a href="'+link.url+'" target="_blank" rel="noopener noreferrer" class="result-link-tile"><span class="rlt-label">'+escHtml(link.label)+'</span><span class="rlt-title serif">'+escHtml(link.title)+'</span><span class="rlt-desc">'+escHtml(link.desc)+'</span><span class="rlt-arrow">'+escHtml(link.arrow)+' &#8594;</span></a>';});
-     document.getElementById('resultLinks').innerHTML=rlHTML;
-     /* For scores below 60, move more-tools section below retake to reduce decision fatigue - done BEFORE scrolling so the DOM is fully settled first */
-     if(scores.total<60){
-       var moreTools=document.querySelector('[data-tools-section]');
-       var retakeWrap=document.querySelector('.retake-wrap');
-       if(moreTools&&retakeWrap&&retakeWrap.parentNode){
-         retakeWrap.parentNode.insertBefore(moreTools,retakeWrap.nextSibling);
-       }
-     }
+     var resultLinksEl=document.getElementById('resultLinks');if(resultLinksEl)resultLinksEl.innerHTML=rlHTML;
      var lcScore=document.getElementById('lcScore');var lcRange=document.getElementById('lcRange');
      if(lcScore)lcScore.value=scores.total;if(lcRange)lcRange.value=result.title;
      if(typeof gtag!=='undefined'){gtag('event','quiz_complete',{event_category:'LinkedIn Health Check',event_label:result.title,value:scores.total});}
@@ -1231,7 +1218,7 @@ if (contactForm) {
        var offset=resultSection.getBoundingClientRect().top+window.pageYOffset-navHeight-16;
        window.scrollTo({top:offset,behavior:'smooth'});
      },80);
-   },generateDelay());
+   },Math.floor(Math.random()*600)+800);
  }
 
  /* ── START QUIZ ── */
@@ -1299,7 +1286,7 @@ var leadForm=document.getElementById('leadForm'),lcThanks=document.getElementByI
 function submitLeadForm(payload,nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,attempt){
   attempt=attempt||1;
   fetch(LEAD_ENDPOINT_HC,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)}).then(function(r){
-    try{leadForm.style.display='none';if(leadCaptureIntro)leadCaptureIntro.style.display='none';if(lcSkip)lcSkip.style.display='none';if(lcThanks){lcThanks.style.display='block';var navElLC=document.querySelector('.nav');var navHeightLC=navElLC?navElLC.offsetHeight:80;var lcOffset=lcThanks.getBoundingClientRect().top+window.pageYOffset-navHeightLC-16;window.scrollTo({top:lcOffset,behavior:'smooth'});}var waMsg='Hi Jennifer, I just completed the Jennavi LinkedIn Health Check. My name is '+(nameVal||'a founder')+'. My score is '+(scoreVal||'?')+' out of 100. Result: '+(rangeVal||'?')+'. I would love to discuss this with you.';var waBtn=document.getElementById('lcWaBtn');if(waBtn)waBtn.href='https://wa.me/2349024680769?text='+encodeURIComponent(waMsg);if(typeof gtag!=='undefined')gtag('event','lead_captured',{event_category:'LinkedIn Health Check',value:parseInt(scoreVal)||0});}catch(displayErr){console.error('Display update error:',displayErr);}
+    try{leadForm.style.display='none';if(leadCaptureIntro)leadCaptureIntro.style.display='none';if(lcSkip)lcSkip.style.display='none';if(lcThanks){lcThanks.style.display='block';requestAnimationFrame(function(){requestAnimationFrame(function(){var navElLC=document.querySelector('.nav');var navHeightLC=navElLC?navElLC.offsetHeight:80;var lcOffset=lcThanks.getBoundingClientRect().top+window.pageYOffset-navHeightLC-16;window.scrollTo({top:lcOffset,behavior:'smooth'});});});}var waMsg='Hi Jennifer, I just completed the Jennavi LinkedIn Health Check. My name is '+(nameVal||'a founder')+'. My score is '+(scoreVal||'?')+' out of 100. Result: '+(rangeVal||'?')+'. I would love to discuss this with you.';var waBtn=document.getElementById('lcWaBtn');if(waBtn)waBtn.href='https://wa.me/2349024680769?text='+encodeURIComponent(waMsg);if(typeof gtag!=='undefined')gtag('event','lead_captured',{event_category:'LinkedIn Health Check',value:parseInt(scoreVal)||0});}catch(displayErr){console.error('Display update error:',displayErr);}
     try{sendEmail(nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,'Book Your Free Discovery Call','https://cal.id/jennavi/strategy');}catch(emailErr){console.error('sendEmail error:',emailErr);}
   }).catch(function(){
     if(attempt<2){setTimeout(function(){submitLeadForm(payload,nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,attempt+1);},600);}
@@ -1334,16 +1321,6 @@ if(leadForm){leadForm.addEventListener('submit',function(e){
    if(id==='shareWhatsApp'){window.open('https://wa.me/?text='+encodeURIComponent('I just took this free LinkedIn Health Check and it told me exactly what is broken. Takes 4 minutes. Try it: '+SHARE_URL),'_blank');if(typeof gtag!=='undefined')gtag('event','share_whatsapp',{event_category:'LinkedIn Health Check'});return;}
    if(id==='copyLink'){var btn=document.getElementById('copyLink');var fallback=function(){var ta=document.createElement('textarea');ta.value=SHARE_URL;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);if(btn)btn.textContent='Copied';setTimeout(function(){if(btn)btn.textContent='Copy Link';},2200);};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(SHARE_URL).then(function(){if(btn){btn.textContent='Copied';btn.style.color='#2E7D32';}setTimeout(function(){if(btn){btn.textContent='Copy Link';btn.style.color='';}},2200);}).catch(fallback);}else{fallback();}if(typeof gtag!=='undefined')gtag('event','copy_link',{event_category:'LinkedIn Health Check'});return;}
  });
-
- /* ── TESTIMONIAL SLIDER ── */
- (function(){
-   var slides=document.querySelectorAll('.testimonial-slide'),dots=document.querySelectorAll('.testimonial-dot');
-   if(!slides.length)return;
-   var current=0,timer;
-   function goTo(idx){slides[current].classList.remove('active');slides[current].classList.add('exiting');dots[current].classList.remove('active');dots[current].setAttribute('aria-selected','false');var prev=current;setTimeout(function(){slides[prev].classList.remove('exiting');},700);current=idx;slides[current].classList.add('active');dots[current].classList.add('active');dots[current].setAttribute('aria-selected','true');}
-   timer=setInterval(function(){goTo((current+1)%slides.length);},5500);
-   dots.forEach(function(dot,i){dot.addEventListener('click',function(){clearInterval(timer);goTo(i);timer=setInterval(function(){goTo((current+1)%slides.length);},5500);});});
- })();
 
  /* ── UTIL ── */
  function escHtml(str){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
@@ -1467,24 +1444,47 @@ if(leadForm){leadForm.addEventListener('submit',function(e){
 /* ============ TESTIMONIAL SLIDER ============ */
 (function(){
   var slides = document.querySelectorAll('.testimonial-slide');
-  var dotsWrap = document.getElementById('testimonialDots');
-  if (!slides.length || !dotsWrap) return;
+  var barsWrap = document.getElementById('testimonialDots');
+  if (!slides.length || !barsWrap) return;
+  var DURATION = 6000;
   var current = 0;
   slides.forEach(function(_, i){
-    var dot = document.createElement('button');
-    dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', function(){ show(i); });
-    dotsWrap.appendChild(dot);
+    var track = document.createElement('div');
+    track.className = 'testimonial-progress-track';
+    var fill = document.createElement('div');
+    fill.className = 'testimonial-progress-fill';
+    track.appendChild(fill);
+    track.addEventListener('click', function(){ show(i); restart(); });
+    barsWrap.appendChild(track);
   });
-  var dots = dotsWrap.querySelectorAll('.testimonial-dot');
+  var fills = barsWrap.querySelectorAll('.testimonial-progress-fill');
+  function fillActive(){
+    fills.forEach(function(f, i){
+      f.classList.remove('filling');
+      f.style.transition = 'none';
+      f.style.width = i < current ? '100%' : (i === current ? '0%' : '0%');
+    });
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        var activeFill = fills[current];
+        activeFill.style.transition = 'width ' + DURATION + 'ms linear';
+        activeFill.style.width = '100%';
+      });
+    });
+  }
   function show(i){
     slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
     current = i;
     slides[current].classList.add('active');
-    dots[current].classList.add('active');
+    fillActive();
   }
-  setInterval(function(){ show((current + 1) % slides.length); }, 6000);
+  var timer;
+  function restart(){
+    clearInterval(timer);
+    fillActive();
+    timer = setInterval(function(){ show((current + 1) % slides.length); }, DURATION);
+  }
+  restart();
 })();
 
 /* ============ FAQ ACCORDION ============ */
