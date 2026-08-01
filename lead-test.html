@@ -3,102 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jennavi Apps Script Test</title>
+<title>Jennavi Lead Test</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
 body{
-    margin:0;
-    background:#f5f5f5;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
 }
 
-.container{
-    width:100%;
-    max-width:420px;
-    background:#fff;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
-}
-
-h2{
-    margin:0 0 20px;
-    text-align:center;
+.card{
+background:#fff;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+width:380px;
 }
 
 input,
 textarea,
 button{
-    width:100%;
-    padding:14px;
-    margin-top:14px;
-    font-size:16px;
-    border-radius:8px;
-    border:1px solid #ccc;
+width:100%;
+padding:12px;
+margin-top:12px;
+box-sizing:border-box;
+font-size:16px;
 }
 
 textarea{
-    min-height:120px;
-    resize:vertical;
+height:120px;
+resize:vertical;
 }
 
 button{
-    background:#111;
-    color:#fff;
-    border:none;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#333;
+background:#111;
+color:#fff;
+border:none;
+cursor:pointer;
 }
 
 #status{
-    margin-top:20px;
-    text-align:center;
-    font-weight:bold;
+margin-top:20px;
+font-weight:bold;
+text-align:center;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
 
-<h2>Jennavi Lead Capture Test</h2>
+<h2>Jennavi Lead Test</h2>
 
-<form id="leadForm">
+<input id="name" placeholder="Name">
 
-<input
-type="text"
-id="name"
-placeholder="Your Name"
-required>
+<input id="email" type="email" placeholder="Email">
 
-<input
-type="email"
-id="email"
-placeholder="Your Email"
-required>
+<textarea id="message" placeholder="Message"></textarea>
 
-<textarea
-id="message"
-placeholder="Your Message"
-required></textarea>
-
-<button type="submit">
-Submit Test
+<button id="submitBtn">
+Submit
 </button>
-
-</form>
 
 <div id="status"></div>
 
@@ -106,53 +77,42 @@ Submit Test
 
 <script>
 
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyJ6ttOAgst4qY598daFLlBXNb4U7720dw_oWbVOp0lfSR8hH3ohQAlHN86rixifBkOUw/exec";
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbyGcEpF8YXAT27WCk3AG48k3JGXjq5FpLpbmu1y4qRdkEUUA1DiRuGQ1ZeBCug7Pn9imw/exec";
 
-const form = document.getElementById("leadForm");
-const status = document.getElementById("status");
+document.getElementById("submitBtn").onclick=async()=>{
 
-form.addEventListener("submit", async (e) => {
+const status=document.getElementById("status");
 
-    e.preventDefault();
+status.innerHTML="Sending...";
 
-    status.textContent = "Sending...";
+try{
 
-    const payload = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value
-    };
-
-    try {
-
-        const response = await fetch(WEB_APP_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-
-        console.log(result);
-
-        if (result.status === "success") {
-            status.textContent = "✅ Success!";
-            form.reset();
-        } else {
-            status.textContent = "❌ " + (result.message || "Server returned an error.");
-        }
-
-    } catch (error) {
-
-        console.error(error);
-
-        status.textContent = "❌ " + error.message;
-
-    }
-
+const res=await fetch(WEB_APP_URL,{
+method:"POST",
+redirect:"follow",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+name:document.getElementById("name").value,
+email:document.getElementById("email").value,
+message:document.getElementById("message").value
+})
 });
+
+const json=await res.json();
+
+status.innerHTML="✅ "+json.status;
+
+}catch(e){
+
+status.innerHTML="❌ "+e.message;
+console.error(e);
+
+}
+
+};
+
 </script>
 
 </body>
