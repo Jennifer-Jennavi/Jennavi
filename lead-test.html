@@ -106,7 +106,7 @@ Submit Test
 
 <script>
 
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwJ3c4A4xkLTqyZVuijcgNmYALamySS7bu2xsvrN3jO6MIaZEg8oKH5alYduG_WR8z33Q/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyJ6ttOAgst4qY598daFLlBXNb4U7720dw_oWbVOp0lfSR8hH3ohQAlHN86rixifBkOUw/exec";
 
 const form = document.getElementById("leadForm");
 const status = document.getElementById("status");
@@ -137,9 +137,12 @@ form.addEventListener("submit", async (e) => {
 
         console.log(result);
 
-        status.textContent = "✅ Success!";
-
-        form.reset();
+        if (result.status === "success") {
+            status.textContent = "✅ Success!";
+            form.reset();
+        } else {
+            status.textContent = "❌ " + (result.message || "Server returned an error.");
+        }
 
     } catch (error) {
 
