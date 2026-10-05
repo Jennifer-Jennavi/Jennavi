@@ -906,7 +906,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
             <li>AI-personalized messages, reviewed before they go out</li>
             <li>CRM tracking, reply handling and a monthly results report</li>
           </ul>
-          <a id="wa-standard" href="https://wa.me/2349024680769?text=Hi%20Jennifer%2C%20I%20would%20like%20to%20talk%20about%20the%20Founder%20tier." target="_blank" rel="noopener noreferrer" class="pricing-cta">Talk with Jennifer First</a>
+          <a id="wa-standard" href="https://wa.me/2349024680769?text=Hi%20Jennifer%2C%20I%20would%20like%20to%20talk%20about%20the%20Founder%20tier.%20Can%20we%20talk%20about%20how%20to%20get%20started%3F" target="_blank" rel="noopener noreferrer" class="pricing-cta">Talk with Jennifer First</a>
           <div class="flw-block" id="flw-block-standard"></div>
         </article>
 
@@ -929,7 +929,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
             <li>CRICKETS playbook included free, delivered by email</li>
             <li>Priority response and closer strategy support</li>
           </ul>
-          <a id="wa-executive" href="https://wa.me/2349024680769?text=Hi%20Jennifer%2C%20I%20would%20like%20to%20talk%20about%20the%20Executive%20tier." target="_blank" rel="noopener noreferrer" class="pricing-cta">Talk with Jennifer First</a>
+          <a id="wa-executive" href="https://wa.me/2349024680769?text=Hi%20Jennifer%2C%20I%20would%20like%20to%20talk%20about%20the%20Executive%20tier.%20Can%20we%20talk%20about%20how%20to%20get%20started%3F" target="_blank" rel="noopener noreferrer" class="pricing-cta">Talk with Jennifer First</a>
           <div class="flw-block" id="flw-block-executive"></div>
         </article>
       </div>
@@ -1559,11 +1559,11 @@ function jvRender(){
     pe.innerHTML='<sup>$</sup>'+c.per.toLocaleString('en-US');
     document.getElementById('cad-'+k).textContent=pilot?'one-time, covers your first 30 days':('per month'+(jvTerm>1?', billed for '+jvTerm+' months':''));
     document.getElementById('save-'+k).textContent=c.off>0?('Savings applied: '+Math.round(c.off*100)+'%'):'';
-    var wa='Hi Jennifer, I am interested in the '+JV_PLANS[k].label+' tier ('+(pilot?'30-day pilot':'monthly plan')+') for '+c.n+' profile'+(c.n>1?'s':'')+'. Can we talk?';
+    var plan=pilot?'30-day pilot':(jvTerm>1?jvTerm+'-month plan, billed upfront for '+jvTerm+' months':'month-to-month plan');var wa='Hi Jennifer, I am interested in the '+JV_PLANS[k].label+' tier ('+plan+') for '+c.n+' profile'+(c.n>1?'s':'')+', about $'+c.total.toLocaleString('en-US')+' in total. Can we talk about how to get started?';
     document.getElementById('wa-'+k).href='https://wa.me/2349024680769?text='+encodeURIComponent(wa);
     var b=document.getElementById('flw-block-'+k);
     if(b&&!b.querySelector('.flw-capture')){
-      b.innerHTML=c.total>CONTACT_SALES_THRESHOLD?'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" target="_blank" rel="noopener noreferrer" href="https://wa.me/2349024680769?text='+encodeURIComponent('Hi Jennifer, I would like a custom team quote for '+c.n+' profiles.')+'">Request a team quote</a>':'<button class="pricing-pay" onclick="showFlwForm(\''+k+'\','+c.total+',\''+c.desc+'\')">'+(pilot?'Try the Pilot':'Continue')+' &middot; $'+c.total.toLocaleString('en-US')+'</button>';
+      b.innerHTML=c.total>CONTACT_SALES_THRESHOLD?'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" target="_blank" rel="noopener noreferrer" href="https://wa.me/2349024680769?text='+encodeURIComponent('Hi Jennifer, I would like a custom team quote for the '+JV_PLANS[k].label+' tier ('+plan+') for '+c.n+' profiles. Can we talk about how to get started?')+'">Request a team quote</a>':'<button class="pricing-pay" onclick="showFlwForm(\''+k+'\','+c.total+',\''+c.desc+'\')">'+(pilot?'Try the Pilot':'Continue')+' &middot; $'+c.total.toLocaleString('en-US')+'</button>';
     }
   });
 }
