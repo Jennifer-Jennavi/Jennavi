@@ -779,7 +779,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         <p class="section-body reveal">These four tools aren't generic LinkedIn advice repackaged as interactive forms. Every scoring rubric, every dimension, every ROI variable is drawn directly from CRICKETS, the complete LinkedIn positioning playbook Jennifer wrote before she built Jennavi.</p>
         <p class="section-body reveal">CRICKETS diagnoses why LinkedIn content generates views but zero paying clients. Jennifer documented 873% impression growth with zero paid ads applying this framework to her own LinkedIn, then codified it into a playbook and built four free tools so any founder could access it.</p>
         <div class="hero-actions" style="margin-top:24px;">
-          <a href="https://jennavi.co/book.html" class="btn btn-brass">Get CRICKETS for $9.99 &#8594;</a>
+          <a href="https://jennavi.co/book.html?buy=1" class="btn btn-brass">Get CRICKETS for $9.99 &#8594;</a>
           <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="btn btn-outline">Hire Jennifer &#8594;</a>
         </div>
       </div>
@@ -810,7 +810,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
             <li>The About section structure that makes buyers reach out first</li>
             <li>How to engineer a DM pipeline from organic content</li>
           </ul>
-          <a href="https://jennavi.co/book.html" class="btn btn-brass" style="width:100%;justify-content:center;">Get CRICKETS &middot; $9.99 &#8594;</a>
+          <a href="https://jennavi.co/book.html?buy=1" class="btn btn-brass" style="width:100%;justify-content:center;">Get CRICKETS &middot; $9.99 &#8594;</a>
           <p style="font-family:'DM Mono',monospace;font-size:9.5px;color:var(--parchment-faint);text-transform:uppercase;letter-spacing:0.08em;margin-top:14px;text-align:center;">Instant PDF &middot; 155 Pages &middot; Read it tonight</p>
         </div>
       </div>
@@ -882,7 +882,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   </div>
   <div class="container" style="margin-top:24px;">
     <div class="jv-story-cards">
-      <div class="jv-card tilt"><p class="eyebrow">Do it yourself</p><h3 class="process-title">Read CRICKETS</h3><p class="process-body">The complete LinkedIn positioning playbook behind every tool, for founders who want to rebuild their own profile. Instant PDF for $9.99.</p><p style="margin-top:14px;"><a href="https://jennavi.co/book.html" class="btn btn-brass">Get CRICKETS</a></p></div>
+      <div class="jv-card tilt"><p class="eyebrow">Do it yourself</p><h3 class="process-title">Read CRICKETS</h3><p class="process-body">The complete LinkedIn positioning playbook behind every tool, for founders who want to rebuild their own profile. Instant PDF for $9.99.</p><p style="margin-top:14px;"><a href="https://jennavi.co/book.html?buy=1" class="btn btn-brass">Get CRICKETS</a></p></div>
       <div class="jv-card tilt"><p class="eyebrow">Have Jennavi do it</p><h3 class="process-title">Start a 30-day pilot</h3><p class="process-body">Profile optimization, content in your voice and outreach that books calls, for you or for your whole sales team. Pilots start at $500.</p><p style="margin-top:14px;"><a href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing" class="btn btn-brass">See Tiers and Pricing</a></p></div>
     </div>
   </div>
@@ -1470,6 +1470,9 @@ document.addEventListener('pointerleave',function(){document.querySelectorAll(se
 function on(x){x.classList.add('in');}
 if(!('IntersectionObserver' in window)){t.forEach(on);return;}
 var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){on(e.target);o.unobserve(e.target);}});},{threshold:.15});t.forEach(function(x){o.observe(x);});})();
+</script>
+<script>/* jv-lock: instant feedback and double-click guard on every form */
+(function(){document.addEventListener('submit',function(e){var f=e.target;setTimeout(function(){var b=f&&f.querySelector&&f.querySelector('button[type="submit"],button:not([type])');if(b&&!b.disabled){b.disabled=true;b.setAttribute('data-t',b.textContent);b.textContent='Sending...';setTimeout(function(){b.disabled=false;b.textContent=b.getAttribute('data-t');},8000);}},0);},true);})();
 </script>
 </body>
 </html>

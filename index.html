@@ -750,7 +750,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         </ul>
         <div style="display:flex;align-items:center;gap:20px;margin-top:26px;flex-wrap:wrap;">
           <span class="serif" style="font-size:30px;font-weight:700;color:var(--brass-bright);">$9.99</span>
-          <a href="https://jennavi.co/book.html" class="btn btn-brass">Get CRICKETS Now</a>
+          <a href="https://jennavi.co/book.html?buy=1" class="btn btn-brass">Get CRICKETS Now</a>
         </div>
         <p style="font-size:12px;color:var(--parchment-faint);margin-top:14px;">Free for Executive tier clients. Get it free elsewhere by <a href="https://jennavi.co/free-crickets.html" style="color:var(--brass-bright);text-decoration:underline;">committing to implement it</a>.</p>
       </div>
@@ -827,7 +827,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
     <p class="eyebrow">Where We Work</p>
     <h2 class="section-title reveal" id="markets-heading">Built for leaders in the<br><em>world's premium markets.</em></h2>
     <p class="section-body reveal">Jennavi serves founders, CEOs and executives in the United States, United Kingdom, Canada and Australia, and in any market where leaders invest in premium positioning, including Germany, France, the UAE, India, Morocco and the Czech Republic. Work is delivered remotely, pricing is in USD, and strategy calls are scheduled across time zones.</p>
-    <div class="jv-chips" style="margin-top:22px;"><span>United States</span><span>United Kingdom</span><span>Canada</span><span>Australia</span><span>Germany</span><span>France</span><span>United Arab Emirates</span><span>India</span><span>Morocco</span><span>Czechia</span></div>
+    <div class="jv-chips" style="margin-top:22px;"><span><span aria-hidden="true">🇺🇸</span> United States</span><span><span aria-hidden="true">🇬🇧</span> United Kingdom</span><span><span aria-hidden="true">🇨🇦</span> Canada</span><span><span aria-hidden="true">🇦🇺</span> Australia</span><span><span aria-hidden="true">🇩🇪</span> Germany</span><span><span aria-hidden="true">🇫🇷</span> France</span><span><span aria-hidden="true">🇦🇪</span> United Arab Emirates</span><span><span aria-hidden="true">🇮🇳</span> India</span><span><span aria-hidden="true">🇲🇦</span> Morocco</span><span><span aria-hidden="true">🇨🇿</span> Czechia</span></div>
   </div>
 </section>
 
@@ -1399,17 +1399,10 @@ function buildHiddenNotes(){
   return JSON.stringify(data);
 }
 function submitLead(payload, onSuccess, onError){
-  /* NOTE: routes to the Google Sheet only. Formspree is reserved for payment
-     success/failure alerts (see payWithFlutterwave) to stay within the 50/month limit. */
-  fetch(LEAD_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(payload)
-  }).then(function(r){
-    onSuccess();
-  }).catch(function(err){
-    if (onError) onError(err); else onSuccess();
-  });
+  /* instant confirmation: the request is sent in the background and retried once if the network drops */
+  try { onSuccess(); } catch(e) {}
+  function send(n){ fetch(LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload), keepalive: true }).catch(function(){ if (n < 2) { setTimeout(function(){ send(n + 1); }, 1500); } else if (typeof FORMSPREE_ENDPOINT !== 'undefined' && FORMSPREE_ENDPOINT) { fetch(FORMSPREE_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) }).catch(function(){}); } }); }
+  send(1);
 }
 
 /* ============ INTL-TEL-INPUT: FULL COUNTRY LIST + IP AUTO-DETECT, DEFAULTS TO US ============ */
@@ -1437,7 +1430,7 @@ var afIti, cfIti;
 var auditForm = document.getElementById('auditForm');
 if (auditForm) {
   auditForm.addEventListener('submit', function(e){
-    e.preventDefault();
+    e.preventDefault(); var _sb=this.querySelector('button[type="submit"],button:not([type])'); if(_sb){ if(_sb.disabled) return; _sb.disabled=true; _sb.setAttribute('data-t',_sb.textContent); _sb.textContent='Sending...'; setTimeout(function(){ if(_sb.disabled){ _sb.disabled=false; _sb.textContent=_sb.getAttribute('data-t'); } },8000); }
     var payload = {
       name: document.getElementById('af-name').value,
       email: document.getElementById('af-email').value,
@@ -1481,7 +1474,7 @@ if (auditForm) {
 var contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e){
-    e.preventDefault();
+    e.preventDefault(); var _sb=this.querySelector('button[type="submit"],button:not([type])'); if(_sb){ if(_sb.disabled) return; _sb.disabled=true; _sb.setAttribute('data-t',_sb.textContent); _sb.textContent='Sending...'; setTimeout(function(){ if(_sb.disabled){ _sb.disabled=false; _sb.textContent=_sb.getAttribute('data-t'); } },8000); }
     var subjectEl = document.getElementById('cf-subject');
     var subjectVal = subjectEl && subjectEl.value ? subjectEl.value : 'General Enquiry';
     var payload = {
@@ -1515,7 +1508,7 @@ if (contactForm) {
 var newsletterForm = document.getElementById('newsletterForm');
 if (newsletterForm) {
   newsletterForm.addEventListener('submit', function(e){
-    e.preventDefault();
+    e.preventDefault(); var _sb=this.querySelector('button[type="submit"],button:not([type])'); if(_sb){ if(_sb.disabled) return; _sb.disabled=true; _sb.setAttribute('data-t',_sb.textContent); _sb.textContent='Sending...'; setTimeout(function(){ if(_sb.disabled){ _sb.disabled=false; _sb.textContent=_sb.getAttribute('data-t'); } },8000); }
     var payload = {
       name: '',
       email: document.getElementById('nl-email').value,
@@ -2163,6 +2156,9 @@ document.addEventListener('pointerleave',function(){document.querySelectorAll(se
 function on(x){x.classList.add('in');}
 if(!('IntersectionObserver' in window)){t.forEach(on);return;}
 var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){on(e.target);o.unobserve(e.target);}});},{threshold:.15});t.forEach(function(x){o.observe(x);});})();
+</script>
+<script>/* jv-lock: instant feedback and double-click guard on every form */
+(function(){document.addEventListener('submit',function(e){var f=e.target;setTimeout(function(){var b=f&&f.querySelector&&f.querySelector('button[type="submit"],button:not([type])');if(b&&!b.disabled){b.disabled=true;b.setAttribute('data-t',b.textContent);b.textContent='Sending...';setTimeout(function(){b.disabled=false;b.textContent=b.getAttribute('data-t');},8000);}},0);},true);})();
 </script>
 </body>
 </html>

@@ -1366,7 +1366,7 @@ function submitLeadForm(payload,nameVal,emailVal,scoreVal,rangeVal,rTitle,rBody,
   });
 }
 if(leadForm){leadForm.addEventListener('submit',function(e){
-  e.preventDefault();
+  e.preventDefault(); var _sb=this.querySelector('button[type="submit"],button:not([type])'); if(_sb){ if(_sb.disabled) return; _sb.disabled=true; _sb.setAttribute('data-t',_sb.textContent); _sb.textContent='Sending...'; setTimeout(function(){ if(_sb.disabled){ _sb.disabled=false; _sb.textContent=_sb.getAttribute('data-t'); } },8000); }
   var lcPhoneEl2=document.getElementById('lc-phone');
   try{if(lcPhoneEl2&&window.lcPhoneIti&&typeof window.lcPhoneIti.getNumber==='function'){var fullNum=window.lcPhoneIti.getNumber();if(fullNum)lcPhoneEl2.value=fullNum;}}catch(phoneErr){console.error('Phone number read error, using raw input value instead:',phoneErr);}
   var nameVal=(document.getElementById('lc-name')||{}).value||'';
@@ -1769,6 +1769,9 @@ document.addEventListener('pointerleave',function(){document.querySelectorAll(se
 function on(x){x.classList.add('in');}
 if(!('IntersectionObserver' in window)){t.forEach(on);return;}
 var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){on(e.target);o.unobserve(e.target);}});},{threshold:.15});t.forEach(function(x){o.observe(x);});})();
+</script>
+<script>/* jv-lock: instant feedback and double-click guard on every form */
+(function(){document.addEventListener('submit',function(e){var f=e.target;setTimeout(function(){var b=f&&f.querySelector&&f.querySelector('button[type="submit"],button:not([type])');if(b&&!b.disabled){b.disabled=true;b.setAttribute('data-t',b.textContent);b.textContent='Sending...';setTimeout(function(){b.disabled=false;b.textContent=b.getAttribute('data-t');},8000);}},0);},true);})();
 </script>
 </body>
 </html>

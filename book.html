@@ -1113,17 +1113,10 @@ function buildHiddenNotes(){
   return JSON.stringify(data);
 }
 function submitLead(payload, onSuccess, onError){
-  /* NOTE: routes to the Google Sheet only. Formspree is reserved for payment
-     success/failure alerts (see payWithFlutterwave) to stay within the 50/month limit. */
-  fetch(LEAD_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(payload)
-  }).then(function(r){
-    onSuccess();
-  }).catch(function(err){
-    if (onError) onError(err); else onSuccess();
-  });
+  /* instant confirmation: the request is sent in the background and retried once if the network drops */
+  try { onSuccess(); } catch(e) {}
+  function send(n){ fetch(LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload), keepalive: true }).catch(function(){ if (n < 2) { setTimeout(function(){ send(n + 1); }, 1500); } else if (typeof FORMSPREE_ENDPOINT !== 'undefined' && FORMSPREE_ENDPOINT) { fetch(FORMSPREE_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) }).catch(function(){}); } }); }
+  send(1);
 }
 
 /* ============ INTL-TEL-INPUT: FULL COUNTRY LIST + IP AUTO-DETECT, DEFAULTS TO US ============ */
@@ -1722,7 +1715,7 @@ if (burger && navLinksEl) {
 })();
 </script>
 
-<div id="jvSticky" aria-label="Quick actions"><a class="a" data-track-location="sticky_bar_book" href="#buy-crickets" onclick="if(typeof gtag==='function')gtag('event','crickets_sticky_click')">Get CRICKETS &middot; $9.99</a><a class="b" href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing" onclick="if(typeof gtag==='function')gtag('event','packages_sticky_click',{page:'book'})">Work With Jennavi</a></div>
+<div id="jvSticky" aria-label="Quick actions"><a class="a" data-track-location="sticky_bar_book" href="#buy-crickets" onclick="event.preventDefault();if(typeof gtag==='function')gtag('event','crickets_sticky_click');if(window.jvOpenBuy)window.jvOpenBuy();">Get CRICKETS &middot; $9.99</a><a class="b" href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing" onclick="if(typeof gtag==='function')gtag('event','packages_sticky_click',{page:'book'})">Work With Jennavi</a></div>
 <script>
 (function(){
 var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1753,6 +1746,15 @@ document.addEventListener('pointerleave',function(){document.querySelectorAll(se
 function on(x){x.classList.add('in');}
 if(!('IntersectionObserver' in window)){t.forEach(on);return;}
 var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){on(e.target);o.unobserve(e.target);}});},{threshold:.15});t.forEach(function(x){o.observe(x);});})();
+</script>
+<script>
+(function(){function openBuy(){var b=document.getElementById('buy-crickets');if(b&&b.scrollIntoView)b.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){if(typeof buyCrickets==='function')buyCrickets();},450);}
+window.jvOpenBuy=openBuy;
+if(/[?&]buy=1/.test(location.search)||location.hash==='#buy'){window.addEventListener('load',function(){setTimeout(openBuy,600);});}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="book.html"]');if(a&&/Get CRICKETS/i.test(a.textContent)){e.preventDefault();openBuy();}});})();
+</script>
+<script>/* jv-lock: instant feedback and double-click guard on every form */
+(function(){document.addEventListener('submit',function(e){var f=e.target;setTimeout(function(){var b=f&&f.querySelector&&f.querySelector('button[type="submit"],button:not([type])');if(b&&!b.disabled){b.disabled=true;b.setAttribute('data-t',b.textContent);b.textContent='Sending...';setTimeout(function(){b.disabled=false;b.textContent=b.getAttribute('data-t');},8000);}},0);},true);})();
 </script>
 </body>
 </html>
