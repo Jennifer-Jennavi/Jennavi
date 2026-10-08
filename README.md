@@ -15,8 +15,8 @@ Jennavi transforms startup founders, coaches, and CEOs into **unignorable Linked
 ## Key Pages
 
 - [Homepage](https://jennavi.co/) – Main brand hub
-- [CRICKETS – The Playbook](https://jennavi.co/book.html) – 53‑page digital book ($29.90)
-- [Services & Pricing](https://jennavi.co/services.html) – $100–$800/month retainers
+- [CRICKETS – The Playbook](https://jennavi.co/book.html) – 155‑page digital book ($9.90)
+- [Services & Pricing](https://jennavi.co/services.html) – starting at $500 for Founder tier and $1000 for Executive tier for the first 30 days pilot, then $1000 and $1500 respectively from the next month.
 - [Why Jennavi](https://jennavi.co/why-jennavi.html) – Methodology
 - [Founder](https://jennavi.co/founder.html) – Jennifer Mmesoma Omaliko
 - [Insights](https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html) – SEO blog article
