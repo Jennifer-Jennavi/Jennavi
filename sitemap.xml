@@ -28,6 +28,20 @@
 
   <!-- HIGH PRIORITY - Priority 0.9 -->
   <url>
+    <loc>https://jennavi.co/about.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/contact.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
     <loc>https://jennavi.co/founder.html</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -330,6 +344,28 @@
     <lastmod>2026-05-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- LEGAL PAGES - Priority 0.3 -->
+  <url>
+    <loc>https://jennavi.co/refund-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/terms-and-conditions.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://jennavi.co/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>
