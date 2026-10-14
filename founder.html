@@ -487,6 +487,20 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 <style>@media(max-width:820px){.jv-scroll .jv-cmp,.jv-scroll .jv-price{min-width:0;width:max-content}.jv-cmp th,.jv-cmp td{padding:14px 14px;font-size:14px}.jv-cmp td:not(:first-child),.jv-cmp th:not(:first-child){min-width:150px}.jv-cmp th:first-child,.jv-cmp td:first-child{width:124px;min-width:124px;max-width:124px;white-space:normal;font-size:12.5px;line-height:1.4;padding:14px 12px}.jv-cmp tr.grp td:first-child{width:auto;min-width:0;max-width:none;white-space:nowrap}}</style>
 <style>.jv-cmp tr.grp td.hi{background:linear-gradient(180deg,rgba(201,168,76,.16),rgba(201,168,76,.05));border-left:1px solid rgba(201,168,76,.55);border-right:1px solid rgba(201,168,76,.55)}.jv-cmp tr.grp td:first-child{white-space:normal;line-height:1.35}@media(max-width:820px){.jv-cmp tr.grp td:first-child{width:124px;min-width:124px;max-width:124px;white-space:normal;font-size:11px;letter-spacing:.08em;line-height:1.35;padding:20px 12px 8px}}</style>
 <style>.proof-img-wrap{height:360px;overflow:hidden;background:#080a0e;display:flex;align-items:center;justify-content:center;}.proof-img-wrap img{width:100%;height:100%;object-fit:contain;object-position:center;}</style>
+<style id="jv-standard">
+/* Jennavi standard cards: dark blue panels, hairline borders, gold only on hover and accents */
+.jv-card{background:var(--ink-2,#12151C);border:1px solid var(--line,rgba(243,238,227,.12));border-radius:6px;box-shadow:none}
+.jv-card:hover{border-color:rgba(201,168,76,.45);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.jv-scroll{border:1px solid var(--line,rgba(243,238,227,.12));border-radius:6px;background:var(--ink-2,#12151C)}
+.jv-cmp .us,.jv-cmp .hi,.jv-cmp tr.grp td.hi{background:var(--ink-3,#181C25);border-left:1px solid rgba(201,168,76,.4);border-right:1px solid rgba(201,168,76,.4)}
+.jv-cmp thead .us,.jv-cmp thead .hi{border-top:1px solid rgba(201,168,76,.4);border-radius:6px 6px 0 0}
+.jv-cmp tbody tr:last-child .us,.jv-cmp tbody tr:last-child .hi{border-bottom:1px solid rgba(201,168,76,.4);border-radius:0 0 6px 6px}
+.jv-cmp th:first-child,.jv-cmp td:first-child,.jv-cmp tr.grp td:first-child{background:var(--ink-2,#12151C)}
+.jv-cmp tbody tr:hover td:not(.us):not(.hi):not(:first-child){background:var(--ink-3,#181C25)}
+.jv-det{background:var(--ink-2,#12151C);border:1px solid var(--line,rgba(243,238,227,.12));border-radius:6px}
+.jv-chips span{background:var(--ink-2,#12151C);border:1px solid var(--line,rgba(243,238,227,.12))}
+.jv-tabs{background:var(--ink-2,#12151C);border-color:var(--line,rgba(243,238,227,.12))}
+</style>
 </head>
 <body>
 
@@ -498,11 +512,11 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
       <a href="#story">Story</a>
       <a href="#writing">Writing</a>
       <a href="https://jennavi.co/insights/">Blog</a>
-      <a href="https://jennavi.co/linkedin-tools.html">Tools</a>
+      <a href="https://jennavi.co/linkedin-tools.html">Free Tools</a>
       <a href="#connect">Connect</a>
     </div>
     <div class="nav-cta">
-      <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="btn btn-outline" style="padding:11px 20px;">View Services</a>
+      <a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="btn btn-outline" style="padding:11px 20px;">View Pricing</a>
       <a data-cal-link="jennavi/strategy" data-cal-namespace="default" data-cal-config='{"layout":"month_view"}' data-track-location="nav" class="btn btn-brass" style="cursor:pointer;padding:11px 20px;">Book a Call</a>
     </div>
     <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -908,23 +922,25 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="/" style="display:block;margin-bottom:14px;"><span class="footer-logo-mask" role="img" aria-label="Jennavi"></span></a>
+        <a href="https://jennavi.co/" style="display:block;margin-bottom:14px;" title="Jennavi home"><span class="footer-logo-mask" role="img" aria-label="Jennavi"></span></a>
         <p class="footer-tagline">"From invisible to inevitable. One founder at a time."</p>
       </div>
       <div>
-        <span class="footer-col-title">Free Tools</span>
-        <div class="footer-links">
-          <a href="https://jennavi.co/linkedin-health-check.html">Health Check</a>
-          <a href="https://jennavi.co/linkedin-roi-calculator.html">ROI Calculator</a>
-          <a href="https://jennavi.co/linkedin-post-audit.html">Post Audit</a>
-          <a href="https://jennavi.co/linkedin-profile-audit.html">Profile Audit</a>
-        </div>
+        <span class="footer-col-title"><a href="https://jennavi.co/linkedin-tools.html" style="color:inherit;text-decoration:none;" title="Free LinkedIn diagnostic tools for founders">Free LinkedIn Diagnostic Tools</a></span>
+      <div class="footer-links">
+        <a href="https://jennavi.co/linkedin-health-check.html" title="Free LinkedIn Positioning Health Check">Health Check</a>
+        <a href="https://jennavi.co/linkedin-roi-calculator.html" title="Free LinkedIn ROI Calculator">ROI Calculator</a>
+        <a href="https://jennavi.co/linkedin-post-audit.html" title="Free LinkedIn Post Audit">Post Audit</a>
+        <a href="https://jennavi.co/linkedin-profile-audit.html" title="Free LinkedIn Profile Audit">Profile Audit</a>
+      </div>
       </div>
       <div>
         <span class="footer-col-title">Company</span>
         <div class="footer-links">
           <a href="https://jennavi.co/founder.html">Founder Story</a>
-        <a href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing">Pricing</a>
+        <a href="https://jennavi.co/why-jennavi.html">Why Jennavi</a>
+        <a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Pricing</a>
+        <a href="https://jennavi.co/book-a-call.html">Book a Call</a>
           <a href="https://jennavi.co/book.html">CRICKETS Book</a>
           <a href="https://jennavi.co/insights/">Insights</a>
         </div>
@@ -1309,6 +1325,55 @@ var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInters
 </script>
 <script>/* jv-lock: instant feedback and double-click guard on every form */
 (function(){document.addEventListener('submit',function(e){var f=e.target;setTimeout(function(){var b=f&&f.querySelector&&f.querySelector('button[type="submit"],button:not([type])');if(b&&!b.disabled){b.disabled=true;b.setAttribute('data-t',b.textContent);b.textContent='Sending...';setTimeout(function(){b.disabled=false;b.textContent=b.getAttribute('data-t');},8000);}},0);},true);})();
+</script>
+<script>
+window.JV_POP={variant:'health'};
+</script>
+<script>/* jv-popup: engagement-triggered, non-blocking offer card */
+(function(){
+var V=(window.JV_POP||{}).variant;if(!V)return;
+var LEAD='https://script.google.com/macros/s/AKfycbwHgYSlK5acg63gE7u0zXjJFmxBZ53wLKC-DlwtLDX6zrHIyef1iTgllySypU_ge0TD/exec',PART1='https://drive.google.com/file/d/1XNxKnLORRnayM2gpLkOo8Lr2YXbUa9Nz/view?usp=drivesdk',KEYMAP={"to_name": "name", "to_email": "email", "pdf_link": "pdf", "subject": "subject", "html_content": "html"};
+var EJS_K='XIy6yIQorZRwYz0xf',EJS_S='service_10a5m5e',EJS_T='template_g32mptd';
+var HTML='<div style="background:#0B0D12;padding:28px 14px;font-family:Arial,Helvetica,sans-serif;"><div style="max-width:560px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,.35);border-radius:18px;padding:34px 30px;color:#F3EEE3;"><p style="margin:0 0 6px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9A84C;">Jennavi</p><h1 style="margin:0 0 18px;font-size:26px;line-height:1.25;color:#F3EEE3;font-family:Georgia,serif;">Your free CRICKETS guide is here.</h1><p style="margin:0 0 16px;font-size:16px;line-height:1.65;color:#F3EEE3;">Hello,</p><p style="margin:0 0 16px;font-size:16px;line-height:1.65;color:#F3EEE3;">Thank you for asking for CRICKETS. This is Part 1, the diagnosis. It shows you exactly why your LinkedIn profile may be getting views without turning them into conversations.</p><p style="margin:26px 0;"><a href="https://drive.google.com/file/d/1XNxKnLORRnayM2gpLkOo8Lr2YXbUa9Nz/view?usp=drivesdk" style="display:inline-block;background:#C9A84C;color:#0B0D12;font-weight:700;text-decoration:none;padding:14px 26px;border-radius:999px;font-size:15px;">Open Your Free Guide</a></p><p style="margin:0 0 10px;font-size:16px;line-height:1.65;color:#F3EEE3;"><strong style="color:#C9A84C;">The best way to use it:</strong></p><p style="margin:0 0 6px;font-size:15px;line-height:1.6;color:#B9B4A8;">1. Read it with your own profile open next to it.</p><p style="margin:0 0 6px;font-size:15px;line-height:1.6;color:#B9B4A8;">2. Write down the three things that make you wince.</p><p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#B9B4A8;">3. Fix the first one this week, before you read anything else.</p><p style="margin:0 0 16px;font-size:16px;line-height:1.65;color:#F3EEE3;">When you finish, I would love to hear what stood out to you. Just reply to this email and it comes straight to me.</p><p style="margin:0 0 16px;font-size:16px;line-height:1.65;color:#F3EEE3;">If it helps you, would you leave a short review? It takes a minute and it helps other founders find it. <a href="https://g.page/r/CU9ZHpnUfx1eEBM/review" style="color:#C9A84C;">Leave a review here</a>.</p><p style="margin:0 0 16px;font-size:16px;line-height:1.65;color:#F3EEE3;">And if you would rather have me work through it with you, you can <a href="https://jennavi.co/book-a-call.html" style="color:#C9A84C;">book a free 30-minute strategy call</a>. I review your profile before we speak.</p><p style="margin:22px 0 0;font-size:16px;line-height:1.65;color:#F3EEE3;">Warmly,<br>Jennifer Omaliko<br><span style="color:#B9B4A8;font-size:14px;">Founder, Jennavi</span></p><p style="margin:24px 0 0;padding-top:18px;border-top:1px solid rgba(243,238,227,.12);font-size:14px;line-height:1.6;color:#B9B4A8;">P.S. Curious how your whole profile scores? <a href="https://jennavi.co/linkedin-health-check.html" style="color:#C9A84C;">Take the free 4-minute LinkedIn Health Check</a>.</p></div></div>';
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){}return null;}
+try{if(sessionStorage.getItem('jv_pop_shown'))return;}catch(e){}
+var now=Date.now(),dis=parseInt(ls('jv_pop_dismiss')||0,10),done=parseInt(ls('jv_pop_done')||0,10);
+if((done&&now-done<5184e6)||(dis&&now-dis<12096e5))return;
+function ev(n,p){if(typeof gtag==='function'){p=p||{};p.variant=V;gtag('event',n,p);}}
+var t0=now,maxS=0,shown=false;
+function sc(){var h=document.documentElement.scrollHeight-innerHeight;if(h>0){var p=scrollY/h;if(p>maxS)maxS=p;}}
+addEventListener('scroll',sc,{passive:true});
+function blocked(){var a=document.activeElement;return !!(document.querySelector('.flw-capture')||document.getElementById('jvPopup')||(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)));}
+var css=document.createElement('style');css.textContent='#jvPopup{position:fixed;left:24px;bottom:24px;width:360px;max-width:calc(100vw - 24px);z-index:97;background:#12151C;border:1px solid rgba(201,168,76,.45);border-radius:18px;padding:22px 22px 18px;color:#F3EEE3;box-shadow:0 18px 50px rgba(0,0,0,.55);transform:translateY(20px);opacity:0;transition:transform .35s ease,opacity .35s ease;font-family:inherit}#jvPopup.in{transform:none;opacity:1}#jvPopup .jvp-x{position:absolute;top:8px;right:12px;background:none;border:0;color:#B9B4A8;font-size:24px;line-height:1;cursor:pointer}#jvPopup .jvp-e{margin:0 0 6px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#C9A84C}#jvPopup h3{margin:0 0 8px;font-size:21px;line-height:1.25;font-weight:600}#jvPopup p.jvp-p{margin:0 0 14px;font-size:14px;line-height:1.55;color:#B9B4A8}#jvPopup .jvp-btn{display:block;text-align:center;background:#C9A84C;color:#0B0D12;font-weight:700;text-decoration:none;padding:12px 16px;border-radius:999px;border:0;width:100%;font-size:15px;cursor:pointer}#jvPopup .jvp-later{display:block;margin:10px auto 0;background:none;border:0;color:#B9B4A8;font-size:13px;text-decoration:underline;cursor:pointer}#jvPopup input{width:100%;box-sizing:border-box;padding:12px 14px;margin-bottom:10px;border-radius:10px;border:1px solid rgba(243,238,227,.25);background:#0B0D12;color:#F3EEE3;font-size:15px}body.jv-popup-open #jvSticky{display:none!important}@media(max-width:820px){#jvPopup{left:12px;right:12px;bottom:12px;width:auto}}@media(prefers-reduced-motion:reduce){#jvPopup{transition:none}}';document.head.appendChild(css);
+function close(why){var el=document.getElementById('jvPopup');if(!el)return;el.classList.remove('in');document.body.classList.remove('jv-popup-open');setTimeout(function(){el.remove();},350);if(why==='dismiss'){ls('jv_pop_dismiss',String(Date.now()));ev('popup_dismiss');}}
+function sendEmail(email){
+  function go(){try{emailjs.init({publicKey:EJS_K});var p={};for(var k in KEYMAP){var m=KEYMAP[k];p[k]=m==='name'?'there':m==='email'?email:m==='subject'?'Your free CRICKETS guide is here':m==='html'?HTML:m==='pdf'?PART1:'';}emailjs.send(EJS_S,EJS_T,p,{publicKey:EJS_K}).catch(function(){});}catch(e){}}
+  if(window.emailjs){go();return;}var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';s.onload=go;document.head.appendChild(s);
+}
+function submitMagnet(box){
+  var inp=box.querySelector('input'),em=(inp.value||'').trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){inp.style.borderColor='#C9A84C';inp.focus();return;}
+  ls('jv_pop_done',String(Date.now()));ev('popup_submit');if(typeof gtag==='function')gtag('event','generate_lead',{form:'book_magnet_popup'});
+  box.innerHTML='<button class="jvp-x" aria-label="Close">&times;</button><p class="jvp-e">On its way</p><h3>Check your inbox.</h3><p class="jvp-p">Your free guide is on its way to '+em.replace(/</g,'&lt;')+'. If you do not see it in a minute, check your spam folder.</p>';
+  box.querySelector('.jvp-x').onclick=function(){close('done');};setTimeout(function(){close('done');},9000);
+  var payload={name:'',email:em,whatsapp:'',linkedin:'',source:'book_magnet_popup',subject:'New free CRICKETS guide request',message:'Requested the free CRICKETS Part 1 guide from '+location.pathname,notes:'page='+location.href};
+  (function send(n){fetch(LEAD,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload),keepalive:true}).catch(function(){if(n<2)setTimeout(function(){send(n+1);},1500);});})(1);
+  sendEmail(em);
+}
+function build(trigger){
+  var el=document.createElement('div');el.id='jvPopup';el.setAttribute('role','dialog');el.setAttribute('aria-label','Free offer');
+  if(V==='book'){el.innerHTML='<button class="jvp-x" aria-label="Close">&times;</button><p class="jvp-e">Free guide</p><h3>Get the first half of CRICKETS free.</h3><p class="jvp-p">Part 1 of the CRICKETS playbook shows you exactly why your LinkedIn is not converting. Enter your email and we will send it straight away.</p><input type="email" placeholder="Your email address" autocomplete="email" aria-label="Email address"><button class="jvp-btn" type="button">Send Me the Free Guide</button><button class="jvp-later" type="button">No thanks</button>';
+    el.querySelector('.jvp-btn').onclick=function(){submitMagnet(el);};el.querySelector('input').addEventListener('keydown',function(e){if(e.key==='Enter')submitMagnet(el);});}
+  else{el.innerHTML='<button class="jvp-x" aria-label="Close">&times;</button><p class="jvp-e">Free, 4 minutes, no signup</p><h3>Diagnose your LinkedIn in 4 minutes.</h3><p class="jvp-p">Answer 20 quick questions and get your score out of 100, your biggest gap and clear next steps.</p><a class="jvp-btn" href="https://jennavi.co/linkedin-health-check.html?src=popup">Check My LinkedIn &rarr;</a><button class="jvp-later" type="button">Maybe later</button>';
+    el.querySelector('.jvp-btn').addEventListener('click',function(){ls('jv_pop_done',String(Date.now()));ev('popup_click');});}
+  el.querySelector('.jvp-x').onclick=function(){close('dismiss');};el.querySelector('.jvp-later').onclick=function(){close('dismiss');};
+  document.body.appendChild(el);document.body.classList.add('jv-popup-open');requestAnimationFrame(function(){el.classList.add('in');});
+  document.addEventListener('keydown',function esc(e){if(e.key==='Escape'){close('dismiss');document.removeEventListener('keydown',esc);}});ev('popup_shown',{trigger:trigger});
+}
+function show(tr){if(shown||blocked())return;shown=true;try{sessionStorage.setItem('jv_pop_shown','1');}catch(e){}build(tr);}
+if(V!=='exit-health'){var iv=setInterval(function(){if(shown){clearInterval(iv);return;}sc();if(Date.now()-t0>=45000&&maxS>=.5){clearInterval(iv);show('engaged');}},1500);}
+if(window.matchMedia&&matchMedia('(hover:hover)').matches){document.addEventListener('mouseout',function(e){if(e.clientY<=0&&!e.relatedTarget&&Date.now()-t0>=(V==='exit-health'?20000:15000))show('exit_intent');});}
+})();
 </script>
 </body>
 </html>

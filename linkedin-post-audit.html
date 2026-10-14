@@ -718,6 +718,20 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 <style>.jv-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(201,168,76,.3);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0));scrollbar-width:thin;scrollbar-color:#C9A84C transparent;margin-top:24px}.jv-scroll::-webkit-scrollbar{height:6px}.jv-scroll::-webkit-scrollbar-thumb{background:#C9A84C;border-radius:6px}.jv-scroll .jv-cmp{min-width:780px;margin:0}.jv-scroll .jv-price{min-width:640px}.jv-cmp th:first-child,.jv-cmp td:first-child{position:sticky;left:0;z-index:2;background:#0B0D12;box-shadow:1px 0 0 rgba(243,238,227,.08)}.jv-cmp tr.grp td:first-child{background:#0B0D12}.jv-cmp tbody tr:hover td:not(.us):not(.hi):not(:first-child){background:rgba(201,168,76,.05)}.jv-swipe{display:none;font-size:12px;letter-spacing:.06em;color:var(--parchment-faint);text-align:center;margin:12px 0 0}@media(max-width:820px){.jv-swipe{display:block}}.bio-inner{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important}@media(max-width:900px){.bio-inner{grid-template-columns:1fr!important}}.jv-photo{position:relative}.bio-img{width:100%;height:auto;display:block}.jv-photo-frame{position:absolute;inset:0;border-radius:6px;background:linear-gradient(180deg,transparent 55%,rgba(11,13,18,.55) 88%,rgba(11,13,18,.92) 100%);pointer-events:none}</style>
 <style>@media(max-width:820px){.jv-scroll .jv-cmp,.jv-scroll .jv-price{min-width:0;width:max-content}.jv-cmp th,.jv-cmp td{padding:14px 14px;font-size:14px}.jv-cmp td:not(:first-child),.jv-cmp th:not(:first-child){min-width:150px}.jv-cmp th:first-child,.jv-cmp td:first-child{width:124px;min-width:124px;max-width:124px;white-space:normal;font-size:12.5px;line-height:1.4;padding:14px 12px}.jv-cmp tr.grp td:first-child{width:auto;min-width:0;max-width:none;white-space:nowrap}}</style>
 <style>.jv-cmp tr.grp td.hi{background:linear-gradient(180deg,rgba(201,168,76,.16),rgba(201,168,76,.05));border-left:1px solid rgba(201,168,76,.55);border-right:1px solid rgba(201,168,76,.55)}.jv-cmp tr.grp td:first-child{white-space:normal;line-height:1.35}@media(max-width:820px){.jv-cmp tr.grp td:first-child{width:124px;min-width:124px;max-width:124px;white-space:normal;font-size:11px;letter-spacing:.08em;line-height:1.35;padding:20px 12px 8px}}</style>
+<style id="jv-standard">
+/* Jennavi standard cards: dark blue panels, hairline borders, gold only on hover and accents */
+.jv-card{background:var(--ink-2,#12151C);border:1px solid var(--line,rgba(243,238,227,.12));border-radius:6px;box-shadow:none}
+.jv-card:hover{border-color:rgba(201,168,76,.45);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.jv-scroll{border:1px solid var(--line,rgba(243,238,227,.12));border-radius:6px;background:var(--ink-2,#12151C)}
+.jv-cmp .us,.jv-cmp .hi,.jv-cmp tr.grp td.hi{background:var(--ink-3,#181C25);border-left:1px solid rgba(201,168,76,.4);border-right:1px solid rgba(201,168,76,.4)}
+.jv-cmp thead .us,.jv-cmp thead .hi{border-top:1px solid rgba(201,168,76,.4);border-radius:6px 6px 0 0}
+.jv-cmp tbody tr:last-child .us,.jv-cmp tbody tr:last-child .hi{border-bottom:1px solid rgba(201,168,76,.4);border-radius:0 0 6px 6px}
+.jv-cmp th:first-child,.jv-cmp td:first-child,.jv-cmp tr.grp td:first-child{background:var(--ink-2,#12151C)}
+.jv-cmp tbody tr:hover td:not(.us):not(.hi):not(:first-child){background:var(--ink-3,#181C25)}
+.jv-det{background:var(--ink-2,#12151C);border:1px solid var(--line,rgba(243,238,227,.12));border-radius:6px}
+.jv-chips span{background:var(--ink-2,#12151C);border:1px solid var(--line,rgba(243,238,227,.12))}
+.jv-tabs{background:var(--ink-2,#12151C);border-color:var(--line,rgba(243,238,227,.12))}
+</style>
 </head>
 <body>
 
@@ -728,7 +742,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
       <a href="javascript:void(0)" onclick="var b=document.getElementById('audit-top');if(b)b.scrollIntoView({behavior:'smooth'});">Audit My Post</a>
       <a href="#faq">FAQ</a>
       <a href="https://jennavi.co/linkedin-tools.html">More Tools</a>
-      <a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Services</a>
+      <a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Pricing</a>
       <a href="https://jennavi.co/founder.html">Jennifer</a>
     </div>
     <div class="nav-cta">
@@ -810,7 +824,8 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
           <textarea class="hook-textarea" id="hookTextarea" rows="4" maxlength="300" placeholder="Paste your hook here"></textarea>
           <div class="hook-see-more-warning" id="hookSeeModeWarning">This looks longer than a typical hook. For a full post, switch to Content Audit above for a complete score.</div>
         </div>
-        <button class="audit-btn" id="hookAuditBtn" type="button">Audit My Hook &#8594;</button>
+        <button class="audit-btn" id="sampleHookBtn" type="button" style="background:transparent;border:1px solid var(--brass);color:var(--brass-bright);margin-right:10px;">Try a Sample Hook</button>
+<button class="audit-btn" id="hookAuditBtn" type="button">Audit My Hook &#8594;</button>
         <p class="val-msg" id="hookValMsg">Please paste your hook before auditing.</p>
         <div class="audit-results" id="hookAuditResults"></div>
       </div>
@@ -888,48 +903,22 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   </div>
 </section>
 
-<section aria-labelledby="other-tools-heading">
+<section id="next-best-step" aria-labelledby="nbs-heading">
   <div class="container">
-    <p class="eyebrow">More Free Jennavi Tools</p>
-    <h2 class="section-title reveal" id="other-tools-heading">Three more ways<br>to <em>diagnose the gap.</em></h2>
+    <p class="eyebrow">Continue Your Diagnosis</p>
+    <h2 class="section-title reveal" id="nbs-heading">Your next best<br><em>step.</em></h2>
+    <p class="section-body reveal">The four Jennavi tools work together. Each result points to the next question worth answering.</p>
+  
+    <p class="section-body" style="margin-top:22px;">All four tools are free. See the full set at the <a href="https://jennavi.co/linkedin-tools.html">Jennavi LinkedIn diagnostic tools hub</a>, or explore how <a href="https://jennavi.co/">Jennavi</a> turns the diagnosis into booked calls.</p>
   </div>
-  <div class="container" style="margin-top:36px;">
-    <div class="carousel-wrap">
-      <div class="carousel-track" id="otherToolsTrack">
-        <a href="https://jennavi.co/linkedin-health-check.html" class="tool-card">
-          <span class="tool-num">Tool 01</span>
-          <span class="tool-name">Positioning Health Check</span>
-          <span class="tool-desc">Score your full profile out of 100 across 6 categories.</span>
-          <span class="tool-cta">Take the Health Check &#8594;</span>
-        </a>
-        <a href="https://jennavi.co/linkedin-roi-calculator.html" class="tool-card">
-          <span class="tool-num">Tool 02</span>
-          <span class="tool-name">LinkedIn ROI Calculator</span>
-          <span class="tool-desc">Find out exactly how much your invisible LinkedIn costs you every year.</span>
-          <span class="tool-cta">Calculate My Loss &#8594;</span>
-        </a>
-        <a href="https://jennavi.co/linkedin-profile-audit.html" class="tool-card">
-          <span class="tool-num">Tool 03</span>
-          <span class="tool-name">LinkedIn Profile Audit</span>
-          <span class="tool-desc">Upload your PDF or paste your headline and About section for a full score.</span>
-          <span class="tool-cta">Audit My Profile &#8594;</span>
-        </a>
-        <a href="https://jennavi.co/linkedin-tools.html" class="tool-card" style="border-color:rgba(201,168,76,0.4);">
-          <span class="tool-num">Hub</span>
-          <span class="tool-name">The Full CRICKETS Toolkit</span>
-          <span class="tool-desc">All four free Jennavi LinkedIn tools in one place.</span>
-          <span class="tool-cta">See All Four Tools &#8594;</span>
-        </a>
-      </div>
-      <div class="carousel-nav">
-        <button class="carousel-btn" data-carousel-prev="otherToolsTrack" aria-label="Previous">&#8592;</button>
-        <button class="carousel-btn" data-carousel-next="otherToolsTrack" aria-label="Next">&#8594;</button>
-      </div>
-    </div>
-  </div>
-
-  <p class="section-body" style="margin-top:22px;text-align:center;">All four tools are free. See the full set at the <a href="https://jennavi.co/linkedin-tools.html">Jennavi LinkedIn tools hub</a>, or explore how <a href="https://jennavi.co/">Jennavi</a> turns the diagnosis into booked calls.</p>
+  <div class="container" style="margin-top:24px;"><div class="jv-story-cards">
+<div class="jv-card tilt"><p class="eyebrow">Next best step</p><h3 class="process-title">Calculate your ROI</h3><p class="process-body">Good content should contribute to business. Estimate what a stronger LinkedIn presence could mean for your pipeline.</p><p style="margin-top:14px;"><a href="https://jennavi.co/linkedin-roi-calculator.html" class="btn btn-brass" data-next="post" data-to="roi_calculator">Use the ROI Calculator</a></p></div>
+<div class="jv-card tilt"><p class="eyebrow">Fix the foundation</p><h3 class="process-title">Audit your profile</h3><p class="process-body">If visitors do not convert after reading your posts, the profile is usually why.</p><p style="margin-top:14px;"><a href="https://jennavi.co/linkedin-profile-audit.html" class="btn btn-brass" data-next="post" data-to="profile_audit">Run the Profile Audit</a></p></div>
+<div class="jv-card tilt"><p class="eyebrow">Get the full picture</p><h3 class="process-title">Take the Health Check</h3><p class="process-body">Score your whole presence across six areas in about four minutes.</p><p style="margin-top:14px;"><a href="https://jennavi.co/linkedin-health-check.html" class="btn btn-brass" data-next="post" data-to="health_check">Take the Health Check</a></p></div>
+  </div></div>
 </section>
+
+
 
 <section id="faq" aria-labelledby="faq-heading">
   <div class="container" style="max-width:820px;">
@@ -1044,23 +1033,25 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="/" style="display:block;margin-bottom:14px;"><span class="footer-logo-mask" role="img" aria-label="Jennavi"></span></a>
+        <a href="https://jennavi.co/" style="display:block;margin-bottom:14px;" title="Jennavi home"><span class="footer-logo-mask" role="img" aria-label="Jennavi"></span></a>
         <p class="footer-tagline">"From invisible to inevitable. One founder at a time."</p>
       </div>
       <div>
-        <span class="footer-col-title">Free Tools</span>
-        <div class="footer-links">
-          <a href="https://jennavi.co/linkedin-health-check.html">Health Check</a>
-          <a href="https://jennavi.co/linkedin-roi-calculator.html">ROI Calculator</a>
-          <a href="https://jennavi.co/linkedin-post-audit.html">Post Audit</a>
-          <a href="https://jennavi.co/linkedin-profile-audit.html">Profile Audit</a>
-        </div>
+        <span class="footer-col-title"><a href="https://jennavi.co/linkedin-tools.html" style="color:inherit;text-decoration:none;" title="Free LinkedIn diagnostic tools for founders">Free LinkedIn Diagnostic Tools</a></span>
+      <div class="footer-links">
+        <a href="https://jennavi.co/linkedin-health-check.html" title="Free LinkedIn Positioning Health Check">Health Check</a>
+        <a href="https://jennavi.co/linkedin-roi-calculator.html" title="Free LinkedIn ROI Calculator">ROI Calculator</a>
+        <a href="https://jennavi.co/linkedin-post-audit.html" title="Free LinkedIn Post Audit">Post Audit</a>
+        <a href="https://jennavi.co/linkedin-profile-audit.html" title="Free LinkedIn Profile Audit">Profile Audit</a>
+      </div>
       </div>
       <div>
         <span class="footer-col-title">Company</span>
         <div class="footer-links">
           <a href="https://jennavi.co/founder.html">Founder Story</a>
-        <a href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing">Pricing</a>
+        <a href="https://jennavi.co/why-jennavi.html">Why Jennavi</a>
+        <a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Pricing</a>
+        <a href="https://jennavi.co/book-a-call.html">Book a Call</a>
           <a href="https://jennavi.co/book.html">CRICKETS Book</a>
           <a href="https://jennavi.co/insights/">Insights</a>
         </div>
@@ -2584,6 +2575,19 @@ var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInters
 </script>
 <script>/* jv-lock: instant feedback and double-click guard on every form */
 (function(){document.addEventListener('submit',function(e){var f=e.target;setTimeout(function(){var b=f&&f.querySelector&&f.querySelector('button[type="submit"],button:not([type])');if(b&&!b.disabled){b.disabled=true;b.setAttribute('data-t',b.textContent);b.textContent='Sending...';setTimeout(function(){b.disabled=false;b.textContent=b.getAttribute('data-t');},8000);}},0);},true);})();
+</script>
+<script>(function(){var b=document.getElementById('sampleHookBtn'),t=document.getElementById('hookTextarea');if(!b||!t)return;b.addEventListener('click',function(){t.value='Excited to share that after months of hard work, we have finally launched our new LinkedIn service for founders.';t.dispatchEvent(new Event('input',{bubbles:true}));t.focus();if(typeof gtag==='function')gtag('event','tool_sample_click',{tool:'post_audit'});});})();</script>
+<script>/* jv-funnel: tool start, completion and next-step tracking */
+(function(){var TOOL='post';function ev(n,p){if(typeof gtag==='function'){p=p||{};p.tool=TOOL;gtag('event',n,p);}}
+ev('tool_view');var started=false,done=false;
+function start(e){if(started)return;var t=e.target;if(t&&t.closest&&t.closest('form,nav,footer,.jw-wrap,#jvSticky'))return;started=true;ev('tool_start');}
+['input','change'].forEach(function(n){document.addEventListener(n,start,true);});
+var qc=document.getElementById('questionContainer');if(qc)qc.addEventListener('click',function(e){if(e.target.closest('button,.option,[role=button],label'))start(e);},true);
+function visible(el){return el&&el.offsetHeight>0&&getComputedStyle(el).display!=='none'&&getComputedStyle(el).visibility!=='hidden';}
+function check(){if(done)return;var els=document.querySelectorAll('[id*="esult"]:not([id*="lead"]):not([id*="Lead"]):not(script)');for(var i=0;i<els.length;i++){var el=els[i];if(/lc[A-Z]|leadCapture|resultTitle|resultTagline/.test(el.id))continue;if(visible(el)&&el.offsetHeight>120){done=true;ev('tool_complete');return;}}}
+var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(check,400);}).observe(document.body,{attributes:true,childList:true,subtree:true,attributeFilter:['class','style']});
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-next]');if(a)ev('tool_next_click',{to:a.getAttribute('data-to')});});
+})();
 </script>
 </body>
 </html>
