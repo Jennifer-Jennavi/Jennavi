@@ -574,6 +574,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .fo-price{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);font-size:15px;line-height:1.7;color:var(--parchment);}
 .fo-price b{font-family:'Fraunces',serif;font-size:34px;color:var(--brass-bright);font-weight:700;margin-right:6px;}
 </style>
+<style>.hero-markets{margin-top:18px;font-size:13.5px;line-height:1.65;color:var(--parchment-dim);max-width:560px;}</style>
 </head>
 <body>
 <nav class="nav">
@@ -616,6 +617,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
           <a data-cal-link="jennavi/strategy" data-cal-namespace="default" data-cal-config='{"layout":"month_view"}' data-track-location="hero" class="btn btn-brass" style="cursor:pointer;">Book a Free Strategy Call</a>
           <a href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing" class="btn btn-outline">See Pricing</a>
         </div>
+        <p class="hero-markets">Serving CEOs and executives in the United States, United Kingdom, Canada, Australia and other English-speaking markets, remotely and in English.</p>
       </div>
       <div class="fo-panel">
         <p class="eyebrow">The Executive tier</p>
@@ -763,17 +765,15 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 <section id="pricing" aria-labelledby="pricing-heading">
   <style>.jv-tabs{display:inline-flex;gap:6px;padding:5px;border:1px solid rgba(201,168,76,.35);border-radius:999px;margin-top:22px}.jv-tab,.jv-chip{background:transparent;color:inherit;border:1px solid transparent;border-radius:999px;padding:9px 18px;font:inherit;font-size:13px;cursor:pointer;letter-spacing:.04em}.jv-tab.on,.jv-chip.on{background:#C9A84C;color:#0F0F0F;font-weight:700}.jv-chip{border-color:rgba(201,168,76,.35);padding:7px 14px;margin:8px 8px 0 0}.jv-hint{font-size:12px;opacity:.65;margin:8px 0 0}.jv-save{font-size:12px;color:#C9A84C;min-height:16px;margin:4px 0 0}</style>
   <div class="container">
-    <p class="eyebrow">The Executive Tier</p>
-    <h2 class="section-title reveal" id="pricing-heading">Start your pilot,<br><em>watch the pipeline move.</em></h2>
-    <p class="section-body reveal">Try a 30-day pilot at a reduced entry fee, and continue monthly only if the results justify it. You can also add team profiles, and the savings apply automatically.</p>
+    <p class="eyebrow">Choose Your Tier</p>
+    <h2 class="section-title reveal" id="pricing-heading">Start with the Executive tier,<br><em>or begin with Founder.</em></h2>
+    <p class="section-body reveal">The Executive tier is built for senior leaders and is shown first. The Founder tier is a lighter option if you prefer to start smaller. Both begin with a 30-day pilot at a reduced entry fee, and you continue monthly only if the results justify it.</p>
     <div class="jv-tabs" role="tablist"><button type="button" class="jv-tab on" id="jv-tab-pilot" onclick="jvSetMode('pilot')">Try the Pilot</button><button type="button" class="jv-tab" id="jv-tab-continue" onclick="jvSetMode('continue')">Continue Monthly</button></div>
     <div id="jv-terms" style="display:none"><button type="button" class="jv-chip on" id="jv-term-1" onclick="jvSetTerm(1)">Month to month</button><button type="button" class="jv-chip" id="jv-term-3" onclick="jvSetTerm(3)">3 months, save 5%</button><button type="button" class="jv-chip" id="jv-term-6" onclick="jvSetTerm(6)">6 months, save 10%</button></div>
   </div>
   <div class="container" style="margin-top:36px;">
     <div class="carousel-wrap">
       <div class="carousel-track" id="pricingTrack">
-        
-
         <article class="pricing-card">
           <p class="pricing-tier">Tier 02</p>
           <h3 class="pricing-name">Executive</h3>
@@ -800,6 +800,29 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
           <a id="wa-executive" href="https://wa.me/2349024680769?text=Hi%20Jennifer%2C%20I%20would%20like%20to%20talk%20about%20the%20Executive%20tier.%20Can%20we%20talk%20about%20how%20to%20get%20started%3F" target="_blank" rel="noopener noreferrer" class="pricing-cta">Talk with Jennifer First</a>
           <div class="flw-block" id="flw-block-executive"></div>
         </article>
+
+        <article class="pricing-card">
+          <p class="pricing-tier">Tier 01</p>
+          <h3 class="pricing-name">Founder</h3>
+          <p class="pricing-tagline">LinkedIn Authority + Lead Generation</p>
+          <p class="pricing-who">For the founder who wants steady inbound conversations without running outreach or writing posts alone.</p>
+          <div class="seat-selector"><span class="seat-label">Profiles</span><div class="seat-controls"><button type="button" class="seat-btn" onclick="jvSeats('standard',-1)" aria-label="Decrease profiles">&minus;</button><input type="number" class="seat-count" id="seat-count-standard" value="1" min="1" max="50" inputmode="numeric" onchange="jvSetSeats('standard',this.value)"><button type="button" class="seat-btn" onclick="jvSeats('standard',1)" aria-label="Increase profiles">+</button></div></div>
+          <p class="jv-hint">Add your team and sales profiles. Savings apply automatically as you add profiles.</p>
+          <p class="pricing-price" id="price-standard"><sup>$</sup>500</p>
+          <span class="pricing-cadence" id="cad-standard">one-time, covers your first 30 days</span>
+          <p class="jv-save" id="save-standard"></p>
+          <div class="pricing-rule"></div>
+          <ul class="pricing-features">
+            <li>Profile optimization in the first week</li>
+            <li>Target audience and voice guide built with you</li>
+            <li>12 LinkedIn posts a month in your voice</li>
+            <li>Outreach campaigns: connection requests, comments and follow-ups</li>
+            <li>AI-personalized messages, reviewed before they go out</li>
+            <li>CRM tracking, reply handling and a monthly results report</li>
+          </ul>
+          <a id="wa-standard" href="https://wa.me/2349024680769?text=Hi%20Jennifer%2C%20I%20would%20like%20to%20talk%20about%20the%20Founder%20tier.%20Can%20we%20talk%20about%20how%20to%20get%20started%3F" target="_blank" rel="noopener noreferrer" class="pricing-cta">Talk with Jennifer First</a>
+          <div class="flw-block" id="flw-block-standard"></div>
+        </article>
       </div>
       <div class="carousel-nav">
         <button class="carousel-btn" data-carousel-prev="pricingTrack" aria-label="Previous">&#8592;</button>
@@ -807,7 +830,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
       </div>
     </div>
     <p class="services-note">Team savings: 5% for 2 profiles, 8% for 3 to 4, 12% for 5 or more. A 30-day pilot shows replies, conversations and booked calls. Closed deals depend on your offer and sales process, so we report results, never revenue promises. All fees in USD.</p>
-<p class="section-body" style="margin-top:22px;font-size:15px;">Comparing both tiers? See <a href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing">Founder and Executive side by side on the pricing page</a>.</p>
+<p class="section-body" style="margin-top:22px;font-size:15px;">Prefer a side-by-side comparison of every feature? See the <a href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing">pricing page</a>.</p>
   </div>
 </section>
 
@@ -815,7 +838,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
   <div class="container">
     <p class="eyebrow">Keep Exploring</p>
     <h2 class="section-title reveal" id="related-heading">Related pages for<br><em>your situation.</em></h2>
-    <div class="jv-chips" style="margin-top:24px;"><b>Pages</b><span><a href="https://jennavi.co/linkedin-lead-generation.html">LinkedIn lead generation services</a></span><span><a href="https://jennavi.co/how-jennavi-works.html">How Jennavi works</a></span><span><a href="https://jennavi.co/linkedin-for-founders.html">LinkedIn for founders</a></span><span><a href="https://jennavi.co/linkedin-personal-branding.html">LinkedIn personal branding</a></span><span><a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Ghostwriting and pricing</a></span></div>
+    <div class="jv-chips" style="margin-top:24px;"><b>Pages</b><span><a href="https://jennavi.co/linkedin-lead-generation.html">LinkedIn lead generation services</a></span><span><a href="https://jennavi.co/how-jennavi-works.html">How Jennavi works</a></span><span><a href="https://jennavi.co/linkedin-for-founders.html">LinkedIn for founders</a></span><span><a href="https://jennavi.co/linkedin-personal-branding.html">LinkedIn personal branding</a></span><span><a href="https://jennavi.co/hire-linkedin-ghostwriter.html">Ghostwriting and pricing</a></span><span><a href="https://jennavi.co/linkedin-newsletter-services.html">LinkedIn newsletter writing</a></span><span><a href="https://jennavi.co/seo-geo-articles-for-founders.html">SEO and GEO articles</a></span><span><a href="https://jennavi.co/linkedin-thought-leadership-services.html">LinkedIn thought leadership</a></span></div>
   </div>
 </section>
 
@@ -928,6 +951,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
         <div class="footer-links">
           <a href="https://jennavi.co/founder.html">Founder Story</a>
         <a href="https://jennavi.co/hire-linkedin-ghostwriter.html#pricing">Pricing</a>
+        <a href="https://jennavi.co/linkedin-services.html">LinkedIn Services</a>
         <a href="https://jennavi.co/linkedin-lead-generation.html">LinkedIn Lead Generation</a>
         <a href="https://jennavi.co/how-jennavi-works.html">How Jennavi Works</a>
           <a href="https://jennavi.co/book.html">CRICKETS Book</a>

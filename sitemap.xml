@@ -1,364 +1,404 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-  <!-- CRITICAL PAGES - Priority 1.0 -->
-  <url>
-    <loc>https://jennavi.co/</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/hire-linkedin-ghostwriter.html</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/why-jennavi.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <!-- HIGH PRIORITY - Priority 0.9 -->
-  <url>
-    <loc>https://jennavi.co/about.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/contact.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/founder.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/book.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/free-crickets.html</loc>
-    <lastmod>2026-07-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- TOOLS HUB - Priority 0.9 -->
-  <url>
-    <loc>https://jennavi.co/linkedin-tools.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- FREE TOOLS - Priority 0.8 -->
-  <url>
-    <loc>https://jennavi.co/linkedin-health-check.html</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/linkedin-roi-calculator.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/linkedin-post-audit.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/linkedin-profile-audit.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- INSIGHTS HUB - Priority 0.8 -->
-  <url>
-    <loc>https://jennavi.co/insights/</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- INSIGHTS ARTICLES - Priority 0.7 -->
-  <url>
-    <loc>https://jennavi.co/insights/how-to-get-recommended-by-chatgpt-perplexity-ai-search.html</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/best-linkedin-ghostwriting-agency-us-uk-canada-australia.html</loc>
-    <lastmod>2026-07-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/best-linkedin-tools-to-audit-your-positioning.html</loc>
-    <lastmod>2026-07-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/why-isnt-my-linkedin-converting.html</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/best-linkedin-ghostwriter-for-founders.html</loc>
-    <lastmod>2026-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-ghostwriting-agency-vs-independent-ghostwriter.html</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/best-time-to-post-on-linkedin-for-founders.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/signs-to-fire-your-linkedin-ghostwriter.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/best-linkedin-positioning-books-for-founders.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/best-linkedin-approach-for-consultants.html</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/chatgpt-vs-human-linkedin-ghostwriter.html</loc>
-    <lastmod>2026-07-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-content-roi-for-founders.html</loc>
-    <lastmod>2026-07-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-4-1-1-rule-explained.html</loc>
-    <lastmod>2026-07-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-for-founders-press-podcasts-speaking.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/using-linkedin-to-hire-your-first-team.html</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-for-founders-raising-a-round.html</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/how-long-does-linkedin-ghostwriting-take-to-work.html</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-personal-branding-vs-ghostwriting.html</loc>
-    <lastmod>2026-06-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-ghostwriting-for-b2b-saas-founders.html</loc>
-    <lastmod>2026-06-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/best-linkedin-ghostwriting-agencies-for-founders.html</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/what-is-linkedin-ghostwriting.html</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-profile-optimisation-for-founders.html</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-for-b2b-founders.html</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/how-to-get-inbound-leads-from-linkedin.html</loc>
-    <lastmod>2026-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-ghostwriting-rates-compared.html</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/how-much-does-linkedin-ghostwriting-cost.html</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-ghostwriter-vs-diy.html</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/how-to-choose-a-linkedin-ghostwriting-agency.html</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/why-your-linkedin-headline-isnt-getting-you-clients.html</loc>
-    <lastmod>2026-05-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-personal-branding-for-startup-founders.html</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-content-strategy-for-founders.html</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/insights/linkedin-algorithm-2026-founder-reach.html</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- LEGAL PAGES - Priority 0.3 -->
-  <url>
-    <loc>https://jennavi.co/refund-policy.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/terms-and-conditions.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://jennavi.co/privacy-policy.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!-- LEVEL 0: HOMEPAGE (brand, entity and commercial authority) -->
+<url>
+<loc>https://jennavi.co/</loc>
+<lastmod>2026-07-26</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
+</url>
+<!-- LEVEL 1: SERVICES HUB (links to every service and role page) -->
+<url>
+<loc>https://jennavi.co/linkedin-services.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+<!-- LEVEL 2: CORE SERVICES AND PRICING -->
+<url>
+<loc>https://jennavi.co/linkedin-lead-generation.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://jennavi.co/hire-linkedin-ghostwriter.html</loc>
+<lastmod>2026-07-20</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-outreach-services.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-profile-optimization.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-personal-branding.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<!-- LEVEL 2: EXECUTIVE CONTENT SERVICES (Executive tier) -->
+<url>
+<loc>https://jennavi.co/linkedin-thought-leadership-services.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-newsletter-services.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/seo-geo-articles-for-founders.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<!-- LEVEL 2: AUDIENCE PAGES (who we help) -->
+<url>
+<loc>https://jennavi.co/linkedin-for-founders.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/executive-linkedin-services.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-for-consultants.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-for-coaches.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-for-sales-teams.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-for-saas-founders.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<!-- LEVEL 2: TRUST AND AUTHORITY (process, proof and company) -->
+<url>
+<loc>https://jennavi.co/how-jennavi-works.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-results.html</loc>
+<lastmod>2026-10-13</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://jennavi.co/why-jennavi.html</loc>
+<lastmod>2026-07-15</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/founder.html</loc>
+<lastmod>2026-07-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/about.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<!-- LEVEL 2: CONVERSION AND CONTACT -->
+<url>
+<loc>https://jennavi.co/book-a-call.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://jennavi.co/book.html</loc>
+<lastmod>2026-07-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://jennavi.co/contact.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<!-- LEVEL 2: FREE TOOLS (hub and tools) -->
+<url>
+<loc>https://jennavi.co/linkedin-tools.html</loc>
+<lastmod>2026-07-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-health-check.html</loc>
+<lastmod>2026-07-20</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-profile-audit.html</loc>
+<lastmod>2026-07-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-post-audit.html</loc>
+<lastmod>2026-07-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/linkedin-roi-calculator.html</loc>
+<lastmod>2026-07-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<!-- LEVEL 2: INSIGHTS HUB -->
+<url>
+<loc>https://jennavi.co/insights/</loc>
+<lastmod>2026-07-26</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<!-- LEVEL 3: INSIGHTS ARTICLES (existing articles, update this block when the new article batch is published) -->
+<url>
+<loc>https://jennavi.co/insights/how-to-get-recommended-by-chatgpt-perplexity-ai-search.html</loc>
+<lastmod>2026-07-26</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/best-linkedin-ghostwriting-agency-us-uk-canada-australia.html</loc>
+<lastmod>2026-07-24</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/best-linkedin-tools-to-audit-your-positioning.html</loc>
+<lastmod>2026-07-22</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/why-isnt-my-linkedin-converting.html</loc>
+<lastmod>2026-07-20</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/best-linkedin-ghostwriting-agencies-for-founders.html</loc>
+<lastmod>2026-07-20</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/how-to-choose-a-linkedin-ghostwriting-agency.html</loc>
+<lastmod>2026-07-20</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/best-linkedin-ghostwriter-for-founders.html</loc>
+<lastmod>2026-07-19</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-ghostwriting-agency-vs-independent-ghostwriter.html</loc>
+<lastmod>2026-07-17</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/best-linkedin-approach-for-consultants.html</loc>
+<lastmod>2026-07-17</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/how-long-does-linkedin-ghostwriting-take-to-work.html</loc>
+<lastmod>2026-07-17</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-profile-optimisation-for-founders.html</loc>
+<lastmod>2026-07-17</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-for-b2b-founders.html</loc>
+<lastmod>2026-07-17</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-ghostwriting-rates-compared.html</loc>
+<lastmod>2026-07-17</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-ghostwriter-vs-diy.html</loc>
+<lastmod>2026-07-17</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/best-time-to-post-on-linkedin-for-founders.html</loc>
+<lastmod>2026-07-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/signs-to-fire-your-linkedin-ghostwriter.html</loc>
+<lastmod>2026-07-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/best-linkedin-positioning-books-for-founders.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/chatgpt-vs-human-linkedin-ghostwriter.html</loc>
+<lastmod>2026-07-11</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-content-roi-for-founders.html</loc>
+<lastmod>2026-07-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-4-1-1-rule-explained.html</loc>
+<lastmod>2026-07-09</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-for-founders-press-podcasts-speaking.html</loc>
+<lastmod>2026-07-07</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/using-linkedin-to-hire-your-first-team.html</loc>
+<lastmod>2026-07-04</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-for-founders-raising-a-round.html</loc>
+<lastmod>2026-07-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-personal-branding-vs-ghostwriting.html</loc>
+<lastmod>2026-06-25</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-ghostwriting-for-b2b-saas-founders.html</loc>
+<lastmod>2026-06-23</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/what-is-linkedin-ghostwriting.html</loc>
+<lastmod>2026-06-17</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/how-to-get-inbound-leads-from-linkedin.html</loc>
+<lastmod>2026-06-12</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/how-much-does-linkedin-ghostwriting-cost.html</loc>
+<lastmod>2026-06-06</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/why-your-linkedin-headline-isnt-getting-you-clients.html</loc>
+<lastmod>2026-05-31</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-personal-branding-for-startup-founders.html</loc>
+<lastmod>2026-05-29</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/why-your-linkedin-is-active-but-clients-are-not-coming.html</loc>
+<lastmod>2026-05-27</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-content-strategy-for-founders.html</loc>
+<lastmod>2026-05-25</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://jennavi.co/insights/linkedin-algorithm-2026-founder-reach.html</loc>
+<lastmod>2026-05-23</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<!-- LEVEL 2: LEGAL AND POLICIES -->
+<url>
+<loc>https://jennavi.co/terms-and-conditions.html</loc>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://jennavi.co/refund-policy.html</loc>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://jennavi.co/privacy-policy.html</loc>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
 </urlset>
