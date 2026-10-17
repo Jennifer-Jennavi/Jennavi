@@ -720,6 +720,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .jx-card p{font-size:15px;line-height:1.7;color:var(--parchment-dim,#A8A397);margin:0;}
 .jx-card .jx-go{display:block;margin-top:14px;font-size:14px;font-weight:600;color:var(--brass-bright,#E0C36B);}
 </style>
+<style id="jx-faq">.faq-item.open .faq-a{max-height:1400px;}.faq-a-inner{padding-bottom:28px;}.faq-q{line-height:1.4;}</style>
 </head>
 <body>
 
@@ -2468,14 +2469,7 @@ document.getElementById('gateForm').addEventListener('submit',function(e){
 })();
 
 /* ============ FAQ ACCORDION ============ */
-document.querySelectorAll('.faq-q').forEach(function(q){
-  q.addEventListener('click', function(){
-    var item = q.parentElement;
-    var wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-    if (!wasOpen) item.classList.add('open');
-  });
-});
+
 
 /* ============ SCROLL REVEAL ============ */
 (function(){
