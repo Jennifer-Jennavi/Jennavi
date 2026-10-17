@@ -42,4 +42,4 @@ cd Jennavi
 
 **Ready to stop being the best‑kept secret?**  
 
-👉 [Secure your strategy call](https://calendly.com/omalikojennifermmesoma/30min)
+👉 [Secure your strategy call](https://cal.id/jennavi/strategy)
