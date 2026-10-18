@@ -1008,7 +1008,7 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 </div>
 
 
-<script src="https://checkout.flutterwave.com/v3.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
 <script>
@@ -1017,7 +1017,7 @@ var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwHgYSlK5acg63gE7u0
 /* NOTE FOR JENNIFER: this is the same Formspree endpoint your original live site uses (mqejgwab),
    so every submission below also lands in your email inbox instantly, in addition to the Google Sheet. */
 var FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejgwab";
-var FLW_PUBLIC_KEY = "FLWPUBK-79284a653b65c85bc8f49fec03f815f1-X";
+var FLW_PUBLIC_KEY = "FLWPUBK-9e057ad7f1a5c1837d8481b2cc382442-X";
 
 /* ============ HIDDEN TRACKING ============ */
 function getQueryParam(name){
@@ -1196,7 +1196,7 @@ function jvRender(){
     document.getElementById('wa-'+k).href='https://wa.me/2349024680769?text='+encodeURIComponent(wa);
     var b=document.getElementById('flw-block-'+k);
     if(b&&!b.querySelector('.flw-capture')){
-      b.innerHTML=c.total>CONTACT_SALES_THRESHOLD?'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" target="_blank" rel="noopener noreferrer" href="https://wa.me/2349024680769?text='+encodeURIComponent('Hi Jennifer, I would like a custom team quote for the '+JV_PLANS[k].label+' tier ('+plan+') for '+c.n+' profiles. Can we talk about how to get started?')+'">Request a team quote</a>':'<button class="pricing-pay" onclick="showFlwForm(\''+k+'\','+c.total+',\''+c.desc+'\')">'+(pilot?'Try the Pilot':'Continue')+' &middot; $'+c.total.toLocaleString('en-US')+'</button>';
+      b.innerHTML=c.total>CONTACT_SALES_THRESHOLD?'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" target="_blank" rel="noopener noreferrer" href="https://wa.me/2349024680769?text='+encodeURIComponent('Hi Jennifer, I would like a custom team quote for the '+JV_PLANS[k].label+' tier ('+plan+') for '+c.n+' profiles. Can we talk about how to get started?')+'">Request a team quote</a>':'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" href="'+'https://jennavi.co/hire-linkedin-ghostwriter.html#pricing'+'">'+(pilot?'Try the Pilot':'Continue')+' &rarr;'+'</a>';
     }
   });
 }

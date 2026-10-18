@@ -364,6 +364,7 @@ section{padding:104px 0;position:relative;}
 .flw-result .flw-status.success{color:var(--sage);}
 .flw-result .flw-status.fail{color:var(--oxblood);}
 .flw-result .btn-wa{width:100%;padding:11px;font-size:11px;}
+.flw-note{font-family:'DM Mono',monospace;font-size:10px;line-height:1.75;letter-spacing:0.05em;color:var(--parchment-faint);margin:4px 0 6px;}
 .services-note{font-size:13px;color:var(--parchment-faint);margin-top:26px;max-width:640px;}
 .services-note a{color:var(--brass-bright);text-decoration:underline;}
 
@@ -554,7 +555,6 @@ footer{border-top:1px solid var(--line);padding:68px 0 40px;}
 .jx-card p{font-size:15px;line-height:1.7;color:var(--parchment-dim,#A8A397);margin:0;}
 .jx-card .jx-go{display:block;margin-top:14px;font-size:14px;font-weight:600;color:var(--brass-bright,#E0C36B);}
 </style>
-<style id="jx-faq">.faq-item.open .faq-a{max-height:1400px;}.faq-a-inner{padding-bottom:28px;}.faq-q{line-height:1.4;}</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "@id": "https://jennavi.co/#service-pages", "name": "Jennavi LinkedIn services, audiences and proof", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "LinkedIn Services Overview", "url": "https://jennavi.co/linkedin-solutions.html"}, {"@type": "ListItem", "position": 2, "name": "LinkedIn Lead Generation Services", "url": "https://jennavi.co/linkedin-lead-generation.html"}, {"@type": "ListItem", "position": 3, "name": "LinkedIn Outreach Agency", "url": "https://jennavi.co/linkedin-outreach-agency.html"}, {"@type": "ListItem", "position": 4, "name": "LinkedIn Profile Optimization", "url": "https://jennavi.co/linkedin-profile-optimization.html"}, {"@type": "ListItem", "position": 5, "name": "LinkedIn Personal Branding", "url": "https://jennavi.co/linkedin-personal-branding.html"}, {"@type": "ListItem", "position": 6, "name": "LinkedIn Ghostwriting and Pricing", "url": "https://jennavi.co/hire-linkedin-ghostwriter.html"}, {"@type": "ListItem", "position": 7, "name": "LinkedIn Thought Leadership", "url": "https://jennavi.co/linkedin-thought-leadership.html"}, {"@type": "ListItem", "position": 8, "name": "LinkedIn Newsletter Writing", "url": "https://jennavi.co/linkedin-newsletter-writing.html"}, {"@type": "ListItem", "position": 9, "name": "SEO and GEO Article Writing", "url": "https://jennavi.co/seo-geo-articles-for-founders.html"}, {"@type": "ListItem", "position": 10, "name": "LinkedIn for Founders", "url": "https://jennavi.co/linkedin-for-founders.html"}, {"@type": "ListItem", "position": 11, "name": "LinkedIn for CEOs and Executives", "url": "https://jennavi.co/linkedin-for-executives.html"}, {"@type": "ListItem", "position": 12, "name": "LinkedIn for B2B Consultants", "url": "https://jennavi.co/linkedin-for-consultants.html"}, {"@type": "ListItem", "position": 13, "name": "LinkedIn for Coaches", "url": "https://jennavi.co/linkedin-for-coaches.html"}, {"@type": "ListItem", "position": 14, "name": "LinkedIn for Sales Teams", "url": "https://jennavi.co/linkedin-for-sales-teams.html"}, {"@type": "ListItem", "position": 15, "name": "LinkedIn for B2B SaaS Founders", "url": "https://jennavi.co/linkedin-for-saas-founders.html"}, {"@type": "ListItem", "position": 16, "name": "How Jennavi Works", "url": "https://jennavi.co/how-jennavi-works.html"}, {"@type": "ListItem", "position": 17, "name": "Jennavi LinkedIn Results", "url": "https://jennavi.co/linkedin-results.html"}]}</script>
 </head>
 <body>
@@ -1445,7 +1445,7 @@ var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwHgYSlK5acg63gE7u0
 /* NOTE FOR JENNIFER: this is the same Formspree endpoint your original live site uses (mqejgwab),
    so every submission below also lands in your email inbox instantly, in addition to the Google Sheet. */
 var FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejgwab";
-var FLW_PUBLIC_KEY = "FLWPUBK-79284a653b65c85bc8f49fec03f815f1-X";
+var FLW_PUBLIC_KEY = "FLWPUBK-9e057ad7f1a5c1837d8481b2cc382442-X";
 
 /* ============ HIDDEN TRACKING ============ */
 function getQueryParam(name){
@@ -1605,6 +1605,12 @@ var seatCounts = {standard:1,executive:1};
 
 var JV_PLANS={standard:{label:'Founder',pilot:500,monthly:1000},executive:{label:'Executive',pilot:1000,monthly:1500}};
 var JV_TERM_OFF={1:0,3:0.05,6:0.10}, jvMode='pilot', jvTerm=1;
+/* Flutterwave payment plan IDs. Created with no fixed amount, so the total the page calculates is what renews. Used on the Continue tab only. The pilot never gets a plan. */
+var JV_PLAN_IDS={1:172186,3:172193,6:172194};
+function jvCadence(term){return term>1?('every '+term+' months'):'every month';}
+function jvMoney(n){return '$'+Number(n).toLocaleString('en-US');}
+function jvEsc(v){return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function jvClient(){try{return JSON.parse(localStorage.getItem('jv_client')||'{}')||{};}catch(e){return {};}}
 function jvVol(n){return n>=5?0.12:n>=3?0.08:n>=2?0.05:0;}
 function jvDone(){try{return localStorage.getItem('jv_pilot_done')==='1';}catch(e){return false;}}
 function jvCalc(k){
@@ -1618,9 +1624,9 @@ function jvRender(){
   Object.keys(JV_PLANS).forEach(function(k){
     var c=jvCalc(k), pe=document.getElementById('price-'+k); if(!pe) return;
     pe.innerHTML='<sup>$</sup>'+c.per.toLocaleString('en-US');
-    document.getElementById('cad-'+k).textContent=pilot?'one-time, covers your first 30 days':('per month'+(jvTerm>1?', billed for '+jvTerm+' months':''));
+    document.getElementById('cad-'+k).textContent=pilot?'one-time, covers your first 30 days':('per month'+(jvTerm>1?', '+jvMoney(c.total)+' billed every '+jvTerm+' months until you cancel':', billed monthly until you cancel'));
     document.getElementById('save-'+k).textContent=c.off>0?('Savings applied: '+Math.round(c.off*100)+'%'):'';
-    var plan=pilot?'30-day pilot':(jvTerm>1?jvTerm+'-month plan, billed upfront for '+jvTerm+' months':'month-to-month plan');var wa='Hi Jennifer, I am interested in the '+JV_PLANS[k].label+' tier ('+plan+') for '+c.n+' profile'+(c.n>1?'s':'')+', about $'+c.total.toLocaleString('en-US')+' in total. Can we talk about how to get started?';
+    var plan=pilot?'30-day pilot':(jvTerm>1?jvTerm+'-month plan, billed every '+jvTerm+' months until cancelled':'month-to-month plan, billed monthly until cancelled');var wa='Hi Jennifer, I am interested in the '+JV_PLANS[k].label+' tier ('+plan+') for '+c.n+' profile'+(c.n>1?'s':'')+', about $'+c.total.toLocaleString('en-US')+' in total. Can we talk about how to get started?';
     document.getElementById('wa-'+k).href='https://wa.me/2349024680769?text='+encodeURIComponent(wa);
     var b=document.getElementById('flw-block-'+k);
     if(b&&!b.querySelector('.flw-capture')){
@@ -1637,37 +1643,11 @@ function jvSetTerm(t){if(typeof gtag==='function')gtag('event','pricing_term_cha
 function jvInit(){if(!document.getElementById('pricingTrack'))return;if(jvDone()){document.getElementById('jv-tab-pilot').style.display='none';jvSetMode('continue');}else{jvRender();}}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',jvInit);}else{jvInit();}
 
+
 var EJS_PUBLIC_KEY_HIRE='XIy6yIQorZRwYz0xf',EJS_SERVICE_ID_HIRE='service_10a5m5e',EJS_TEMPLATE_ID_HIRE='template_g32mptd';
-function buildAuditReceiptEmailHtml(name, linkedinUrl){
-  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:22px;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0B0D12;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:24px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Ghostwriting for Founders</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>I received your <a href="' + (linkedinUrl || '#') + '" style="color:#C9A84C;text-decoration:underline;" target="_blank" rel="noopener noreferrer">LinkedIn</a> Audit request, and I\'m currently reviewing your profile.</p><p class="gr">I\'m looking at what\'s working, what could be better, and what may be stopping the right people from reaching out to you.</p><p class="gr">You\'ll receive your feedback from me within the next 24 hours.<br>My feedback will be clear, honest, and easy to use.</p><p class="gr" style="margin-bottom:0;">Speak soon,</p><div class="ct"><a href="https://jennavi.co/hire-linkedin-ghostwriter.html" class="cb">See How I Can Help &middot; 6 Tiers</a></div><hr class="hr"><p class="dg">If you\'d rather start fixing things yourself tonight, <a href="https://jennavi.co/book.html" style="color:#C9A84C;">CRICKETS</a> is the exact system behind everything I do, $9.99, yours to keep.</p><hr class="hr"><p style="font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;font-style:italic;margin-bottom:0;">Anything urgent before then? Message me directly on WhatsApp at +234 902 468 0769. I read those myself too.</p><br><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
-}
-function sendAuditReceiptEmail(name, email, linkedinUrl, retryCount){
-  retryCount = retryCount || 0;
-  if (!email) return;
-  var firstName = (name || '').trim().split(/\s+/)[0] || (name || '').trim() || '';
-  if (typeof emailjs === 'undefined') {
-    if (retryCount < 5) {
-      setTimeout(function(){ sendAuditReceiptEmail(name, email, linkedinUrl, retryCount+1); }, 500);
-    } else {
-      console.error('EmailJS failed to load after 5 attempts. Audit receipt email was not sent for:', email);
-    }
-    return;
-  }
-  try { emailjs.init({publicKey: EJS_PUBLIC_KEY_HIRE}); } catch(e) {}
-  var params = {
-    to_name: firstName || 'Founder',
-    to_email: email,
-    pdf_link: '',
-    subject: 'Got It, ' + (firstName || 'Founder') + '! Jennifer is Reviewing Your Profile',
-    html_content: buildAuditReceiptEmailHtml(firstName, linkedinUrl)
-  };
-  emailjs.send(EJS_SERVICE_ID_HIRE, EJS_TEMPLATE_ID_HIRE, params, {publicKey: EJS_PUBLIC_KEY_HIRE})
-    .then(function(r){ console.log('Audit receipt email sent:', r.status); })
-    .catch(function(e){ console.error('Audit receipt email error:', e); });
-}
 var TIER_PDF_LINK = 'https://drive.google.com/file/d/1_83RcBHf08Vn8wfNlI8xR_WBahscZvKH/view?usp=drivesdk';
 function buildTierCricketsEmailHtml(name, pdfLink, tierLabel) {
-  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:20px;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0B0D12;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.sub{font-size:13px;color:rgba(243,238,227,0.5);text-align:center;margin:0 0 28px;line-height:1.7;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Lead Generation + Ghostwriting</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for joining the ' + tierLabel + ' tier. Your payment went through, and since CRICKETS is included free for ' + tierLabel + ' clients, your copy is ready right now.</p><div class="ct"><a href="' + pdfLink + '" class="cb">Download Your CRICKETS Playbook &#8594;</a></div><p class="sub">Jennifer will reach out within 24 hours to book your onboarding session, where we define your target audience, voice guide and campaign plan. A pilot runs for 30 days, and before it ends you will receive your results report and your renewal options.</p><hr class="hr"><p class="dg">In the meantime, feel free to read through CRICKETS, the exact positioning system behind Jennifer\'s own 873% LinkedIn growth, so you already know the language and framework she\'ll be using with you.</p><hr class="hr"><p class="rp" style="font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;margin-bottom:24px;">Questions in the meantime? Just reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:20px;}.ct{text-align:center;padding:8px 0 26px;}.cb{display:inline-block;padding:16px 40px;background:#C9A84C;color:#0B0D12;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;}.sub{font-size:13px;color:rgba(243,238,227,0.5);text-align:center;margin:0 0 28px;line-height:1.7;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Lead Generation + Ghostwriting</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for joining the ' + tierLabel + '. Your payment went through, and since CRICKETS is included free for ' + tierLabel + ' clients, your copy is ready right now.</p><div class="ct"><a href="' + pdfLink + '" class="cb">Download Your CRICKETS Playbook &#8594;</a></div><p class="sub">Jennifer will reach out within 24 hours to book your onboarding session, where we define your target audience, voice guide and campaign plan. A pilot runs for 30 days, and before it ends you will receive your results report and your renewal options.</p><hr class="hr"><p class="dg">In the meantime, feel free to read through CRICKETS, the exact positioning system behind Jennifer\'s own 873% LinkedIn growth, so you already know the language and framework she\'ll be using with you.</p><hr class="hr"><p class="rp" style="font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;margin-bottom:24px;">Questions in the meantime? Just reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
 }
 function sendTierCricketsEmail(name, email, tierLabel, seats, amount, retryCount) {
   retryCount = retryCount || 0;
@@ -1696,7 +1676,7 @@ function sendTierCricketsEmail(name, email, tierLabel, seats, amount, retryCount
     .catch(function(e){ console.error('Tier CRICKETS email error:', e); });
 }
 function buildGeneralConfirmationEmailHtml(name, tierLabel, amountLine) {
-  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:20px;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.rp{font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;margin-bottom:0;}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Lead Generation + Ghostwriting</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for joining the ' + tierLabel + ' tier. Your payment' + (amountLine ? (' of ' + amountLine) : '') + ' went through successfully, and Jennifer will reach out within 24 hours to book your onboarding session, where we define your target audience, voice guide and campaign plan. A pilot runs for 30 days, and before it ends you will receive your results report and your renewal options.</p><hr class="hr"><p class="dg">In the meantime, feel free to message her directly if you have any questions before your first session.</p><hr class="hr"><p class="rp">Reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><br><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:20px;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.rp{font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;margin-bottom:0;}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Lead Generation + Ghostwriting</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for joining the ' + tierLabel + '. Your payment' + (amountLine ? (' of ' + amountLine) : '') + ' went through successfully, and Jennifer will reach out within 24 hours to book your onboarding session, where we define your target audience, voice guide and campaign plan. A pilot runs for 30 days, and before it ends you will receive your results report and your renewal options.</p><hr class="hr"><p class="dg">In the meantime, feel free to message her directly if you have any questions before your first session.</p><hr class="hr"><p class="rp">Reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><br><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
 }
 function sendGeneralConfirmationEmail(name, email, tierLabel, seats, amount, retryCount) {
   retryCount = retryCount || 0;
@@ -1725,16 +1705,52 @@ function sendGeneralConfirmationEmail(name, email, tierLabel, seats, amount, ret
     .then(function(r){ console.log('General confirmation email sent:', r.status); })
     .catch(function(e){ console.error('General confirmation email error:', e); });
 }
+function buildContinueConfirmationEmailHtml(name, tierLabel, amountLine, cadenceLine, pdfLink) {
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:0;background:#0B0D12;font-family:Georgia,serif;}.w{max-width:600px;margin:0 auto;background:#12151C;border:1px solid rgba(201,168,76,0.3);}.h{background:#0B0D12;padding:28px 36px 20px;border-bottom:2px solid #C9A84C;text-align:center;}.lg{font-size:24px;font-weight:700;color:#C9A84C;letter-spacing:0.15em;text-transform:uppercase;}.tg{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.4);letter-spacing:0.18em;text-transform:uppercase;display:block;margin-top:6px;}.b{padding:32px 36px;}.gr{font-size:14px;color:rgba(243,238,227,0.75);line-height:1.8;margin-bottom:20px;}.hr{border:none;border-top:1px solid rgba(201,168,76,0.15);margin:28px 0;}.dg{font-size:14px;color:rgba(243,238,227,0.7);line-height:1.85;margin-bottom:0;}.sn2{font-size:15px;font-weight:700;color:#F3EEE3;display:block;margin-bottom:3px;}.st{font-family:Courier New,monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);}.rp{font-size:13px;color:rgba(243,238,227,0.5);line-height:1.85;margin-bottom:0;}.ft{background:#0B0D12;padding:18px 36px;border-top:1px solid rgba(201,168,76,0.15);text-align:center;}.ft p{font-family:Courier New,monospace;font-size:9px;color:rgba(243,238,227,0.25);letter-spacing:0.07em;line-height:1.8;margin:0;}.ft a{color:rgba(201,168,76,0.5);text-decoration:none;}</style></head><body><div class="w"><div class="h"><span class="lg">JENNAVI</span> <span class="tg">LinkedIn Lead Generation + Ghostwriting</span></div><div class="b"><p class="gr">Hi ' + (name || 'there') + ',<br><br>Thank you for continuing with the ' + tierLabel + '. Your payment of ' + amountLine + ' went through successfully and your subscription is now active. Your card will be charged ' + amountLine + ' ' + cadenceLine + ' until you cancel, and Flutterwave will send you an invoice each time. Jennifer will reach out within 24 hours to confirm what happens next.</p>' + (pdfLink ? '<hr class="hr"><p class="dg">Your CRICKETS playbook is included with the Executive Tier. Here is your copy again in case you need it.</p><p style="text-align:center;margin:18px 0;"><a href="' + pdfLink + '" style="display:inline-block;padding:16px 40px;background:#C9A84C;color:#0B0D12;font-family:Courier New,monospace;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;">Download Your CRICKETS Playbook &#8594;</a></p>' : '') + '<hr class="hr"><p class="dg">If you would like to stop future charges, use the cancel link in the reminder email Flutterwave sends before each charge, or reply to this email, or message Jennifer on WhatsApp before your next billing date.</p><hr class="hr"><p class="rp">Questions about your plan? Reply to this email, or message her directly on WhatsApp at +234 902 468 0769. She reads every message herself.</p><br><span class="sn2">Jennifer Omaliko</span> <span class="st">Founder and CEO, Jennavi</span></div><div class="ft"><p>jennavi.co &middot; jennifer@jennavi.co &middot; +234 902 468 0769<br><a href="https://jennavi.co">jennavi.co</a></p><p style="margin-top:8px;font-size:8px;">&copy; 2026 Jennavi &middot; All Rights Reserved</p></div></div></body></html>';
+}
+function sendContinueConfirmationEmail(name, email, tierLabel, seats, amount, term, retryCount) {
+  retryCount = retryCount || 0;
+  if (!email) return;
+  seats = seats || 1;
+  var firstName = (name || '').trim().split(/\s+/)[0] || (name || '').trim() || '';
+  var tierDisplay = seats > 1 ? (tierLabel + ' Tier (' + seats + ' Profiles)') : (tierLabel + ' Tier');
+  var amountLine = jvMoney(amount);
+  if (typeof emailjs === 'undefined') {
+    if (retryCount < 5) {
+      setTimeout(function(){ sendContinueConfirmationEmail(name, email, tierLabel, seats, amount, term, retryCount+1); }, 500);
+    } else {
+      console.error('EmailJS failed to load after 5 attempts. Continue confirmation email was not sent for:', email);
+    }
+    return;
+  }
+  try { emailjs.init({publicKey: EJS_PUBLIC_KEY_HIRE}); } catch(e) {}
+  var params = {
+    to_name: firstName || 'Founder',
+    to_email: email,
+    pdf_link: '',
+    subject: 'Your Jennavi ' + tierDisplay + ' subscription is active, ' + (firstName || 'Founder'),
+    html_content: buildContinueConfirmationEmailHtml(firstName, tierDisplay, amountLine, jvCadence(term), /^Executive/.test(tierLabel) ? TIER_PDF_LINK : '')
+  };
+  emailjs.send(EJS_SERVICE_ID_HIRE, EJS_TEMPLATE_ID_HIRE, params, {publicKey: EJS_PUBLIC_KEY_HIRE})
+    .then(function(r){ console.log('Continue confirmation email sent:', r.status); })
+    .catch(function(e){ console.error('Continue confirmation email error:', e); });
+}
 var flwCompleted = {};
 
 function showFlwForm(tier, amount, description){
   var block = document.getElementById('flw-block-' + tier);
   if (!block) return;
   if (typeof window.holdAllCarousels === 'function') window.holdAllCarousels();
+  var cl = jvClient();
+  var recurring = (jvMode === 'continue') && !/Pilot/.test(description);
+  var note = recurring
+    ? ('<p class="flw-note">' + jvMoney(amount) + ' charged today, then ' + jvCadence(jvTerm) + ' until you cancel. To cancel, email jennifer@jennavi.co or message Jennifer on WhatsApp before your next billing date.</p>')
+    : '';
   block.innerHTML =
     '<div class="flw-capture">' +
-      '<input type="text" id="flw-name-' + tier + '" placeholder="Your full name" autocomplete="name">' +
-      '<input type="email" id="flw-email-' + tier + '" placeholder="Your email address" autocomplete="email">' +
+      '<input type="text" id="flw-name-' + tier + '" placeholder="Your full name" autocomplete="name" value="' + jvEsc(cl.name) + '">' +
+      '<input type="email" id="flw-email-' + tier + '" placeholder="Your email address" autocomplete="email" value="' + jvEsc(cl.email) + '">' +
+      note +
       '<div class="flw-capture-actions">' +
         '<button type="button" class="flw-proceed" onclick="initFlwPayment(\'' + tier + '\',' + amount + ',\'' + description.replace(/'/g,"\\'") + '\')">Proceed to Payment</button>' +
         '<button type="button" class="flw-cancel" onclick="hideFlwForm(\'' + tier + '\',' + amount + ',\'' + description.replace(/'/g,"\\'") + '\')">Cancel</button>' +
@@ -1763,12 +1779,18 @@ function initFlwPayment(tier, amount, description){
   if (typeof gtag === 'function') gtag('event', 'begin_checkout', { tier: tier, plan: description, profiles: seatCounts[tier] || 1, value: amount, currency: 'USD', items: [{ item_id: tier, item_name: description, price: amount, quantity: 1 }] });
   flwCompleted[tier] = false;
 
-  FlutterwaveCheckout({
+  var isContinue = (jvMode === 'continue') && !/Pilot/.test(description);
+  var term = jvTerm;
+  var planId = isContinue ? JV_PLAN_IDS[term] : null;
+  if (isContinue && !planId) { alert('This billing option is not available yet. Please use the WhatsApp button on this card.'); return; }
+
+  var flwCfg = {
     public_key: FLW_PUBLIC_KEY,
     tx_ref: 'jennavi-' + tier + '-' + Date.now(),
     amount: amount,
     currency: 'USD',
     payment_options: 'card',
+    meta: { tier: tier, mode: isContinue ? 'continue' : 'pilot', term_months: isContinue ? term : 0, profiles: seatCounts[tier] || 1 },
     customer: { email: email, name: name },
     customizations: {
       title: 'Jennavi ' + FLW_TIER_LABELS[tier] + ' Tier',
@@ -1784,10 +1806,13 @@ function initFlwPayment(tier, amount, description){
       if (wasSuccessful) {
         try { if (/Pilot/.test(description)) localStorage.setItem('jv_pilot_done','1'); } catch(e) {}
         flwCompleted[tier] = true;
+        try { localStorage.setItem('jv_client', JSON.stringify({ name: name, email: email })); } catch(e) {}
         if (typeof gtag === 'function') gtag('event', 'purchase', { tier: tier, plan: description, profiles: seatCounts[tier] || 1, transaction_id: String((data && (data.transaction_id || data.tx_ref)) || ('jennavi-' + tier + '-' + Date.now())), value: amount, currency: 'USD', items: [{ item_id: tier, item_name: description, price: amount, quantity: 1 }] });
         var seats = seatCounts[tier] || 1;
         try {
-          if (tier === 'executive') {
+          if (isContinue) {
+            sendContinueConfirmationEmail(name, email, FLW_TIER_LABELS[tier], seats, amount, term);
+          } else if (tier === 'executive') {
             sendTierCricketsEmail(name, email, FLW_TIER_LABELS[tier], seats, amount);
           } else {
             sendGeneralConfirmationEmail(name, email, FLW_TIER_LABELS[tier], seats, amount);
@@ -1795,12 +1820,12 @@ function initFlwPayment(tier, amount, description){
         } catch (emailDispatchErr) {
           console.error('Confirmation email dispatch error:', emailDispatchErr);
         }
-        waMsg = "Hi Jennifer, I just paid for the " + FLW_TIER_LABELS[tier] + " tier" + (seats > 1 ? (" (" + seats + " profiles)") : "") + " ($" + amount + (true ? '' : '/month') + "). I'm " + name + ", my email is " + email + ". Ready to get started.";
+        waMsg = "Hi Jennifer, " + (isContinue ? "I just subscribed to the " : "I just paid for the ") + FLW_TIER_LABELS[tier] + " tier" + (seats > 1 ? (" (" + seats + " profiles)") : "") + " (" + jvMoney(amount) + (isContinue ? ", billed " + jvCadence(term) + " until I cancel" : ", one-time pilot payment") + "). I'm " + name + ", my email is " + email + ". Ready to get started.";
         waHref = "https://wa.me/2349024680769?text=" + encodeURIComponent(waMsg);
         if (block) {
           block.innerHTML =
             '<div class="flw-result"><span class="flw-status success">Payment Successful</span>' +
-            '<p>Jennifer will be in touch within 24 hours. Message her now to speed things up.</p>' +
+            '<p>' + (isContinue ? ('Your subscription is active. Your card will be charged ' + jvMoney(amount) + ' ' + jvCadence(term) + ' until you cancel, and Flutterwave will send an invoice each time. Jennifer will be in touch within 24 hours.') : 'Jennifer will be in touch within 24 hours. Message her now to speed things up.') + '</p>' +
             '<a href="' + waHref + '" class="btn btn-wa" style="display:flex;">Message Jennifer on WhatsApp</a></div>';
         }
       } else {
@@ -1821,7 +1846,7 @@ function initFlwPayment(tier, amount, description){
         linkedin: '',
         source: wasSuccessful ? 'payment_notification' : 'payment_failed_notification',
         subject: (wasSuccessful ? 'PAID: ' : 'Payment Attempt Failed: ') + description,
-        message: (wasSuccessful ? 'Payment successful for ' : 'Payment attempt failed for ') + description + ', ' + amount + ' USD.' + (tier === 'executive' ? ' Executive tier, CRICKETS bundled free.' : '') + ' Transaction ref: ' + ((data && (data.transaction_id || data.tx_ref)) || 'N/A') + '. Status: ' + ((data && data.status) || 'unknown') + '.',
+        message: (wasSuccessful ? 'Payment successful for ' : 'Payment attempt failed for ') + description + ', ' + amount + ' USD.' + (isContinue ? (' Recurring: billed ' + jvCadence(term) + ' until cancelled, plan ID ' + planId + '.') : ' One-time pilot payment.') + (tier === 'executive' && !isContinue ? ' Executive tier, CRICKETS bundled free.' : '') + ' Transaction ref: ' + ((data && (data.transaction_id || data.tx_ref)) || 'N/A') + '. Status: ' + ((data && data.status) || 'unknown') + '.',
         notes: buildHiddenNotes()
       };
       /* Logged to the Sheet so the Apps Script can auto-email the client on payment_notification.
@@ -1845,7 +1870,9 @@ function initFlwPayment(tier, amount, description){
         gtag('event', 'checkout_abandoned', { tier: tier, plan: description, profiles: seatCounts[tier] || 1, value: amount, currency: 'USD' });
       }
     }
-  });
+  };
+  if (planId) flwCfg.payment_plan = planId;
+  FlutterwaveCheckout(flwCfg);
 }
 
 /* ============ JENNIFER CHAT WIDGET ============ */
