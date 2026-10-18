@@ -1178,7 +1178,7 @@ var TIER_BASE_PRICE = {standard:500,executive:1000};
 var TIER_DESCRIPTIONS = {standard:'Founder Tier, 30-Day Pilot',executive:'Executive Tier, 30-Day Pilot'};
 var TIER_WA_TEXT = {standard:'the Founder pilot',executive:'the Executive pilot'};
 var MAX_SEATS = 50;
-var CONTACT_SALES_THRESHOLD = 5000;
+var CONTACT_SALES_THRESHOLD = Infinity; /* no cap here: this page only links to the hire page, which applies the payment limit */
 var seatCounts = {standard:1,executive:1};
 
 var JV_PLANS={standard:{label:'Founder',pilot:500,monthly:1000},executive:{label:'Executive',pilot:1000,monthly:1500}};
@@ -1202,7 +1202,7 @@ function jvRender(){
     document.getElementById('wa-'+k).href='https://wa.me/2349024680769?text='+encodeURIComponent(wa);
     var b=document.getElementById('flw-block-'+k);
     if(b&&!b.querySelector('.flw-capture')){
-      b.innerHTML=c.total>CONTACT_SALES_THRESHOLD?'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" target="_blank" rel="noopener noreferrer" href="https://wa.me/2349024680769?text='+encodeURIComponent('Hi Jennifer, I would like a custom team quote for the '+JV_PLANS[k].label+' tier ('+plan+') for '+c.n+' profiles. Can we talk about how to get started?')+'">Request a team quote</a>':'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" href="'+'https://jennavi.co/hire-linkedin-ghostwriter.html#pricing'+'">'+(pilot?'Try the Pilot':'Continue')+' &rarr;'+'</a>';
+      b.innerHTML=c.total>CONTACT_SALES_THRESHOLD?'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" target="_blank" rel="noopener noreferrer" href="https://wa.me/2349024680769?text='+encodeURIComponent('Hi Jennifer, I would like a custom team quote for the '+JV_PLANS[k].label+' tier ('+plan+') for '+c.n+' profiles. Can we talk about how to get started?')+'">Request a team quote</a>':'<a class="pricing-pay" style="display:block;text-align:center;text-decoration:none" href="'+'https://jennavi.co/hire-linkedin-ghostwriter.html?tier='+k+'&amp;mode='+jvMode+'&amp;term='+jvTerm+'&amp;profiles='+c.n+'#pricing'+'">'+(pilot?'Try the Pilot':'Continue')+' &middot; $'+c.total.toLocaleString('en-US')+'</a>';
     }
   });
 }
@@ -1490,7 +1490,13 @@ function initFlwPayment(tier, amount, description){
     }
     setInterval(autoAdvance, 4200);
 
-    function pause(){ state.pausedUntil = Date.now() + 120000; }
+    var holdMs = (id === 'pricingTrack') ? 240000 : 120000; /* pricing cards stay still for 4 minutes while someone is reading or tapping them */
+    function pause(){ state.pausedUntil = Date.now() + holdMs; }
+    if (id === 'pricingTrack') {
+      ['mouseenter','mousemove','touchstart','touchmove','click','focusin','keydown'].forEach(function(ev){
+        track.addEventListener(ev, pause, { passive: true });
+      });
+    }
 
     var isDown = false, startX = 0, startScroll = 0, moved = false;
     track.addEventListener('pointerdown', function(e){
